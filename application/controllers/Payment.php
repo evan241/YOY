@@ -17,15 +17,17 @@ class Payment extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
+        $this->load->helper('paypal');
 	}
 	
 	public function index() {
-        $data['RESPONSE'] = $this->getInformation("6Y237066T71437910");
+        $data['RESPONSE'] = $this->handleInformation("6Y237066T71437910");
         $this->load->view('PAYPAL_TEST/TEST', $data);
     }
     
-    public function handleInformation() {
-        
+    public function handleInformation($orderID) {
+        $info = $this->getInformation($orderID);
+        return fixDateTime($info);
     }
 
     /**
@@ -55,7 +57,8 @@ class Payment extends CI_Controller {
         $orderDetails = array(
             "ID_PRODUCTO" => $additionalInfo->purchase_units[0]->description,
             "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
-            "create_date_time" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+            "create_time" => "EMPTY",
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
@@ -64,7 +67,8 @@ class Payment extends CI_Controller {
 
         $developerInfo = array(
             "status" => $response->result->status,
-            "update_date_time" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
+            "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
+            "update_time" => "EMPTY",
             "checkout_url" => $response->result->links[0]->href,
             "checkout_id" => $response->result->id
         );

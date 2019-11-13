@@ -1,0 +1,85 @@
+$clientDetails = array(
+            "id" => $response->result->payer->payer_id,
+            "name" => $response->result->payer->name->given_name,
+            "surname" => $response->result->payer->name->surname,
+            "email" => $response->result->payer->email_address
+        );
+
+$orderDetails = array(
+            "id" => $response->result->id,
+            "status" => $response->result->status,
+            "item" => $additionalInfo->purchase_units[0]->description,
+            "create_time" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+            "update_time" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
+            "checkout" => $response->result->links[0]->href,
+        );
+
+$purchaseDetails = array(
+            "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
+            "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
+            "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
+            "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
+            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value
+        );
+
+
+
+TA49G9TEB3ULN
+Edward
+Doe
+sb-tn6ga491088@personal.example.com
+
+
+6Y237066T71437910
+
+
+4KG52490MN7432231
+test item
+COMPLETED
+
+2019-11-12
+17:31:12
+2019-11-12
+17:31:12
+
+MXN
+50.00
+43.07
+6.93
+
+https://api.sandbox.paypal.com/v2/checkout/orders/6Y237066T71437910
+6Y237066T71437910
+
+
+
+Client
+	client_id	int	(15)
+	ID_USUARIO	int	(255)	Foreign Key ID_USUARIO
+
+	id		varchar	(25)
+	name		varchar (50)
+	surname		varchar	(50)
+	email		varchar	(50)
+
+Order
+	order_id	int	(15)
+	client_id	int	(15)	Foreign Key client_id
+	ID_PRODUCTO	int	(255)	Foreign Key ID_PRODUCTO
+
+	id		varchar	(25)
+	create_date	date
+	create_time	time
+	lo
+	currency	varchar	(5)
+	total_amont	float	(15)
+	net_amount	float	(15)
+	paypal_fee	float	(15) 
+
+
+developer
+		
+	status		varchar	(50)
+	update_date	date
+	update_time	time
+	checkout_url	varchar	(100)
+	checkout_id	varchar	(25)
