@@ -42,9 +42,11 @@ class Paypal extends CI_Controller {
      */
     public function handleInformation($orderID) {
         $info = fixDateTime($this->getInformation($orderID));
-        $info = $this->mpaypal->addClient($info);
-        $info = $this->mpaypal->addOrder($info);
-        $info = $this->mpaypal->addInfo($info);
+        // $this->mpaypal->addAccount($info);
+        // $info = $this->mpaypal->addClient($info);
+        // $info = $this->mpaypal->addOrder($info);
+        // $info = $this->mpaypal->addInfo($info);
+        return $this->mpaypal->getAccount($info);
     }
 
     /**
@@ -53,9 +55,6 @@ class Paypal extends CI_Controller {
      * 
      *      Los "key" dentro de cada arrray tienen el mismo nombre de los CAMPOS en la base de datos,
      *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las TABLAS.
-     * 
-     *      PLACE HOLDER: 
-     *      Son campos que serán llenados en automatico durante el codigo.
      */
 	public function getInformation($orderID) {
 
@@ -68,40 +67,46 @@ class Paypal extends CI_Controller {
             $this->getToken()
         );
 
-        //  Necesitamos obtener el ID_USUARIO, el 1 simplemente es un place holder.
-        $clientDetails = array(
-            "ID_USUARIO" => 1,
+        //  Necesitamos obtener el ID_USUARIO de la sesion
+        $paypal_account = array(
+            "ID_USUARIO" => "",
+            "paypal_client_id" => ""
+        );
+
+        $paypal_client = array(
             "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
             "surname" => $response->result->payer->name->surname,
             "email" => $response->result->payer->email_address
         );
 
-        $orderDetails = array(
-            "paypal_client_id" => "PLACE HOLDER",
-            "ID_PRODUCTO" => $additionalInfo->purchase_units[0]->description,
+        // Necesitamos obtener el ID_PRODUCTO de la sesion
+        $paypal_order = array(
+            "paypal_client_id" => "",
+            "ID_PRODUCTO" => "",
             "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-            "create_time" => "PLACE_HOLDER",
+            "create_time" => "",
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
             "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value
         );
 
-        $developerInfo = array(
-            "paypal_order_id" => "PLACE HOLDER",
+        $paypal_info = array(
+            "paypal_order_id" => "",
             "status" => $response->result->status,
             "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
-            "update_time" => "PLACE_HOLDER",
+            "update_time" => "",
             "checkout_url" => $response->result->links[0]->href,
             "checkout_id" => $response->result->id
         );
 
         return array(
-            "paypal_client" => $clientDetails,
-            "paypal_order" => $orderDetails,
-            "paypal_info" => $developerInfo
+            "paypal_client" => $paypal_client,
+            "paypal_order" => $paypal_order,
+            "paypal_info" => $paypal_info,
+            "paypal_account" => $paypal_account
         );
     }
 

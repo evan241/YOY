@@ -6,6 +6,30 @@ Class Mpaypal extends CI_Model {
         parent::__construct();
     }
 
+    // function addAccount($info) {
+    //     try {
+    //         $this->db->select("paypal_account_id");
+    //         $this->db->from("paypal_account");
+    //         $this->db->where("id", $info['paypal_client']['id']);
+    //     }
+    //     catch (Exception $e) {
+    //         return -1;
+    //     }
+    // }
+
+    function getAccount($info) {
+        try {
+            // $this->db->select("paypal_account_id");
+            // $this->db->from("paypal_account");
+            // $this->db->where("id", $info['paypal_client']['id']);
+            $query = $this->db->query("SELECT * FROM usuario WHERE NOMBRE_USUARIO = 'Erick' AND VIGENCIA_USUARIO = 1");
+            return $query->result();
+        }
+        catch (Exception $e) {
+            return -1;
+        }
+    }
+
     function getClientID($info) {
         try {
             $this->db->select("paypal_client_id");

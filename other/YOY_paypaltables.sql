@@ -24,8 +24,8 @@ CREATE TABLE 			`paypal_client` (
 -- entonces creamos una tabla para enlazar al usuario con distipos tipos de cuentas de 
 -- paypal que este haya utilizado.
 
-DROP TABLE IF EXISTS 	`paypal_accounts`;
-CREATE TABLE 			`paypal_accounts` (
+DROP TABLE IF EXISTS 	`paypal_account`;
+CREATE TABLE 			`paypal_account` (
 
 	`paypal_account_id` INT(15) NOT NULL AUTO_INCREMENT,
     `ID_USUARIO` 		INT(255) NOT NUll,

@@ -1,10 +1,11 @@
 <?php
 
     print_r($RESPONSE);
+    echo count($RESPONSE);
 
-    if ($RESPONSE == NULL) {
-        echo "it was null";
-    }
+    // if ($RESPONSE == NULL) {
+    //     echo "it was null";
+    // }
     // echo $RESPONSE;
 
     // foreach ($RESPONSE as $innerArray) {

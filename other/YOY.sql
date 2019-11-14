@@ -11,11 +11,8 @@
  Target Server Version : 50625
  File Encoding         : 65001
 
- Date: 12/11/2019 10:02:37
+ Date: 14/11/2019 13:39:23
 */
-
-CREATE DATABASE `YOY`;
-USE `YOY`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -80,6 +77,7 @@ CREATE TABLE `PRODUCTO` (
   `ACTIVO_PRODUCTO` int(1) DEFAULT '1',
   `VIGENCIA_PRODUCTO` int(1) DEFAULT '1',
   `STOCK_MINIMO_PRODUCTO` int(4) DEFAULT '0',
+  `IMAGEN_PRODUCTO` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`ID_PRODUCTO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
@@ -87,11 +85,11 @@ CREATE TABLE `PRODUCTO` (
 -- Records of PRODUCTO
 -- ----------------------------
 BEGIN;
-INSERT INTO `PRODUCTO` VALUES (1, 2, NULL, '0001', 'Equipal artesanal', 'Es una equipal hecho por manos Colimenses...', 500.00, 1000.00, -1, 1, 1, 2);
-INSERT INTO `PRODUCTO` VALUES (2, 2, NULL, '0987', 'Mesa de centro', 'Una mesa elaborada de la mejor madera...', 600.00, 1200.00, 89, 0, 1, 2);
-INSERT INTO `PRODUCTO` VALUES (3, 2, NULL, '44', 'Silla artesanal', 'Silla de madera decorada y hecha artesanalmente...', 400.00, 800.00, 20, 1, 1, 8);
-INSERT INTO `PRODUCTO` VALUES (4, 3, 2, '2', 'Cuadro pintura', 'Pintura al oleo con marco artesanal hecho por...', 1000.00, 2000.00, -2, 1, 1, 3);
-INSERT INTO `PRODUCTO` VALUES (5, 1, 1, '6', 'Vestido', 'Vestido de tela artesanal bordado a mano...', 1200.00, 2400.00, 2, 1, 1, 2);
+INSERT INTO `PRODUCTO` VALUES (1, 2, NULL, '0001', 'Equipal artesanal', 'Es una equipal hecho por manos Colimenses...', 500.00, 1000.00, 10, 1, 1, 2, 'assets/img/store/1.jpg');
+INSERT INTO `PRODUCTO` VALUES (2, 2, NULL, '0987', 'Mesa de centro', 'Una mesa elaborada de la mejor madera...', 600.00, 1200.00, 89, 1, 1, 2, 'assets/img/store/2.jpg');
+INSERT INTO `PRODUCTO` VALUES (3, 2, NULL, '44', 'Silla artesanal', 'Silla de madera decorada y hecha artesanalmente...', 400.00, 800.00, 20, 1, 1, 8, 'assets/img/store/3.jpg');
+INSERT INTO `PRODUCTO` VALUES (4, 3, 2, '2', 'Cuadro pintura', 'Pintura al oleo con marco artesanal hecho por...', 1000.00, 2000.00, 3, 1, 1, 3, 'assets/img/store/4.jpg');
+INSERT INTO `PRODUCTO` VALUES (5, 1, 1, '6', 'Vestido', 'Vestido de tela artesanal bordado a mano...', 1200.00, 2400.00, 2, 1, 1, 2, 'assets/img/store/5.jpg');
 COMMIT;
 
 -- ----------------------------
@@ -122,6 +120,7 @@ DROP TABLE IF EXISTS `TIPO_ENVIO`;
 CREATE TABLE `TIPO_ENVIO` (
   `ID_TIPO_ENVIO` int(5) NOT NULL AUTO_INCREMENT,
   `NOMBRE_TIPO_ENVIO` varchar(60) DEFAULT NULL,
+  `PRECIO_TIPO_ENVIO` float(10,2) DEFAULT '0.00',
   `ACTIVO_TIPO_ENVIO` int(1) DEFAULT '1',
   `VIGENTE_TIPO_ENVIO` int(1) DEFAULT '1',
   PRIMARY KEY (`ID_TIPO_ENVIO`)
@@ -131,9 +130,9 @@ CREATE TABLE `TIPO_ENVIO` (
 -- Records of TIPO_ENVIO
 -- ----------------------------
 BEGIN;
-INSERT INTO `TIPO_ENVIO` VALUES (1, 'EXPRESS', 1, 1);
-INSERT INTO `TIPO_ENVIO` VALUES (2, '3 DÍAS HÁBILES', 1, 1);
-INSERT INTO `TIPO_ENVIO` VALUES (3, '2 SEMANAS', 1, 1);
+INSERT INTO `TIPO_ENVIO` VALUES (1, 'EXPRESS', 600.00, 1, 1);
+INSERT INTO `TIPO_ENVIO` VALUES (2, '3 DÍAS HÁBILES', 500.00, 1, 1);
+INSERT INTO `TIPO_ENVIO` VALUES (3, '2 SEMANAS', 400.00, 1, 1);
 COMMIT;
 
 -- ----------------------------
@@ -156,9 +155,9 @@ CREATE TABLE `USUARIO` (
 -- Records of USUARIO
 -- ----------------------------
 BEGIN;
-INSERT INTO `USUARIO` VALUES (1, 'admin', 'Erick', 'Evangelista', 'admin', '1', 1, '2019-11-06 09:22:40');
-INSERT INTO `USUARIO` VALUES (2, '2', 'Empleado', 'General', '2', '1', 2, NULL);
-INSERT INTO `USUARIO` VALUES (3, '1', 'Pruebas', 'Iniciales', '1', '1', 3, '2019-11-04 17:05:27');
+INSERT INTO `USUARIO` VALUES (1, 'admin', 'Erick', 'Evangelista', 'admin', '1', 1, '2019-11-13 10:42:12');
+INSERT INTO `USUARIO` VALUES (2, '2', 'Empleado', 'General', '2', '1', 2, '2019-11-13 10:43:24');
+INSERT INTO `USUARIO` VALUES (3, '1', 'Pruebas', 'Iniciales', '1', '1', 3, '2019-11-13 11:44:22');
 COMMIT;
 
 -- ----------------------------
