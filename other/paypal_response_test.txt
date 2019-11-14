@@ -1,0 +1,136 @@
+{
+    "id": "6Y237066T71437910",
+    "intent": "CAPTURE",
+    "purchase_units": [
+        {
+            "reference_id": "default",
+            "amount": {
+                "currency_code": "MXN",
+                "value": "50.00",
+                "breakdown": {
+                    "item_total": {
+                        "currency_code": "MXN",
+                        "value": "50.00"
+                    },
+                    "shipping": {
+                        "currency_code": "MXN",
+                        "value": "0.00"
+                    },
+                    "handling": {
+                        "currency_code": "MXN",
+                        "value": "0.00"
+                    },
+                    "insurance": {
+                        "currency_code": "MXN",
+                        "value": "0.00"
+                    },
+                    "shipping_discount": {
+                        "currency_code": "MXN",
+                        "value": "0.00"
+                    },
+                    "discount": {
+                        "currency_code": "MXN",
+                        "value": "0.00"
+                    }
+                }
+            },
+            "payee": {
+                "email_address": "sb-wjdcw490773@business.example.com",
+                "merchant_id": "QSUU9HLRMLN2L"
+            },
+            "description": "test item",
+            "soft_descriptor": "PAYPAL *JOHNDOESTES",
+            "shipping": {
+                "name": {
+                    "full_name": "Edward Doe"
+                },
+                "address": {
+                    "address_line_1": "Calle Juarez 1",
+                    "address_line_2": "Col. Cuauhtemoc",
+                    "admin_area_2": "Miguel Hidalgo",
+                    "admin_area_1": "Ciudad de Mexico",
+                    "postal_code": "11580",
+                    "country_code": "MX"
+                }
+            },
+            "payments": {
+                "captures": [
+                    {
+                        "id": "4KG52490MN7432231",
+                        "status": "COMPLETED",
+                        "amount": {
+                            "currency_code": "MXN",
+                            "value": "50.00"
+                        },
+                        "final_capture": true,
+                        "seller_protection": {
+                            "status": "ELIGIBLE",
+                            "dispute_categories": [
+                                "ITEM_NOT_RECEIVED",
+                                "UNAUTHORIZED_TRANSACTION"
+                            ]
+                        },
+                        "seller_receivable_breakdown": {
+                            "gross_amount": {
+                                "currency_code": "MXN",
+                                "value": "50.00"
+                            },
+                            "paypal_fee": {
+                                "currency_code": "MXN",
+                                "value": "6.93"
+                            },
+                            "net_amount": {
+                                "currency_code": "MXN",
+                                "value": "43.07"
+                            }
+                        },
+                        "links": [
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/4KG52490MN7432231",
+                                "rel": "self",
+                                "method": "GET"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/payments/captures/4KG52490MN7432231/refund",
+                                "rel": "refund",
+                                "method": "POST"
+                            },
+                            {
+                                "href": "https://api.sandbox.paypal.com/v2/checkout/orders/6Y237066T71437910",
+                                "rel": "up",
+                                "method": "GET"
+                            }
+                        ],
+                        "create_time": "2019-11-12T17:31:12Z",
+                        "update_time": "2019-11-12T17:31:12Z"
+                    }
+                ]
+            }
+        }
+    ],
+    "payer": {
+        "name": {
+            "given_name": "Edward",
+            "surname": "Doe"
+        },
+        "email_address": "sb-tn6ga491088@personal.example.com",
+        "payer_id": "TA49G9TEB3ULN",
+        "phone": {
+            "phone_number": {
+                "national_number": "9398954996"
+            }
+        },
+        "address": {
+            "country_code": "MX"
+        }
+    },
+    "update_time": "2019-11-12T17:31:12Z",
+    "links": [
+        {
+            "href": "https://api.sandbox.paypal.com/v2/checkout/orders/6Y237066T71437910",
+            "rel": "self",
+            "method": "GET"
+        }
+    ],
+    "status": "COMPLETED"
+}
