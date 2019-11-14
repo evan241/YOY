@@ -4,6 +4,10 @@
 ?>
 <html>
     <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
         <title>YOY-Distinción por tradición</title>
         <script type="text/javascript">
             var raiz_url = '<?php echo base_url() ?>';

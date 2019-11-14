@@ -51,7 +51,49 @@
                                 Total: <div id="total_sale" style="color: white;"><?= $product[0]['PRECIO_PRODUCTO'] ?></div>
                             </p>
 
-                            <button id="btnBuyNow" class="btn btn-primary">Buy now</button>
+
+                             <!-- Boton de Paypal -->
+
+                             
+                            <script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" .
+                                                    SANDBOX_ID .
+                                                    "&currency=MXN"?>></script> <!-- Aqui va el currency code, MXN o USD -->
+
+                            <div id="paypal-button-container"></div>
+
+                            <script>
+                                
+                                paypal.Buttons({
+                                                createOrder: function(data, actions) {
+                                                
+                                                return actions.order.create({
+                                                    purchase_units: [{
+                                                    amount: {
+
+                                                        /*  Cantidad a cobrar
+                                                        */
+                                                        value: '<?= $product[0]['PRECIO_PRODUCTO'] ?>'
+                                                    },
+                                                    /*  La descripcion que se manda durante la paga
+                                                    */
+                                                    description: '<?= $product[0]['DESCRIPCION_PRODUCTO'] ?>'
+                                                    }]
+                                                });
+                                                },
+
+                                                onApprove: function(data, actions) {
+                                                    
+                                                return actions.order.capture().then(function(details) {
+
+                                                    /*      Necesitamos enviar 
+                                                    *       1) data.OrderID
+                                                    */
+                                                    // window.location="<?php echo base_url() ?>Payment/index/"+data.orderID;
+                                                });
+                                                }
+                                                }).render('#paypal-button-container');
+                            </script>
+                            <!-- <button id="btnBuyNow" class="btn btn-primary">Buy now</button> -->
                         </div>
                     </div>
                 </div>

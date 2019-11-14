@@ -1,0 +1,12 @@
+1) Pega el archivo: 
+	cacert-2019-10-16.pem
+
+   En el directorio:
+	C:\AppServ
+
+2) Pega las siguientes lineas dentro del archivo:  C:\AppServ\php5.ini
+
+	curl.cainfo="C:\AppServ\cacert-2019-10-16.pem"
+	openssl.cafile="C:\AppServ\cacert-2019-10-16.pem"
+
+3) Reinicia el servidor apache
