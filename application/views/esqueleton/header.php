@@ -60,7 +60,7 @@
                         <ul class="dropdown-menu" role="menu" style="background-color: black;">
                             <li><a href="#"><i class="fa fa-user"></i> My account</a></li><br>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> My shops</a></li><br>
-                            <li><a href="<?= base_url() ?>site/salir"><i class="fa fa-sign-out"> Salir</a></li>
+                            <li><a href="<?= base_url() ?>site/salir"><i class="fa fa-sign-out"></i> Salir</a></li>
                         </ul>
                     </li>
                     <?php } else{ ?>

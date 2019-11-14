@@ -1,136 +1,103 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
-        </div>
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-left">
             <br>
-            <div class="panel panel-primary">
-                <form data-toggle="validator" role="form" id="formRecorProduct">
-                    <div class="control-group text-left">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading header-primary">
-                                    <div class="panel-title text-left"><h2 class="heading-primary">Nuevo Producto</h2></div>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_ID_CATEGORIA" class="control-label text-left"  >Categoría</label>
-                                            <select name="RG_ID_CATEGORIA" id="RG_ID_CATEGORIA" class="form-control">
-                                                <?php
-                                                if (count($ROW_CATEGORIES) > NULO):
-                                                    echo '<option value="">Seleccionar</option>';
-                                                    foreach ($ROW_CATEGORIES as $ROW):
-                                                        ?>
-                                                <option value="<?= $ROW['ID_CATEGORIA'] ?>"><?= mb_strtoupper( $ROW['NOMBRE_CATEGORIA']) ?></option>
-                                                        <?php
-                                                    endforeach;
-                                                else:
-                                                    ?>
-                                                    <option value="-1">No existen registros</option>
-                                                <?php
-                                                endif;
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_ID_ALMACEN" class="control-label text-left"  >Almacen</label>
-                                            <select name="RG_ID_ALMACEN" id="RG_ID_ALMACEN" class="form-control">
-                                                <?php
-                                                if (count($ROW_ALMACEN) > NULO):
-                                                    echo '<option value="">Seleccionar</option>';
-                                                    foreach ($ROW_ALMACEN as $ROW):
-                                                        ?>
-                                                <option value="<?= $ROW['ID_ALMACEN'] ?>"><?= mb_strtoupper( $ROW['NOMBRE_ALMACEN'] )?></option>
-                                                        <?php
-                                                    endforeach;
-                                                else:
-                                                    ?>
-                                                    <option value="-1">No existen registros</option>
-                                                <?php
-                                                endif;
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_CODIGO_PRODUCTO" class="control-label text-left"  >Código Primario</label>
-                                            <input type="text" name="RG_CODIGO_PRODUCTO" id="RG_CODIGO_PRODUCTO" class="form-control" required placeholder="Código del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_CODIGO_PRODUCTO_SECUNDARIO" class="control-label text-left"  >Código Secundario</label>
-                                            <input type="text" name="RG_CODIGO_PRODUCTO_SECUNDARIO" id="RG_CODIGO_PRODUCTO_SECUNDARIO" class="form-control" required placeholder="Código del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_NOMBRE_PRODUCTO" class="control-label text-left"  >Nombre</label>
-                                            <input type="text" name="RG_NOMBRE_PRODUCTO" onkeyUp="this.value = this.value.toUpperCase()" id="RG_NOMBRE_PRODUCTO" class="form-control" required placeholder="Nombre del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>      
-                                    <div class="col-md-6">
-                                        <div class="form-group"> 
-                                            <label for="RG_DESCRIPCION_PRODUCTO" class="control-label text-left"  >Descripción</label>
-                                            <input type="text" name="RG_DESCRIPCION_PRODUCTO" onkeyUp="this.value = this.value.toUpperCase()" id="RG_DESCRIPCION_PRODUCTO" class="form-control" placeholder="Descripción del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_COSTO_PRODUCTO" class="control-label text-left"  >Costo</label>
-                                            <input type="text" name="RG_COSTO_PRODUCTO" id="RG_COSTO_PRODUCTO" class="form-control" placeholder="Costo del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>                                
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_STOCK_PRODUCTO" class="control-label text-left"  >Stock</label>
-                                            <input type="text" name="RG_STOCK_PRODUCTO" id="RG_STOCK_PRODUCTO" class="form-control" placeholder="Existencia del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_STOCK_MINIMO_PRODUCTO" class="control-label text-left"  >Stock Mínimo</label>
-                                            <input type="text" name="RG_STOCK_MINIMO_PRODUCTO" id="RG_STOCK_MINIMO_PRODUCTO" class="form-control" placeholder="Existencia del producto">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_PRESTAMO_PRODUCTO" class="control-label text-left"><input id="RG_PRESTAMO_PRODUCTO" name="RG_PRESTAMO_PRODUCTO" type="checkbox" value="0"> Préstamos</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_CONSUMO_PRODUCTO" class="control-label text-left"><input id="RG_CONSUMO_PRODUCTO" name="RG_CONSUMO_PRODUCTO" type="checkbox" value="0"> Consumo</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-footer">
-
-                                    <div class="btn-group pull-right"><br>
-                                        <a href="<?= base_url() ?>productos/index" class="btn btn pull-left" id="btnCloseAddProduct">
-                                            <i class="fa fa-remove" aria-hidden="true"></i>
-                                            Cancelar</a>
-                                        <button type="submit" class="btn btn-default pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                            Guardar producto</button>
-                                    </div>
-                                    <div style="clear:both"><br></div>
-                                </div>
-                            </div>   
+            <form data-toggle="validator" role="form" id="formRecordProduct">
+                <div class="panel panel-primary">
+                    <div class="panel-heading header-primary">
+                        <div class="panel-title text-left"><h2 class="heading-primary">Nuevo Producto</h2></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_ID_CATEGORIA" class="control-label text-left"  >Categoría</label>
+                                <select name="RG_ID_CATEGORIA" id="RG_ID_CATEGORIA" class="form-control">
+                                    <?php
+                                    if (count($ROW_CATEGORIES) > NULO):
+                                        echo '<option value="">Seleccionar</option>';
+                                        foreach ($ROW_CATEGORIES as $ROW):
+                                            ?>
+                                            <option value="<?= $ROW['ID_CATEGORIA'] ?>"><?= mb_strtoupper($ROW['NOMBRE_CATEGORIA']) ?></option>
+                                            <?php
+                                        endforeach;
+                                    else:
+                                        ?>
+                                        <option value="-1">No existen registros</option>
+                                    <?php
+                                    endif;
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_CODIGO_PRODUCTO" class="control-label text-left"  >Código</label>
+                                <input type="text" name="RG_CODIGO_PRODUCTO" id="RG_CODIGO_PRODUCTO" class="form-control" required placeholder="Código del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_NOMBRE_PRODUCTO" class="control-label text-left"  >Nombre</label>
+                                <input type="text" name="RG_NOMBRE_PRODUCTO" onkeyUp="this.value = this.value.toUpperCase()" id="RG_NOMBRE_PRODUCTO" class="form-control" required placeholder="Nombre del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>      
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="RG_DESCRIPCION_PRODUCTO" class="control-label text-left"  >Descripción</label>
+                                <input type="text" name="RG_DESCRIPCION_PRODUCTO" onkeyUp="this.value = this.value.toUpperCase()" id="RG_DESCRIPCION_PRODUCTO" class="form-control" placeholder="Descripción del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_COSTO_PRODUCTO" class="control-label text-left"  >Costo</label>
+                                <input type="text" name="RG_COSTO_PRODUCTO" id="RG_COSTO_PRODUCTO" class="form-control" placeholder="Costo del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_PRECIO_PRODUCTO" class="control-label text-left"  >Precio</label>
+                                <input type="text" name="RG_PRECIO_PRODUCTO" id="RG_PRECIO_PRODUCTO" class="form-control" placeholder="Precio al público">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_STOCK_PRODUCTO" class="control-label text-left"  >Stock</label>
+                                <input type="text" name="RG_STOCK_PRODUCTO" id="RG_STOCK_PRODUCTO" class="form-control" placeholder="Existencia del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_STOCK_MINIMO_PRODUCTO" class="control-label text-left"  >Stock Mínimo</label>
+                                <input type="text" name="RG_STOCK_MINIMO_PRODUCTO" id="RG_STOCK_MINIMO_PRODUCTO" class="form-control" placeholder="Existencia del producto">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RG_ACTIVO_PRODUCTO" class="control-label text-left"><input id="RG_ACTIVO_PRODUCTO" name="RG_ACTIVO_PRODUCTO" type="checkbox" value="1" checked> Activo</label>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                    <div class="panel-footer">
+
+                        <div class="btn-group pull-right"><br>
+                            <a href="<?= base_url() ?>productos/index" class="btn btn pull-left" id="btnCloseAddProduct">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                                Cancelar</a>
+                            <button type="submit" class="btn btn-default pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Guardar producto</button>
+                        </div>
+                        <div style="clear:both"><br></div>
+                    </div>
+                </div> 
+            </form>
         </div>
         <div class="col-sm-3"></div>
     </div>

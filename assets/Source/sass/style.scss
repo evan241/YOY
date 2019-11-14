@@ -1006,6 +1006,41 @@
 	 }
  }
  
+ .page-info-sectionII {
+	 height: 432px;
+	 position: relative;
+	 padding: 0 15px;
+	 text-align: center;
+	 display: -webkit-box;
+	 display: -ms-flexbox;
+	 display: flex;
+	 -webkit-box-pack: center;
+	 -ms-flex-pack: center;
+	 justify-content: center;
+	 -webkit-box-align: end;
+	 -ms-flex-align: end;
+	 align-items: flex-end;
+	 overflow: hidden;
+	 h2 {
+		 font-size: 160px;
+		 color: #fff;
+		 position: relative;
+		 top: 34px;
+		 z-index: 1;
+	 }
+	 &:after {
+		 position: absolute;
+		 content: "";
+		 width: 100%;
+		 height: calc(100% - 64px);
+		 left: 0;
+		 bottom: 0;
+		 background-image: url("../img/hero-overlay.png");
+		 background-repeat: no-repeat;
+		 background-size: cover;
+	 }
+ }
+ 
  /* ----------------
 	 About page
 	---------------------*/
@@ -1455,6 +1490,10 @@
 		 font-size: 115px;
 		 top: 24px;
 	 }
+         .page-info-sectionII h2 {
+		 font-size: 75px;
+		 top: 24px;
+	 }
 	 .about-logo {
 		 padding-top: 0;
 		 margin-bottom: 50px;
@@ -1625,6 +1664,13 @@
 		 margin-bottom: 50px;
 	 }
 	 .page-info-section {
+		 height: 330px;
+		 h2 {
+			 font-size: 65px;
+			 top: 14px;
+		 }
+	 }
+         .page-info-sectionII {
 		 height: 330px;
 		 h2 {
 			 font-size: 65px;

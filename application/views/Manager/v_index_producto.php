@@ -11,12 +11,12 @@
                 </div>
                 <div class="panel-body">
                     <?php
-                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR):
+                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO):
                         $disabled = '';
                     else:
                         $disabled = 'disabled';
                     endif;
-                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR):
+                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO):
                         ?>
                         <a href="<?= base_url() ?>manager/form_add_product" class="btn btn-default pull-right" id="btnAddProduct">
                             <i class="fas fa-plus" prescription-bottle aria-hidden="true"></i> Nuevo Poducto
