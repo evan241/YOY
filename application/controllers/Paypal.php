@@ -13,11 +13,12 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
-class Payment extends CI_Controller {
+class Paypal extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
         $this->load->helper('paypal');
+        $this->load->model('mpaypal');
 	}
 	
 	public function index() {
@@ -25,29 +26,51 @@ class Payment extends CI_Controller {
         $this->load->view('PAYPAL_TEST/TEST', $data);
     }
     
+    /**
+     *      Una vez que tengamos la información necesaria, finalmente la ingresamo en la base de datos.
+     * 
+     *      Como puedes ver a $info se le esta asignando el valor de la funcion, las cuales regresan
+     *      el mismo array pero ligeramente modificado, ya que incluyen el ultimo ID ingresado a la base,
+     *      y estos ID son utilizados como Foreign Key en las tablas.
+     * 
+     *      Las tablas estan en CASCADA, por lo cual eliminar al USUARIO va a eliminar en automatico:
+     * 
+     *          - El cliente en "paypal_client" cuyo ID_USUARIO equivale al USUARIO eliminado.
+     *              - Todas las ordenes en "paypal_order" cuyo "paypal_client_id" sea eliminado.
+     *                  - Todos los dev_info en "paypal_info" cuyo "paypal_order_id" sea eliminado.
+     *          
+     */
     public function handleInformation($orderID) {
-        $info = $this->getInformation($orderID);
-        return fixDateTime($info);
+        $info = fixDateTime($this->getInformation($orderID));
+        $info = $this->mpaypal->addClient($info);
+        $info = $this->mpaypal->addOrder($info);
+        $info = $this->mpaypal->addInfo($info);
     }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
      *      solo tomamos la informacion necesaria y lo acomodamos en tres distintos arrays.
      * 
-     *      Los "key" de los tres arrray tienen el mismo nombre de los CAMPOS en la base de datos,
-     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las TABLAS en la base de datos.
+     *      Los "key" dentro de cada arrray tienen el mismo nombre de los CAMPOS en la base de datos,
+     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las TABLAS.
+     * 
+     *      PLACE HOLDER: 
+     *      Son campos que serán llenados en automatico durante el codigo.
      */
 	public function getInformation($orderID) {
 
         $client = PayPalClient::client();
         $response = $client->execute(new OrdersGetRequest($orderID));
 
+        // Aqui es donde solicitamos informacion adicional que Paypal no ofrece en el response por default.
         $additionalInfo = $this->getTransactionDetails(
             $response->result->links[0]->href,
             $this->getToken()
         );
 
+        //  Necesitamos obtener el ID_USUARIO, el 1 simplemente es un place holder.
         $clientDetails = array(
+            "ID_USUARIO" => 1,
             "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
             "surname" => $response->result->payer->name->surname,
@@ -55,10 +78,11 @@ class Payment extends CI_Controller {
         );
 
         $orderDetails = array(
+            "paypal_client_id" => "PLACE HOLDER",
             "ID_PRODUCTO" => $additionalInfo->purchase_units[0]->description,
             "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-            "create_time" => "EMPTY",
+            "create_time" => "PLACE_HOLDER",
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
@@ -66,9 +90,10 @@ class Payment extends CI_Controller {
         );
 
         $developerInfo = array(
+            "paypal_order_id" => "PLACE HOLDER",
             "status" => $response->result->status,
             "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
-            "update_time" => "EMPTY",
+            "update_time" => "PLACE_HOLDER",
             "checkout_url" => $response->result->links[0]->href,
             "checkout_id" => $response->result->id
         );
@@ -85,6 +110,7 @@ class Payment extends CI_Controller {
      *      el response no te regresa todo, entonces aqui exigimos toda la informacion.
      * 
      *      La funcion simplemente requiere el checkout_url obtenido durante la compra y el token.
+     *      checkout_url = $response->result->links[0]->href
      */
     public function getTransactionDetails($checkout, $token) {
 
@@ -107,7 +133,7 @@ class Payment extends CI_Controller {
      *      Esta funcion simplemente regresa el Token necesario para mandar un request
      *      al API de paypal y obtener informacion de la compra.
      * 
-     *      Solo requiere los datos de Sandbox / Live, se encuentran en el archivo de Constants.
+     *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants.
      */
     public function getToken() {
 
@@ -139,6 +165,8 @@ class Payment extends CI_Controller {
 }
 
 /**
+ *      Aqui es donde cambiamos el payment API a Sandbox o Live.
+ * 
  *      Servidor Sandbox        Servidor Live
  *      SANDBOX_ID              Se necesita crear una business account
  *      SANDBOX_SECRET          para las ventas reales

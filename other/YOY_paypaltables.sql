@@ -16,7 +16,7 @@ CREATE TABLE 			`paypal_client` (
     `email` 			VARCHAR(50) NOT NULL,
     
     PRIMARY KEY (`paypal_client_id`),
-    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`)
+    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`) ON DELETE CASCADE
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -40,8 +40,8 @@ CREATE TABLE 			`paypal_order` (
     `paypal_fee` 		FLOAT(15) NOT NULL,
     
     PRIMARY KEY (`paypal_order_id`),
-    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`),
-    FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`)
+    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE
+    -- FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`) ON DELETE CASCADE
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -64,6 +64,6 @@ CREATE TABLE 			`paypal_info` (
     `checkout_id` 		VARCHAR(25) NOT NULL,
     
     PRIMARY KEY (`paypal_info_id`),
-    FOREIGN KEY (`paypal_order_id`) REFERENCES `paypal_order` (`paypal_order_id`)
+    FOREIGN KEY (`paypal_order_id`) REFERENCES `paypal_order` (`paypal_order_id`) ON DELETE CASCADE
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

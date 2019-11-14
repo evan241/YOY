@@ -51,6 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 // $route['default_controller'] = 'site';
-$route['default_controller'] = 'Payment';
+$route['default_controller'] = 'Paypal';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
