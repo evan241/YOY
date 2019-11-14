@@ -1,4 +1,5 @@
 USE YOY;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- Informacion del cliente respecto a como esta registrado en la pagina
 -- de Paypal, por lo cual no debe ser repetido el field "id",
@@ -8,20 +9,38 @@ DROP TABLE IF EXISTS 	`paypal_client`;
 CREATE TABLE 			`paypal_client` (
 
 	`paypal_client_id` 	INT(15) NOT NULL AUTO_INCREMENT,
-    `ID_USUARIO` 		INT(255) NOT NUll,
     
     `id` 				VARCHAR(25) NOT NULL,
     `name` 				VARCHAR(50) NOT NULL,
     `surname` 			VARCHAR(50) NOT NULL,
     `email` 			VARCHAR(50) NOT NULL,
     
-    PRIMARY KEY (`paypal_client_id`),
-    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`) ON DELETE CASCADE
+    PRIMARY KEY (`paypal_client_id`)
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
--- Guarda la informacion de la orden en el momento que se hace la compra
+-- Dado el caso en el que un cliente puede hacer compras con distintas cuentas de paypal,
+-- entonces creamos una tabla para enlazar al usuario con distipos tipos de cuentas de 
+-- paypal que este haya utilizado.
+
+DROP TABLE IF EXISTS 	`paypal_accounts`;
+CREATE TABLE 			`paypal_accounts` (
+
+	`paypal_account_id` INT(15) NOT NULL AUTO_INCREMENT,
+    `ID_USUARIO` 		INT(255) NOT NUll,
+    `paypal_client_id` 	INT(25) NOT NULL,
+    
+    PRIMARY KEY (`paypal_account_id`),
+    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`) ON DELETE CASCADE,
+    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE
+    
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+-- Guarda la informacion de la orden en el momento que se hace la compra, es la informacion
+-- más util para la pagina web, contiene cosas cmo el ID de la orden, cliente, producto,
+-- asi como tambien la cantidad total pagada, la cantidad neta y la comision de paypal.
 
 DROP TABLE IF EXISTS 	`paypal_order`;
 CREATE TABLE 			`paypal_order` (
@@ -41,7 +60,6 @@ CREATE TABLE 			`paypal_order` (
     
     PRIMARY KEY (`paypal_order_id`),
     FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE
-    -- FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`) ON DELETE CASCADE
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -67,3 +85,5 @@ CREATE TABLE 			`paypal_info` (
     FOREIGN KEY (`paypal_order_id`) REFERENCES `paypal_order` (`paypal_order_id`) ON DELETE CASCADE
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+SET FOREIGN_KEY_CHECKS=1;
