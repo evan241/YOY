@@ -9,10 +9,11 @@ class Site extends CI_Controller {
         parent::__construct();
 
         $this->load->model('msite');
+        $this->load->model('mmanager');
     }
 
     public function index() {
-        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
+        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO) {
             redirect('manager/index');
         } else {
             $this->load->view('esqueleton/header');
@@ -77,287 +78,22 @@ class Site extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
 
-    public function hoteles() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/hoteles');
+    public function store() {
+        $this->load->view('esqueleton/header');
+        $data['products'] = $this->msite->get_all_valid_products_to_store();
+        $this->load->view('store', $data);
+        $this->load->view('esqueleton/footer');
+    }
+    
+    public function sales($param) {
+        $this->load->view('esqueleton/header');
+        $data['product'] = $this->mmanager->get_product_by_id($param);
+        $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
+        $this->load->view('sales', $data);
         $this->load->view('esqueleton/footer');
     }
 
-    public function wyndham() {
-
-        $data['logo1'] = base_url() . "assets/images/logowindham.png";
-        $data['logo2'] = base_url() . "assets/images/logowindham.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/wyndham');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function fiestainn() {
-
-        $data['logo1'] = base_url() . "assets/images/logofiesta.png";
-        $data['logo2'] = base_url() . "assets/images/logofiesta.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/fiesta-inn');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function mision() {
-
-        $data['logo1'] = base_url() . "assets/images/logomision.png";
-        $data['logo2'] = base_url() . "assets/images/logomision.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/mision');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function concierge() {
-
-        $data['logo1'] = base_url() . "assets/images/logoconcierge.png";
-        $data['logo2'] = base_url() . "assets/images/logoconcierge.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/concierge');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function delrey() {
-
-        $data['logo1'] = base_url() . "assets/images/logodelrey.png";
-        $data['logo2'] = base_url() . "assets/images/logodelrey.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/del-rey');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function donjorge() {
-
-        $data['logo1'] = base_url() . "assets/images/logodonjorge.png";
-        $data['logo2'] = base_url() . "assets/images/logodonjorge.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('hoteles/don-jorge');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function actividades() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/actividades');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function paracaidismo() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/paracaidismo');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function paracaidismo2() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/paracaidismo2');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function gastronomia() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/gastronomia');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function ronclasico() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/ron-clasico');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function lamaria() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/la-maria');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function conoce() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/conoce-colima');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function cerveza() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/cerveza');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function pascuales() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/pascuales');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function ponche() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/ponche');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function rios() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/rios');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function playas() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/playas');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function villa() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/villa');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function volcan() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/volcan');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function Manglar() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/Manglar');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function museos() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/museos');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function rangeliana() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/rangeliana');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function canon() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/canon');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function canaverales() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('conoce/cañaverales');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function globo() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('actividades/globo');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function quienes() {
-
-        $data['logo1'] = base_url() . "assets/images/logo.png";
-        $data['logo2'] = base_url() . "assets/images/logo2.png";
-
-        $this->load->view('esqueleton/header', $data);
-        $this->load->view('quienes-somos');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function contacto() {
+    public function contact() {
 
         $data['logo1'] = base_url() . "assets/images/logo.png";
         $data['logo2'] = base_url() . "assets/images/logo2.png";

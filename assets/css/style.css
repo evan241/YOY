@@ -953,7 +953,7 @@ h2.white-title {
 	color: #fff;
 	min-width: 130px;
 	padding: 11px;
-	background: #000;
+	background: #ff1493;
 }
 
 /* ----------------
@@ -1054,6 +1054,23 @@ h2.white-title {
 	overflow: hidden;
 }
 
+.page-info-sectionII {
+	height: 270px;
+	position: relative;
+	padding: 0 15px;
+	text-align: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	align-items: flex-end;
+	overflow: hidden;
+}
+
 .page-info-section h2 {
 	font-size: 160px;
 	font-weight: lighter;
@@ -1062,7 +1079,24 @@ h2.white-title {
 	z-index: 1;
 }
 
+.page-info-sectionII h2 {
+	font-size: 90px;
+	font-weight: lighter;
+	color: #fff;
+	position: relative;
+	z-index: 1;
+}
+
 .page-info-section:after {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: calc(100% - 64px);
+	left: 0;
+	bottom: 0;
+}
+
+.page-info-sectionII:after {
 	position: absolute;
 	content: "";
 	width: 100%;
@@ -1189,7 +1223,15 @@ h2.white-title {
 	padding-top: 130px;
 }
 
+.portfolio-page-sectionII {
+	padding-top: 30px;
+}
+
 .portfolio-page-section .portfolio-gallery:after {
+	display: none;
+}
+
+.portfolio-page-sectionII .portfolio-gallery:after {
 	display: none;
 }
 
@@ -1557,6 +1599,10 @@ h2.white-title {
 		font-size: 115px;
 		top: 24px;
 	}
+        .page-info-sectionII h2 {
+		font-size: 75px;
+		top: 24px;
+	}
 	.about-logo {
 		padding-top: 0;
 		margin-bottom: 50px;
@@ -1727,7 +1773,14 @@ h2.white-title {
 	.page-info-section {
 		height: 330px;
 	}
+        .page-info-sectionII {
+		height: 330px;
+	}
 	.page-info-section h2 {
+		font-size: 65px;
+		top: 14px;
+	}
+        .page-info-sectionII h2 {
 		font-size: 65px;
 		top: 14px;
 	}

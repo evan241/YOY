@@ -36,6 +36,7 @@ define('VIGENTE', 1);
 define('ADMINISTRADOR', 1);
 define('ADMINISTRATIVO', 2);
 define('USUARIO', 3);
+define('NULO', 0);
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes

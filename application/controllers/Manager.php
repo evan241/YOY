@@ -15,7 +15,7 @@ class Manager extends CI_Controller {
     }
 
     public function index() {
-        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && $this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
+        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO)) {
             $data['classIni'] = 'class="dropdown active"';
             $data['classPro'] = '';
             $data['classSal'] = '';
@@ -33,7 +33,7 @@ class Manager extends CI_Controller {
     
     //Products
     public function products() {
-        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && $this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
+        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO)) {
             $data['classIni'] = '';
             $data['classPro'] = 'class="dropdown active"';
             $data['classSal'] = '';
@@ -50,18 +50,18 @@ class Manager extends CI_Controller {
     }
 
     public function form_add_product() {
-        if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
+        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO)) {
             $data['classIni'] = '';
             $data['classPro'] = 'class="dropdown active"';
-            $data['classEnt'] = '';
             $data['classSal'] = '';
-            $data['classRep'] = '';
+            $data['classUser'] = '';
+            $data['classCustom'] = '';
             $data['classCnf'] = '';
-            $this->load->view('esqueleton/header', $data);
-            $data['ROW_CATEGORIES'] = $this->mproductos->get_all_valid_categories();
-            $data['ROW_ALMACEN'] = $this->mproductos->get_all_valid_almacenes();
-            $this->load->view('Productos/v_add_producto', $data);
-            $this->load->view('esqueleton/footer');
+            $this->load->view('esqueleton/header_manager', $data);
+            $data['ROW_CATEGORIES'] = $this->mmanager->get_all_valid_categories();
+            //$data['ROW_ALMACEN'] = $this->mproductos->get_all_valid_almacenes();
+            $this->load->view('Manager/v_add_producto', $data);
+            $this->load->view('esqueleton/footer_manager');
         } else {
             redirect('login/salir');
         }
