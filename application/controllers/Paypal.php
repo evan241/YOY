@@ -39,12 +39,12 @@ class Paypal extends CI_Controller {
      *          
      */
     public function handleInformation($orderID) {
-        $info = fixDateTime($this->getInformation($orderID));
-        // $this->mpaypal->addAccount($info);
+        return $this->getToken();
+        // $info = fixDateTime($this->getInformation($orderID));
         // $info = $this->mpaypal->addClient($info);
         // $info = $this->mpaypal->addOrder($info);
         // $info = $this->mpaypal->addInfo($info);
-        return $this->mpaypal->getAccount($info);
+        // return $this->mpaypal->getAccount($info);
     }
 
     /**
@@ -58,7 +58,9 @@ class Paypal extends CI_Controller {
 
         $client = PayPalClient::client();
         $response = $client->execute(new OrdersGetRequest($orderID));
+        $token = $this->getToken();
 
+        if ($token != null)
         // Aqui es donde solicitamos informacion adicional que Paypal no ofrece en el response por default.
         $additionalInfo = $this->getTransactionDetails(
             $response->result->links[0]->href,
@@ -143,17 +145,12 @@ class Paypal extends CI_Controller {
         curl_setopt($ch, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
         
-        $result = curl_exec($ch);
-        $token = '';
-        
-        if(!empty($result)) {
-            $json = json_decode($result);
-            $token = $json->access_token;
-        }
-        else {
-            // Falta implementar que hacer en caso de no regresar el token
-            $token = "N/A";
-        }
+        /**
+         *      Regresa el token si el ID y Password del vendedor son correctos,
+         *      caso contrario regresa un valor null.
+         */
+        $result = json_decode(curl_exec($ch));
+        $token = (array_key_exists("access_token", $result)) ? $result->access_token : null;
         curl_close($ch);
         
         return $token;
