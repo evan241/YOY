@@ -31,22 +31,20 @@ class Paypal extends CI_Controller {
      * 
      *      Como puedes ver a $info se le esta asignando el valor de la funcion, las cuales regresan
      *      el mismo array pero ligeramente modificado, ya que incluyen el ultimo ID ingresado a la base,
-     *      y estos ID son utilizados como Foreign Key en las tablas.
-     * 
-     *      Las tablas estan en CASCADA, eliminar al paypal_client va a eliminar:
-     *          - Todas las ordenes en "paypal_order" cuyo "paypal_client_id" sea eliminado.
-     *              - Todos los dev_info en "paypal_info" cuyo "paypal_order_id" sea eliminado.
-     *          
+     *      y estos ID son utilizados como Foreign Key en las tablas.      
      */
     public function handleInformation($orderID) {
         
-        return $this->getInformation($orderID);
+        $info = $this->getInformation($orderID);
 
-        // $info = fixDateTime($this->getInformation($orderID));
-        // $info = $this->mpaypal->addClient($info);
-        // $info = $this->mpaypal->addOrder($info);
-        // $info = $this->mpaypal->addInfo($info);
-        // return $this->mpaypal->getAccount($info);
+        if ($info == null) {
+            return "Error";
+        }
+
+        $info = fixDateTime($this->getInformation($orderID));
+        $this->mpaypal->addSale($info);
+
+        return "Success";
     }
 
     /**
@@ -58,18 +56,22 @@ class Paypal extends CI_Controller {
      */
 	public function getInformation($orderID) {
 
-        $client = PayPalClient::client();
-
-        /**
-         *      FALTA: Que hacer si los ID y/o Password son invalidos
-         */
         try {
+            $client = PayPalClient::client();
             $response = $client->execute(new OrdersGetRequest($orderID));
         }
         catch (Exception $e) {
-           return "Error 1"; 
+            // Solo guardar el orderID
+           return null; 
         }
         
+        $paypal_client = array(
+            "id" => $response->result->payer->payer_id,
+            "name" => $response->result->payer->name->given_name,
+            "surname" => $response->result->payer->name->surname,
+            "email" => $response->result->payer->email_address
+        );
+
         $token = $this->getToken();
 
         $additionalInfo = $this->getTransactionDetails(
@@ -78,28 +80,29 @@ class Paypal extends CI_Controller {
 
         /**
          *      Si el servidor falla en obtener el token o si no recibe la informacion
-         *      adicional requerida, simplemente guardara informacion basica de la venta
-         *      y registrara esta venta en la tabla de: "paypal_error"
+         *      adicional requerida, simplemente guardara el url y orden en: "paypal_error"
          */
         if ($token == null || $additionalInfo == null) {
-            return "Error 2";
+            $paypal_error = array(
+                "paypal_client" => $paypal_client,
+                "ID_USUARIO" => 1,
+                "ID_PRODUCTO" => 1,
+                "status" => $response->result->status,
+                "checkout_url" => $response->result->links[0]->href,
+                "checkout_id" => $response->result->id
+            );
+            return null;
         }
 
         /**
          *      De lo contrario, si la informacion es recibida de manera correcta, se guardara toda la 
          *      informacion en la base de datos
          */
-        $paypal_client = array(
-            "id" => $response->result->payer->payer_id,
-            "name" => $response->result->payer->name->given_name,
-            "surname" => $response->result->payer->name->surname,
-            "email" => $response->result->payer->email_address
-        );
 
         $paypal_order = array(
             "paypal_client_id" => "",
-            "ID_USUARIO" => "",
-            "ID_PRODUCTO" => "",
+            "ID_USUARIO" => 1,
+            "ID_PRODUCTO" => 1,
             "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
             "create_time" => "",
@@ -150,7 +153,7 @@ class Paypal extends CI_Controller {
          *      caso contrario regresa un valor null.
          */
         $result = json_decode(curl_exec($curl));
-        return (array_key_exists("name", $result)) ? $result : null;
+        return (!array_key_exists("name", $result)) ? $result : null;
     }
 
     /**

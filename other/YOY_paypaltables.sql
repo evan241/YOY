@@ -59,7 +59,7 @@ CREATE TABLE 			`paypal_info` (
 	`paypal_info_id` 	INT(15) NOT NULL AUTO_INCREMENT,
     `paypal_order_id` 	INT(15) NOT NUll,
     
-    `status` 			VARCHAR(25) NOT NULL,
+    `status` 			VARCHAR(100) NOT NULL,
     `update_date`		DATE NOT NULL,
     `update_time`		TIME NOT NULL,
     
@@ -68,6 +68,25 @@ CREATE TABLE 			`paypal_info` (
     
     PRIMARY KEY (`paypal_info_id`),
     FOREIGN KEY (`paypal_order_id`) REFERENCES `paypal_order` (`paypal_order_id`) ON DELETE CASCADE
+    
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+-- Cuando alguna venta falle en procesarse por causa de ID invalido / password invalido /
+-- orden invalida / token no obtenido, etc, el checkout_url será guardado para luego
+-- verificar si la venta fue completada ó no y darle seguimiento.
+DROP TABLE IF EXISTS 	`paypal_error`;
+CREATE TABLE 			`paypal_error` (
+
+	`paypal_error_id` 	INT(15) NOT NULL AUTO_INCREMENT,
+    `paypal_client_id` 	INT(15),
+    `ID_USUARIO`		INT(255),
+    `ID_PRODUCTO`		INT(255),
+    `status` 			VARCHAR(100),
+    `checkout_url` 		VARCHAR(100),
+    `checkout_id` 		VARCHAR(25) NOT NULL,
+    
+    PRIMARY KEY (`paypal_error_id`)
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

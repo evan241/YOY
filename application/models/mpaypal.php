@@ -6,6 +6,19 @@ Class Mpaypal extends CI_Model {
         parent::__construct();
     }
 
+    function addSale($info) {
+        $info = $this->addClient($info);
+        $info = $this->addOrder($info);
+        $info = $this->addInfo($info);
+    }
+
+    function PAYPAL_ERROR_NO_INFO($info) {
+        if ($this->getClientID($info) == null) {
+            $this->addClient($info);
+        }
+
+    }
+
     function getClientID($info) {
         try {
             $this->db->select("paypal_client_id");
