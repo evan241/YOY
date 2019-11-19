@@ -1,7 +1,8 @@
 <?php
 
     print_r($RESPONSE);
-    echo count($RESPONSE);
+
+    echo "<br>Count: " . count($RESPONSE);
 
     // if ($RESPONSE == NULL) {
     //     echo "it was null";

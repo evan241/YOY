@@ -22,7 +22,7 @@ class Paypal extends CI_Controller {
 	}
 	
 	public function index() {
-        $data['RESPONSE'] = $this->handleInformation("6Y237066T71437910");
+        $data['RESPONSE'] = $this->handleInformation("3XL77363M2982862A");
         $this->load->view('PAYPAL_TEST/TEST', $data);
     }
     
@@ -39,7 +39,9 @@ class Paypal extends CI_Controller {
      *          
      */
     public function handleInformation($orderID) {
-        return $this->getToken();
+        
+        return $this->getInformation($orderID);
+
         // $info = fixDateTime($this->getInformation($orderID));
         // $info = $this->mpaypal->addClient($info);
         // $info = $this->mpaypal->addOrder($info);
@@ -57,16 +59,36 @@ class Paypal extends CI_Controller {
 	public function getInformation($orderID) {
 
         $client = PayPalClient::client();
-        $response = $client->execute(new OrdersGetRequest($orderID));
+
+        /**
+         *      FALTA: Que hacer si los ID y/o Password son invalidos
+         */
+        try {
+            $response = $client->execute(new OrdersGetRequest($orderID));
+        }
+        catch (Exception $e) {
+           return "Error 1"; 
+        }
+        
         $token = $this->getToken();
 
-        if ($token != null)
-        // Aqui es donde solicitamos informacion adicional que Paypal no ofrece en el response por default.
         $additionalInfo = $this->getTransactionDetails(
             $response->result->links[0]->href,
-            $this->getToken()
-        );
+            $token);
 
+        /**
+         *      Si el servidor falla en obtener el token o si no recibe la informacion
+         *      adicional requerida, simplemente guardara informacion basica de la venta
+         *      y registrara esta venta en la tabla de: "paypal_error"
+         */
+        if ($token == null || $additionalInfo == null) {
+            return "Error 2";
+        }
+
+        /**
+         *      De lo contrario, si la informacion es recibida de manera correcta, se guardara toda la 
+         *      informacion en la base de datos
+         */
         $paypal_client = array(
             "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
@@ -122,9 +144,13 @@ class Paypal extends CI_Controller {
             'Accept: application/json',
             'Content-Type: application/json'
         ));
-        $response = curl_exec($curl);
 
-        return json_decode($response);
+        /**
+         *      Regresa la informacion de la venta si el token y el url son correctos,
+         *      caso contrario regresa un valor null.
+         */
+        $result = json_decode(curl_exec($curl));
+        return (array_key_exists("name", $result)) ? $result : null;
     }
 
     /**
