@@ -88,7 +88,7 @@
                                                     /*      Necesitamos enviar 
                                                     *       1) data.OrderID
                                                     */
-                                                    // window.location="<?php echo base_url() ?>Payment/index/"+data.orderID;
+                                                    window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID;
                                                 });
                                                 }
                                                 }).render('#paypal-button-container');

@@ -20,24 +20,6 @@ CREATE TABLE 			`paypal_client` (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
--- Dado el caso en el que un cliente puede hacer compras con distintas cuentas de paypal,
--- entonces creamos una tabla para enlazar al usuario con distipos tipos de cuentas de 
--- paypal que este haya utilizado.
-
-DROP TABLE IF EXISTS 	`paypal_account`;
-CREATE TABLE 			`paypal_account` (
-
-	`paypal_account_id` INT(15) NOT NULL AUTO_INCREMENT,
-    `ID_USUARIO` 		INT(255) NOT NUll,
-    `paypal_client_id` 	INT(25) NOT NULL,
-    
-    PRIMARY KEY (`paypal_account_id`),
-    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`) ON DELETE CASCADE,
-    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE
-    
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
 -- Guarda la informacion de la orden en el momento que se hace la compra, es la informacion
 -- más util para la pagina web, contiene cosas cmo el ID de la orden, cliente, producto,
 -- asi como tambien la cantidad total pagada, la cantidad neta y la comision de paypal.
@@ -47,6 +29,7 @@ CREATE TABLE 			`paypal_order` (
 
 	`paypal_order_id` 	INT(15) NOT NULL AUTO_INCREMENT,
     `paypal_client_id` 	INT(15) NOT NUll,
+    `ID_USUARIO`		INT(255) NOT NULL,
     `ID_PRODUCTO` 		INT(255) NOT NULL,
     
     `id` 				VARCHAR(25) NOT NULL,
@@ -59,7 +42,9 @@ CREATE TABLE 			`paypal_order` (
     `paypal_fee` 		FLOAT(15) NOT NULL,
     
     PRIMARY KEY (`paypal_order_id`),
-    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE
+    FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE,
+    FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`)
+    
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

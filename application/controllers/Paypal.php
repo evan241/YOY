@@ -33,11 +33,9 @@ class Paypal extends CI_Controller {
      *      el mismo array pero ligeramente modificado, ya que incluyen el ultimo ID ingresado a la base,
      *      y estos ID son utilizados como Foreign Key en las tablas.
      * 
-     *      Las tablas estan en CASCADA, por lo cual eliminar al USUARIO va a eliminar en automatico:
-     * 
-     *          - El cliente en "paypal_client" cuyo ID_USUARIO equivale al USUARIO eliminado.
-     *              - Todas las ordenes en "paypal_order" cuyo "paypal_client_id" sea eliminado.
-     *                  - Todos los dev_info en "paypal_info" cuyo "paypal_order_id" sea eliminado.
+     *      Las tablas estan en CASCADA, eliminar al paypal_client va a eliminar:
+     *          - Todas las ordenes en "paypal_order" cuyo "paypal_client_id" sea eliminado.
+     *              - Todos los dev_info en "paypal_info" cuyo "paypal_order_id" sea eliminado.
      *          
      */
     public function handleInformation($orderID) {
@@ -67,12 +65,6 @@ class Paypal extends CI_Controller {
             $this->getToken()
         );
 
-        //  Necesitamos obtener el ID_USUARIO de la sesion
-        $paypal_account = array(
-            "ID_USUARIO" => "",
-            "paypal_client_id" => ""
-        );
-
         $paypal_client = array(
             "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
@@ -80,9 +72,9 @@ class Paypal extends CI_Controller {
             "email" => $response->result->payer->email_address
         );
 
-        // Necesitamos obtener el ID_PRODUCTO de la sesion
         $paypal_order = array(
             "paypal_client_id" => "",
+            "ID_USUARIO" => "",
             "ID_PRODUCTO" => "",
             "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
@@ -105,8 +97,7 @@ class Paypal extends CI_Controller {
         return array(
             "paypal_client" => $paypal_client,
             "paypal_order" => $paypal_order,
-            "paypal_info" => $paypal_info,
-            "paypal_account" => $paypal_account
+            "paypal_info" => $paypal_info
         );
     }
 
