@@ -31,26 +31,23 @@ class Paypal extends CI_Controller {
      *      caso contrario solamente guardamos el Order ID en la tabla paypal_error, para procesarla despues.    
      */
     public function handleInformation($orderID) {
-        
+
         $info = $this->getInformation($orderID);
 
         if ($info == null) {
-            $this->mpaypayl->orderError($orderID);
-            return false;
+            $this->mpaypal->addError($orderID);
+            return "Guardado en errores";
         }
-
-        $info = fixDateTime($this->getInformation($orderID));
         $this->mpaypal->addSale($info);
-
-        return "Success";
+        return "Guardado correctamente";
     }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
      *      solo tomamos la informacion necesaria y lo acomodamos en tres distintos arrays.
      * 
-     *      Los "key" dentro de cada arrray tienen el mismo nombre de los CAMPOS en la base de datos,
-     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las TABLAS.
+     *      Los "key" dentro de cada ambos tienen el mismo nombre de las columnas en la base de datos,
+     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las tablas.
      */
 	public function getInformation($orderID) {
 
@@ -86,18 +83,14 @@ class Paypal extends CI_Controller {
             "paypal_client_id" => "",
             "ID_USUARIO" => 1,
             "ID_PRODUCTO" => 1,
-            "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
-            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-            "create_time" => "",
+            "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
-            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value
-        );
-
-        $paypal_info = array(
-            "paypal_order_id" => "",
+            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
             "status" => $response->result->status,
+            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+            "create_time" => "",
             "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
             "update_time" => "",
             "checkout_url" => $response->result->links[0]->href,
@@ -106,8 +99,7 @@ class Paypal extends CI_Controller {
 
         return fixDateTime(array(
             "paypal_client" => $paypal_client,
-            "paypal_order" => $paypal_order,
-            "paypal_info" => $paypal_info
+            "paypal_order" => $paypal_order
         ));
     }
 

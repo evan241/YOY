@@ -6,62 +6,60 @@ Class Mpaypal extends CI_Model {
         parent::__construct();
     }
 
-    function addSale($info) {
-        $info = $this->addClient($info);
-        $info = $this->addOrder($info);
-        $info = $this->addInfo($info);
+    function getErrorID($orderID) {
+        try {
+            $this->db->select("checkout_id");
+            $this->db->from("paypal_error");
+            $this->db->where("checkout_id", $orderID);
+            return $this->db->get()->row('checkout_id');
+        }
+        catch (Exception $e) {
+            return null;
+        }
     }
 
-    function orderError($info) {
+    function addError($orderID) {
+        try {
+            if ($this->getErrorID($orderID) == null) {
+                $this->db->insert('paypal_error', array('checkout_id' => $orderID));
+            }
+        }
+        catch (Exception $e) {
+            return null;
+        }
         
     }
 
-    function getClientID($info) {
+    function getClientID($paypal_client) {
         try {
             $this->db->select("paypal_client_id");
             $this->db->from("paypal_client");
-            $this->db->where("id", $info['paypal_client']['id']);
+            $this->db->where("id", $paypal_client['id']);
             return $this->db->get()->row('paypal_client_id');
         }
         catch (Exception $e) {
-            return -1;
+            return null;
         }
     }
 
-    function addClient($info) {
+    function addSale($info) {
         try {
-            if ($this->getClientID($info) == NULL) {
+            $clientID = $this->getClientID($info['paypal_client']);
+
+            if ($clientID == null) {
                 $this->db->insert('paypal_client', $info['paypal_client']);
                 $info['paypal_order']['paypal_client_id'] = $this->db->insert_id();
             }
             else {
                 $info['paypal_order']['paypal_client_id'] = $this->getClientID($info);
             }
-            return $info;
-        }
-        catch (Exception $e) {
-            return -1;
-        }
-    }
-
-    function addOrder($info) {
-        try {
+            
             $this->db->insert('paypal_order', $info['paypal_order']);
-            $info['paypal_info']['paypal_order_id'] = $this->db->insert_id();
-            return $info;
-        }
-        catch (Exception $e) {
-            return -1;
-        }
-    }
 
-    function addInfo($info) {
-        try {
-            $this->db->insert('paypal_info', $info['paypal_info']);
-            return $info;
+            return "PLACEHOLDER";
         }
         catch (Exception $e) {
-            return -1;
+            return "PLACEHOLDER";
         }
     }
 }

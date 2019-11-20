@@ -28,11 +28,12 @@ DROP TABLE IF EXISTS 	`paypal_order`;
 CREATE TABLE 			`paypal_order` (
 
 	`paypal_order_id` 	INT(15) NOT NULL AUTO_INCREMENT,
+    
     `paypal_client_id` 	INT(15) NOT NUll,
     `ID_USUARIO`		INT(255) NOT NULL,
     `ID_PRODUCTO` 		INT(255) NOT NULL,
     
-    `id` 				VARCHAR(25) NOT NULL,
+    `sale_id` 			VARCHAR(25) NOT NULL,
     
     `currency` 			VARCHAR(5) NOT NULL,
     `total_amount` 		FLOAT(15) NOT NULL,
@@ -58,11 +59,13 @@ CREATE TABLE 			`paypal_order` (
 
 -- Cuando alguna venta falle en procesarse por causa de ID invalido / password invalido /
 -- orden invalida / token no obtenido, lo guardamos aqui para procesarlo despues
+
 DROP TABLE IF EXISTS 	`paypal_error`;
 CREATE TABLE 			`paypal_error` (
 
 	`paypal_error_id` 	INT(15) NOT NULL AUTO_INCREMENT,
-    `checkout_id`	INT(25) NOT NULL,
+	
+    `checkout_id`		VARCHAR(25) NOT NULL,
     
     PRIMARY KEY (`paypal_error_id`)
     
