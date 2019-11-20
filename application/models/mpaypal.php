@@ -12,11 +12,8 @@ Class Mpaypal extends CI_Model {
         $info = $this->addInfo($info);
     }
 
-    function PAYPAL_ERROR_NO_INFO($info) {
-        if ($this->getClientID($info) == null) {
-            $this->addClient($info);
-        }
-
+    function orderError($info) {
+        
     }
 
     function getClientID($info) {

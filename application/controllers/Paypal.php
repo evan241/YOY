@@ -27,18 +27,16 @@ class Paypal extends CI_Controller {
     }
     
     /**
-     *      Una vez que tengamos la información necesaria, finalmente la ingresamo en la base de datos.
-     * 
-     *      Como puedes ver a $info se le esta asignando el valor de la funcion, las cuales regresan
-     *      el mismo array pero ligeramente modificado, ya que incluyen el ultimo ID ingresado a la base,
-     *      y estos ID son utilizados como Foreign Key en las tablas.      
+     *      Si la informacion fue recibida de maneara correcta se ingresan todos los campos necesarios a la base de dato,
+     *      caso contrario solamente guardamos el Order ID en la tabla paypal_error, para procesarla despues.    
      */
     public function handleInformation($orderID) {
         
         $info = $this->getInformation($orderID);
 
         if ($info == null) {
-            return "Error";
+            $this->mpaypayl->orderError($orderID);
+            return false;
         }
 
         $info = fixDateTime($this->getInformation($orderID));
@@ -56,48 +54,33 @@ class Paypal extends CI_Controller {
      */
 	public function getInformation($orderID) {
 
+        $token = null;
+        $additionalInfo = null;
+
         try {
             $client = PayPalClient::client();
             $response = $client->execute(new OrdersGetRequest($orderID));
+
+            $token = $this->getToken();
+
+            $additionalInfo = $this->getTransactionDetails(
+                $response->result->links[0]->href,
+                $token);
         }
         catch (Exception $e) {
-            // Solo guardar el orderID
-           return null; 
+           // Dejar vacio, solo es para evitar que la pagina crashe en la inicializacion de $response.
         }
-        
+
+        if ($additionalInfo == null) {
+            return null;
+        }
+
         $paypal_client = array(
             "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
             "surname" => $response->result->payer->name->surname,
             "email" => $response->result->payer->email_address
         );
-
-        $token = $this->getToken();
-
-        $additionalInfo = $this->getTransactionDetails(
-            $response->result->links[0]->href,
-            $token);
-
-        /**
-         *      Si el servidor falla en obtener el token o si no recibe la informacion
-         *      adicional requerida, simplemente guardara el url y orden en: "paypal_error"
-         */
-        if ($token == null || $additionalInfo == null) {
-            $paypal_error = array(
-                "paypal_client" => $paypal_client,
-                "ID_USUARIO" => 1,
-                "ID_PRODUCTO" => 1,
-                "status" => $response->result->status,
-                "checkout_url" => $response->result->links[0]->href,
-                "checkout_id" => $response->result->id
-            );
-            return null;
-        }
-
-        /**
-         *      De lo contrario, si la informacion es recibida de manera correcta, se guardara toda la 
-         *      informacion en la base de datos
-         */
 
         $paypal_order = array(
             "paypal_client_id" => "",
@@ -121,11 +104,11 @@ class Paypal extends CI_Controller {
             "checkout_id" => $response->result->id
         );
 
-        return array(
+        return fixDateTime(array(
             "paypal_client" => $paypal_client,
             "paypal_order" => $paypal_order,
             "paypal_info" => $paypal_info
-        );
+        ));
     }
 
     /**
@@ -134,6 +117,8 @@ class Paypal extends CI_Controller {
      * 
      *      La funcion simplemente requiere el checkout_url obtenido durante la compra y el token.
      *      checkout_url = $response->result->links[0]->href
+     * 
+     *      Si el token o el url de la venta son incorrectos, regresara un valor null.
      */
     public function getTransactionDetails($checkout, $token) {
 
@@ -148,39 +133,35 @@ class Paypal extends CI_Controller {
             'Content-Type: application/json'
         ));
 
-        /**
-         *      Regresa la informacion de la venta si el token y el url son correctos,
-         *      caso contrario regresa un valor null.
-         */
         $result = json_decode(curl_exec($curl));
-        return (!array_key_exists("name", $result)) ? $result : null;
+        $additionalInfo = (!array_key_exists("name", $result)) ? $result : null;
+        curl_close($curl);
+
+        return $additionalInfo;
     }
 
     /**
      *      Esta funcion simplemente regresa el Token necesario para mandar un request
      *      al API de paypal y obtener informacion de la compra.
      * 
-     *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants.
+     *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants,
+     *      si la informacion ingresada es correcta regresara un valor null en vez del token.
      */
     public function getToken() {
 
-        $ch = curl_init();
+        $curl = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, TOKEN_URL);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-        curl_setopt($ch, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+        curl_setopt($curl, CURLOPT_URL, TOKEN_URL);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($curl, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
         
-        /**
-         *      Regresa el token si el ID y Password del vendedor son correctos,
-         *      caso contrario regresa un valor null.
-         */
-        $result = json_decode(curl_exec($ch));
+        $result = json_decode(curl_exec($curl));
         $token = (array_key_exists("access_token", $result)) ? $result->access_token : null;
-        curl_close($ch);
+        curl_close($curl);
         
         return $token;
     }

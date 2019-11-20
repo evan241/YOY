@@ -33,13 +33,20 @@ CREATE TABLE 			`paypal_order` (
     `ID_PRODUCTO` 		INT(255) NOT NULL,
     
     `id` 				VARCHAR(25) NOT NULL,
-    `create_date`		DATE NOT NULL,
-    `create_time`		TIME NOT NULL,
     
     `currency` 			VARCHAR(5) NOT NULL,
     `total_amount` 		FLOAT(15) NOT NULL,
     `net_amount` 		FLOAT(15) NOT NULL,
     `paypal_fee` 		FLOAT(15) NOT NULL,
+    
+    `status` 			VARCHAR(100) NOT NULL,
+    `create_date`		DATE NOT NULL,
+    `create_time`		TIME NOT NULL,
+    `update_date`		DATE NOT NULL,
+    `update_time`		TIME NOT NULL,
+    
+    `checkout_url` 		VARCHAR(100) NOT NULL,
+    `checkout_id` 		VARCHAR(25) NOT NULL,
     
     PRIMARY KEY (`paypal_order_id`),
     FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE,
@@ -49,42 +56,13 @@ CREATE TABLE 			`paypal_order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
--- Contiene informacion adicional de la compra que puede ser util para los developer,
--- el "checkout_url" te regresa toda la informacion de la compra, lo cual es útil en
--- caso de querer implementar más features en un futuro, como seguimiento a rembolsos.
-
-DROP TABLE IF EXISTS 	`paypal_info`;
-CREATE TABLE 			`paypal_info` (
-
-	`paypal_info_id` 	INT(15) NOT NULL AUTO_INCREMENT,
-    `paypal_order_id` 	INT(15) NOT NUll,
-    
-    `status` 			VARCHAR(100) NOT NULL,
-    `update_date`		DATE NOT NULL,
-    `update_time`		TIME NOT NULL,
-    
-    `checkout_url` 		VARCHAR(100) NOT NULL,
-    `checkout_id` 		VARCHAR(25) NOT NULL,
-    
-    PRIMARY KEY (`paypal_info_id`),
-    FOREIGN KEY (`paypal_order_id`) REFERENCES `paypal_order` (`paypal_order_id`) ON DELETE CASCADE
-    
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
 -- Cuando alguna venta falle en procesarse por causa de ID invalido / password invalido /
--- orden invalida / token no obtenido, etc, el checkout_url será guardado para luego
--- verificar si la venta fue completada ó no y darle seguimiento.
+-- orden invalida / token no obtenido, lo guardamos aqui para procesarlo despues
 DROP TABLE IF EXISTS 	`paypal_error`;
 CREATE TABLE 			`paypal_error` (
 
 	`paypal_error_id` 	INT(15) NOT NULL AUTO_INCREMENT,
-    `paypal_client_id` 	INT(15),
-    `ID_USUARIO`		INT(255),
-    `ID_PRODUCTO`		INT(255),
-    `status` 			VARCHAR(100),
-    `checkout_url` 		VARCHAR(100),
-    `checkout_id` 		VARCHAR(25) NOT NULL,
+    `checkout_id`	INT(25) NOT NULL,
     
     PRIMARY KEY (`paypal_error_id`)
     
