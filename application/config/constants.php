@@ -92,7 +92,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define("SANDBOX_ID", "AUkS_CZjrIbTs8VBGI6DMlGYlCKPx6kD3mmai8b26yBfC6odKwPAgXm3BbMoDh8tPSWEa3lncUiZoxNC");
 define("SANDBOX_SECRET", "EHGPk70uoc_GUcT8g9UdHY4hRI4HgrYictcIEEAG5vJvP2Au48BL0GL0rBQ3TrRlJsJgljypkrdUTfqI");
-// define("SANDBOX_SECRET", "TEST");
+// define("SANDBOX_SECRET", "TEST PARA INVALIDAR AL VENDEDOR");
 
 define("LIVE_ID", "AZxD_NRo_2G2F4WI3_sNF7W_dY-bx6wG_0PtLlXyroDEhQ_1OapZtRzZrHy5ojkMPiZJIOrdljr2qwgL");
 define("LIVE_SECRET", "EMd0La4XDWpSITErPfYnBnBqETDa1_0-5vy4Qo09qkMQEaitUI6YjcosCGNNteiU9WhIhYkTtud30XzK");

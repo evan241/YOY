@@ -34,7 +34,7 @@ Class Mpaypal extends CI_Model {
         try {
             $this->db->select("paypal_client_id");
             $this->db->from("paypal_client");
-            $this->db->where("id", $paypal_client['id']);
+            $this->db->where("id", $paypal_client["id"]);
             return $this->db->get()->row('paypal_client_id');
         }
         catch (Exception $e) {
@@ -45,21 +45,23 @@ Class Mpaypal extends CI_Model {
     function addSale($info) {
         try {
             $clientID = $this->getClientID($info['paypal_client']);
+            
+            // return $clientID;
 
             if ($clientID == null) {
                 $this->db->insert('paypal_client', $info['paypal_client']);
                 $info['paypal_order']['paypal_client_id'] = $this->db->insert_id();
             }
             else {
-                $info['paypal_order']['paypal_client_id'] = $this->getClientID($info);
+                $info['paypal_order']['paypal_client_id'] = $clientID;
             }
             
             $this->db->insert('paypal_order', $info['paypal_order']);
 
-            return "PLACEHOLDER";
+            return "FALTA IMPLEMENTAR EL VALOR";
         }
         catch (Exception $e) {
-            return "PLACEHOLDER";
+            return "FALTA IMPLEMENTAR EL VALOR";
         }
     }
 }

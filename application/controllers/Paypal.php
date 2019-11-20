@@ -23,7 +23,10 @@ class Paypal extends CI_Controller {
 	
 	public function index($orderID) {
         $data['RESPONSE'] = $this->handleInformation($orderID);
-        $this->load->view('PAYPAL_TEST/TEST', $data);
+        // $this->load->view('PAYPAL_TEST/TEST', $data);
+        $this->load->view('esqueleton/header');
+        $this->load->view('index');
+        $this->load->view('esqueleton/footer');
     }
     
     /**
@@ -82,7 +85,7 @@ class Paypal extends CI_Controller {
 
         $paypal_order = array(
             "paypal_client_id" => "",
-            "ID_USUARIO" => 1,
+            "ID_USUARIO" => $this->session->userdata("YOY_ID_USUARIO"),
             "ID_PRODUCTO" => 1,
             "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
