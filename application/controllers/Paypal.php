@@ -21,8 +21,8 @@ class Paypal extends CI_Controller {
         $this->load->model('mpaypal');
 	}
 	
-	public function index() {
-        $data['RESPONSE'] = $this->handleInformation("3XL77363M2982862A");
+	public function index($orderID) {
+        $data['RESPONSE'] = $this->handleInformation($orderID);
         $this->load->view('PAYPAL_TEST/TEST', $data);
     }
     
@@ -35,10 +35,11 @@ class Paypal extends CI_Controller {
         $info = $this->getInformation($orderID);
 
         if ($info == null) {
-            $this->mpaypal->addError($orderID);
+            $this->mpaypal->Error($orderID);
             return "Guardado en errores";
         }
         $this->mpaypal->addSale($info);
+
         return "Guardado correctamente";
     }
 

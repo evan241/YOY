@@ -82,15 +82,11 @@
                                                 },
 
                                                 onApprove: function(data, actions) {
-                                                    
-                                                return actions.order.capture().then(function(details) {
-
-                                                    /*      Necesitamos enviar 
-                                                    *       1) data.OrderID
-                                                    */
-                                                    window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID;
-                                                });
+                                                    return actions.order.capture().then(function(details) {
+                                                        window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID;
+                                                    });
                                                 }
+
                                                 }).render('#paypal-button-container');
                             </script>
                             <!-- <button id="btnBuyNow" class="btn btn-primary">Buy now</button> -->
