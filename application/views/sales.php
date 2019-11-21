@@ -84,31 +84,21 @@
 
                                                 onApprove: function(data, actions) {
                                                     return actions.order.capture().then(function(details) {
-                                                        var info = data.orderID;
-
-                                                        jQuery.ajax({
-                                                            type: "POST",
-                                                            url: raiz_url + 'paypal/handleInformation',
-                                                            data: info,
-
-                                                            success: function (obj, textstatus) {
-                                                                        if( !('error' in obj) ) {
-                                                                            yourVariable = obj.result;
-                                                                        }
-                                                                        else {
-                                                                            console.log(obj.error);
-                                                                        }
-                                                                    }
+                                                        return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID, {
+                                                            method: 'post',
+                                                            headers: {
+                                                                'content-type': 'application/json'
+                                                            },
+                                                            body: JSON.stringify({
+                                                                orderID: data.orderID
+                                                            })
                                                         });
-
-
-                                                        // window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID;
                                                     });
                                                 }
 
-                                                }).render('#paypal-button-container');
+                                }).render('#paypal-button-container');
                             </script>
-                            
+                            <!-- window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID; --
                         </div>
                     </div>
                 </div>
