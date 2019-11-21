@@ -90,6 +90,9 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+define("KEY", "yoygeem");
+define("CODE", "AES-128-CBC");
+
 define("SANDBOX_ID", "AUkS_CZjrIbTs8VBGI6DMlGYlCKPx6kD3mmai8b26yBfC6odKwPAgXm3BbMoDh8tPSWEa3lncUiZoxNC");
 define("SANDBOX_SECRET", "EHGPk70uoc_GUcT8g9UdHY4hRI4HgrYictcIEEAG5vJvP2Au48BL0GL0rBQ3TrRlJsJgljypkrdUTfqI");
 // define("SANDBOX_SECRET", "TEST PARA INVALIDAR AL VENDEDOR");

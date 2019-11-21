@@ -13,7 +13,7 @@ CREATE TABLE 			`paypal_client` (
     `id` 				VARCHAR(25) NOT NULL,
     `name` 				VARCHAR(50) NOT NULL,
     `surname` 			VARCHAR(50) NOT NULL,
-    `email` 			VARCHAR(50) NOT NULL,
+    `email` 			VARCHAR(200) NOT NULL,
     
     PRIMARY KEY (`paypal_client_id`)
     
@@ -33,7 +33,7 @@ CREATE TABLE 			`paypal_order` (
     `ID_USUARIO`		INT(255) NOT NULL,
     `ID_PRODUCTO` 		INT(255) NOT NULL,
     
-    `sale_id` 			VARCHAR(25) NOT NULL,
+    `sale_id` 			VARCHAR(200) NOT NULL,
     
     `currency` 			VARCHAR(5) NOT NULL,
     `total_amount` 		FLOAT(15) NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE 			`paypal_order` (
     `update_date`		DATE NOT NULL,
     `update_time`		TIME NOT NULL,
     
-    `checkout_url` 		VARCHAR(100) NOT NULL,
-    `checkout_id` 		VARCHAR(25) NOT NULL,
+    `checkout_url` 		VARCHAR(200) NOT NULL,
+    `checkout_id` 		VARCHAR(200) NOT NULL,
     
     PRIMARY KEY (`paypal_order_id`),
     FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON DELETE CASCADE,
@@ -65,7 +65,7 @@ CREATE TABLE 			`paypal_error` (
 
 	`paypal_error_id` 	INT(15) NOT NULL AUTO_INCREMENT,
 	
-    `checkout_id`		VARCHAR(25) NOT NULL,
+    `checkout_id`		VARCHAR(200) NOT NULL,
     
     PRIMARY KEY (`paypal_error_id`)
     
