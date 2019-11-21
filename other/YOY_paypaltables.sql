@@ -10,7 +10,7 @@ CREATE TABLE 			`paypal_client` (
 
 	`paypal_client_id` 	INT(15) NOT NULL AUTO_INCREMENT,
     
-    `id` 				VARCHAR(25) NOT NULL,
+    `id` 				VARCHAR(200) NOT NULL,
     `name` 				VARCHAR(50) NOT NULL,
     `surname` 			VARCHAR(50) NOT NULL,
     `email` 			VARCHAR(200) NOT NULL,

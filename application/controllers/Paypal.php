@@ -15,18 +15,18 @@ ini_set('display_startup_errors', '1');
 
 class Paypal extends CI_Controller {
 
-	public function __construct() {
+    private $orderID = '';
+
+	public function __construct($orderID) {
         parent::__construct();
+        $this->orderID = $orderID;
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
 	}
 	
-	public function index($orderID) {
-        $data['RESPONSE'] = $this->handleInformation($orderID);
+	public function index() {
+        $data['RESPONSE'] = $this->handleInformation($this->orderID);
         $this->load->view('PAYPAL_TEST/TEST', $data);
-        // $this->load->view('esqueleton/header');
-        // $this->load->view('index');
-        // $this->load->view('esqueleton/footer');
     }
     
     /**
@@ -39,11 +39,11 @@ class Paypal extends CI_Controller {
 
         if ($info == null) {
             $this->mpaypal->Error($orderID);
-            return "Guardado en errores";
+            // return "Guardado en errores";
         }
         $this->mpaypal->addSale($info);
 
-        return "Guardado correctamente";
+        // return "Guardado correctamente";
     }
 
     /**
@@ -77,7 +77,8 @@ class Paypal extends CI_Controller {
         }
 
         $paypal_client = array(
-            "id" => $response->result->payer->payer_id,
+            "id" => $this->encryption->encrypt(
+                    $response->result->payer->payer_id),
             "name" => $response->result->payer->name->given_name,
             "surname" => $response->result->payer->name->surname,
             "email" => $this->encryption->encrypt(
