@@ -84,7 +84,7 @@
 
                                                 onApprove: function(data, actions) {
                                                     return actions.order.capture().then(function(details) {
-                                                        return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID, {
+                                                        return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID + '/' + <?php echo $product[0]['ID_PRODUCTO']; ?>, {
                                                             method: 'post',
                                                             headers: {
                                                                 'content-type': 'application/json'

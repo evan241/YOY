@@ -21,25 +21,24 @@ class Paypal extends CI_Controller {
         $this->load->model('mpaypal');
 	}
 	
-	public function index($orderID) {
-        $data['RESPONSE'] = $this->handleInformation($orderID);
+	public function index($orderID, $product) {
+        $this->handleInformation($orderID, $product);
     }
     
     /**
      *      Si la informacion fue recibida de maneara correcta se ingresan todos los campos necesarios a la base de dato,
      *      caso contrario solamente guardamos el Order ID en la tabla paypal_error, para procesarla despues.    
      */
-    public function handleInformation($orderID) {
+    public function handleInformation($orderID, $product) {
 
-        $info = $this->getInformation($orderID);
+        $info = $this->getInformation($orderID, $product);
 
         if ($info == null) {
             $this->mpaypal->Error($orderID);
-            return "Guardado en errores";
         }
-        $this->mpaypal->addSale($info);
-
-        return "Guardado correctamente";
+        else {
+            $this->mpaypal->addSale($info);
+        }
     }
 
     /**
@@ -49,7 +48,7 @@ class Paypal extends CI_Controller {
      *      Los "key" dentro de cada ambos tienen el mismo nombre de las columnas en la base de datos,
      *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las tablas.
      */
-	public function getInformation($orderID) {
+	public function getInformation($orderID, $product) {
 
         $token = null;
         $additionalInfo = null;
@@ -82,7 +81,7 @@ class Paypal extends CI_Controller {
         $paypal_order = array(
             "paypal_client_id" => "",
             "ID_USUARIO" => $this->session->userdata("YOY_ID_USUARIO"),
-            "ID_PRODUCTO" => 1,
+            "ID_PRODUCTO" => $product,
             "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
