@@ -73,20 +73,17 @@ class Paypal extends CI_Controller {
         }
 
         $paypal_client = array(
-            "id" => $this->encryption->encrypt(
-                    $response->result->payer->payer_id),
+            "id" => $response->result->payer->payer_id,
             "name" => $response->result->payer->name->given_name,
             "surname" => $response->result->payer->name->surname,
-            "email" => $this->encryption->encrypt(
-                        $response->result->payer->email_address)
+            "email" => $response->result->payer->email_address
         );
 
         $paypal_order = array(
             "paypal_client_id" => "",
             "ID_USUARIO" => $this->session->userdata("YOY_ID_USUARIO"),
             "ID_PRODUCTO" => 1,
-            "sale_id" => $this->encryption->encrypt(
-                        $additionalInfo->purchase_units[0]->payments->captures[0]->id),
+            "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
@@ -96,10 +93,8 @@ class Paypal extends CI_Controller {
             "create_time" => "",
             "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
             "update_time" => "",
-            "checkout_url" => $this->encryption->encrypt(
-                            $response->result->links[0]->href),
-            "checkout_id" => $this->encryption->encrypt(
-                            $response->result->id)
+            "checkout_url" => $response->result->links[0]->href,
+            "checkout_id" => $response->result->id
         );
 
         return fixDateTime(array(

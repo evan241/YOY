@@ -45,8 +45,6 @@ Class Mpaypal extends CI_Model {
     function addSale($info) {
         try {
             $clientID = $this->getClientID($info['paypal_client']);
-            
-            // return $clientID;
 
             if ($clientID == null) {
                 $this->db->insert('paypal_client', $info['paypal_client']);
