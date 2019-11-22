@@ -1,12 +1,12 @@
 DELIMITER //
 
-CREATE PROCEDURE addOrder(
-		IN v_product_id INT(11)
+CREATE PROCEDURE PAYPAL_ERROR_NO_INFO (
+		IN v_checkout_url VARCHAR(100)
 )
 BEGIN
 		INSERT
-        INTO	`order`
-				(`product_id`, `quantity`)
+        INTO	`paypal_error`
+				(`paypal_client_id`, `ID_USUARIO`, `ID_PRODUCTO`, `status`, `checkout_url`, `checkout_id`)
 		VALUES
 				(v_product_id, 1);
                 

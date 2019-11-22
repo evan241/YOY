@@ -61,6 +61,7 @@
 
                             <div id="paypal-button-container"></div>
 
+
                             <script>
                                 
                                 paypal.Buttons({
@@ -82,18 +83,22 @@
                                                 },
 
                                                 onApprove: function(data, actions) {
-                                                    
-                                                return actions.order.capture().then(function(details) {
-
-                                                    /*      Necesitamos enviar 
-                                                    *       1) data.OrderID
-                                                    */
-                                                    // window.location="<?php echo base_url() ?>Payment/index/"+data.orderID;
-                                                });
+                                                    return actions.order.capture().then(function(details) {
+                                                        return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID + '/' + <?php echo $product[0]['ID_PRODUCTO']; ?>, {
+                                                            method: 'post',
+                                                            headers: {
+                                                                'content-type': 'application/json'
+                                                            },
+                                                            body: JSON.stringify({
+                                                                orderID: data.orderID
+                                                            })
+                                                        });
+                                                    });
                                                 }
-                                                }).render('#paypal-button-container');
+
+                                }).render('#paypal-button-container');
                             </script>
-                            <!-- <button id="btnBuyNow" class="btn btn-primary">Buy now</button> -->
+                            <!-- window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID; --
                         </div>
                     </div>
                 </div>

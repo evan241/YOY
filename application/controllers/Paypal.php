@@ -21,57 +21,55 @@ class Paypal extends CI_Controller {
         $this->load->model('mpaypal');
 	}
 	
-	public function index() {
-        $data['RESPONSE'] = $this->handleInformation("6Y237066T71437910");
-        $this->load->view('PAYPAL_TEST/TEST', $data);
+	public function index($orderID, $product) {
+        $this->handleInformation($orderID, $product);
     }
     
     /**
-     *      Una vez que tengamos la información necesaria, finalmente la ingresamo en la base de datos.
-     * 
-     *      Como puedes ver a $info se le esta asignando el valor de la funcion, las cuales regresan
-     *      el mismo array pero ligeramente modificado, ya que incluyen el ultimo ID ingresado a la base,
-     *      y estos ID son utilizados como Foreign Key en las tablas.
-     * 
-     *      Las tablas estan en CASCADA, por lo cual eliminar al USUARIO va a eliminar en automatico:
-     * 
-     *          - El cliente en "paypal_client" cuyo ID_USUARIO equivale al USUARIO eliminado.
-     *              - Todas las ordenes en "paypal_order" cuyo "paypal_client_id" sea eliminado.
-     *                  - Todos los dev_info en "paypal_info" cuyo "paypal_order_id" sea eliminado.
-     *          
+     *      Si la informacion fue recibida de maneara correcta se ingresan todos los campos necesarios a la base de dato,
+     *      caso contrario solamente guardamos el Order ID en la tabla paypal_error, para procesarla despues.    
      */
-    public function handleInformation($orderID) {
-        $info = fixDateTime($this->getInformation($orderID));
-        // $this->mpaypal->addAccount($info);
-        // $info = $this->mpaypal->addClient($info);
-        // $info = $this->mpaypal->addOrder($info);
-        // $info = $this->mpaypal->addInfo($info);
-        return $this->mpaypal->getAccount($info);
+    public function handleInformation($orderID, $product) {
+
+        $info = $this->getInformation($orderID, $product);
+
+        if ($info == null) {
+            $this->mpaypal->Error($orderID);
+        }
+        else {
+            $this->mpaypal->addSale($info);
+        }
     }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
      *      solo tomamos la informacion necesaria y lo acomodamos en tres distintos arrays.
      * 
-     *      Los "key" dentro de cada arrray tienen el mismo nombre de los CAMPOS en la base de datos,
-     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las TABLAS.
+     *      Los "key" dentro de cada ambos tienen el mismo nombre de las columnas en la base de datos,
+     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las tablas.
      */
-	public function getInformation($orderID) {
+	public function getInformation($orderID, $product) {
 
-        $client = PayPalClient::client();
-        $response = $client->execute(new OrdersGetRequest($orderID));
+        $token = null;
+        $additionalInfo = null;
 
-        // Aqui es donde solicitamos informacion adicional que Paypal no ofrece en el response por default.
-        $additionalInfo = $this->getTransactionDetails(
-            $response->result->links[0]->href,
-            $this->getToken()
-        );
+        try {
+            $client = PayPalClient::client();
+            $response = $client->execute(new OrdersGetRequest($orderID));
 
-        //  Necesitamos obtener el ID_USUARIO de la sesion
-        $paypal_account = array(
-            "ID_USUARIO" => "",
-            "paypal_client_id" => ""
-        );
+            $token = $this->getToken();
+
+            $additionalInfo = $this->getTransactionDetails(
+                $response->result->links[0]->href,
+                $token);
+        }
+        catch (Exception $e) {
+           // Dejar vacio, solo es para evitar que la pagina crashe en la inicializacion de $response.
+        }
+
+        if ($additionalInfo == null) {
+            return null;
+        }
 
         $paypal_client = array(
             "id" => $response->result->payer->payer_id,
@@ -80,34 +78,28 @@ class Paypal extends CI_Controller {
             "email" => $response->result->payer->email_address
         );
 
-        // Necesitamos obtener el ID_PRODUCTO de la sesion
         $paypal_order = array(
             "paypal_client_id" => "",
-            "ID_PRODUCTO" => "",
-            "id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
-            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-            "create_time" => "",
+            "ID_USUARIO" => $this->session->userdata("YOY_ID_USUARIO"),
+            "ID_PRODUCTO" => $product,
+            "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
             "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
             "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
             "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
-            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value
-        );
-
-        $paypal_info = array(
-            "paypal_order_id" => "",
+            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
             "status" => $response->result->status,
+            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+            "create_time" => "",
             "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
             "update_time" => "",
             "checkout_url" => $response->result->links[0]->href,
             "checkout_id" => $response->result->id
         );
 
-        return array(
+        return fixDateTime(array(
             "paypal_client" => $paypal_client,
-            "paypal_order" => $paypal_order,
-            "paypal_info" => $paypal_info,
-            "paypal_account" => $paypal_account
-        );
+            "paypal_order" => $paypal_order
+        ));
     }
 
     /**
@@ -116,6 +108,8 @@ class Paypal extends CI_Controller {
      * 
      *      La funcion simplemente requiere el checkout_url obtenido durante la compra y el token.
      *      checkout_url = $response->result->links[0]->href
+     * 
+     *      Si el token o el url de la venta son incorrectos, regresara un valor null.
      */
     public function getTransactionDetails($checkout, $token) {
 
@@ -129,41 +123,36 @@ class Paypal extends CI_Controller {
             'Accept: application/json',
             'Content-Type: application/json'
         ));
-        $response = curl_exec($curl);
 
-        return json_decode($response);
+        $result = json_decode(curl_exec($curl));
+        $additionalInfo = (!array_key_exists("name", $result)) ? $result : null;
+        curl_close($curl);
+
+        return $additionalInfo;
     }
 
     /**
      *      Esta funcion simplemente regresa el Token necesario para mandar un request
      *      al API de paypal y obtener informacion de la compra.
      * 
-     *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants.
+     *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants,
+     *      si la informacion ingresada es correcta regresara un valor null en vez del token.
      */
     public function getToken() {
 
-        $ch = curl_init();
+        $curl = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, TOKEN_URL);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-        curl_setopt($ch, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+        curl_setopt($curl, CURLOPT_URL, TOKEN_URL);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($curl, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
         
-        $result = curl_exec($ch);
-        $token = '';
-        
-        if(!empty($result)) {
-            $json = json_decode($result);
-            $token = $json->access_token;
-        }
-        else {
-            // Falta implementar que hacer en caso de no regresar el token
-            $token = "N/A";
-        }
-        curl_close($ch);
+        $result = json_decode(curl_exec($curl));
+        $token = (array_key_exists("access_token", $result)) ? $result->access_token : null;
+        curl_close($curl);
         
         return $token;
     }

@@ -6,79 +6,90 @@ Class Mpaypal extends CI_Model {
         parent::__construct();
     }
 
-    // function addAccount($info) {
-    //     try {
-    //         $this->db->select("paypal_account_id");
-    //         $this->db->from("paypal_account");
-    //         $this->db->where("id", $info['paypal_client']['id']);
-    //     }
-    //     catch (Exception $e) {
-    //         return -1;
-    //     }
-    // }
-
-    function getAccount($info) {
+    /**
+     *      Busca el error en la base de datos
+     */
+    function errorExists($orderID) {
         try {
-            // $this->db->select("paypal_account_id");
-            // $this->db->from("paypal_account");
-            // $this->db->where("id", $info['paypal_client']['id']);
-            $query = $this->db->query("SELECT * FROM usuario WHERE NOMBRE_USUARIO = 'Erick' AND VIGENCIA_USUARIO = 1");
-            return $query->result();
+            $this->db->select("paypal_error_id");
+            $this->db->from("paypal_error");
+            $this->db->where("checkout_id", $orderID);
+            return ($this->db->count_all_results() > 0);
         }
         catch (Exception $e) {
-            return -1;
+            return false;
         }
     }
 
-    function getClientID($info) {
+    /**
+     *      Agrega errores a la tabla paypal_error, pero antes de eso busca
+     *      si no existe actualmente en la base de datos, para evitar duplicado.
+     */
+    function addError($orderID) {
+        try {
+            if (!$this->errorExists($orderID)) {
+                $this->db->insert('paypal_error', array('checkout_id' => $orderID));
+            }
+        }
+        catch (Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     *      Regresa el paypal_client_id o null
+     */
+    function getClientID($paypal_client) {
         try {
             $this->db->select("paypal_client_id");
             $this->db->from("paypal_client");
-            $this->db->where("id", $info['paypal_client']['id']);
-
+            $this->db->where("id", $paypal_client["id"]);
             return $this->db->get()->row('paypal_client_id');
         }
         catch (Exception $e) {
-            return -1;
+            return null;
         }
     }
 
-    function addClient($info) {
+    /**
+     *      Busca la orden en la base de datos
+     */
+    function orderExists($paypal_order) {
         try {
-            $clientID = $this->getClientID($info);
+            $this->db->select("*");
+            $this->db->from("paypal_order");
+            $this->db->where("sale_id", $paypal_order["sale_id"]);
+            return ($this->db->count_all_results() > 0);
+        }
+        catch (Exception $e) {
+            return false;
+        }
+    }
 
-            if ($clientID == NULL) {
+    /**
+     *      Primero busca al cliente en la base de datos, sino esta lo agrega para
+     *      evitar duplicados, hace lo mismo con la orden.
+     */
+    function addSale($info) {
+        try {
+            $clientID = $this->getClientID($info['paypal_client']);
+
+            if ($clientID == null) {
                 $this->db->insert('paypal_client', $info['paypal_client']);
                 $info['paypal_order']['paypal_client_id'] = $this->db->insert_id();
             }
             else {
                 $info['paypal_order']['paypal_client_id'] = $clientID;
             }
-            return $info;
-        }
-        catch (Exception $e) {
-            return -1;
-        }
-    }
 
-    function addOrder($info) {
-        try {
-            $this->db->insert('paypal_order', $info['paypal_order']);
-            $info['paypal_info']['paypal_order_id'] = $this->db->insert_id();
-            return $info;
+            if (!$this->orderExists($info['paypal_order'])) {
+                $this->db->insert('paypal_order', $info['paypal_order']);
+                return true;
+            }
+            return false;
         }
         catch (Exception $e) {
-            return -1;
-        }
-    }
-
-    function addInfo($info) {
-        try {
-            $this->db->insert('paypal_info', $info['paypal_info']);
-            return $info;
-        }
-        catch (Exception $e) {
-            return -1;
+            return false;
         }
     }
 }

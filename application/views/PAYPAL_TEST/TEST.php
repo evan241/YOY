@@ -1,16 +1,11 @@
 <?php
 
     print_r($RESPONSE);
-    echo count($RESPONSE);
 
-    // if ($RESPONSE == NULL) {
-    //     echo "it was null";
-    // }
-    // echo $RESPONSE;
+    // $ciphered = $this->encryption->encrypt($RESPONSE);
+    // $unciphered = $this->encryption->decrypt($ciphered);
 
-    // foreach ($RESPONSE as $innerArray) {
-    //     foreach ($innerArray as $values) {
-    //         echo $values . "<br>";
-    //     }
-    //     echo "<br>";
-    // }
+    // echo $RESPONSE . " Un-encrypted <br>";
+    // echo $ciphered . " Crypted <br>";
+    // echo $unciphered;
+
