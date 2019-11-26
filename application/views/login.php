@@ -1,32 +1,80 @@
-        
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<br><br><br><br><br><br><br>
 <!-- Login -->
+<style>
+ .form {
+background: #f8f9fa;
+border-radius: 10px;
+margin-bottom: 1rem;
+padding:15px;
+font-family: "Roboto", sans-serif;
+}
+.register{
+text-decoration: underline;
+color: #ffc107;
+}
+.forgotpwd{
+text-decoration: underline;
+color: #dc3545;
+float:right
+}
+body{
+    background-image:url('http://localhost/YOY/assets/img/bg.jpg') !important;
+}
+ @media (max-width: 1200px) {
+
+    .logo-header{
+        left:36%;
+        width:30%;
+    }
+}
+.footer-section{
+    /* position:absolute;
+    width:100%;
+    bottom:0; */
+    display:none
+}
+.link{
+	color:white !important;
+}
+</style>
 <section class="shop-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                <form class="">
-                    <input class="form-control" type="text" placeholder="username" name="username" id="username">
-                    <input class="form-control" type="password" placeholder="password" name="password" id="password">
-                    <button type="button" name="btnLogin" id="btnLogin" class="btn btn-block btn-primary" style="background-color: #CCC; border-color: #CCC;">login</button>
+            <div class="col-lg-4 col-xl-3" ></div>
+            <div class="col-lg-4 col-xl-6">
+                <h2 class="text-center mb-3">INICIAR SESIÓN</h2>
+                <form class="form">
+                    <div class="input-group mb-3 mt-3">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span></div>
+                        <input class="form-control" type="email" placeholder="Correo" name="username" id="username" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span></div>
+                        <input class="form-control" type="password" placeholder="Contraseña" name="password" id="password" required>
+                    </div>
+                <div class="text-center">
+                    <button type="submit" name="btnLogin" id="btnLogin" class="btn button btn-primary">Acceder</button>
+                </div>
                 </form>
-                <div id="messages"></div>
-            </div>
-            <div class="col-lg-4"></div>
+                <div class="alert alert-warning" id="messages" style="display:none;"></div>
+
+                <div class="row">
+                <div class="col-lg-6" style="text-align: left">
+                    <a class="link hover-2"href="<?= base_url(); ?>login/registration"><font face="Roboto" size="2">REGISTRATE</font></a>
+                </div>
+                <div class="col-lg-6" style="text-align: left">
+                    <a class="link hover-3 float-right" href="<?= base_url(); ?>login/ForgotPassword"><font face="Roboto" size="2">OLVIDE MI CONTRASEÑA</font></a>
+                </div>
+                </div>
+
         </div>
-        <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-2" style="text-align: left">
-                <a href="<?= base_url(); ?>login/registration"><font face="Lemon" size="2">Registrate</font></a>
             </div>
-            <div class="col-lg-2" style="text-align: left">
-                <a href="<?= base_url(); ?>login/ForgotPassword"><font face="Lemon" size="2">Olvide mi contraseña</font></a>
-            </div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4 col-xl-3"></div>
         </div>
+
     </div>
 </div>
 </section>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 <!-- Newslatter section end -->
