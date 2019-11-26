@@ -82,9 +82,25 @@
                                                 });
                                                 },
 
+                                                // onApprove: function(data, actions) {
+                                                //     return actions.order.capture().then(function(details) {
+                                                //         return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID + '/' + <?php echo $product[0]['ID_PRODUCTO']; ?>, {
+                                                //             method: 'post',
+                                                //             headers: {
+                                                //                 'content-type': 'application/json'
+                                                //             },
+                                                //             body: JSON.stringify({
+                                                //                 orderID: data.orderID
+                                                //             })
+                                                //         });
+                                                //     });
+                                                // }
+
                                                 onApprove: function(data, actions) {
                                                     return actions.order.capture().then(function(details) {
-                                                        return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID + '/' + <?php echo $product[0]['ID_PRODUCTO']; ?>, {
+                                                        return fetch('<?php echo base_url(); ?>paypal/getInformation/' + data.orderID + '/' 
+                                                                                                                    + <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' 
+                                                                                                                    + <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>, {
                                                             method: 'post',
                                                             headers: {
                                                                 'content-type': 'application/json'
@@ -95,6 +111,7 @@
                                                         });
                                                     });
                                                 }
+
 
                                 }).render('#paypal-button-container');
                             </script>
