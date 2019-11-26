@@ -20,86 +20,79 @@ class Paypal extends CI_Controller {
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
 	}
-	
-	public function index($orderID, $product) {
-        $this->handleInformation($orderID, $product);
-    }
-    
-    /**
-     *      Si la informacion fue recibida de maneara correcta se ingresan todos los campos necesarios a la base de dato,
-     *      caso contrario solamente guardamos el Order ID en la tabla paypal_error, para procesarla despues.    
-     */
-    public function handleInformation($orderID, $product) {
-
-        $info = $this->getInformation($orderID, $product);
-
-        if ($info == null) {
-            $this->mpaypal->Error($orderID);
-        }
-        else {
-            $this->mpaypal->addSale($info);
-        }
-    }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
-     *      solo tomamos la informacion necesaria y lo acomodamos en tres distintos arrays.
+     *      solo tomamos la informacion necesaria y lo acomodamos en dos arrays.
      * 
-     *      Los "key" dentro de cada ambos tienen el mismo nombre de las columnas en la base de datos,
-     *      y los "key" del array regresado al final de la funcion tienen el mismo nombre de las tablas.
+     *      Antes de comenzar cualquier proceso de paypal guardamos la informacion más importante en la tabla "paypal_error", 
+	 * 		hacemos esto en caso de que el proceso falle por cualquier motivo como: perdida de conexion, token invalido, etc,
+	 * 		para asi poder volver a ejecutar el SDK de paypal.
      */
-	public function getInformation($orderID, $product) {
+	public function getInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
 
-        $token = null;
+		// Guardamos la info en caso de un error
+
+		$this->mpaypal->addError($ID_USUARIO, $ID_PRODUCTO, $orderID);
+
+		// Intentamos pedir a paypal la informacion 
+
         $additionalInfo = null;
+		$response = null;
 
         try {
             $client = PayPalClient::client();
             $response = $client->execute(new OrdersGetRequest($orderID));
 
-            $token = $this->getToken();
-
             $additionalInfo = $this->getTransactionDetails(
                 $response->result->links[0]->href,
-                $token);
+                $this->getToken());
         }
         catch (Exception $e) {
-           // Dejar vacio, solo es para evitar que la pagina crashe en la inicializacion de $response.
-        }
+           // Dejar vacio, solo evita que la pagina crashe en la inicializacion de $response.
+		}
 
-        if ($additionalInfo == null) {
-            return null;
-        }
+		/**
+		 * 		Si paypal regresa de manera efectiva la informacion, entonces guardamos la compra,
+		 * 		dentro de la cual si todo se procesa de manera correcta, entonces borra el registro
+		 * 		que colocamos en "paypal_error" al inicio.
+		 */
 
-        $paypal_client = array(
-            "id" => $response->result->payer->payer_id,
-            "name" => $response->result->payer->name->given_name,
-            "surname" => $response->result->payer->name->surname,
-            "email" => $response->result->payer->email_address
-        );
-
-        $paypal_order = array(
-            "paypal_client_id" => "",
-            "ID_USUARIO" => $this->session->userdata("YOY_ID_USUARIO"),
-            "ID_PRODUCTO" => $product,
-            "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
-            "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
-            "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
-            "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
-            "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
-            "status" => $response->result->status,
-            "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-            "create_time" => "",
-            "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
-            "update_time" => "",
-            "checkout_url" => $response->result->links[0]->href,
-            "checkout_id" => $response->result->id
-        );
-
-        return fixDateTime(array(
-            "paypal_client" => $paypal_client,
-            "paypal_order" => $paypal_order
-        ));
+		if (($additionalInfo != null) && ($response != null)) {
+			
+			$paypal_client = array(
+				"id" => $response->result->payer->payer_id,
+				"name" => $response->result->payer->name->given_name,
+				"surname" => $response->result->payer->name->surname,
+				"email" => $response->result->payer->email_address
+			);
+	
+			$paypal_order = array(
+				"paypal_client_id" => "",
+				"ID_USUARIO" => $ID_USUARIO,
+				"ID_PRODUCTO" => $ID_PRODUCTO,
+				"sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
+				"currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
+				"total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
+				"net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
+				"paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
+				"status" => $response->result->status,
+				"create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+				"create_time" => "",
+				"update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
+				"update_time" => "",
+				"checkout_url" => $response->result->links[0]->href,
+				"checkout_id" => $response->result->id
+			);
+	
+			$info = fixDateTime(array(
+				"paypal_client" => $paypal_client,
+				"paypal_order" => $paypal_order
+			));
+			
+			$this->mpaypal->addSale($info);
+			$this->mpaypal->deleteError($orderID);
+		}
     }
 
     /**

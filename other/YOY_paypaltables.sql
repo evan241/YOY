@@ -56,13 +56,16 @@ CREATE TABLE 			`paypal_order` (
 
 
 -- Cuando alguna venta falle en procesarse por causa de ID invalido / password invalido /
--- orden invalida / token no obtenido, lo guardamos aqui para procesarlo despues
+-- orden invalida / token no obtenido, o incluso perdida de conexion con el usuario,
+-- lo guardamos aqui para procesarlo despues
 
 DROP TABLE IF EXISTS 	`paypal_error`;
 CREATE TABLE 			`paypal_error` (
 
 	`paypal_error_id` 	INT(15) NOT NULL AUTO_INCREMENT,
 	
+	`ID_USUARIO`		INT(255) NOT NULL,
+    `ID_PRODUCTO` 		INT(255) NOT NULL,
     `checkout_id`		VARCHAR(25) NOT NULL,
     
     PRIMARY KEY (`paypal_error_id`)
