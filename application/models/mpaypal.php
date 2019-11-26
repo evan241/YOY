@@ -40,7 +40,7 @@ Class Mpaypal extends CI_Model {
     }
 
     /**
-     *      Regresa el paypal_client_id o null
+     *      Regresa el paypal_client_id
      */
     function getClientID($paypal_client_id) {
         try {
