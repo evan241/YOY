@@ -4,19 +4,28 @@ class Registro extends CI_Controller {
 
         public function __construct() {
         parent::__construct();
-        $this->load->model('mlogin');
+
+        $this->load->model('mregistro');
     }
 
-    public function register() {
-        if (empty($this->session->userdata('YOY_ID_ROL'))) {
-            $this->load->view('Login/v_register');
-        } else {
-            //echo 'aca';
-            redirect('login/salir');
+    public function index() {
+        $this->load->view('TESTING/registrar');
+    }
+
+    public function validar() {
+
+        // $this->form_validation->set_rules('username', 'Username', array($this->mregistro, 'test'));
+        $this->form_validation->set_rules('username', 'Username', array('required', array($this->mregistro, 'test')));
+        // $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_message('required', 'TEST');
+
+        if ($this->form_validation->run()) {
+            $this->load->view('TESTING/ok');
         }
+        else {
+            $this->load->view('TESTING/registrar');
+        }
+                
     }
 
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
