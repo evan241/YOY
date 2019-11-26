@@ -98,6 +98,9 @@
         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/11.jpg">
             <a href="<?= base_url() ?>assets/img/works/11.jpg" class="portfolio-view">Silla Lienzo</a>
         </div>
+         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/5.jpg">
+            <a href="<?= base_url() ?>assets/img/works/5.jpg"></a>
+        </div>
     </div>
 </div>
 <!-- Portfilio section end -->
@@ -105,15 +108,16 @@
 
 <!-- About section -->
 <section class="about-secton">
-    <div class="container">
+        <img src="<?= base_url() ?>assets/img/works/6.jpg" class="imgFill-index" alt="">
+    <div class="container xstyle">
         <img src="<?= base_url() ?>assets/img/about-img.jpg" class="about-img" alt="">
         <div class="row">
-            <div class="col-lg-7 about-text">
-                <h2>SILLÓN ENCICLOPEDIA</h2>
+            <div class="col-lg-7 about-text" style="padding-left:30px;">
+                <h2 class="color-black">SILLÓN ENCICLOPEDIA</h2>
                 <p>Las palabras viajan más allá del estatus y resaltan la solemne esencia<br>del corazón transmutado
                     en arte. YOY<br><br>Obra de arte conformada por una maleta de viaje con historia
                     y<br>enciclopedias antiguas.</p>
-                <h2 class="black-title">Material</h2>
+                <h2 class="color-black">Material</h2>
                 <P>Estructura de Madera | Pino<br>Resina cristal para proteger asiento</P>
                 <P>Modelos | Sofía Serrano<br>Elaborado por | DK Arquitectura & Carpintería<br>Diseño | Yoyce Aranní
                     HR</P>
@@ -122,14 +126,14 @@
     </div>
     <div class="about-img-box-warp">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 p-0">
+            <div class="row" style="padding-left: 8rem;">
+                <div class="col-lg-7 p-0">
                     <div class="about-img-box">
-                        <img src="<?= base_url() ?>assets/img/image-box.jpg" alt="">
+                        <img class="w100" src="<?= base_url() ?>assets/img/image-box.jpg" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6  d-lg-flex align-items-center p-0">
-                    <div class="about-text-box-warp">
+                <div class="col-lg-5  d-lg-flex p-0">
+                    <div class="about-text-box-warp second-index">
                         <div class="about-text">
                             <h2>MESA XÓLOTL</h2>
                             <p>El conocimiento es un universo y se transforma en poder cuando se transmite.
@@ -144,6 +148,7 @@
                         </div>
                     </div>
                 </div>
+
                 <video class="video" controls="false" loop="true" autoplay="true">
                     <source src="<?= base_url() ?>assets/img/Yoy.mp4" type="video/mp4">
                     <source src="<?= base_url() ?>assets/img/Yoy.webm" type="video/webm">

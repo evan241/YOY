@@ -2,9 +2,9 @@
 
 class Login extends CI_Controller {
 
-	
-    
-        public function __construct() {
+
+
+    public function __construct() {
         parent::__construct();
         /* if ($this->session->userdata('sesionAdmin')) {
           redirect('administracion');
@@ -13,7 +13,11 @@ class Login extends CI_Controller {
         //$this->load->model('mprincipal');
         //$this->load->model('mmanager');
     }
-
+    public function index(){
+        $this->load->view('esqueleton/header');
+        $this->load->view('login');
+        $this->load->view('esqueleton/footer');
+    }
     public function register() {
         if (empty($this->session->userdata('YOY_ID_ROL'))) {
             $this->load->view('Login/v_register');
@@ -22,7 +26,7 @@ class Login extends CI_Controller {
             redirect('login/salir');
         }
     }
-    
+
     public function registration(){
         if (empty($this->session->userdata('YOY_ID_ROL'))) {
             $this->load->view('esqueleton/header');
@@ -33,9 +37,9 @@ class Login extends CI_Controller {
         } else {
             //echo 'aca';
             redirect('login/salir');
-        }  
+        }
     }
-    
+
     public function confirmation($ID_USUARIO){
         if (empty($this->session->userdata('ROLLINGO_ID_USUARIO'))) {
             $this->load->view('esqueleton/header');
@@ -51,7 +55,17 @@ class Login extends CI_Controller {
         } else {
             //echo 'aca';
             redirect('login/salir');
-        }  
+        }
+
+    }
+
+    public function insert_user()
+    {
+        if($this->input->is_ajax_request())
+        {
+            $this->mlogin->insert_user();
+
+        }
     }
 
     public function ajax_validate_user() {
@@ -60,9 +74,9 @@ class Login extends CI_Controller {
                 $data['USERNAME_USUARIO'] = $this->input->post('USERNAME_USUARIO');
                 $data['PASSWD_USUARIO'] = $this->input->post('PASSWD_USUARIO');
                 $result = $this->mlogin->login($data);
-               
+
                 if (count($result)):
-                    
+
                     $datosSesion = array(
                         'ROLLINGO_ID_USUARIO' => $result[0]["ID_USUARIO"],
                         'ROLLINGO_EMAIL_USUARIO'=>$result[0]['EMAIL_USUARIO'],
@@ -72,14 +86,14 @@ class Login extends CI_Controller {
                     );
                     //var_dump($result);
                     $this->session->set_userdata($datosSesion);
-                    
+
 
                     echo 'Ok'.$result[0]["ID_ROL"];
                 else:
-                    echo '<b>* Datos de acceso incorrectos</b>';
+                    echo '<b id="msj">* Datos de acceso incorrectos</b>';
                 endif;
             else:
-                echo '<b>* Datos de acceso incorrectos</b>';
+                echo '<b id="msj">* Datos de acceso incorrectos</b>';
             //redirect('login/salir');
             endif;
         else:
@@ -91,7 +105,7 @@ class Login extends CI_Controller {
         $this->session->sess_destroy();
         redirect(base_url());
     }
-    
+
     public function ForgotPassword(){
         if (empty($this->session->userdata('ROLLING_ID_USUARIO'))) {
             $this->load->view('esqueleton/header');
@@ -101,7 +115,7 @@ class Login extends CI_Controller {
             $this->load->view('esqueleton/footer');
         } else {
             redirect('login/salir');
-        }  
+        }
     }
 }
 
