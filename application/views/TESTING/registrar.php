@@ -4,12 +4,8 @@
 </head>
 <body>
 
-Lista de errores: 
-<?php echo validation_errors(); ?>
-
-
-
 <?php echo form_open('Registro/validar'); ?>
+
 <h5>Username</h5>
 <?php echo form_error('username', '<div class="error">', '</div>'); ?>
 <input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />

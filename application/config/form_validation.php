@@ -7,6 +7,6 @@ $config = array(
         array(
                 'field' => 'username',
                 'label' => 'Username',
-                'rules' => 'trim|required|alpha'
+                'rules' => 'trim|required|noAlpha|noDigits'
         ))
 );

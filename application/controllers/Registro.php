@@ -15,6 +15,9 @@ class Registro extends CI_Controller {
 
     public function validar() {
 
+        $this->form_validation->set_message('noAlpha', 'Alpha detected');
+        $this->form_validation->set_message('noDigits', 'Digit detected');
+
         if ($this->form_validation->run('registro')) {
             $this->load->view('TESTING/ok');
         }
