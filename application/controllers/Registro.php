@@ -6,6 +6,7 @@ class Registro extends CI_Controller {
         parent::__construct();
 
         $this->load->model('mregistro');
+        $this->load->helper('validation');
     }
 
     public function index() {
@@ -14,12 +15,7 @@ class Registro extends CI_Controller {
 
     public function validar() {
 
-        // $this->form_validation->set_rules('username', 'Username', array($this->mregistro, 'test'));
-        $this->form_validation->set_rules('username', 'Username', array('required', array($this->mregistro, 'test')));
-        // $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_message('required', 'TEST');
-
-        if ($this->form_validation->run()) {
+        if ($this->form_validation->run('registro')) {
             $this->load->view('TESTING/ok');
         }
         else {

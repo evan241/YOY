@@ -6,7 +6,5 @@ Class Mregistro extends CI_Model {
         parent::__construct();
     }
 
-    function test($username) {
-        return $username == "test";
-    }
+    
 }

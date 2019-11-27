@@ -4,7 +4,7 @@
 </head>
 <body>
 
-OK
+<a href="<?php echo base_url(); ?>Registro">OK</a>
 
 </body>
 </html>
