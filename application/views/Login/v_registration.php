@@ -6,9 +6,10 @@ body{
 	background-repeat: repeat;
 }
 .footer-section{
-    position:absolute;
+    /* position:absolute;
     width:100%;
-    bottom:0;
+    bottom:0; */
+    display:none !important
 }
 </style>
 <link rel="shortcut icon" href="img/favicon.jpg" />

@@ -27,6 +27,7 @@
 <script src="<?= base_url() ?>assets/js/isotope.pkgd.min.js"></script>
 <script src="<?= base_url() ?>assets/js/circle-progress.min.js"></script>
 <script src="<?= base_url() ?>assets/js/main.js"></script>
+<script src="<?= base_url('assets/js/login.js')?>"></script>
 
 <script src="<?= base_url() ?>assets/js/site.js"></script>
 
