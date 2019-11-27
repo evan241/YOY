@@ -63,7 +63,6 @@
 
 
                             <script>
-                                
                                 paypal.Buttons({
                                                 createOrder: function(data, actions) {
                                                 
@@ -111,8 +110,6 @@
                                                         });
                                                     });
                                                 }
-
-
                                 }).render('#paypal-button-container');
                             </script>
                             <!-- window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID; --
