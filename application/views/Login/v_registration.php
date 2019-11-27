@@ -47,7 +47,7 @@ body{
                                     </div>
                                 </div><br>-->
                                 <div class="row">
-                                    <div class="col-md-3 text-left">
+                                    <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
@@ -56,49 +56,15 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
-
-                                    
-                                    <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
-                                    <!-- No he cambiado los id ni nada -->
-
-                                    <div class="col-md-3 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
-                                            <input type='text' class="form-control" id="C_NOMBRE_USUARIO"
-                                                name="C_NOMBRE_USUARIO" placeholder="(opcional)" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
-
-
-                                    <div class="col-md-3 text-left">
+                                    <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
                                             <input type='text' class="form-control" id="C_APELLIDOS_USUARIO" required
-                                                name="C_APELLIDOS_USUARIO" placeholder="Apellido paterno" />
+                                                name="C_APELLIDOS_USUARIO" placeholder="Apellido(s)" />
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
-
-                                    
-                                    <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
-                                    <!-- No he cambiado los id ni nada -->
-
-                                    <div class="col-md-3 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
-                                            <input type='text' class="form-control" id="C_APELLIDOS_USUARIO" required
-                                                name="C_APELLIDOS_USUARIO" placeholder="Apellido materno" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
-
-
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
@@ -108,38 +74,21 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
-
-
-                                    <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
-                                    <!-- No he cambiado los id ni nada -->
-
-                                    <div class="col-md-6 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-lock"></i></span></div>
-                                            <input type='password' class="form-control" id="C_PASSWORD_USUARIO" required
-                                                name="C_PASSWORD_USUARIO" placeholder="Repetir contraseña" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
-
-
-                                    <div class="col-md-6 text-left">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-at"></i></span></div>
-                                            <input type='email' class="form-control" id="C_EMAIL_USUARIO" required
-                                                name="C_EMAIL_USUARIO" placeholder="Correo electrónico" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     id="basic-addon1"><i class="fas fa-phone"></i></span></div>
                                             <input type='text' class="form-control" id="C_TELEFONO_USUARIO"
-                                                name="C_TELEFONO_USUARIO" placeholder="Número celular (opcional)" />
+                                                name="C_TELEFONO_USUARIO" placeholder="Teléfono/Móvil" />
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-left">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"
+                                                    id="basic-addon1"><i class="fas fa-at"></i></span></div>
+                                            <input type='email' class="form-control" id="C_EMAIL_USUARIO" required
+                                                name="C_EMAIL_USUARIO" placeholder="example@correo.com" />
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
