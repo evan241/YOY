@@ -33,7 +33,7 @@ class Login extends CI_Controller {
             //$data['contenido']="Login/v_registration";
             //$data['title']='Principal/v_title_registrate';
             // $this->load->view('Login/v_registration');
-            $this->load->view('TESTING/test');
+            $this->load->view('Login/v_registration');
             $this->load->view('esqueleton/footer');
         } else {
             //echo 'aca';

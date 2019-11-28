@@ -14,7 +14,7 @@ $config = array(
         array(
                 'field' => 'C_APELLIDOS_USUARIO',
                 'label' => 'Apellidos',
-                'rules' => 'trim|required|noDigits|noSpecial|min_length[3]|max_length[25]'
+                'rules' => 'trim|required|noDigits|noSpecial|min_length[3]|max_length[30]'
         ),
         
         array(
@@ -26,12 +26,12 @@ $config = array(
         array(
                 'field' => 'C_TELEFONO_USUARIO',
                 'label' => 'Telefono',
-                'rules' => 'numeric|min_length[7]|max_length[20]'
+                'rules' => 'trim|required|min_length[7]|max_length[30]'
         ),
 
         array(
                 'field' => 'C_EMAIL_USUARIO',
                 'label' => 'Email',
-                'rules' => 'trim|required|valid_email|min_length[5]'
+                'rules' => 'trim|required|valid_email|min_length[5]|max_length[50]'
         ),
 ));
