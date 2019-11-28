@@ -32,7 +32,8 @@ class Login extends CI_Controller {
             $this->load->view('esqueleton/header');
             //$data['contenido']="Login/v_registration";
             //$data['title']='Principal/v_title_registrate';
-            $this->load->view('Login/v_registration');
+            // $this->load->view('Login/v_registration');
+            $this->load->view('TESTING/test');
             $this->load->view('esqueleton/footer');
         } else {
             //echo 'aca';
@@ -57,15 +58,6 @@ class Login extends CI_Controller {
             redirect('login/salir');
         }
 
-    }
-
-    public function insert_user()
-    {
-        if($this->input->is_ajax_request())
-        {
-            $this->mlogin->insert_user();
-
-        }
     }
 
     public function ajax_validate_user() {

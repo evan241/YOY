@@ -15,15 +15,11 @@ class Registro extends CI_Controller {
 
     public function validar() {
 
-        $this->form_validation->set_rules('username', 'User', 'required');
-        // $this->form_validation->set_message('noAlpha', 'Alpha detected');
-        // $this->form_validation->set_message('noDigits', 'Digit detected');
-
-        if ($this->form_validation->run()) {
-            $this->load->view('TESTING/ok');
+        if ($this->form_validation->run('registro')) {
+            echo "Ok";
         }
         else {
-            $this->load->view('TESTING/registrar');
+            echo "Nope";
         }
                 
     }

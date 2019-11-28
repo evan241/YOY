@@ -25,27 +25,9 @@ body{
                 <h2 class="text-center mb-3">REGÍSTRATE</h2>
                 <center>
                     <form class="formx " data-toggle="validator" role="form" id="formRegistration">
-                        <!--<div class="panel-heading header-primary">
-                            <div class="panel-title text-left"><h2 class="heading-primary">Registro</h2></div>
-                        </div>-->
+
                         <div class="panel-body" style=" padding: 25px">
                             <div class="control-group text-left">
-                                <!--<div class="row">
-                                    <div class="col-md-12 text-left">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-lg btn-block" style="background-color: #e5e3e9;" id="btnIHaveAccount">
-                                                <i class="fa fa-user" aria-hidden="true"></i> Ya tengo mi cuenta
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-left">
-                                        <center>
-                                                O crea una cuenta nueva
-                                        </center>
-                                    </div>
-                                </div><br>-->
                                 <div class="row">
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
@@ -56,6 +38,7 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
@@ -65,6 +48,7 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
@@ -74,6 +58,7 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
@@ -83,6 +68,7 @@ body{
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-12 text-left">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span class="input-group-text"
@@ -96,25 +82,6 @@ body{
 
 
                             </div>
-                            <!--  <div class="row">
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-left">
-                                        <div class="form-group">
-                                            <input type='text' class="form-control" id="C_ESTADO_USUARIO"  name="C_ESTADO_USUARIO" placeholder="Estado"/>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-left">
-                                        <div class="form-group">
-                                            <input type='text' class="form-control" id="C_CIUDAD_USUARIO"  name="C_CIUDAD_USUARIO" placeholder="Ciudad"/>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             <div class="row">
                                 <div class="col-md-12 text-center mt-3">
                                     <div class="form-group">
@@ -125,6 +92,7 @@ body{
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12 text-center" style="text-align: left">
                                     <font face="Roboto" size="2">¿ Ya tienes una cuenta ? </font> <a class="register"
@@ -134,17 +102,6 @@ body{
                             </div>
                         </div>
             </div>
-            <!--<div class="panel-footer"><br>
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn pull-left" id="btnCancelAddMov" >
-                                    <i class="fa fa-remove" aria-hidden="true"></i> Cancelar
-                                </button>
-                                <button type="submit" class="btn btn-primary pull-right">
-                                    <i class="fa fa-check" aria-hidden="true"></i> Enviar
-                                </button>
-                            </div>
-                            <div style="clear:both"><br></div>
-                        </div>-->
             </form>
 
 
@@ -152,6 +109,5 @@ body{
         </div>
         <div class="col-md-3">
         </div>
-        <!--<div class="col-sm-4"><br></div>-->
     </div>
 </div>

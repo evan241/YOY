@@ -1,5 +1,5 @@
 $(document).ready(function () {
-        var oTableUsers = $('#datamyBuys').dataTable({
+    var oTableUsers = $('#datamyBuys').dataTable({
         "iDisplayLength": 5,
         "aLengthMenu": [[5, 25, 50, 100, -1], [5, 25, 50, 100, "Todos"]],
         "bDestroy": true,
@@ -26,70 +26,48 @@ $(document).ready(function () {
             }
         }
     });
-    
+
     $('#btnIHaveAccount').on('click', function () {
         window.location.href = raiz_url + "login/register";
     });
 
-    $('#formRegistration').validator().on('submit', function (e) {
+    // $('#formRegistration').validator().on('submit', function (e) {
+    //     if (!e.isDefaultPrevented()) {
+    //         e.preventDefault();
+
+    //         // $('#modAdvice').modal('toggle');
+    //         // $('#modBodyAdvice').html('Enviando...');
+
+    //         $.ajax({
+    //             url: raiz_url + "registro/validar",
+    //             type: 'POST',
+    //             data: $(this).serialize(),
+    //             success: function (data) {
+    //                 if (data) {
+    //                     // $('#modBodyAdvice').html('<b>! La información se envió correctamente, ahora confirma tu correo para poder entrar ¡</b> ');
+    //                     // $('#modAdvice').on('hidden.bs.modal', function () {
+    //                     // window.location.href = raiz_url;
+    //                     // });
+    //                     console.log("TRUE");
+    //                 }
+    //                 else {
+    //                     // $('#modBodyAdvice').html('<b>Hubo un error al realizar la operación...</b>');
+    //                     // $('#modAdvice').on('hidden.bs.modal', function () {
+    //                     // window.location.href = raiz_url + "login/index";
+    //                     // });
+    //                     console.log("FALSE");
+    //                 }
+    //             }
+    //         });
+    //     }
+    // });
+
+    $('#formSugiere').validator().on('submit', function (e) {
         if (e.isDefaultPrevented()) {
             // handle the invalid form...
 
         } else {
             // everything looks good!
-            e.preventDefault();
-            //$('#modEditCategoriaEjercicio').modal('toggle');
-            //$('#modBodyEditCategoriaEjercicio').html('');
-            $('#modAdvice').modal('toggle');
-            $('#modBodyAdvice').html('Enviando...');
-            $.ajax({ 
-                url: raiz_url + "principal/ajax_add_user_for_confirmation",
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (data) {
-                    if (parseInt(data) > 0) {
-                        $.ajax({
-                            url: raiz_url + "principal/ajax_email_confirmation",
-                            type: 'POST',
-                            data: 'ID_USER=' + data,
-                            success: function (dato) {
-                                if (dato == true) {
-                                    $('#modBodyAdvice').html('<b>! La información se envió correctamente, ahora confirma tu correo para poder entrar ¡</b> ');
-                                    $('#modAdvice').on('hidden.bs.modal', function () {
-                                        window.location.href = raiz_url;
-                                    });
-                                } else {
-                                    $('#modBodyAdvice').html('<b>Hubo un error al realizar la operación...</b>');
-                                    $('#modAdvice').on('hidden.bs.modal', function () {
-                                        window.location.href = raiz_url + "login/registration";
-                                    });
-                                }
-                            }
-                        });
-                    } else {
-                        if (parseInt(data) == 0) {
-                            $('#modBodyAdvice').html('<b>Este email ya fue registrado...</b>');
-                            $('#modAdvice').on('hidden.bs.modal', function () {
-                                window.location.href = raiz_url + "login/ForgotPassword";
-                            });
-                        } else {
-                            $('#modBodyAdvice').html('<b>Hubo un error al realizar la operación...</b>');
-                            $('#modAdvice').on('hidden.bs.modal', function () {
-                                window.location.href = raiz_url + "login/registration";
-                            });
-                        }
-                    }
-                }
-            });
-        }
-    });
-
-    $('#formSugiere').validator().on('submit', function (e) {
-        if (e.isDefaultPrevented()) {
-// handle the invalid form...
-
-        } else {
-// everything looks good!
             e.preventDefault();
             //$('#modEditCategoriaEjercicio').modal('toggle');
             //$('#modBodyEditCategoriaEjercicio').html('');
@@ -135,10 +113,10 @@ $(document).ready(function () {
 
     $('#formHazParo').validator().on('submit', function (e) {
         if (e.isDefaultPrevented()) {
-// handle the invalid form...
+            // handle the invalid form...
 
         } else {
-// everything looks good!
+            // everything looks good!
             e.preventDefault();
             $('#modAdvice').modal('toggle');
             $('#modBodyAdvice').html('Enviando...');
@@ -216,7 +194,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: raiz_url + "principal/ajax_add_buy",
                     type: 'POST',
-                    data: 'RG_ID_IMAGEN_EVENTO='+$('#RG_ID_IMAGEN_EVENTO').val()+'&RG_CANTIDAD_COMPRA='+$('#RG_CANTIDAD_COMPRA').val()+'&RG_COSTO_EVENTO_COMPRA='+$('#RG_COSTO_EVENTO_COMPRA').val(),
+                    data: 'RG_ID_IMAGEN_EVENTO=' + $('#RG_ID_IMAGEN_EVENTO').val() + '&RG_CANTIDAD_COMPRA=' + $('#RG_CANTIDAD_COMPRA').val() + '&RG_COSTO_EVENTO_COMPRA=' + $('#RG_COSTO_EVENTO_COMPRA').val(),
                     success: function (data) {
                         $('#modAddBuy').modal('toggle');
                         $('#modAdviceBuy').modal('toggle');
@@ -230,11 +208,11 @@ $(document).ready(function () {
             });
         }
     });
-    
+
     $('#modAdviceBuy').on('hidden.bs.modal', function () {
         window.location.href = raiz_url + "principal/mybuys";
     });
-    
+
     $('body').on("click", ".btn-cancel-buy", function (e) {
         var ID_COMPRA = $(this).attr('data-id-buy');
         if (ID_COMPRA > 0) {
@@ -258,23 +236,23 @@ $(document).ready(function () {
             });
         }
     });
-    
+
     $('body').on("click", ".btn-confirm-buy", function (e) {
         var ID_COMPRA = $(this).attr('data-id-buy');
         if (ID_COMPRA > 0) {
             $('#modConfirmBuy').modal('toggle');
             /*$('#modBodyConfirmBuy').html('<b>se confirmara la compra.<br>¿ Estás seguro ?</b>');*/
             $('#btnConfirm_Buy').on('click', function (e) {
-                if(!$('#FECHA_DEPOSITO_COMPRA').val() || !$('#HORA_DEPOSITO_COMPRA').val() || !$('#NO_AUTORIZACION_BANCO_COMPRA').val() || !$('#MONTO_DEPOSITO_COMPRA').val()){
-                    if(!$('#FECHA_DEPOSITO_COMPRA').val())
+                if (!$('#FECHA_DEPOSITO_COMPRA').val() || !$('#HORA_DEPOSITO_COMPRA').val() || !$('#NO_AUTORIZACION_BANCO_COMPRA').val() || !$('#MONTO_DEPOSITO_COMPRA').val()) {
+                    if (!$('#FECHA_DEPOSITO_COMPRA').val())
                         $('#FECHA_DEPOSITO_COMPRA').closest('.form-group').removeClass('has-success').addClass('has-error');
-                    if(!$('#HORA_DEPOSITO_COMPRA').val())
+                    if (!$('#HORA_DEPOSITO_COMPRA').val())
                         $('#HORA_DEPOSITO_COMPRA').closest('.form-group').removeClass('has-success').addClass('has-error');
-                    if(!$('#NO_AUTORIZACION_BANCO_COMPRA').val())
+                    if (!$('#NO_AUTORIZACION_BANCO_COMPRA').val())
                         $('#NO_AUTORIZACION_BANCO_COMPRA').closest('.form-group').removeClass('has-success').addClass('has-error');
-                    if(!$('#MONTO_DEPOSITO_COMPRA').val())
+                    if (!$('#MONTO_DEPOSITO_COMPRA').val())
                         $('#MONTO_DEPOSITO_COMPRA').closest('.form-group').removeClass('has-success').addClass('has-error');
-                } else{
+                } else {
                     $.ajax({
                         url: raiz_url + "principal/ajax_confirm_buy",
                         type: 'POST',
@@ -293,8 +271,8 @@ $(document).ready(function () {
             });
         }
     });
-    
-     var oTableNews = $('#dataNew').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+
+    var oTableNews = $('#dataNew').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         //"iDisplayLength": 30,
         //"sSwfPath": "..assets/swf/copy_csv_xls_pdf.swf",
         "iDisplayLength": 25,
@@ -323,17 +301,17 @@ $(document).ready(function () {
             }
         }
     });
-    
-    
+
+
     $('#pagination-demo').twbsPagination({
         totalPages: 35,
         visiblePages: 7,
-        
+
         onPageClick: function (event, page) {
             $('#page-content').text('Page ' + page);
         }
     });
-    
+
     /*var $pagination = $('#pagination-demo');
     var defaultOpts = {
         totalPages: 35

@@ -24,9 +24,11 @@ function noSpecial($text) {
     return (strpbrk($text, $invalid) === FALSE) ? true : false;
 }
 
+
+// No funciona por el momento
 function onlyAlphaSpaces($text) {
     foreach($text as $character) {
-        if ((ctype_alpha($character)) && (ctype_space($character))) {
+        if ((!ctype_alpha($character)) && (!ctype_space($character))) {
             return false;
         }
     }
