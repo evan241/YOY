@@ -1,6 +1,6 @@
 <?php
 
-    function fixDateTime($date){
+    function fixDateTime($info){
 
         // Saca solamente la fecha del string
         $create_date = substr($date['paypal_order']['create_date'], 0, 10);
@@ -16,5 +16,5 @@
         $date['paypal_order']['create_time'] = $create_time;
         $date['paypal_order']['update_time'] = $update_time;
 
-        return $date;
+        return $info;
     }
