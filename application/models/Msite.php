@@ -9,7 +9,7 @@ class Msite extends CI_Model {
     function login($data) {
         try {
             $this->db->select("*");
-            $this->db->from("usuario");
+            $this->db->from("USUARIO");
             $this->db->where("USERNAME_USUARIO", $data['username'])->where("PASSWD_USUARIO", $data['password'])->where("VIGENCIA_USUARIO", VIGENTE);
             $query = $this->db->get();
             return $query->result_array();
@@ -26,7 +26,7 @@ class Msite extends CI_Model {
             );
 
             $this->db->where('ID_USUARIO', $ID_USUARIO);
-            $this->db->update('usuario', $data);
+            $this->db->update('USUARIO', $data);
             return $this->db->affected_rows();
         } catch (Exception $ex) {
 
