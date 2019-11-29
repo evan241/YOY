@@ -2,42 +2,36 @@
 
 class Mpaypal extends CI_Model
 {
-
-    // const TABLE_PAYPAL_CLIENT = "paypal_client";
-    // const TABLE_PAYPAL_ORDER = "paypal_order";
-    // const TABLE_PAYPAL_ERROR = "paypal_error";
-
-
-
     function __construct()
     {
         parent::__construct();
         define('TABLE_PAYPAL_CLIENT', 'paypal_client');
         define("TABLE_PAYPAL_ORDER", "paypal_order");
         define("TABLE_PAYPAL_ERROR", "paypal_error");
+        $this->load->helper('log');
     }
 
     /**
      *      Agrega errores a la tabla paypal_error, para evitar perder la informacion
      *      en caso de fallo durante el proceso.
      */
-    function addError($ID_USUARIO, $ID_PRODUCTO, $orderID) {
+    function addError($ID_USUARIO, $ID_PRODUCTO, $orderID)
+    {
         try {
             $errorId = $this->getError($orderID);
 
             if ($errorId == NULL) {
                 $this->db->insert(TABLE_PAYPAL_ERROR, array(
-                   'ID_USUARIO' => $ID_USUARIO,
-                   'ID_PRODUCTO' => $ID_PRODUCTO,
-                   'checkout_id' => $orderID));
-
-                $errorId = $this->db->insert_id();
+                    'ID_USUARIO' => $ID_USUARIO,
+                    'ID_PRODUCTO' => $ID_PRODUCTO,
+                    'checkout_id' => $orderID
+                ));
+                return $this->db->insert_id();
             }
+            consoleLog("El error ya esta registrado, no será duplicado.");
             return $errorId;
-        }
-        catch (Exception $e) {
-            echo "Este error paypal ya esta registrado";
-            return 9;
+        } catch (Exception $e) {
+            return NULL;
         }
     }
 
@@ -102,31 +96,12 @@ class Mpaypal extends CI_Model
 
             if ($clientId == NULL) {
                 $this->db->insert(TABLE_PAYPAL_CLIENT, $paypal_client);
-                $clientId = $this->db->insert_id();
+                return $this->db->insert_id();
             }
+            consoleLog("El cliente paypal ya esta registrado, no será duplicado.");
             return $clientId;
         } catch (Exception $e) {
-            echo "Este cliente paypal ya esta registrado.";
             return NULL;
-        }
-    }
-
-    /**
-     *      Agrega toda la informacion a paypal_orders
-     */
-    function addOrder($paypal_order)
-    {
-        try {
-            $orderId = $this->getOrder($paypal_order["checkout_id"]);
-
-            if ($orderId == NULL) {
-                $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order);
-                $orderId = $this->db->insert_id();
-            }
-            return $orderId;
-        } catch (Exception $e) {
-            echo "Esta orden paypal ya esta registrada.";
-            return -1;
         }
     }
 
@@ -142,6 +117,25 @@ class Mpaypal extends CI_Model
 
             $result = $this->db->get()->row('paypal_order_id');
             return ($result > 0) ? $result : NULL;
+        } catch (Exception $e) {
+            return NULL;
+        }
+    }
+
+    /**
+     *      Agrega toda la informacion a paypal_orders
+     */
+    function addOrder($paypal_order)
+    {
+        try {
+            $orderId = $this->getOrder($paypal_order["checkout_id"]);
+
+            if ($orderId == NULL) {
+                $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order);
+                return $this->db->insert_id();
+            }
+            consoleLog("La orden paypal ya esta registrada, no será duplicada.");
+            return $orderId;
         } catch (Exception $e) {
             return NULL;
         }

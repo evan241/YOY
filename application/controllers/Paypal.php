@@ -22,8 +22,13 @@ class Paypal extends CI_Controller {
         parent::__construct();
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
+        $this->load->helper('log');
 	}
 
+    /**
+     *      Finalmente, al obtener toda la informacion, la ingresamos en la base de datos
+     *      La cual revisara los registros para evitar duplicados.
+     */
     public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
         $this->ID_PRODUCTO = $ID_PRODUCTO;
         $this->ID_USUARIO = $ID_USUARIO;
@@ -36,7 +41,10 @@ class Paypal extends CI_Controller {
             $this->mpaypal->addOrder($info["paypal_order"]);
             $this->mpaypal->deleteError($orderID);
         }
-        echo "Ok";
+        else {
+            consoleLog("La información no fue procesada.");
+        }
+        echo true;
     }
 
     /**
@@ -65,8 +73,7 @@ class Paypal extends CI_Controller {
                 $this->getToken());
         }
         catch (Exception $e) {
-            echo "No fue posible conectar con el API de Paypal, informacion guardada en paypal_error";
-            // echo "console.log('No fue posible conectar con el API de Paypal, informacion guardada en paypal_error')";
+            consoleLog("Error de conexion con el API de Paypal, orden o credenciales invalidas.");
             return NULL;
 		}
 
@@ -136,6 +143,10 @@ class Paypal extends CI_Controller {
         $additionalInfo = (!array_key_exists("name", $result)) ? $result : NULL;
         curl_close($curl);
 
+        if ($additionalInfo == NULL) {
+            consoleLog("Error durante el request de informacion al API.");
+        }
+
         return $additionalInfo;
     }
 
@@ -162,6 +173,10 @@ class Paypal extends CI_Controller {
         $token = (array_key_exists("access_token", $result)) ? $result->access_token : NULL;
         curl_close($curl);
         
+        if ($token == NULL) {
+            consoleLog("Error al intentar obtener el token.");
+        }
+
         return $token;
     }
 }
