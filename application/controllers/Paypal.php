@@ -19,25 +19,26 @@ class Paypal extends CI_Controller {
     private $ID_USUARIO = NULL;
 
 	public function __construct() {
+        // echo 'console.log("constructor")';
         parent::__construct();
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
 	}
 
     public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
+        // echo 'console.log("handle")';
         $this->ID_PRODUCTO = $ID_PRODUCTO;
         $this->ID_USUARIO = $ID_USUARIO;
 
         $info = $this->getInformation($orderID);
 
         if ($info != NULL) {
-
+            $clientId = $this->mpaypal->addClient($info["paypal_client"]);
+            $info["paypal_order"]["paypal_client_id"] = $clientId;
+            $this->mpaypal->addOrder($info["paypal_order"]);
+            $this->mpaypal->deleteError($orderID);
         }
-        else {
-            echo "No"
-        }
-
-
+        echo "Ok";
     }
 
     /**
@@ -67,6 +68,7 @@ class Paypal extends CI_Controller {
         }
         catch (Exception $e) {
             echo "No fue posible conectar con el API de Paypal, informacion guardada en paypal_error";
+            // echo "console.log('No fue posible conectar con el API de Paypal, informacion guardada en paypal_error')";
             return NULL;
 		}
 
@@ -119,7 +121,7 @@ class Paypal extends CI_Controller {
      * 
      *      Si el token o el url de la venta son incorrectos, regresara un valor null.
      */
-    private function getTransactionDetails($checkout, $token) {
+    public function getTransactionDetails($checkout, $token) {
 
         $curl = curl_init($checkout);
         curl_setopt($curl, CURLOPT_POST, false);

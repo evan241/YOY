@@ -57,19 +57,18 @@
                              
                             <script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" .
                                                     SANDBOX_ID .
-                                                    "&currency=MXN"?>></script> <!-- Aqui va el currency code, MXN o USD -->
+                                                    "&currency=MXN"?>></script> <!-- Currency -->
 
                             <div id="paypal-button-container"></div>
 
 
                             <script>
                                 paypal.Buttons({
-                                                createOrder: function(data, actions) {
-                                                
-                                                return actions.order.create({
-                                                    purchase_units: [{
-                                                    amount: {
+                                    createOrder: function(data, actions) {
 
+                                        return actions.order.create({
+                                            purchase_units: [{
+                                                amount: {
                                                         /*  Cantidad a cobrar
                                                         */
                                                         value: '<?= $product[0]['PRECIO_PRODUCTO'] ?>'
@@ -77,10 +76,9 @@
                                                     /*  La descripcion que se manda durante la paga
                                                     */
                                                     description: '<?= $product[0]['DESCRIPCION_PRODUCTO'] ?>'
-                                                    }]
-                                                });
-                                                },
-
+                                                }]
+                                            });
+                                    },
                                                 // onApprove: function(data, actions) {
                                                 //     return actions.order.capture().then(function(details) {
                                                 //         return fetch('<?php echo base_url(); ?>paypal/handleInformation/' + data.orderID + '/' + <?php echo $product[0]['ID_PRODUCTO']; ?>, {
@@ -94,24 +92,32 @@
                                                 //         });
                                                 //     });
                                                 // }
-
                                                 onApprove: function(data, actions) {
                                                     return actions.order.capture().then(function(details) {
-                                                        return fetch('<?php echo base_url(); ?>paypal/getInformation/' + data.orderID + '/' 
-                                                                                                                    + <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' 
-                                                                                                                    + <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>, {
-                                                            method: 'post',
-                                                            headers: {
-                                                                'content-type': 'application/json'
-                                                            },
-                                                            body: JSON.stringify({
-                                                                orderID: data.orderID
-                                                            })
-                                                        });
+
+                                                        var test = '<?php echo base_url(); ?>paypal/handleInformation/' +
+                                                         data.orderID + '/' + 
+                                                         <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' + 
+                                                         <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>;
+
+                                                         console.log(test);
+
+                                                        // return fetch('<?php echo base_url(); ?>paypal/handleInformation/' +
+                                                        //  data.orderID + '/' + 
+                                                        //  <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' + 
+                                                        //  <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>, {
+                                                        //         method: 'post',
+                                                        //         headers: {
+                                                        //             'content-type': 'application/json'
+                                                        //         },
+                                                        //         body: JSON.stringify({
+                                                        //             orderID: data.orderID
+                                                        //         })
+                                                        //     });
                                                     });
                                                 }
-                                }).render('#paypal-button-container');
-                            </script>
+                                            }).render('#paypal-button-container');
+                                        </script>
                             <!-- window.location="<?php echo base_url() ?>Paypal/index/"+data.orderID; --
                         </div>
                     </div>
