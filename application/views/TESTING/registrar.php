@@ -8,7 +8,7 @@
 
 <h5>Username</h5>
 <?php echo form_error('username', '<div class="error">', '</div>'); ?>
-<input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
+<input type="text" name="username" placeholder="<?php echo form_error('username', '', ''); ?>" value="<?php echo set_value('username'); ?>" size="50" />
 
 <!-- <h5>Password</h5>
 <?php echo form_error('password', '<div class="error">', '</div>'); ?>
