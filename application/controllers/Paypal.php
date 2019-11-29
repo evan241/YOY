@@ -19,14 +19,12 @@ class Paypal extends CI_Controller {
     private $ID_USUARIO = NULL;
 
 	public function __construct() {
-        // echo 'console.log("constructor")';
         parent::__construct();
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
 	}
 
     public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
-        // echo 'console.log("handle")';
         $this->ID_PRODUCTO = $ID_PRODUCTO;
         $this->ID_USUARIO = $ID_USUARIO;
 

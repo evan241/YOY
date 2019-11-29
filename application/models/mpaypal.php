@@ -1,14 +1,16 @@
 <?php
 
-Class Mpaypal extends CI_Model {
+class Mpaypal extends CI_Model
+{
 
     // const TABLE_PAYPAL_CLIENT = "paypal_client";
     // const TABLE_PAYPAL_ORDER = "paypal_order";
     // const TABLE_PAYPAL_ERROR = "paypal_error";
 
-    
 
-    function __construct() {
+
+    function __construct()
+    {
         parent::__construct();
         define('TABLE_PAYPAL_CLIENT', 'paypal_client');
         define("TABLE_PAYPAL_ORDER", "paypal_order");
@@ -21,17 +23,15 @@ Class Mpaypal extends CI_Model {
      */
     function addError($ID_USUARIO, $ID_PRODUCTO, $orderID) {
         try {
-            echo "ok";
-            $errorId = $this->errorExists($orderID);
-            echo "wtf";
-            echo $errorId;
-            if ($errorId < 0) {
+            $errorId = $this->getError($orderID);
+
+            if ($errorId == NULL) {
                 $this->db->insert(TABLE_PAYPAL_ERROR, array(
                    'ID_USUARIO' => $ID_USUARIO,
                    'ID_PRODUCTO' => $ID_PRODUCTO,
                    'checkout_id' => $orderID));
 
-                return $this->db->insert_id();
+                $errorId = $this->db->insert_id();
             }
             return $errorId;
         }
@@ -41,97 +41,19 @@ Class Mpaypal extends CI_Model {
         }
     }
 
-    /*
-     *      Registra al cliente de paypal que esta haciendo la compra
-     */
-    function addClient($paypal_client) {
-        try {
-            $clientId = $this->getClientId($paypal_client["id"]);
-
-            if ($clientId == NULL) {
-                $clientId = $this->db->insert(TABLE_PAYPAL_CLIENT, $paypal_client);
-                return $this->db->insert_id();
-            }
-            return $clientId;
-        }
-        catch (Exception $e) {
-            echo "Este cliente paypal ya esta registrado.";
-            return NULL;
-        }
-    }
-
-    /**
-     *      Agrega toda la informacion a paypal_orders
-     */
-    function addOrder($paypal_order) {
-        try {
-            $orderId = $this->orderExists($paypal_order["checkout_id"]);
-
-            if ($orderId == NULL) {
-               $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order); 
-               return $this->db->insert_id();
-            }
-            return $orderId;
-        }
-        catch (Exception $e) {
-            echo "Esta orden paypal ya esta registrada.";
-            return -1;
-        }
-    }
-
     /**
      *      Busca el error en la base de datos
      */
-    function errorExists($orderID) {
+    function getError($orderID)
+    {
         try {
             $this->db->select("*");
-            $this->db->from("paypal_error");
+            $this->db->from(TABLE_PAYPAL_ERROR);
             $this->db->where("checkout_id", $orderID);
 
-            if ($this->db->get()->num_rows() > 0) {
-                return $this->db->get()->row('paypal_error_id');
-            }
-            return 0;
-        }
-        catch (Exception $e) {
-            return 0;
-        }
-    }
-
-    /**
-     *      Busca la orden en la base de datos
-     */
-    function orderExists($checkout_id) {
-        try {
-            $this->db->select("paypal_order_id");
-            $this->db->from(TABLE_PAYPAL_ORDER);
-            $this->db->where("checkout_id", $checkout_id);
-
-            if ($this->db->count_all_results() > 0) {
-                return $this->db->get()->row('paypal_order_id');
-            }
-            return NULL;
-        }
-        catch (Exception $e) {
-            return NULL;
-        }
-    }
-
-    /**
-     *      Regresa el paypal_client_id
-     */
-    function getClientId($paypal_client_id) {
-        try {
-            $this->db->select("paypal_client_id");
-            $this->db->from(TABLE_PAYPAL_CLIENT);
-            $this->db->where("id", $paypal_client_id);
-
-            if ($this->db->count_all_results() > 0) {
-                return $this->db->get()->row('paypal_client_id');
-            }
-            return NULL;
-        }
-        catch (Exception $e) {
+            $result = $this->db->get()->row('paypal_error_id');
+            return ($result > 0) ? $result : NULL;
+        } catch (Exception $e) {
             return NULL;
         }
     }
@@ -140,16 +62,88 @@ Class Mpaypal extends CI_Model {
      *      Verifica que la compra haya sido procesada de manera correcta,  
      *      de ser asi entonces borra el registro en "paypal_errors"
      */
-    function deleteError($checkout_id) {
+    function deleteError($checkout_id)
+    {
         try {
-            $errorId = $this->errorExists($checkout_id);
+            $errorId = $this->getError($checkout_id);
             if ($errorId != NULL) {
                 $this->db->where('paypal_error_id', $errorId);
-                $this->db->delete('paypal_error'); 
+                $this->db->delete('paypal_error');
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
+        }
+    }
+
+    /**
+     *      Regresa el paypal_client_id
+     */
+    function getClientId($paypal_client_id)
+    {
+        try {
+            $this->db->select("paypal_client_id");
+            $this->db->from(TABLE_PAYPAL_CLIENT);
+            $this->db->where("id", $paypal_client_id);
+
+            $result = $this->db->get()->row('paypal_client_id');
+            return ($result > 0) ? $result : NULL;
+        } catch (Exception $e) {
+            return NULL;
+        }
+    }
+
+    /*
+     *      Registra al cliente de paypal que esta haciendo la compra
+     */
+    function addClient($paypal_client)
+    {
+        try {
+            $clientId = $this->getClientId($paypal_client["id"]);
+
+            if ($clientId == NULL) {
+                $this->db->insert(TABLE_PAYPAL_CLIENT, $paypal_client);
+                $clientId = $this->db->insert_id();
+            }
+            return $clientId;
+        } catch (Exception $e) {
+            echo "Este cliente paypal ya esta registrado.";
+            return NULL;
+        }
+    }
+
+    /**
+     *      Agrega toda la informacion a paypal_orders
+     */
+    function addOrder($paypal_order)
+    {
+        try {
+            $orderId = $this->getOrder($paypal_order["checkout_id"]);
+
+            if ($orderId == NULL) {
+                $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order);
+                $orderId = $this->db->insert_id();
+            }
+            return $orderId;
+        } catch (Exception $e) {
+            echo "Esta orden paypal ya esta registrada.";
+            return -1;
+        }
+    }
+
+    /**
+     *      Busca la orden en la base de datos
+     */
+    function getOrder($checkout_id)
+    {
+        try {
+            $this->db->select("paypal_order_id");
+            $this->db->from(TABLE_PAYPAL_ORDER);
+            $this->db->where("checkout_id", $checkout_id);
+
+            $result = $this->db->get()->row('paypal_order_id');
+            return ($result > 0) ? $result : NULL;
+        } catch (Exception $e) {
+            return NULL;
         }
     }
 }
