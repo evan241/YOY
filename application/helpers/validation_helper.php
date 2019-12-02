@@ -20,10 +20,19 @@ function noDigits($text) {
 }
 
 function noSpecial($text) {
-    $invalid = "#$%^&*()+=-[]';,./{}|:<>?~¿\"!·¿¡ºª";
+    $invalid = "#$%^&*()+_=-[]';,./{}|:@<>?~¿\"!·¿¡ºª";
     return (strpbrk($text, $invalid) === FALSE) ? true : false;
 }
 
+function hasSpecial($text) {
+    $invalid = "#$%^&*()+=_-[]';,./{}|:@<>?~¿\"!·¿¡ºª";
+    return (strpbrk($text, $invalid) === FALSE) ? false : true;
+}
+
+function isPhoneNumber($text) {
+    $invalid = "#$%^&*_=[]';,./{}|:<>?~¿\"!·¿¡ºª";
+    return (strpbrk($text, $invalid) === FALSE) ? true : false;
+}
 
 // No funciona por el momento
 function onlyAlphaSpaces($text) {

@@ -1,11 +1,11 @@
 <style>
-body{
-    background-image:url('http://localhost/YOY/assets/img/bg.jpg') !important;
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: repeat;
-}
-.footer-section{
+    body{
+        background-image:url('http://localhost/YOY/assets/img/bg.jpg') !important;
+        background-attachment: fixed;
+        background-position: center center;
+        background-repeat: repeat;
+    }
+    .footer-section{
     /* position:absolute;
     width:100%;
     bottom:0; */
@@ -33,85 +33,86 @@ body{
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
-                                            <input type='text' class="form-control" id="C_NOMBRE_USUARIO" required
+                                                id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
+                                                <input type='text' class="form-control" id="C_NOMBRE_USUARIO" required
                                                 name="C_NOMBRE_USUARIO" placeholder="Nombre(s)" 
                                                 pattern="[a-zA-Z ]{3,25}"/>
-                                            <div class="help-block with-errors"></div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
+                                        <div class="col-md-6 text-left">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend"><span class="input-group-text"
                                                     id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
-                                            <input type='text' class="form-control" id="C_APELLIDOS_USUARIO" required
-                                                name="C_APELLIDOS_USUARIO" placeholder="Apellido(s)" 
-                                                pattern="[a-zA-Z ]{3,25}"/>
-                                            <div class="help-block with-errors"></div>
+                                                    <input type='text' class="form-control" id="C_APELLIDOS_USUARIO" required
+                                                    name="C_APELLIDOS_USUARIO" placeholder="Apellido(s)" 
+                                                    pattern="[a-zA-Z ]{3,25}"/>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 text-left">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend"><span class="input-group-text"
+                                                        id="basic-addon1"><i class="fas fa-lock"></i></span></div>
+                                                        <input type='password' class="form-control" id="C_PASSWORD_USUARIO" required
+                                                        name="C_PASSWORD_USUARIO" placeholder="Contraseña" 
+                                                        pattern="[a-zA-Z0-9]{8,25}"/>
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 text-left">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"><span class="input-group-text"
+                                                            id="basic-addon1"><i class="fas fa-phone"></i></span></div>
+                                                            <input type='text' class="form-control" id="C_TELEFONO_USUARIO"
+                                                            name="C_TELEFONO_USUARIO" placeholder="Teléfono/Móvil"
+                                                            pattern="[0-9 ()-+-'-']{7,30}" />
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 text-left">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend"><span class="input-group-text"
+                                                                id="basic-addon1"><i class="fas fa-at"></i></span></div>
+                                                                <input type='email' class="form-control" id="C_EMAIL_USUARIO" required
+                                                                name="C_EMAIL_USUARIO" placeholder="example@correo.com" />
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center mt-3">
+                                                        <div class="form-group">
+                                                            <button type='submit' class="btn btn-lg button" id="btnEnviarRegisto"
+                                                            name="btnEnviarRegisto" />
+                                                            Enviar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center" style="text-align: left">
+                                                    <font face="Roboto" size="2">¿ Ya tienes una cuenta ? </font> <a class="register"
+                                                    href="<?= base_url(); ?>Login">Inicia sesión aquí</a>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-lock"></i></span></div>
-                                            <input type='password' class="form-control" id="C_PASSWORD_USUARIO" required
-                                                name="C_PASSWORD_USUARIO" placeholder="Contraseña" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 text-left">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-phone"></i></span></div>
-                                            <input type='text' class="form-control" id="C_TELEFONO_USUARIO"
-                                                name="C_TELEFONO_USUARIO" placeholder="Teléfono/Móvil"
-                                                pattern="[0-9 ()-_+]{7,30}" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 text-left">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-at"></i></span></div>
-                                            <input type='email' class="form-control" id="C_EMAIL_USUARIO" required
-                                                name="C_EMAIL_USUARIO" placeholder="example@correo.com" />
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
 
 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center mt-3">
-                                    <div class="form-group">
-                                        <button type='submit' class="btn btn-lg button" id="btnEnviarRegisto"
-                                            name="btnEnviarRegisto" />
-                                        Enviar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-12 text-center" style="text-align: left">
-                                    <font face="Roboto" size="2">¿ Ya tienes una cuenta ? </font> <a class="register"
-                                        href="<?= base_url(); ?>Login">Inicia sesión aquí</a>
-                                </div>
-
-                            </div>
+                            </center>
                         </div>
-            </div>
-            </form>
-
-
-            </center>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-</div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                </div>

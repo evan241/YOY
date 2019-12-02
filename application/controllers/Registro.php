@@ -16,10 +16,10 @@ class Registro extends CI_Controller {
     public function validar() {
 
         if ($this->form_validation->run('registro')) {
-            echo "Ok";
+            echo true;
         }
         else {
-            echo "Nope";
+            echo false;
         }
                 
     }
