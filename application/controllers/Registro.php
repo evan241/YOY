@@ -20,8 +20,24 @@ class Registro extends CI_Controller {
         }
         else {
             echo false;
-        }
-                
+        }       
     }
 
+    public function insert() {
+        if ($this->mregistro->insert_user()) {
+
+            $this->email->from("CGXel@hotmail.com", "Jashua");
+            $this->email->to("Alexis.isidoro_91@hotmail.com");
+            $this->email->subject("Titulo");
+            $this->email->message("Mensaje");
+            $this->email->send();
+
+
+
+            echo true;
+        }
+        else {
+            echo false;
+        }
+    }
 }

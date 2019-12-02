@@ -13,6 +13,7 @@
 
  Date: 14/11/2019 13:39:23
 */
+USE `yoy`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -141,13 +142,16 @@ COMMIT;
 DROP TABLE IF EXISTS `USUARIO`;
 CREATE TABLE `USUARIO` (
   `ID_USUARIO` int(255) NOT NULL AUTO_INCREMENT,
-  `USERNAME_USUARIO` varchar(50) DEFAULT NULL,
+  `EMAIL_USUARIO` VARCHAR(50) DEFAULT NULL,
   `NOMBRE_USUARIO` varchar(100) DEFAULT NULL,
   `APELLIDO_USUARIO` varchar(255) DEFAULT NULL,
   `PASSWD_USUARIO` varchar(100) DEFAULT NULL,
   `VIGENCIA_USUARIO` varchar(255) DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 0,
+  `V_KEY` VARCHAR(50) DEFAULT NULL,
   `ID_ROL` int(1) DEFAULT NULL,
   `ULTIMO_LOGIN_USUARIO` datetime DEFAULT NULL,
+  
   PRIMARY KEY (`ID_USUARIO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -155,9 +159,9 @@ CREATE TABLE `USUARIO` (
 -- Records of USUARIO
 -- ----------------------------
 BEGIN;
-INSERT INTO `USUARIO` VALUES (1, 'admin', 'Erick', 'Evangelista', 'admin', '1', 1, '2019-11-13 10:42:12');
-INSERT INTO `USUARIO` VALUES (2, '2', 'Empleado', 'General', '2', '1', 2, '2019-11-13 10:43:24');
-INSERT INTO `USUARIO` VALUES (3, '1', 'Pruebas', 'Iniciales', '1', '1', 3, '2019-11-13 11:44:22');
+INSERT INTO `USUARIO` VALUES (1, 'asdas','admin', 'Evangelista', 'admin', '1', 1, '2019-11-13 10:42:12');
+INSERT INTO `USUARIO` VALUES (2,'asdas', '2', 'General', '2', '1', 2, '2019-11-13 10:43:24');
+INSERT INTO `USUARIO` VALUES (3,'asdas', '1', 'Iniciales', '1', '1', 3, '2019-11-13 11:44:22');
 COMMIT;
 
 -- ----------------------------
