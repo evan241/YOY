@@ -62,7 +62,7 @@ class Mpaypal extends CI_Model
             $errorId = $this->getError($checkout_id);
             if ($errorId != NULL) {
                 $this->db->where('paypal_error_id', $errorId);
-                $this->db->delete('paypal_error');
+                $this->db->delete(TABLE_PAYPAL_ERROR);
             }
         } catch (Exception $e) {
             return false;

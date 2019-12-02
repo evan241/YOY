@@ -28,6 +28,8 @@ class Paypal extends CI_Controller {
     /**
      *      Finalmente, al obtener toda la informacion, la ingresamos en la base de datos
      *      La cual revisara los registros para evitar duplicados.
+     *
+     *      Si todo sale bien entonces removera el registro temporal que guardamos en paypal_error
      */
     public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
         $this->ID_PRODUCTO = $ID_PRODUCTO;
@@ -60,7 +62,7 @@ class Paypal extends CI_Controller {
 		// Guardamos la info en caso de un error
 		$this->mpaypal->addError($this->ID_USUARIO, $this->ID_PRODUCTO, $orderID);
 
-		// Intentamos pedir a paypal la informacion 
+		// Intentamos pedir la informacion a paypal
         $additionalInfo = NULL;
 		$response = NULL;
 
@@ -78,11 +80,8 @@ class Paypal extends CI_Controller {
 		}
 
 		/**
-		 * 		Si paypal regresa de manera efectiva la informacion, entonces guardamos la compra,
-		 * 		dentro de la cual si todo se procesa de manera correcta, entonces borra el registro
-		 * 		que colocamos en "paypal_error" al inicio.
+		 * 		Si paypal regresa de manera efectiva la informacion, entonces la acomodamos en arrays
 		 */
-
 		if (($additionalInfo != NULL) && ($response != NULL)) {
 			
 			$paypal_client = array(
@@ -115,6 +114,7 @@ class Paypal extends CI_Controller {
 			));
             return $info;
 		}
+        return NULL;
     }
 
     /**
@@ -155,7 +155,7 @@ class Paypal extends CI_Controller {
      *      al API de paypal y obtener informacion de la compra.
      * 
      *      Solo requiere los datos de Sandbox ó Live, se encuentran en el archivo de Constants,
-     *      si la informacion ingresada es correcta regresara un valor null en vez del token.
+     *      si la informacion ingresada es incorrecta regresara un valor null en vez del token.
      */
     public function getToken() {
 
