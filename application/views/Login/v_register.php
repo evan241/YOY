@@ -75,7 +75,7 @@ mysql_query("SET NAMES 'utf8'");
                         </button>
                         <br>
                         <center>
-                            <a href="<?= base_url()?>login/registration">Registrame</a>
+                            <a href="<?= base_url()?>registro">Registrame</a>
                         </center>
 
                     </section>

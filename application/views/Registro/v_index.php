@@ -52,6 +52,7 @@
                                                 </div>
                                             </div>
 
+<<<<<<< HEAD:application/views/Login/v_registration.php
                                             <div class="col-md-6 text-left">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend"><span class="input-group-text"
@@ -62,6 +63,18 @@
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
+=======
+                                    <div class="col-md-6 text-left">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend"><span class="input-group-text"
+                                                    id="basic-addon1"><i class="fas fa-lock"></i></span></div>
+                                            <input type='password' class="form-control" id="C_PASSWORD_USUARIO" required
+                                                name="C_PASSWORD_USUARIO" placeholder="Contraseña"
+                                                pattern="[a-zA-Z0-9]{8,25}" />
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+>>>>>>> c341cc47a071122665d695cb53a49c4b3ab45cc3:application/views/Registro/v_index.php
 
                                                 <div class="col-md-6 text-left">
                                                     <div class="input-group mb-3">
