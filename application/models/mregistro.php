@@ -6,5 +6,13 @@ Class Mregistro extends CI_Model {
         parent::__construct();
     }
 
-    
+    function registroUsuario($info) {
+    	try {
+    		$this->db->insert("usuario", $info);
+    		return 1;
+    	}
+    	catch (Exception $e) {
+    		return null;
+    	}
+    }
 }

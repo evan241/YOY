@@ -61,7 +61,7 @@ body{
 
                 <div class="row">
                 <div class="col-lg-6" style="text-align: left">
-                    <a class="link hover-2"href="<?= base_url(); ?>login/registration"><font face="Roboto" size="2">REGISTRATE</font></a>
+                    <a class="link hover-2"href="<?= base_url(); ?>registro"><font face="Roboto" size="2">REGISTRATE</font></a>
                 </div>
                 <div class="col-lg-6" style="text-align: left">
                     <a class="link hover-3 float-right" href="<?= base_url(); ?>login/ForgotPassword"><font face="Roboto" size="2">OLVIDE MI CONTRASEÑA</font></a>

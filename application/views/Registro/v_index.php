@@ -57,7 +57,8 @@ body{
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     id="basic-addon1"><i class="fas fa-lock"></i></span></div>
                                             <input type='password' class="form-control" id="C_PASSWORD_USUARIO" required
-                                                name="C_PASSWORD_USUARIO" placeholder="Contraseña" />
+                                                name="C_PASSWORD_USUARIO" placeholder="Contraseña"
+                                                pattern="[a-zA-Z0-9]{8,25}" />
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>

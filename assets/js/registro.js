@@ -3,37 +3,27 @@ $(document).ready(function () {
 
 
     $('#formRegistration').submit(function (e) {
-        if (!e.isDefaultPrevented()) {
-            e.preventDefault();
+        e.preventDefault();
 
-            // $('#modAdvice').modal('toggle');
-            // $('#modBodyAdvice').html('Enviando...');
-
-            $.ajax({
-                url: raiz_url + "registro/validar",
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (data) {
-
-                    alert(data);
-
-                    // if (data == "Ok") {
-                    //     // $('#modBodyAdvice').html('<b>! La información se envió correctamente, ahora confirma tu correo para poder entrar ¡</b> ');
-                    //     // $('#modAdvice').on('hidden.bs.modal', function () {
-                    //     // window.location.href = raiz_url;
-                    //     // });
-                    //     console.log("TRUE");
-                    // }
-                    // else {
-                    //     // $('#
-                    //     // $('#modAdvice').on('hidden.bs.modal', function () {
-                    //     // window.location.href = raiz_url + "login/index";
-                    //     // });
-                    //     console.log("FALSE");
-                    // }
+        var formdata = new FormData($(this)[0]);
+        $.ajax({
+            url: raiz_url + "registro/ajax_registrar_usuario",
+            type: 'POST',
+            data: formdata,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data == "ok") {
+                    // Aqui mostramos el mensaje de email
                 }
-            });
-        }
+                else {
+                    // Aqui va el pop-up de error       
+                }
+
+            }
+        });
+
     });
 
 
@@ -92,4 +82,4 @@ $(document).ready(function () {
     // });
 
 
- });
+});
