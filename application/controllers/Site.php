@@ -28,8 +28,6 @@ class Site extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
 
-    
-
     public function salir() {
         $this->session->sess_destroy();
         redirect(base_url());
@@ -44,21 +42,6 @@ class Site extends CI_Controller {
     public function about() {
         $this->load->view('esqueleton/header');
         $this->load->view('about');
-        $this->load->view('esqueleton/footer');
-    }
-
-    public function store() {
-        $this->load->view('esqueleton/header');
-        $data['products'] = $this->msite->get_all_valid_products_to_store();
-        $this->load->view('store', $data);
-        $this->load->view('esqueleton/footer');
-    }
-    
-    public function sales($param) {
-        $this->load->view('esqueleton/header');
-        $data['product'] = $this->mmanager->get_product_by_id($param);
-        $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
-        $this->load->view('sales', $data);
         $this->load->view('esqueleton/footer');
     }
 
