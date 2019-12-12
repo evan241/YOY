@@ -7,7 +7,7 @@ $(document).ready(function () {
 
         var formdata = new FormData($(this)[0]);
         $.ajax({
-            url: raiz_url + "registro/ajax_registrar_usuario",
+            url: raiz_url + "login/ajax_registrar_usuario",
             type: 'POST',
             data: formdata,
             cache: false,
@@ -15,6 +15,7 @@ $(document).ready(function () {
             processData: false,
             success: function (data) {
                 if (data == "ok") {
+                    alert("Registrado");
                     // Aqui mostramos el mensaje de email
                 }
                 else {

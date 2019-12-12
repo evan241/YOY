@@ -20,7 +20,17 @@ class Mlogin extends CI_Model {
         } catch (Exception $e) {
             return $e->getMessage();
         }
-    } 
+    }
+
+    function registroUsuario($info) {
+        try {
+            $this->db->insert("usuario", $info);
+            return 1;
+        }
+        catch (Exception $e) {
+            return null;
+        }
+    }
     
     function update_last_login($ID_USUARIO) {
         try {
@@ -33,5 +43,4 @@ class Mlogin extends CI_Model {
             return $e->getMessage();
         }
     }
-
 }

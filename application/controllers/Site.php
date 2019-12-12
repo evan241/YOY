@@ -7,9 +7,6 @@ class Site extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
-        $this->load->model('msite');
-        $this->load->model('mmanager');
     }
 
     public function index() {
@@ -20,12 +17,6 @@ class Site extends CI_Controller {
             $this->load->view('index');
             $this->load->view('esqueleton/footer');
         }
-    }
-
-    public function login() {
-        $this->load->view('esqueleton/header');
-        $this->load->view('Login/v_index');
-        $this->load->view('esqueleton/footer');
     }
 
     public function salir() {

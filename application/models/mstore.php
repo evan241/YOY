@@ -20,5 +20,4 @@ class Mstore extends CI_Model {
             return $e->getMessage();
         }
     }
-
 }

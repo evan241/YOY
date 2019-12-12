@@ -91,7 +91,7 @@
                         </ul>
                     </li>
                     <?php } else{ ?>
-                    <li><a href="<?= base_url() ?>Login">Login</a></li>
+                    <li><a href="<?= base_url() ?>login">Login</a></li>
                      <?php } ?>
                 </ul>
             </div>
