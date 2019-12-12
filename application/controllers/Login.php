@@ -6,55 +6,64 @@ class Login extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        /* if ($this->session->userdata('sesionAdmin')) {
-          redirect('administracion');
-          } */
         $this->load->model('mlogin');
-        //$this->load->model('mprincipal');
-        //$this->load->model('mmanager');
+        $this->load->model('msite');
+        $this->load->helper("log");
     }
-    public function index(){
+    public function index() {
         $this->load->view('esqueleton/header');
-        $this->load->view('login');
+        $this->load->view('Login/v_index');
         $this->load->view('esqueleton/footer');
     }
 
-    public function confirmation($ID_USUARIO){
-        if (empty($this->session->userdata('ROLLINGO_ID_USUARIO'))) {
-            $this->load->view('esqueleton/header');
-            //$ID_USUARIO=$this->input->post('ID_USUARIO');
-            if(intval($ID_USUARIO)>0){
-                $confirm=$this->mprincipal->confirm($ID_USUARIO);
-            }
-            if(intval($ID_USUARIO)>0 && intval($confirm)>0)
-                $this->load->view('Principal/v_confirmation');
-            else
-                $this->load->view('Principal/v_error_confirmation');
-            $this->load->view('esqueleton/footer');
-        } else {
-            //echo 'aca';
-            redirect('login/salir');
-        }
-
-    }
-
-    public function salir(){
+    public function salir() {
         $this->session->sess_destroy();
         redirect(base_url());
     }
 
-    public function ForgotPassword(){
+    public function ForgotPassword() {
         if (empty($this->session->userdata('ROLLING_ID_USUARIO'))) {
             $this->load->view('esqueleton/header');
             $data['title']='Principal/v_title_forgot_password';
             $data['contenido']="Login/v_forgot_password";
-            $this->load->view('Principal/v_index_principal',$data);
+            $this->load->view('Login/v_forgot_password',$data);
             $this->load->view('esqueleton/footer');
         } else {
             redirect('login/salir');
         }
     }
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+
+    public function ajax_validate_user() {
+
+        if ($this->input->is_ajax_request()) {
+            if (!empty($this->input->post('email')) && !empty($this->input->post('password'))) {
+
+                $data = array(
+                    'email' => $this->input->post('email'),
+                    'password' => $this->input->post('password'));
+
+                $result = $this->mlogin->login($data);
+
+                if (count($result)) {
+                    $datosSesion = array(
+                        'YOY_ID_USUARIO' => $result[0]["ID_USUARIO"],
+                        'YOY_NOMBRE_USUARIO' => $result[0]["NOMBRE_USUARIO"],
+                        'YOY_USERNAME_USUARIO' => $result[0]["EMAIL_USUARIO"],
+                        'YOY_APELLIDO_USUARIO' => $result[0]["APELLIDO_USUARIO"],
+                        'YOY_ID_ROL' => $result[0]["ID_ROL"]
+                    );
+                    $this->session->set_userdata($datosSesion);
+                    $this->msite->update_last_login($result[0]["ID_USUARIO"]);
+                    echo 'Ok';
+                }
+                else {
+                    echo '<b>* Datos de acceso incorrectos</b>';
+                }
+            }
+            else {
+                echo '<b>* Debe introducir usuario y contraseña</b>';
+            }
+        }
+    }
+}

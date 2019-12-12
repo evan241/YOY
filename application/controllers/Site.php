@@ -24,42 +24,11 @@ class Site extends CI_Controller {
 
     public function login() {
         $this->load->view('esqueleton/header');
-        $this->load->view('login');
+        $this->load->view('Login/v_index');
         $this->load->view('esqueleton/footer');
     }
 
-    public function ajax_validate_user() {
-        if ($this->input->is_ajax_request()):
-            if (!empty($this->input->post('username')) && !empty($this->input->post('password'))):
-                $data['username'] = $this->input->post('username');
-                $data['password'] = $this->input->post('password');
-                $result = $this->msite->login($data);
-                if (count($result)):
-
-                    $datosSesion = array(
-                        'YOY_ID_USUARIO' => $result[0]["ID_USUARIO"],
-                        'YOY_NOMBRE_USUARIO' => $result[0]["NOMBRE_USUARIO"],
-                        'YOY_USERNAME_USUARIO' => $result[0]["USERNAME_USUARIO"],
-                        'YOY_APELLIDO_USUARIO' => $result[0]["APELLIDO_USUARIO"],
-                        'YOY_ID_ROL' => $result[0]["ID_ROL"]
-                    );
-
-                    //var_dump($result);
-                    $this->session->set_userdata($datosSesion);
-                    $this->msite->update_last_login($result[0]["ID_USUARIO"]);
-                    echo 'Ok';
-
-                else:
-                    echo '<b>* Datos de acceso incorrectos</b>';
-                endif;
-            else:
-                echo '<b>* Debe introducir usuario y contraseña</b>';
-            //redirect('login/salir');
-            endif;
-        else:
-            redirect('login/salir');
-        endif;
-    }
+    
 
     public function salir() {
         $this->session->sess_destroy();
