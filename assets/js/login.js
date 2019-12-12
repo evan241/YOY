@@ -1,20 +1,6 @@
 
 $(document).ready(function () {
 
-    //inicializar controles clock
-
-    //////////////////////////////////////////////
-    //////////// FIN DE INICIALIZACIONES//////////
-    //////////////////////////////////////////////
-
-
-    /* if($("#msj")){
-        $("#messages").css("display","block");
-
-    }else{
-         $("#messages").css("display","none");
-    }
- */
     $('#RG_PASSWD_USUARIO').on('keydown', function (e) {
         if (e.which == 13) {
             $('#btnEntrar').click();
@@ -27,23 +13,22 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnEntrar').on('click', function () {
-        $('#btnEntrar').html('<img src="' + raiz_url + 'assets/img/loading.svg" width="20">');
+    $('#btnFormYOY').on('submit', function (e) {
+        e.preventDefault();
+        // $('#btnLoginYOY').html('<img src="' + raiz_url + 'assets/img/loading.svg" width="20">');
         $.ajax({
             url: raiz_url + "login/ajax_validate_user",
-            type: 'POST',
-            data: 'USERNAME_USUARIO=' + $('#RG_USERNAME_USUARIO').val() +
-                '&PASSWD_USUARIO=' + $('#RG_PASSWD_USUARIO').val(),
-            success: function (data) {
-                console.log(data);
-                if (data == 'Ok') {
-                    window.location.href = "inicio/index";
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                if (response == 'Ok') {
+                    window.location.href = raiz_url + "site/index";
                 }
                 else {
-                    $('#messages').html(data);
+                    $('#messages').html(response);
                     $('#messages').focus();
                 }
-                $('#btnEntrar').html('<i class="fa fa-sign-in" aria-hidden="true"></i> Entrar');
+                $('#btnLoginYOY').html('login');
             }
         });
     });

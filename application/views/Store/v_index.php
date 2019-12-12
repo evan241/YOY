@@ -22,7 +22,7 @@
                             <img src="<?= base_url($product['IMAGEN_PRODUCTO']) ?>" alt="">
                             <h3><?= $product['NOMBRE_PRODUCTO'] ?></h3>
                             <h6>$<?= $product['PRECIO_PRODUCTO'] ?></h6>
-                            <a href="<?= $this->session->userdata('YOY_ID_USUARIO')? base_url('site/sales/'.$product['ID_PRODUCTO']) : base_url('site/login') ?>" class="add-card">Buy</a>
+                            <a href="<?= $this->session->userdata('YOY_ID_USUARIO')? base_url('store/sales/'.$product['ID_PRODUCTO']) : base_url('login') ?>" class="add-card">Buy</a>
                         </div>
                     </div>
                     <?php

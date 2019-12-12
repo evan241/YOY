@@ -8,7 +8,6 @@ class Mpaypal extends CI_Model
         define('TABLE_PAYPAL_CLIENT', 'paypal_client');
         define("TABLE_PAYPAL_ORDER", "paypal_order");
         define("TABLE_PAYPAL_ERROR", "paypal_error");
-        $this->load->helper('log');
     }
 
     /**
@@ -28,7 +27,6 @@ class Mpaypal extends CI_Model
                 ));
                 return $this->db->insert_id();
             }
-            consoleLog("El error ya esta registrado, no será duplicado.");
             return $errorId;
         } catch (Exception $e) {
             return NULL;
@@ -98,7 +96,6 @@ class Mpaypal extends CI_Model
                 $this->db->insert(TABLE_PAYPAL_CLIENT, $paypal_client);
                 return $this->db->insert_id();
             }
-            consoleLog("El cliente paypal ya esta registrado, no será duplicado.");
             return $clientId;
         } catch (Exception $e) {
             return NULL;
@@ -134,7 +131,6 @@ class Mpaypal extends CI_Model
                 $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order);
                 return $this->db->insert_id();
             }
-            consoleLog("La orden paypal ya esta registrada, no será duplicada.");
             return $orderId;
         } catch (Exception $e) {
             return NULL;

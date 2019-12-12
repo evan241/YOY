@@ -13,6 +13,7 @@
 
  Date: 14/11/2019 13:39:23
 */
+USE `yoy`;
 
 DROP DATABASE IF EXISTS `yoy`;
 CREATE DATABASE `yoy`;
@@ -147,22 +148,24 @@ CREATE TABLE `USUARIO` (
   `ID_USUARIO` int(255) NOT NULL AUTO_INCREMENT,
   `NOMBRE_USUARIO` varchar(100) DEFAULT NULL,
   `APELLIDO_USUARIO` varchar(255) DEFAULT NULL,
-  `EMAIL_USUARIO` varchar(200) DEFAULT NULL,
   `TELEFONO_USUARIO` varchar(25) DEFAULT NULL,
+  `EMAIL_USUARIO` varchar(200) DEFAULT NULL,
   `PASSWD_USUARIO` varchar(200) DEFAULT NULL,
   `VIGENCIA_USUARIO` tinyint(1) DEFAULT 0,
+  `CONFIRMADO_USUARIO` tinyint(1) DEFAULT 0,
   `ID_ROL` tinyint(1) DEFAULT 3,
   `ULTIMO_LOGIN_USUARIO` datetime DEFAULT NULL,
+  
   PRIMARY KEY (`ID_USUARIO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of USUARIO
 -- ----------------------------
-INSERT INTO `USUARIO` (`EMAIL_USUARIO`, `PASSWD_USUARIO`, `VIGENCIA_USUARIO`, `ID_ROL`) VALUES
-("admin", "admin", 1, 1),
-("seller", "seller", 1, 2),
-("client", "client", 1, 3);
+INSERT INTO `USUARIO` (`EMAIL_USUARIO`, `PASSWD_USUARIO`, `VIGENCIA_USUARIO`, `CONFIRMADO_USUARIO`, `ID_ROL`) VALUES
+("admin@geem.com", "geem", 1, 1, 1),
+("seller@geem.com", "geem", 1, 1, 2),
+("client@geem.com", "geem", 1, 1, 3);
 
 -- ----------------------------
 -- Table structure for VENTA
