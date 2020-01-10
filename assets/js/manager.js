@@ -2,7 +2,7 @@
 var asInitVals = new Array();
 $(document).ready(function () {
     //Products
-    var pTable = $('#dataProducts').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+    $('#dataVentas').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         //"iDisplayLength": 30,
         //"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
         "iDisplayLength": 25,
@@ -10,7 +10,7 @@ $(document).ready(function () {
         "bDestroy": true,
         "bServerSide": false,
         "bProcessing": true,
-        "dom": "<'row'<'col-md-5'l><'col-md-5'f><'col-md-2'B>><'row'<'col-md-12't>><'row'<'col-md-12'i>><'row'<'col-md-12'p>>",
+        "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information dt-filter"ip><"clear">',
         buttons: [
             {
                 extend: 'csv',
@@ -30,21 +30,20 @@ $(document).ready(function () {
             "sEmptyTable": "No hay registros disponibles",
             "sInfo": "Resultado _START_ - _END_ de _TOTAL_ registros",
             "sLengthMenu": " Mostrar _MENU_ registros",
-            "sSearch": "Buscar en todas las columnas:",
+            "sSearch": "Buscar :",
             "sInfoEmpty": "Mostrando 0 - 0 de 0 registros",
             "sInfoFiltered": "(Filtrado de _MAX_ registros)",
             "sProcessing": "Procesando...",
             "sZeroRecords": "No se localizaron registros",
             "oPaginate": {
                 "sNext": "Sig",
-                "sLast": "Ultimo",
+                "sLast": "",
                 "sPrevious": "Ant",
-                "sFirst": "Primero"
+                "sFirst": ""
             }
         }
     });
     
-
     //filtros--
     $("thead input").keyup(function () {
         /* Filter on the column (the index) of this element */
