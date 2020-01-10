@@ -26,7 +26,7 @@ $config = array(
         array(
                 'field' => 'C_TELEFONO_USUARIO',
                 'label' => 'Telefono',
-                'rules' => 'trim|required|isPhoneNumber|min_length[7]|max_length[30]'
+                'rules' => 'trim|isPhoneNumber|min_length[7]|max_length[30]'
         ),
 
         array(

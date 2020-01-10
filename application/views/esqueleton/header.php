@@ -82,7 +82,7 @@
                     <?php if($this->session->userdata('YOY_ID_USUARIO') > 0){ ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-cog" aria-hidden="true"></i> <?=$this->session->userdata('YOY_USERNAME_USUARIO');?> <span class="caret"></span>
+                            <i class="fa fa-cog" aria-hidden="true"></i> <?=$this->session->userdata('YOY_EMAIL_USUARIO');?> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="background-color: black;">
                             <li><a href="#"><i class="fa fa-user"></i> My account</a></li><br>

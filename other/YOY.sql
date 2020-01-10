@@ -1,20 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : Local
- Source Server Type    : MySQL
- Source Server Version : 50625
- Source Host           : localhost:3306
- Source Schema         : YOY
-
- Target Server Type    : MySQL
- Target Server Version : 50625
- File Encoding         : 65001
-
- Date: 14/11/2019 13:39:23
-*/
-USE `yoy`;
-
 DROP DATABASE IF EXISTS `yoy`;
 CREATE DATABASE `yoy`;
 USE `yoy`;
@@ -151,8 +134,9 @@ CREATE TABLE `USUARIO` (
   `TELEFONO_USUARIO` varchar(25) DEFAULT NULL,
   `EMAIL_USUARIO` varchar(200) DEFAULT NULL,
   `PASSWD_USUARIO` varchar(200) DEFAULT NULL,
-  `VIGENCIA_USUARIO` tinyint(1) DEFAULT 0,
-  `CONFIRMADO_USUARIO` tinyint(1) DEFAULT 0,
+  `VIGENCIA_USUARIO` tinyint DEFAULT 0,
+  `CONFIRMADO_USUARIO` tinyint DEFAULT 0,
+  `CODIGO_USUARIO` varchar(6) NOT NULL,
   `ID_ROL` tinyint(1) DEFAULT 3,
   `ULTIMO_LOGIN_USUARIO` datetime DEFAULT NULL,
   
@@ -163,9 +147,9 @@ CREATE TABLE `USUARIO` (
 -- Records of USUARIO
 -- ----------------------------
 INSERT INTO `USUARIO` (`EMAIL_USUARIO`, `PASSWD_USUARIO`, `VIGENCIA_USUARIO`, `CONFIRMADO_USUARIO`, `ID_ROL`) VALUES
-("admin@geem.com", "geem", 1, 1, 1),
-("seller@geem.com", "geem", 1, 1, 2),
-("client@geem.com", "geem", 1, 1, 3);
+("admin@geem.com", "dbc2642e6c94f7c31c2d22403327efb0ae870e3aeb1fef8da3a499fe39b9465d7d5265d7af74853de00a1a7e6a4dfa1cedb23603bf0675848385fe23d8254c65ojWoHVKGBZI7ve7sztGsERgo+F5vTgWKdZ7tnrTKILk=", 1, 1, 1),
+("seller@geem.com", "dbc2642e6c94f7c31c2d22403327efb0ae870e3aeb1fef8da3a499fe39b9465d7d5265d7af74853de00a1a7e6a4dfa1cedb23603bf0675848385fe23d8254c65ojWoHVKGBZI7ve7sztGsERgo+F5vTgWKdZ7tnrTKILk=", 1, 1, 2),
+("client@geem.com", "dbc2642e6c94f7c31c2d22403327efb0ae870e3aeb1fef8da3a499fe39b9465d7d5265d7af74853de00a1a7e6a4dfa1cedb23603bf0675848385fe23d8254c65ojWoHVKGBZI7ve7sztGsERgo+F5vTgWKdZ7tnrTKILk=", 1, 1, 3);
 
 -- ----------------------------
 -- Table structure for VENTA
