@@ -66,6 +66,7 @@
 
         <link href="<?php echo base_url(); ?>assets/css/yoy.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url(); ?>assets/css/styles.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url(); ?>assets/css/<?= $this->router->fetch_class(); ?>.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -91,6 +92,7 @@
                                         <li <?=$classIni?>> <a href="<?= base_url(); ?>manager/index" style="color: white"><i class="fa fa-home" ></i> Inicio</a></li>
                                         <li <?=$classPro?>> <a href="<?= base_url(); ?>manager/products" style="color: white"><i class="fa fa-shopping-cart" ></i> Productos</a></li>
                                         <li <?=$classSal?>> <a href="<?= base_url(); ?>manager/sales" style="color: white"><i class="fa fa-shopping-bag"></i> Ventas</a></li>
+                                        <li <?=$classNews?>> <a href="<?= base_url(); ?>manager/news" style="color: white"><i class="fa fa-file"></i> News</a></li>
                                         <li <?=$classUser?>> <a href="<?= base_url(); ?>manager/users" style="color: white"><i class="fa fa-user"></i> Usuarios</a></li>
                                         <li <?=$classCustom?>> <a href="<?= base_url(); ?>manager/customers" style="color: white"><i class="fa fa-users"></i> Clientes</a></li>
                                         <li class="dropdown">

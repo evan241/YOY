@@ -19,6 +19,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = 'class="dropdown active"';
             $data['classPro'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = '';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -37,6 +38,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = '';
             $data['classPro'] = 'class="dropdown active"';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = '';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -54,6 +56,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = '';
             $data['classPro'] = 'class="dropdown active"';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = '';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -110,6 +113,7 @@ class Manager extends CI_Controller {
                     $data['classPro'] = 'class="dropdown active"';
                     $data['classEnt'] = '';
                     $data['classSal'] = '';
+                    $data['classNews'] = '';
                     $data['classRep'] = '';
                     $data['classCnf'] = '';
                     $this->load->view('esqueleton/header', $data);
@@ -182,6 +186,7 @@ class Manager extends CI_Controller {
             $data['classPro'] = 'class="dropdown active"';
             $data['classEnt'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classRep'] = '';
             $data['classCnf'] = '';
             $this->load->view('esqueleton/header', $data);
@@ -200,6 +205,7 @@ class Manager extends CI_Controller {
             $data['classPro'] = 'class="dropdown active"';
             $data['classEnt'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classRep'] = '';
             $data['classCnf'] = '';
             $this->load->view('esqueleton/header', $data);
@@ -243,6 +249,7 @@ class Manager extends CI_Controller {
                     $data['classPro'] = 'class="dropdown active"';
                     $data['classEnt'] = '';
                     $data['classSal'] = '';
+                    $data['classNews'] = '';
                     $data['classRep'] = '';
                     $data['classCnf'] = '';
                     $this->load->view('esqueleton/header', $data);
@@ -301,6 +308,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = '';
             $data['classPro'] = '';
             $data['classSal'] = 'class="dropdown active"';
+            $data['classNews'] = '';
             $data['classUser'] = '';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -319,6 +327,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = '';
             $data['classPro'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = 'class="dropdown active"';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -338,6 +347,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = '';
             $data['classPro'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = 'class="dropdown active"';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -383,6 +393,7 @@ class Manager extends CI_Controller {
             $data['classPro'] = '';
             $data['classEnt'] = 'class="dropdown active"';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classRep'] = '';
             $data['classCnf'] = '';
 
@@ -619,11 +630,21 @@ class Manager extends CI_Controller {
     }
 
     public function news() {
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $this->load->view('esqueleton/header');
-            $DATA['ROW_NEWS'] = $this->mmanager->get_all_valid_news();
-            $this->load->view('Manager/v_manager_news', $DATA);
-            $this->load->view('esqueleton/footer');
+        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO)) {
+            $data['classIni'] = '';
+            $data['classPro'] = '';
+            $data['classSal'] = '';
+            $data['classNews'] = 'class="dropdown active"';
+            $data['classUser'] = '';
+            $data['classCustom'] = '';
+            $data['classCnf'] = '';
+
+            $data['ROWS'] = $this->mmanager->get_all_news();
+            
+
+            $this->load->view('esqueleton/header_manager', $data);
+            $this->load->view('Manager/News/v_manager_news', $data['ROWS']);
+            $this->load->view('esqueleton/footer_manager');
         } else {
             redirect('login/salir');
         }
@@ -633,12 +654,19 @@ class Manager extends CI_Controller {
         
     }
 
-    public function form_add_new() {
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $this->load->view('esqueleton/header');
-            //$DATA['ROW_EVENTS'] = $this->mmanager->get_all_valid_events();
-            $this->load->view('Manager/v_add_new');
-            $this->load->view('esqueleton/footer');
+    public function add_new() {
+        if (!empty($this->session->userdata('YOY_ID_USUARIO')) && ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO)) {
+            $data['classIni'] = '';
+            $data['classPro'] = '';
+            $data['classSal'] = '';
+            $data['classNews'] = 'class="dropdown active"';
+            $data['classUser'] = '';
+            $data['classCustom'] = '';
+            $data['classCnf'] = '';
+
+            $this->load->view('esqueleton/header_manager', $data);
+            $this->load->view('Manager/News/v_manager_add_new');
+            $this->load->view('esqueleton/footer_manager');
         } else {
             redirect('login/salir');
         }
