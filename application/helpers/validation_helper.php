@@ -44,3 +44,13 @@ function onlyAlphaSpaces($text) {
     return true;
 }
 
+function getAuthCode() { 
+    $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $code = '' ; 
+
+    for ($i = 0; $i <= 5; $i++) {
+        $code .= substr($characters, rand(0, 35), 1);
+    }
+    return $code; 
+} 
+

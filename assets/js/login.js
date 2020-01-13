@@ -20,12 +20,15 @@ $(document).ready(function () {
             url: raiz_url + "login/ajax_validate_user",
             type: "POST",
             data: $(this).serialize(),
-            success: function (response) {
-                if (response == 'Ok') {
+            success: function (data) {
+                if (data == '1') {
                     window.location.href = raiz_url + "site/index";
                 }
+                else if (data == '2') {
+                    alert("datos incorrectos")
+                }
                 else {
-                    $('#messages').html(response);
+                    $('#messages').html(data);
                     $('#messages').focus();
                 }
                 $('#btnLoginYOY').html('login');

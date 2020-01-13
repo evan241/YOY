@@ -14,14 +14,15 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (data) {
-                if (data == "ok") {
-                    alert("Registrado");
-                    // Aqui mostramos el mensaje de email
+                if (data == '1') {
+                    alert("Usuario registrado");
+                }
+                else if (data == '2') {
+                    alert("Email ya esta registrado");
                 }
                 else {
-                    // Aqui va el pop-up de error       
+                    alert("Error en los campos");      
                 }
-
             }
         });
     });
