@@ -28,7 +28,6 @@
   </div>
 
 
-
   <script src="<?=base_url();?>assets/ADMIN/plugins/jquery/jquery.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/toaster/toastr.min.js"></script>

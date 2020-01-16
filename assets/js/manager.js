@@ -44,6 +44,42 @@ $(document).ready(function () {
         }
     });
     
+<<<<<<< HEAD
+=======
+    //CLIENTS..
+    var oTableUsers = $('#dataUser').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+        //"iDisplayLength": 30,
+        //"sSwfPath": "..assets/swf/copy_csv_xls_pdf.swf",
+        "iDisplayLength": 25,
+        "aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
+        "bDestroy": true,
+        "bServerSide": false,
+        "bProcessing": true,
+        "dom": "<'row'<'col-md-5'l><'col-md-5'f><'col-md-2'B>><'row'<'col-md-12't>><'row'<'col-md-12'i>><'row'<'col-md-12'p>>",       
+        "columnDefs": [
+            { "targets": [0, 2, 3, 6, 9], "orderable": false },
+         ],
+      
+        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+        "oLanguage": {
+            "sLoadingRecords": "Cargando...",
+            "sEmptyTable": "No hay registros disponibles",
+            "sInfo": "Resultado _START_ - _END_ de _TOTAL_ registros",
+            "sLengthMenu": " Mostrar _MENU_ registros",
+            "sSearch": "Buscar en todas las columnas:",
+            "sInfoEmpty": "Mostrando 0 - 0 de 0 registros",
+            "sInfoFiltered": "(Filtrado de _MAX_ registros)",
+            "sProcessing": "Procesando...",
+            "sZeroRecords": "No se localizaron registros",
+            "oPaginate": {
+                "sNext": "Sig",
+                "sLast": "Ultimo",
+                "sPrevious": "Ant",
+                "sFirst": "Primero"
+            }
+        }
+    });
+>>>>>>> 5fe948f... style Table Ventas
     //filtros--
     $("thead input").keyup(function () {
         /* Filter on the column (the index) of this element */
