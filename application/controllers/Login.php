@@ -9,15 +9,12 @@ class Login extends CI_Controller {
     }
 
     // public function index() {
-
     //     $var = $this->mlogin->authUser("cgxel@hotmail.com", "KNUWYV");
     //     echo $var;
     // }
 
     public function index() {
-        $this->load->view('esqueleton/header');
-        $this->load->view('Login/v_index');
-        $this->load->view('esqueleton/footer');
+        echo getAuthCode();
     }
 
     public function registro(){
@@ -32,10 +29,6 @@ class Login extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
 
-    public function salir() {
-        $this->session->sess_destroy();
-        redirect(base_url());
-    }
 
 
     public function ajax_validate_user() {
@@ -98,7 +91,6 @@ class Login extends CI_Controller {
         // Algun campo ingresado (input) no paso la validacion
         else echo 3; 
     }
-
 
     /*  Este metodo es el cual será ejecutado una vez que abran el enlace enviado
         por email, llamara la funcion que se encarga de la verificacion, 

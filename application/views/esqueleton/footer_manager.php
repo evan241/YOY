@@ -57,6 +57,10 @@
   <script src="<?php echo base_url(); ?>assets/js/easypiechart.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/manager.js" type="text/javascript"></script>
 
+  <script src="<?= base_url() ?>assets/js/manager_users.js"></script>
+  <script src="<?= base_url() ?>assets/js/manager_clients.js"></script>
+  <script src="<?= base_url() ?>assets/js/manager_sales.js"></script>
+
 <!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 </body>
 </html>

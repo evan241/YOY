@@ -10,6 +10,7 @@ class Mpaypal extends CI_Model
         define("TABLE_PAYPAL_ERROR", "paypal_error");
     }
 
+
     /**
      *      Agrega errores a la tabla paypal_error, para evitar perder la informacion
      *      en caso de fallo durante el proceso.
@@ -48,6 +49,22 @@ class Mpaypal extends CI_Model
         } catch (Exception $e) {
             return NULL;
         }
+    }
+
+    function getErrorInfo($errorID) {
+        try {
+            $this->db->select("*");
+            $this->db->from(TABLE_PAYPAL_ERROR);
+            $this->db->where("paypal_error_id", $errorID);
+            
+            $result = $this->db->get()->result_array();
+
+            if ($result) return $result[0];
+        }
+        catch (Exception $exception) {
+            $exception->getMessage();
+        }
+        return NULL;
     }
 
     /**

@@ -22,8 +22,27 @@ class Paypal extends CI_Controller {
         parent::__construct();
         $this->load->helper('paypal');
         $this->load->model('mpaypal');
-        $this->load->helper('log');
+        $this->load->model('mmanager_sales');
 	}
+
+    /**
+     *      Funcion para arreglar los errores de paypal, solo toma el ID del error encontrado
+     *      en la base de datos, para despues ejecutar de nuevo toda la operacion,
+     *      este proceso toma unos segundos, puede tomar más arriba del server.
+    */
+    public function requestSaleInformation($errorID) {
+        $var = $this->mpaypal->getErrorInfo($errorID);
+
+        if ($var != NULL) {
+            $order = $var['checkout_id'];
+            $product = $var['ID_PRODUCTO'];
+            $user = $var['ID_USUARIO'];
+
+            
+            $this->handleInformation($order, $product, $user);
+        }
+        else echo false;
+    }
 
     /**
      *      Finalmente, al obtener toda la informacion, la ingresamos en la base de datos
@@ -38,15 +57,28 @@ class Paypal extends CI_Controller {
         $info = $this->getInformation($orderID);
 
         if ($info != NULL) {
-            $clientId = $this->mpaypal->addClient($info["paypal_client"]);
-            $info["paypal_order"]["paypal_client_id"] = $clientId;
+            $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
             $this->mpaypal->addOrder($info["paypal_order"]);
             $this->mpaypal->deleteError($orderID);
+
+            $data = array(
+                'ID_USUARIO' => $ID_USUARIO,
+                'ID_PRODUCTO' => $ID_PRODUCTO,
+                'CANTIDAD_VENTA' => SI,
+                'FECHA_VENTA' => $info['paypal_order']['create_date'],
+                'PAGADA_VENTA' => SI,
+                'ENVIADA_VENTA' => SI,
+                'ID_MEDIO_PAGO' => PAGO_PAYPAL,
+                'paypal_order_id' => $orderID,
+            );
+
+            $this->mmanager_sales->save_sale($data);
+
+            echo true;
+            return true;
         }
-        else {
-            consoleLog("La información no fue procesada.");
-        }
-        echo true;
+        else echo false;
+        return false;
     }
 
     /**
@@ -75,7 +107,6 @@ class Paypal extends CI_Controller {
                 $this->getToken());
         }
         catch (Exception $e) {
-            consoleLog("Error de conexion con el API de Paypal, orden o credenciales invalidas.");
             return NULL;
 		}
 
@@ -143,10 +174,6 @@ class Paypal extends CI_Controller {
         $additionalInfo = (!array_key_exists("name", $result)) ? $result : NULL;
         curl_close($curl);
 
-        if ($additionalInfo == NULL) {
-            consoleLog("Error durante el request de informacion al API.");
-        }
-
         return $additionalInfo;
     }
 
@@ -172,10 +199,6 @@ class Paypal extends CI_Controller {
         $result = json_decode(curl_exec($curl));
         $token = (array_key_exists("access_token", $result)) ? $result->access_token : NULL;
         curl_close($curl);
-        
-        if ($token == NULL) {
-            consoleLog("Error al intentar obtener el token.");
-        }
 
         return $token;
     }

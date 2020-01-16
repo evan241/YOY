@@ -36,12 +36,12 @@
                                         foreach ($ROW_SHIPS as $ROW) :
                                             ?>
                                             <option value="<?= $ROW['ID_TIPO_ENVIO'] ?>"><?= mb_strtoupper($ROW['NOMBRE_TIPO_ENVIO']) . " $" . $ROW['PRECIO_TIPO_ENVIO'] ?></option>
-                                        <?php
-                                            endforeach;
-                                        else :
-                                            ?>
+                                            <?php
+                                        endforeach;
+                                    else :
+                                        ?>
                                         <option value="-1">No existen registros</option>
-                                    <?php
+                                        <?php
                                     endif;
                                     ?>
                                 </select>
@@ -56,25 +56,34 @@
 
 
                             <script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" .
-                                            SANDBOX_ID .
-                                            "&currency=MXN" ?>></script> <!-- Currency -->
+                            SANDBOX_ID .
+                            "&currency=MXN" ?>></script> <!-- Currency -->
 
                             <div id="paypal-button-container"></div>
 
 
                             <script>
                                 paypal.Buttons({
+
+                                    style: {
+                                        layout: 'horizontal',
+                                        fundingicons: 'false',
+                                        shape: 'pill',
+                                        size: 'responsive'
+                                    },
+
+
                                     createOrder: function(data, actions) {
 
                                         return actions.order.create({
                                             purchase_units: [{
                                                 amount: {
                                                     /*  Cantidad a cobrar
-                                                     */
+                                                    */
                                                     value: '<?= $product[0]['PRECIO_PRODUCTO'] ?>'
                                                 },
                                                 /*  La descripcion que se manda durante la paga
-                                                 */
+                                                */
                                                 description: '<?= $product[0]['DESCRIPCION_PRODUCTO'] ?>'
                                             }]
                                         });
@@ -82,13 +91,10 @@
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
 
-                                            /*  Aqui abajo es donde debería ir el AJAX,
-                                             *  no muevan el URL del fetch, eso ya funciona. 
-                                             */
-                                            return fetch('<?php echo base_url(); ?>paypal/handleInformation/' +
+                                            return fetch('<?= base_url() ?>paypal/handleInformation/' +
                                                 data.orderID + '/' +
-                                                <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' +
-                                                <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>, {
+                                                <?= $product[0]['ID_PRODUCTO'] ?> + '/' +
+                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>, {
                                                     method: 'post',
                                                     headers: {
                                                         'content-type': 'application/json'

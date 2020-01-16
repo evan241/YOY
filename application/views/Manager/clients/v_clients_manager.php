@@ -4,63 +4,57 @@
             <br>
             <div class="panel panel-primary">
                 <div class="panel-heading header-primary">
-                    <div class="panel-title text-left"><h2 class="heading-primary">Usuarios</h2></div>
+                    <div class="panel-title text-left"><h2 class="heading-primary">Clientes</h2></div>
                 </div>
                 <div class="panel-body">
-                    <a href="<?= base_url() ?>manager/form_config_add_user" class="btn btn-default pull-right" id="btnAddUser">
-                        <i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo usuario
-                    </a>
+                
                     <div style="clear:both"><br></div>
                     <div class="control-group text-left">
                         <div class="table-responsive">
                             <table id="dataUser"  class="display" style="font-size: 14px; background-color: white;" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th><input type="text" name="search_no_cliente" placeholder="#" class="search_init form-control" size="1" /></th>
                                         <th><input type="text" name="search_nombre" placeholder="Nombre" class="search_init form-control" size="15" /></th>
                                         <th><input type="text" name="search_apellido" placeholder="Apellido" class="search_init form-control" size="15" /></th>
-                                        <th><input type="text" name="search_email" placeholder="Username" class="search_init form-control" size="8" /></th>
-                                        <th><input type="text" name="search_registro" placeholder="Rol"  class="search_init form-control" size="8" /></th>
+                                        <th><input type="text" name="search_telefono" placeholder="Telefono" class="search_init form-control" size="15" /></th>
+                                        <th><input type="text" name="search_email" placeholder="Email" class="search_init form-control" size="8" /></th>
                                         <th></th>
                                     </tr>
                                     <tr>
-                                        <th style="text-align: center; width: 5%;">#Usuario</th>
                                         <th style="width: 20%">Nombre</th>
                                         <th style="width: 20%">Apellido</th>
-                                        <th style="width: 15%">Username</th>
-                                        <th style="width: 15%">Rol</th>
+                                        <th style="width: 15%">Telefono</th>
+                                        <th style="width: 15%">Email</th>
                                         <th style="text-align: center; width: 10%;">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="6"><br></td>
+                                        <td colspan="4"><br></td>
                                     </tr>
                                 </tfoot>
                                 <tbody style="font-size:12px;">
                                     <?php
-                                    if (count($ROW_USERS)):
-                                        foreach ($ROW_USERS as $ROW):
+                                    if ($users) {
+                                        foreach ($users as $user) {
                                             ?>
                                             <tr>
-                                                <td><b><?= $ROW['ID_USUARIO'] ?></b></td>
-                                                <td><?= $ROW['NOMBRE_USUARIO'] ?></td>
-                                                <td><?= $ROW['APELLIDO_USUARIO'] ?></td>
-                                                <!--<td><?= $ROW['EMAIL_USUARIO'] ?></td>-->
-                                                <td><?= $ROW['USERNAME_USUARIO'] ?></td>
-                                                <td><?= $ROW['NOMBRE_ROL'] ?></td>
+                                                <td><?= $user['NOMBRE_USUARIO'] ?></td>
+                                                <td><?= $user['APELLIDO_USUARIO'] ?></td>
+                                                <td><?= $user['TELEFONO_USUARIO'] ?></td>
+                                                <td><?= $user['EMAIL_USUARIO'] ?></td>
                                                 <td>
-                                                    <button id="btnEditUser" class="btn btn-primary btn-edit-user" data-original-title="Editar info usuario" data-toggle="tooltip" data-id-user="<?= $ROW['ID_USUARIO']?>" style=" padding: 2px 5px !important;">
+                                                    <button id="btnEditUser" class="btn btn-primary btn-edit-client" data-original-title="Editar info usuario" data-toggle="tooltip" data-id-client="<?= $user['ID_USUARIO']?>" style=" padding: 2px 5px !important;">
                                                         <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
                                                     </button>
-                                                    <button id="btnDeleteUser" class="btn btn-primary btn-delete-user" data-original-title="Borrar usuario" data-toggle="tooltip" data-id-user="<?= $ROW['ID_USUARIO']?>" style=" padding: 2px 5px !important;">
+                                                    <button id="btnDeleteUser" class="btn btn-primary btn-delete-client" data-original-title="Borrar usuario" data-toggle="tooltip" data-id-client="<?= $user['ID_USUARIO']?>" style=" padding: 2px 5px !important;">
                                                         <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <?php
-                                        endforeach;
-                                    endif;
+                                        }
+                                    }
                                     ?>   
                                 </tbody>
                             </table>

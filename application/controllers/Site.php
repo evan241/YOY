@@ -10,13 +10,14 @@ class Site extends CI_Controller {
     }
 
     public function index() {
-        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO) {
+        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || 
+            $this->session->userdata('YOY_ID_ROL') == VENDEDOR) 
             redirect('manager/index');
-        } else {
-            $this->load->view('esqueleton/header');
-            $this->load->view('index');
-            $this->load->view('esqueleton/footer');
-        }
+
+        $this->load->view('esqueleton/header');
+        $this->load->view('index');
+        $this->load->view('esqueleton/footer');
+        
     }
 
     public function salir() {

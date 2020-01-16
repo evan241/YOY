@@ -5,7 +5,7 @@
         <div class="col-sm-10 text-center">
             <br>
             <div class="panel panel-primary">
-                <form data-toggle="validator" role="form" id="formEditUser">
+                <form data-toggle="validator" role="form" id="formEditClient">
                     <input type="hidden" value="<?=$user['ID_USUARIO']?>" name="RG_ID_USUARIO" id="RG_ID_USUARIO" > 
                     <div class="panel-heading header-primary">
                         <div class="panel-title text-left"><h2 class="heading-primary">Editar usuario</h2></div>
@@ -41,33 +41,7 @@
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div> 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="RG_ID_ROL" class="control-label text-left"  >Rol</label>
-                                                <select name="RG_ID_ROL" id="RG_ID_ROL" class="form-control">
-                                                    <?PHP
-                                                    if ($roles) {
-                                                        foreach ($roles as $rol) {
-
-                                                            $sel='';
-
-                                                            if($rol['ID_ROL'] == $user['ID_ROL']) $sel='selected';
-                                                            ?>
-                                                            <option value="<?= $rol['ID_ROL'] ?>" <?= $sel ?>>
-                                                                <?= $rol['NOMBRE_ROL'] ?>
-                                                            </option>
-                                                            <?PHP
-                                                        }
-                                                    }
-                                                    else {
-                                                        ?>
-                                                        <option value="">No existen registros</option>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <input type="hidden" id="custId" name="RG_ID_ROL" value="3">
                                         <div class="col-md-6">
                                             &nbsp;
                                         </div>
@@ -104,7 +78,7 @@
                 <div class="panel-footer">
                     <div class="btn-group pull-right">
 
-                        <button type="button" class="btn pull-left" id="btnCancelEditUser">
+                        <button type="button" class="btn pull-left" id="btnCancelEditClient">
                             <i class="fa fa-remove" aria-hidden="true"></i> Cancelar
                         </button>
                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>

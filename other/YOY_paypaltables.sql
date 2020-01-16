@@ -8,7 +8,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS 	`paypal_client`;
 CREATE TABLE 			`paypal_client` (
 
-	`paypal_client_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_client_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     
     `id` 				VARCHAR(25) UNIQUE NOT NULL,
     `name` 				VARCHAR(50) NOT NULL,
@@ -27,9 +27,9 @@ CREATE TABLE 			`paypal_client` (
 DROP TABLE IF EXISTS 	`paypal_order`;
 CREATE TABLE 			`paypal_order` (
 
-	`paypal_order_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_order_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     
-    `paypal_client_id` 	TINYINT DEFAULT NULL,
+    `paypal_client_id` 	INT DEFAULT NULL,
     `ID_USUARIO`		INT DEFAULT NULL,
     `ID_PRODUCTO` 		INT DEFAULT NULL,
     
@@ -66,7 +66,7 @@ CREATE TABLE 			`paypal_order` (
 DROP TABLE IF EXISTS 	`paypal_error`;
 CREATE TABLE 			`paypal_error` (
 
-	`paypal_error_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_error_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	
 	`ID_USUARIO`		INT NOT NULL,
     `ID_PRODUCTO` 		INT NOT NULL,

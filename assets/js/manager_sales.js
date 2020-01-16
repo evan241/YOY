@@ -45,50 +45,33 @@ $(document).ready(function () {
     });
     
 
-    //filtros--
-    $("thead input").keyup(function () {
-        /* Filter on the column (the index) of this element */
-        oTableUsers.fnFilter(this.value, $("thead input").index(this));
-        pTable.fnFilter(this.value, $("thead input").index(this));
-    });
+    $('body').on("click", ".btn-cancel-sale", function (e) {
 
-    
-    /*
-     * Support functions to provide a little bit of 'user friendlyness' to the textboxes in
-     * the footer
-     */
-    $("thead input").each(function (i) {
-        asInitVals[i] = this.value;
-    });
-
-
-    $("thead input").focus(function () {
-        if (this.className == "search_init")
-        {
-            this.className = "";
-            this.value = "";
+        var ID_VENTA = $(this).attr('data-id-sale');
+        if (ID_VENTA > 0) {
+            
+            $('#modDelSale').modal('toggle');
+            $('#modBodyDelSale').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
+            $('#btnDelRowSale').on('click', function (e) {
+               
+                $.ajax({
+                    url: raiz_url + "manager_sales/ajax_disable_sale",
+                    type: 'POST',
+                    data: 'ID_VENTA=' + ID_VENTA,
+                    success: function (data) {
+                        
+                        if (data > 0) {
+                            window.location.reload();
+                        } else {
+                            $('#modBodyDelSale').html('<b>Hubo un error al realizar la operación</b>');
+                            $('#btnDelRowSale').attr("disabled", "disabled");
+                        }
+                    }
+                });
+            });
         }
     });
 
 
-    $("thead input").blur(function (i) {
-        if (this.value == "")
-        {
-            this.className = "search_init";
-            this.value = asInitVals[$("thead input").index(this)];
-        }
-    });
-
-
-    $('#DIV_FECHA_VIGENCIA_PASSWORD').datepicker({
-        'isRTL': false,
-        'format': 'dd/mm/yyyy',
-        'autoclose': true,
-        'language': 'es'
-    });
-
-    
-    
-    //FIN USUARIO...//
 });
 ///FUNCIONES JS..

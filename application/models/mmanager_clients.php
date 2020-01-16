@@ -1,18 +1,18 @@
 <?php
 
-class Mmanager_users extends CI_Model {
+class Mmanager_clients extends CI_Model {
 
     function __construct() {
         parent::__construct();
     }
 
-    function get_all_valid_users() {
+    function get_all_valid_clients() {
         try {
             $this->db->select("*");
             $this->db->from('USUARIO AS U');
             $this->db->join('ROL AS R', 'U.ID_ROL=R.ID_ROL');
             $this->db->where('VIGENCIA_USUARIO', VIGENTE);
-            $this->db->where_in('U.ID_ROL', array(ADMINISTRADOR, VENDEDOR));
+            $this->db->where_in('U.ID_ROL', CLIENTE);
             return $this->db->get()->result_array();
         }
         catch (Exception $exception) {
@@ -20,9 +20,9 @@ class Mmanager_users extends CI_Model {
         }
     }
 
-    function add_new_user_on_db($user) {
+    function add_new_client_on_db($client) {
         try {
-            $this->db->insert('USUARIO', $user);
+            $this->db->insert('USUARIO', $client);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -30,12 +30,12 @@ class Mmanager_users extends CI_Model {
         }
     }
 
-    function get_user_by_id($id) {
+    function get_client_by_id($id) {
         try {
             $this->db->select("*");
             $this->db->from('USUARIO');
             $this->db->where('ID_USUARIO', $id);
-            $this->db->where_in('ID_ROL', array(ADMINISTRADOR, VENDEDOR));
+            $this->db->where('ID_ROL', CLIENTE);
             $array = $this->db->get()->result_array()[0];
             $array["PASSWD_USUARIO"] = $this->encryption->decrypt($array["PASSWD_USUARIO"]);
             return $array;
@@ -45,10 +45,10 @@ class Mmanager_users extends CI_Model {
         }
     }
 
-    function edit_user_on_db($user,$id) {
+    function edit_client_on_db($client,$id) {
         try {
             $this->db->where('ID_USUARIO', $id);
-            $this->db->update('USUARIO',$user);
+            $this->db->update('USUARIO',$client);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -56,7 +56,7 @@ class Mmanager_users extends CI_Model {
         }
     }
 
-    function disable_user_on_db($id) {
+    function disable_client_on_db($id) {
         try {
             $this->db->set('VIGENCIA_USUARIO', 0);
             $this->db->where('ID_USUARIO', $id);
