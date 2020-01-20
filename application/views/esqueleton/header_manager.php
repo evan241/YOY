@@ -117,7 +117,7 @@
               <ul class="collapse" id="dashboard" data-parent="#sidebar-menu">
                 <div class="sub-menu">
                   <li>
-                    <a class="sidenav-item-link" href="<?=base_url()?>manager/sales">
+                    <a class="sidenav-item-link" href="<?=base_url()?>manager_sales/sales">
                       <span class="nav-text">Ventas</span>
                       <span class="badge badge-success">5</span>
                     </a>
@@ -163,7 +163,7 @@
               </a>            
             </li>
             <li class="has-sub">
-              <a class="sidenav-item-link" href="<?= base_url();?>manager/customers">
+              <a class="sidenav-item-link" href="<?= base_url();?>manager_clients/clients">
                 <i class="mdi mdi-account-multiple-check"></i>
                 <span class="nav-text">Clientes</span>
               </a> 
@@ -295,7 +295,7 @@
                   </li>
 
                   <li class="dropdown-footer">
-                    <a href="signout"> <i class="mdi mdi-logout"></i> Log Out </a>
+                    <a href="<?= base_url() ?>site/salir"> <i class="mdi mdi-logout"></i> Log Out </a>
                   </li>
                 </ul>
               </li>

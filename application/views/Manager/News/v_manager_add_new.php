@@ -17,13 +17,12 @@
                     </div>
                     <div class="card-footer">
                         <div class="news-object-section">
-                            <div class="object-icon" id="add-news-object"><span id="add-icon" class="fas fa-plus"></span></div>
                             <div class="news-objects">
-                                <div class="object-icon" id="add-header"><span class="fas fa-heading"></span></div>
-                                <div class="object-icon" id="add-paragraph"><span class="fas fa-paragraph"></span></div>
-                                <div class="object-icon" id="add-image"><span class="fas fa-image"></span></div>
-                                <div class="object-icon" id="add-video"><span class="fas fa-video"></span></div>
-                                <div class="object-icon" id="add-youtube"><span class="fab fa-youtube"></span></div>
+                                <div class="object-icon" title="Agregar un subtitulo" id="add-header"><span class="fas fa-heading"></span></div>
+                                <div class="object-icon" title="Agregar un parrafo" id="add-paragraph"><span class="fas fa-paragraph"></span></div>
+                                <div class="object-icon" title="Agregar una imagen" id="add-image"><span class="fas fa-image"></span></div>
+                                <div class="object-icon" title="Agregar un video" id="add-video"><span class="fas fa-video"></span></div>
+                                <div class="object-icon" title="Agregar un enlace de youtube" id="add-youtube"><span class="fab fa-youtube"></span></div>
                             </div>
                         </div>
                     </div>
@@ -31,7 +30,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="#" id="upload-news" class="btn btn-success">Publicar</a>
+            <button id="upload-news" class="btn btn-success">Publicar</button>
             <span id="response-tag"></span>
         </div>
     </div>

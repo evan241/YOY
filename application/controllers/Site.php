@@ -7,6 +7,7 @@ class Site extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('mmanager_news');
     }
 
     public function index() {
@@ -46,4 +47,19 @@ class Site extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
 
+    public function news($id = NULL) {
+        
+        $data['ROWS'] = $this->mmanager_news->get_all_news();
+        $data['ID'] = $id;
+
+        $this->load->view('esqueleton/header', $data);
+
+        if (!isset($id)) {
+            $this->load->view('News/v_news', $data['ROWS']);
+        } else {
+            $this->load->view('News/v_id_news', $data['ROWS']);
+        }
+
+        $this->load->view('esqueleton/footer');
+    }
 }

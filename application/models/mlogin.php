@@ -30,11 +30,9 @@ class Mlogin extends CI_Model {
             $this->db->from("USUARIO");
             $this->db->where("EMAIL_USUARIO", $email);
             $result = $this->db->get()->row('PASSWD_USUARIO');
-
             if ($result) return $this->encryption->decrypt($result);
         }
         catch (Exception $e) {
-
         }
         return false;
     }
@@ -107,7 +105,7 @@ class Mlogin extends CI_Model {
 
             return $this->db->affected_rows();
         } catch (Exception $ex) {
-            return $e->getMessage();
+            return $ex->getMessage();
         }
     }
 }

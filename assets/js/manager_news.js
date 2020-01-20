@@ -15,16 +15,6 @@ $(document).ready(function(){
         });
     });
 
-    $('#add-news-object').click(function() {
-        if ($('.news-objects').css('display') == 'none') {
-            $('#add-icon').removeClass('fa-plus').addClass('fa-times');
-            $('.news-objects').css('display', 'inline-block')
-        } else {
-            $('#add-icon').removeClass('fa-times').addClass('fa-plus');
-            $('.news-objects').css('display', 'none');
-        }
-    });
-
     $('#add-header').click(function(){
         $('#news-content').append('<h3 contenteditable="true" placeholder="Subtitulo...">Subtitulo...</h3>');
     });
@@ -48,22 +38,32 @@ $(document).ready(function(){
     });
 
     $('#add-image').click(function(){
-        var addImage = '<div class="card" style="border: 1px; border-style: dashed; border-color: #141414; width:100%; height: 100px; text-align:center; line-height: 100px">';
-        addImage += '<div class="body">';
-        addImage += '<label for="image">Subir imagen<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
-        addImage += '<input style="display:none;" type="file" name="image-file" id="image">';
+        var addImage = '<form  enctype="multipart/form-data"><div class="card add-file">';
+        addImage += '<div class="card-body">';
+        addImage += '<label for="add-image" class="btn btn-light">Subir imagen<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
+        addImage += '<div class="file-selected"></div>';
+        addImage += '<input style="display:none;" type="file" name="image-file" id="add-image">';
+        addImage += '<input type="submit" value="Cargar imagen" style="display:none">';
         addImage += '</div>';
-        addImage += '</div>';
+        addImage += '</div></form>';
         $('#news-content').append(addImage);
     });
 
+    $(document).on('change', '#add-image', function(){
+        $('.file-selected').html($(this).val());
+    });
+
+    $(document).on('submit', );
+
     $('#add-video').click(function(){
-        var addImage = '<div class="card" style="border: 1px; border-style: dashed; border-color: #141414; width:100%; height: 100px; text-align:center; line-height: 100px">';
-        addImage += '<div class="body">';
-        addImage += '<label for="video">Subir video<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
-        addImage += '<input style="display:none;" type="file" name="video-file" id="video">';
+        var addImage = '<form  enctype="multipart/form-data"><div class="card add-file">';
+        addImage += '<div class="card-body">';
+        addImage += '<label for="add-video" class="btn btn-light">Subir video<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
+        addImage += '<div class="file-selected"></div>';
+        addImage += '<input style="display:none;" type="file" name="video-file" id="add-video">';
+        addImage += '<input type="submit" value="Cargar imagen" style="display:none">';
         addImage += '</div>';
-        addImage += '</div>';
+        addImage += '</div></form>';
         $('#news-content').append(addImage);
     });
 
@@ -87,35 +87,40 @@ $(document).ready(function(){
     
         $('.youtube-form').remove();
     
-        $('#news-content').append('<iframe src="http://www.youtube.com/embed/'+youtubeLink+'" width="560" height="315" style="margin:30px auto;" frameborder="0" allowfullscreen></iframe>');
+        $('#news-content').append('<iframe src="http://www.youtube.com/embed/'+youtubeLink+'" width="560" height="315" frameborder="0" allowfullscreen></iframe>');
     });
 
     $('#upload-news').click(function(){
-        var data = {
-            TITULO: $('#news-title').html(),
-            IMAGEN_TITULO: '',
-            CONTENIDO: $('#news-content').html(),
-            AUTOR: userID,
-            PUBLICADO: 1,
-        };
+        var newsTitle = $('#news-title').attr('placeholder');
+        if($('#news-title').html() == '' || $('#news-title').html() == '<br>' || $('#news-title').html() == newsTitle){
+            $('#response-tag').html('<span class="text-danger">Por favor agrega un titulo</span>');
+        } else {
+            var data = {
+                TITULO: $('#news-title').html(),
+                IMAGEN_TITULO: '',
+                CONTENIDO: $('#news-content').html(),
+                AUTOR: userID,
+                PUBLICADO: 1,
+            };
 
-        $.ajax({
-            url:  raiz_url + "manager_news/ajax_add_news",
-            type: 'post',
-            data: {
-                'Content': data,
-            },
-            dataType: 'html',
-            success: function(result){
-                if (result == '1') {
-                    $('#response-tag').append('<span class="text-success">Se publico con exito!</span>');
-                } else {
-                    alert('Se produjo un error');
+            $.ajax({
+                url:  raiz_url + "manager_news/ajax_add_news",
+                type: 'post',
+                data: {
+                    'Content': data,
+                },
+                dataType: 'html',
+                success: function(result){
+                    if (result == '1') {
+                        $('#response-tag').html('<span class="text-success">Se publico con exito!</span>');
+                    } else {
+                        alert('Se produjo un error');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert('Se produjo un error en el AJAX' + jqXHR.responseText)
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                alert('Se produjo un error en el AJAX' + jqXHR.responseText)
-            }
-        });
+            });
+        }
     });
 });

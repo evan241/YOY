@@ -43,49 +43,23 @@ $(document).ready(function () {
         }
     });
 
-    //GUARDAR USUARIO
-    $('#formRecordUser').on('submit', function (e) {
-        e.preventDefault();
-        $('#modAddUser').modal('toggle');
-        $('#modBodyAddUser').html('');
-        $.ajax({
-            url: raiz_url + "manager_users/ajax_add_user",
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (data) {
-                if (data) {
-                    $('#modBodyAddUser').html('<b>! El usuario se agregó correctamente ¡</b> ');
-                } else {
-                    $('#modBodyAddUser').html('<b>Hubo un error al realizar la operación...</b>');
-                }
-            }
-        });
-        $('#modAddUser').on('hidden.bs.modal', function () {
-            window.location.href = raiz_url + "manager_users/users";
-        });
-    });
-    
 
-    $('#btnCancelAddUser').on('click', function () {
-       window.location.href = raiz_url + "manager_users/users";
-   });
-
-    $('body').on("click", ".btn-edit-user", function (e) {
-        var ID_USUARIO = $(this).attr('data-id-user');
-        window.location.href = raiz_url + "manager_users/form_config_edit_user/" + ID_USUARIO;
+    $('body').on("click", ".btn-edit-client", function (e) {
+        var ID_CLIENTE = $(this).attr('data-id-client');
+        window.location.href = raiz_url + "manager_clients/form_config_edit_client/" + ID_CLIENTE;
     });
 
 
-    $('#btnCancelEditUser').on('click', function () {
-        window.location.href = raiz_url + "manager_users/users";
+    $('#btnCancelEditClient').on('click', function () {
+        window.location.href = raiz_url + "manager_clients/clients";
     });
     
 
     //EDIT USUARIO...
-    $('#formEditUser').on('submit', function (e) {
+    $('#formEditClient').on('submit', function (e) {
             e.preventDefault();
             $.ajax({
-                url: raiz_url + "manager_users/ajax_edit_user",
+                url: raiz_url + "manager_clients/ajax_edit_client",
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (data) {
@@ -102,21 +76,21 @@ $(document).ready(function () {
             });
 
             $('#modEditUser').on('hidden.bs.modal', function () {
-                window.location.href = raiz_url + "manager_users/users";
+                window.location.href = raiz_url + "manager_clients/clients";
             });
     });
     
 
-    ///btnDeleteUser..
-    $('body').on("click", ".btn-delete-user", function (e) {
-        var ID_USUARIO = $(this).attr('data-id-user');
+    $('body').on("click", ".btn-delete-client", function (e) {
+        var ID_USUARIO = $(this).attr('data-id-client');
+
         if (ID_USUARIO > 0) {
             $('#modDelUser').modal('toggle');
             $('#modBodyDelUser').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
             $('#btnDelRowUser').on('click', function (e) {
                
                 $.ajax({
-                    url: raiz_url + "manager_users/ajax_disable_user",
+                    url: raiz_url + "manager_clients/ajax_disable_client",
                     type: 'POST',
                     data: 'ID_USUARIO=' + ID_USUARIO,
                     success: function (data) {

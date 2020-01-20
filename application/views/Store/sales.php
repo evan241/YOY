@@ -31,18 +31,18 @@
                                 <label for="RG_ID_TIPO_ENVIO" class="control-label text-left" style="color: white;">Tipo de envío</label>
                                 <select name="RG_ID_TIPO_ENVIO" id="RG_ID_TIPO_ENVIO" class="form-control">
                                     <?php
-                                    if (count($ROW_SHIPS) > NULO) :
+                                    if ($ROW_SHIPS) {
                                         echo '<option value="">Seleccionar</option>';
-                                        foreach ($ROW_SHIPS as $ROW) :
+                                        foreach ($ROW_SHIPS as $ROW) {
                                             ?>
                                             <option value="<?= $ROW['ID_TIPO_ENVIO'] ?>"><?= mb_strtoupper($ROW['NOMBRE_TIPO_ENVIO']) . " $" . $ROW['PRECIO_TIPO_ENVIO'] ?></option>
-                                        <?php
-                                            endforeach;
-                                        else :
-                                            ?>
+                                            <?php
+                                        }
+                                    } else {
+                                        ?>
                                         <option value="-1">No existen registros</option>
-                                    <?php
-                                    endif;
+                                        <?php
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -56,25 +56,42 @@
 
 
                             <script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" .
-                                            SANDBOX_ID .
-                                            "&currency=MXN" ?>></script> <!-- Currency -->
+                            SANDBOX_ID .
+                            "&currency=MXN" ?>></script> <!-- Currency -->
 
                             <div id="paypal-button-container"></div>
 
 
                             <script>
                                 paypal.Buttons({
+
+                                    style: {
+                                        layout: 'horizontal',
+                                        fundingicons: 'false',
+                                        shape: 'pill',
+                                        size: 'responsive'
+                                    },
+
+
+
                                     createOrder: function(data, actions) {
+
+                                        var shipment = document.getElementById("RG_ID_TIPO_ENVIO");
+                                        var shipmentPrice = shipment.options[shipment.selectedIndex].value;
+
+                                        var itemPrice = <?php echo json_encode($product[0]['PRECIO_PRODUCTO'], JSON_HEX_TAG); ?>;
+
+                                        var total = parseInt(shipmentPrice) + parseInt(itemPrice);
 
                                         return actions.order.create({
                                             purchase_units: [{
                                                 amount: {
                                                     /*  Cantidad a cobrar
-                                                     */
+                                                    */
                                                     value: '<?= $product[0]['PRECIO_PRODUCTO'] ?>'
                                                 },
                                                 /*  La descripcion que se manda durante la paga
-                                                 */
+                                                */
                                                 description: '<?= $product[0]['DESCRIPCION_PRODUCTO'] ?>'
                                             }]
                                         });
@@ -82,13 +99,16 @@
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
 
-                                            /*  Aqui abajo es donde debería ir el AJAX,
-                                             *  no muevan el URL del fetch, eso ya funciona. 
-                                             */
-                                            return fetch('<?php echo base_url(); ?>paypal/handleInformation/' +
+                                            // alert(data.orderID);
+                                            // var option = d
+                                            // var value = option.options[option.selectedIndex].value;
+                                            // alert(value);
+
+                                            return fetch('<?= base_url() ?>paypal/handleInformation/' +
                                                 data.orderID + '/' +
-                                                <?php echo $product[0]['ID_PRODUCTO']; ?> + '/' +
-                                                <?php echo $this->session->userdata("YOY_ID_USUARIO"); ?>, {
+                                                <?= $product[0]['ID_PRODUCTO'] ?> + '/' +
+                                                '1' + '/' +
+                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>, {
                                                     method: 'post',
                                                     headers: {
                                                         'content-type': 'application/json'
@@ -101,6 +121,7 @@
                                     }
                                 }).render('#paypal-button-container');
                             </script>
+
                         </div>
                     </div>
                 </div>

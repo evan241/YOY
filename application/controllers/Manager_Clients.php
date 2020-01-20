@@ -2,55 +2,56 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Manager_Users extends CI_Controller {
+class Manager_Clients extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->model('mmanager');
-        $this->load->model('mmanager_users');
+        $this->load->model('mmanager_clients');
         $this->load->helper('general');
     }
 
-    public function users() {
+
+    public function clients() {
         if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('manager/index');
 
-        $data['users'] = $this->mmanager_users->get_all_valid_users();
+        $data['users'] = $this->mmanager_clients->get_all_valid_clients();
 
         $this->load->view('esqueleton/header_manager', getActive("classUser"));
-        $this->load->view('Manager/users/v_users_manager', $data);
+        $this->load->view('Manager/clients/v_clients_manager', $data);
         $this->load->view('esqueleton/footer_manager');
     }
 
 
-    public function form_config_add_user() {
+    public function form_config_add_client() {
         if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('manager/index');
 
         $data['roles'] = $this->mmanager->get_all_valid_autoridades();
 
         $this->load->view('esqueleton/header_manager', getActive("classUser"));
-        $this->load->view('Manager/users/v_add_user', $data);
+        $this->load->view('Manager/clients/v_add_client', $data);
         $this->load->view('esqueleton/footer_manager');
     }
 
 
-    public function form_config_edit_user($id) {
+    public function form_config_edit_client($id) {
         if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('manager/index');
-        if ($id <= 0) redirect('manager_users/users');
+        if ($id <= 0) redirect('manager_clients/clients');
 
         $data = array(
-            'user' => $this->mmanager_users->get_user_by_id($id),
+            'user' => $this->mmanager_clients->get_client_by_id($id),
             'roles' => $this->mmanager->get_all_valid_autoridades()
         );
 
         if (!$data['user'] || !$data['roles']) redirect('manager_users/users');
 
         $this->load->view('esqueleton/header_manager', getActive("classEnt"));
-        $this->load->view('Manager/users/v_edit_user', $data);
+        $this->load->view('Manager/clients/v_edit_client', $data);
         $this->load->view('esqueleton/footer_manager');
     }
 
 
-    public function ajax_add_user() {
+    public function ajax_add_client() {
         if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
             redirect('manager/index');
 
@@ -64,13 +65,12 @@ class Manager_Users extends CI_Controller {
             'VIGENCIA_USUARIO' => VIGENTE
         );
 
-        echo print_r($data);
-        if ($this->mmanager_users->add_new_user_on_db($data)) echo 1;
+        if ($this->mmanager_clients->add_new_client_on_db($data)) echo 1;
         else echo 0;
     }
 
 
-    public function ajax_edit_user() {
+    public function ajax_edit_client() {
         if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
             redirect('manager/index');
 
@@ -85,16 +85,16 @@ class Manager_Users extends CI_Controller {
         
         $id = trim($this->input->post("RG_ID_USUARIO"));
 
-        if ($this->mmanager_users->edit_user_on_db($user, $id)) echo 1;
+        if ($this->mmanager_clients->edit_client_on_db($user, $id)) echo 1;
         else echo 0;
     }
 
 
-    public function ajax_disable_user() {
+    public function ajax_disable_client() {
         if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
             redirect('manager/index');
 
-        if ($this->mmanager_users->disable_user_on_db($this->input->post("ID_USUARIO"))) echo 1;
+        if ($this->mmanager_clients->disable_client_on_db($this->input->post("ID_USUARIO"))) echo 1;
         else echo 0;
     }
 }

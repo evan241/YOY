@@ -20,7 +20,7 @@
                         foreach ($ROWS as $ROW) {?>
                             <div>
                                 <h2><a href="news/<?= $ROW['ID'] ?>"><?= $ROW['TITULO']; ?></a></h2>
-                                <div><?= substr($ROW['CONTENIDO'], 0, 300) .'...</div>'; ?>
+                                <div><?= substr($ROW['CONTENIDO'], 0, 300) .'...'; ?></div>
                             </div>
                         <?php }
                     ?>

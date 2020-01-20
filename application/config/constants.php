@@ -34,9 +34,13 @@ defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 define('VIGENTE', 1);
 
 define('ADMINISTRADOR', 1);
-define('ADMINISTRATIVO', 2);
-define('USUARIO', 3);
+define('VENDEDOR', 2);
+define('CLIENTE', 3);
 define('NULO', 0);
+
+define('PAGO_PAYPAL', 4);
+define('SI', 1);
+define('NO', 0);
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes

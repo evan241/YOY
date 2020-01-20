@@ -6,9 +6,9 @@
 
 </body>
 </html>
- -->
- </div>
-      </div>
+-->
+</div>
+</div>
 
    <!--    <footer class="footer mt-auto">
         <div class="copyright bg-white">
@@ -28,7 +28,6 @@
   </div>
 
 
-
   <script src="<?=base_url();?>assets/ADMIN/plugins/jquery/jquery.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/toaster/toastr.min.js"></script>
@@ -43,7 +42,7 @@
   <script src="<?=base_url();?>assets/ADMIN/plugins/daterangepicker/moment.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/daterangepicker/daterangepicker.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/jekyll-search.min.js"></script>
-<!--   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.js"></script> -->
+  <!--   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.js"></script> -->
   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/jquery.datatables.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/sleek.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/chart.js"></script>
@@ -58,7 +57,6 @@
   <script src="<?php echo base_url(); ?>assets/js/easypiechart.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/manager.js" type="text/javascript"></script>
 
-  <script src="<?= base_url() ?>assets/js/manager_users.js"></script>
   <script src="<?= base_url() ?>assets/js/<?php 
   $classExplode = explode('_', $this->router->fetch_class()); 
   $methodExplode = explode('_', $this->router->fetch_method()); 
@@ -66,6 +64,10 @@
   ?>.js"></script>
 
 <!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
+  <script src="<?= base_url() ?>assets/js/manager_clients.js"></script>
+  <script src="<?= base_url() ?>assets/js/manager_sales.js"></script>
+
+  <!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 </body>
 </html>
 

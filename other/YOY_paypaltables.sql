@@ -8,7 +8,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS 	`paypal_client`;
 CREATE TABLE 			`paypal_client` (
 
-	`paypal_client_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_client_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     
     `id` 				VARCHAR(25) UNIQUE NOT NULL,
     `name` 				VARCHAR(50) NOT NULL,
@@ -27,11 +27,12 @@ CREATE TABLE 			`paypal_client` (
 DROP TABLE IF EXISTS 	`paypal_order`;
 CREATE TABLE 			`paypal_order` (
 
-	`paypal_order_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_order_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     
-    `paypal_client_id` 	TINYINT DEFAULT NULL,
+    `paypal_client_id` 	INT DEFAULT NULL,
     `ID_USUARIO`		INT DEFAULT NULL,
     `ID_PRODUCTO` 		INT DEFAULT NULL,
+    `ID_TIPO_ENVIO`		INT DEFAULT NULL,
     
     `sale_id` 			VARCHAR(25) UNIQUE NOT NULL,
     
@@ -46,15 +47,17 @@ CREATE TABLE 			`paypal_order` (
     `update_date`		DATE NOT NULL,
     `update_time`		TIME NOT NULL,
     
-    `checkout_id` 		VARCHAR(25) UNIQUE NOT NULL,
+    `order_id` 		VARCHAR(25) UNIQUE NOT NULL,
 
 	INDEX `paypal_order_paypal_client_id` (`paypal_client_id`),
     INDEX `paypal_order_ID_USUARIO` (`ID_USUARIO`),
     INDEX `paypal_order_ID_PRODUCTO` (`ID_PRODUCTO`),
+    INDEX `paypal_order_ID_TIPO_ENVIO` (`ID_TIPO_ENVIO`),
 
     FOREIGN KEY (`paypal_client_id`) REFERENCES `paypal_client` (`paypal_client_id`) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `producto` (`ID_PRODUCTO`) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `producto` (`ID_PRODUCTO`) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (`ID_TIPO_ENVIO`) REFERENCES `tipo_envio` (`ID_TIPO_ENVIO`) ON UPDATE CASCADE ON DELETE SET NULL
     
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -66,11 +69,12 @@ CREATE TABLE 			`paypal_order` (
 DROP TABLE IF EXISTS 	`paypal_error`;
 CREATE TABLE 			`paypal_error` (
 
-	`paypal_error_id` 	TINYINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`paypal_error_id` 	INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	
 	`ID_USUARIO`		INT NOT NULL,
     `ID_PRODUCTO` 		INT NOT NULL,
-    `checkout_id`		VARCHAR(25) UNIQUE NOT NULL,
+    `ID_TIPO_ENVIO`		INT NOT NULL,
+    `order_id`		VARCHAR(25) UNIQUE NOT NULL,
     
     FOREIGN KEY (`ID_USUARIO`) REFERENCES `USUARIO` (`ID_USUARIO`) ON UPDATE CASCADE ON DELETE NO ACTION,
     FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `PRODUCTO` (`ID_PRODUCTO`) ON UPDATE CASCADE ON DELETE NO ACTION
