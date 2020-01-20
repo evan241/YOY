@@ -73,7 +73,15 @@
                                     },
 
 
+
                                     createOrder: function(data, actions) {
+
+                                        var shipment = document.getElementById("RG_ID_TIPO_ENVIO");
+                                        var shipmentPrice = shipment.options[shipment.selectedIndex].value;
+
+                                        var itemPrice = <?php echo json_encode($product[0]['PRECIO_PRODUCTO'], JSON_HEX_TAG); ?>;
+
+                                        var total = parseInt(shipmentPrice) + parseInt(itemPrice);
 
                                         return actions.order.create({
                                             purchase_units: [{
@@ -91,14 +99,16 @@
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
 
-                                            var ship = document.getElementById("RG_ID_TIPO_ENVIO");
-                                            alert(ship);
+                                            // alert(data.orderID);
+                                            // var option = d
+                                            // var value = option.options[option.selectedIndex].value;
+                                            // alert(value);
 
                                             return fetch('<?= base_url() ?>paypal/handleInformation/' +
                                                 data.orderID + '/' +
                                                 <?= $product[0]['ID_PRODUCTO'] ?> + '/' +
-                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>  + '/' +
-                                                ship, {
+                                                '1' + '/' +
+                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>, {
                                                     method: 'post',
                                                     headers: {
                                                         'content-type': 'application/json'

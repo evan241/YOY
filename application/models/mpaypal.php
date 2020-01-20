@@ -15,7 +15,7 @@ class Mpaypal extends CI_Model
      *      Agrega errores a la tabla paypal_error, para evitar perder la informacion
      *      en caso de fallo durante el proceso.
      */
-    function addError($ID_USUARIO, $ID_PRODUCTO, $orderID)
+    function addError($ID_USUARIO, $ID_PRODUCTO, $ID_TIPO_ENVIO, $orderID)
     {
         try {
             $errorId = $this->getError($orderID);
@@ -24,7 +24,8 @@ class Mpaypal extends CI_Model
                 $this->db->insert(TABLE_PAYPAL_ERROR, array(
                     'ID_USUARIO' => $ID_USUARIO,
                     'ID_PRODUCTO' => $ID_PRODUCTO,
-                    'checkout_id' => $orderID
+                    'ID_TIPO_ENVIO' => $ID_TIPO_ENVIO,
+                    'order_id' => $orderID
                 ));
                 return $this->db->insert_id();
             }
@@ -42,7 +43,7 @@ class Mpaypal extends CI_Model
         try {
             $this->db->select("*");
             $this->db->from(TABLE_PAYPAL_ERROR);
-            $this->db->where("checkout_id", $orderID);
+            $this->db->where("order_id", $orderID);
 
             $result = $this->db->get()->row('paypal_error_id');
             return ($result > 0) ? $result : NULL;
@@ -71,10 +72,10 @@ class Mpaypal extends CI_Model
      *      Verifica que la compra haya sido procesada de manera correcta,  
      *      de ser asi entonces borra el registro en "paypal_errors"
      */
-    function deleteError($checkout_id)
+    function deleteError($order_id)
     {
         try {
-            $errorId = $this->getError($checkout_id);
+            $errorId = $this->getError($order_id);
             if ($errorId != NULL) {
                 $this->db->where('paypal_error_id', $errorId);
                 $this->db->delete(TABLE_PAYPAL_ERROR);
@@ -122,12 +123,12 @@ class Mpaypal extends CI_Model
     /**
      *      Busca la orden en la base de datos
      */
-    function getOrder($checkout_id)
+    function getOrder($order_id)
     {
         try {
             $this->db->select("paypal_order_id");
             $this->db->from(TABLE_PAYPAL_ORDER);
-            $this->db->where("checkout_id", $checkout_id);
+            $this->db->where("order_id", $order_id);
 
             $result = $this->db->get()->row('paypal_order_id');
             return ($result > 0) ? $result : NULL;
@@ -142,7 +143,7 @@ class Mpaypal extends CI_Model
     function addOrder($paypal_order)
     {
         try {
-            $orderId = $this->getOrder($paypal_order["checkout_id"]);
+            $orderId = $this->getOrder($paypal_order["order_id"]);
 
             if ($orderId == NULL) {
                 $this->db->insert(TABLE_PAYPAL_ORDER, $paypal_order);

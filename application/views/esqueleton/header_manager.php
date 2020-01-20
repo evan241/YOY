@@ -295,7 +295,7 @@
                   </li>
 
                   <li class="dropdown-footer">
-                    <a href="signin.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                    <a href="<?= base_url() ?>site/salir"> <i class="mdi mdi-logout"></i> Log Out </a>
                   </li>
                 </ul>
               </li>

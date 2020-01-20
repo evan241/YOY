@@ -6,9 +6,9 @@
 
 </body>
 </html>
- -->
- </div>
-      </div>
+-->
+</div>
+</div>
 
    <!--    <footer class="footer mt-auto">
         <div class="copyright bg-white">
@@ -42,7 +42,7 @@
   <script src="<?=base_url();?>assets/ADMIN/plugins/daterangepicker/moment.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/daterangepicker/daterangepicker.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/plugins/jekyll-search.min.js"></script>
-<!--   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.js"></script> -->
+  <!--   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.js"></script> -->
   <script src="<?=base_url();?>assets/ADMIN/plugins/data-tables/jquery.datatables.min.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/sleek.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/chart.js"></script>
@@ -61,7 +61,7 @@
   <script src="<?= base_url() ?>assets/js/manager_clients.js"></script>
   <script src="<?= base_url() ?>assets/js/manager_sales.js"></script>
 
-<!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
+  <!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 </body>
 </html>
 
