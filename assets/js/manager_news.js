@@ -1,0 +1,121 @@
+$(document).ready(function(){
+    $('#new-thead-title').change(function() {
+        if ($(this).prop('checked')) {
+            $('.new-tbody-title').prop('checked', true);
+        } else {
+            $('.new-tbody-title').prop('checked', false);
+        }
+    });
+    
+    $("#search-news-input").on("keyup", function(e) {
+        e.preventDefault()
+        var value = $(this).val().toLowerCase();
+        $("#news-table tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $('#add-news-object').click(function() {
+        if ($('.news-objects').css('display') == 'none') {
+            $('#add-icon').removeClass('fa-plus').addClass('fa-times');
+            $('.news-objects').css('display', 'inline-block')
+        } else {
+            $('#add-icon').removeClass('fa-times').addClass('fa-plus');
+            $('.news-objects').css('display', 'none');
+        }
+    });
+
+    $('#add-header').click(function(){
+        $('#news-content').append('<h3 contenteditable="true" placeholder="Subtitulo...">Subtitulo...</h3>');
+    });
+
+    $('#add-paragraph').click(function(){
+        $('#news-content').append('<p contenteditable="true" placeholder="Contenido...">Contenido...</p>');
+    });
+
+    $(document).on('focus', '#news-content h3, #news-content p, #news-title', function(){
+        var ph = $(this).attr('placeholder');
+        if($(this).html() == '' || $(this).html() == '<br>' || $(this).html() == ph){
+            $(this).html('<br>');
+        }
+    });
+
+    $(document).on('focusout', '#news-content h3, #news-content p, #news-title', function(){
+        var ph = $(this).attr('placeholder');
+        if($(this).html() == '' || $(this).html() == '<br>'){
+            $(this).html(ph);
+        }
+    });
+
+    $('#add-image').click(function(){
+        var addImage = '<div class="card" style="border: 1px; border-style: dashed; border-color: #141414; width:100%; height: 100px; text-align:center; line-height: 100px">';
+        addImage += '<div class="body">';
+        addImage += '<label for="image">Subir imagen<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
+        addImage += '<input style="display:none;" type="file" name="image-file" id="image">';
+        addImage += '</div>';
+        addImage += '</div>';
+        $('#news-content').append(addImage);
+    });
+
+    $('#add-video').click(function(){
+        var addImage = '<div class="card" style="border: 1px; border-style: dashed; border-color: #141414; width:100%; height: 100px; text-align:center; line-height: 100px">';
+        addImage += '<div class="body">';
+        addImage += '<label for="video">Subir video<span class="fa fa-upload fa-2x" style="margin-left: 20px;"></span></label>';
+        addImage += '<input style="display:none;" type="file" name="video-file" id="video">';
+        addImage += '</div>';
+        addImage += '</div>';
+        $('#news-content').append(addImage);
+    });
+
+    $('#add-youtube').click(function(){
+        var addYoutube = '<form class="youtube-form">';
+        addYoutube += '<div class="input-group">';
+        addYoutube += '<div class="input-group-prepend">';
+        addYoutube += '<div class="input-group-text"><span class="fa fa-link"</span></div>';
+        addYoutube += '</div>';
+        addYoutube += '<input type="text" class="form-control add-youtube-link" placeholder="Ingresa aqui el enlace de youtube">';
+        addYoutube += '</div>';
+        addYoutube += '</form>';
+        $('#news-content').append(addYoutube);
+    });
+
+    $(document).on( 'submit', '.youtube-form', function(e){
+        e.preventDefault();
+        var youtubeLink = $('.add-youtube-link').val();
+        var lastIndex = youtubeLink.split("=");
+        youtubeLink = lastIndex[lastIndex.length - 1];
+    
+        $('.youtube-form').remove();
+    
+        $('#news-content').append('<iframe src="http://www.youtube.com/embed/'+youtubeLink+'" width="560" height="315" style="margin:30px auto;" frameborder="0" allowfullscreen></iframe>');
+    });
+
+    $('#upload-news').click(function(){
+        var data = {
+            TITULO: $('#news-title').html(),
+            IMAGEN_TITULO: '',
+            CONTENIDO: $('#news-content').html(),
+            AUTOR: userID,
+            PUBLICADO: 1,
+        };
+
+        $.ajax({
+            url:  raiz_url + "manager_news/ajax_add_news",
+            type: 'post',
+            data: {
+                'Content': data,
+            },
+            dataType: 'html',
+            success: function(result){
+                if (result == '1') {
+                    $('#response-tag').append('<span class="text-success">Se publico con exito!</span>');
+                } else {
+                    alert('Se produjo un error');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert('Se produjo un error en el AJAX' + jqXHR.responseText)
+            }
+        });
+    });
+});

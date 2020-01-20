@@ -1,26 +1,33 @@
 <br>
 <div class="container-fluid">
-    <div class="panel panel-primary">
-        <div class="panel-heading header-primary">
-            <div class="panel-title text-left pull-left"><h2 class="heading-primary">News</h2></div>
-            <div class="pull-right">
-                <a href="<?= base_url(); ?>manager/add_new" class="btn btn-primary"><span class="fa fa-plus"></span> Añadir nueva</a>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="float-left">News</h3>
+            <div class="float-right">
+                <a href="<?= base_url(); ?>manager_news/add_news" class="btn btn-primary"><span class="fa fa-plus"></span> Añadir nueva</a>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="container-fluid">
-                <div class="pull-left">
-                    <a href="#">Todo ()</a> | <a href="#"> Publicado ()</a>
+                <div class="float-left">
+                    <a href="#">Todo (<?= count($ROWS);?>)</a> | <a href="#"> Publicado (<?php
+                                $totalNewsPublic = 0;
+                                foreach ($ROWS as $ROW) {
+                                    if ($ROW['PUBLICADO'] == 1) $totalNewsPublic += 1;
+                                }
+                                echo $totalNewsPublic;
+                            ?>)</a>
                 </div>
-                <div class="pull-right">
+                <div class="float-right">
                     <form class="form-inline">
                         <div class="form-group">
                             <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></div>
+                                </div>
                                 <input type="text" class="form-control" id="search-news-input" placeholder="Buscar...">
-                                </button>
                             </div>
                         </div>
-                        <button id="search-news-btn" class="form-control"><span class="fa fa-search"></span>
                     </form>
                 </div>
             </div>
@@ -63,27 +70,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="panel-footer">
+        <div class="card-footer">
             <button class="btn btn-danger">Eliminar seleccionados</button>
         </div>
     </div>
 </div>
-
-<script>
-    $('#new-thead-title').change(function() {
-        if ($(this).prop('checked')) {
-            $('input[name="new-tbody-title"]').prop('checked', true);
-        } else {
-            $('input[name="new-tbody-title"]').prop('checked', false);
-        }
-    });
-
-    $("#search-news-input").on("keyup", function(e) {
-        e.preventDefault()
-        var value = $(this).val().toLowerCase();
-        $("#news-table tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
-</script>

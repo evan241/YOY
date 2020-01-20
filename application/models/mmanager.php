@@ -103,14 +103,4 @@ class Mmanager extends CI_Model {
         }
     }
 
-    public function get_all_news() {
-        $this->db->select('*');
-        $this->db->join('usuario', 'news.AUTOR = usuario.ID_USUARIO');
-        
-        $this->db->from('news');
-        $query = $this->db->get();
-        
-        return $query->result_array();
-    }
-
 }

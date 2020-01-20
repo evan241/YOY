@@ -28,15 +28,13 @@
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="<?=base_url();?>assets/ADMIN/css/sleek.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-  <link href="<?php echo base_url(); ?>assets/css/<?= $this->router->fetch_class(); ?>.css" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url(); ?>assets/css/<?= explode('_', $this->router->fetch_class())[0]; ?>.css" rel="stylesheet" type="text/css"/>
 
 
 
 
   <!-- FAVICON -->
   <link href="<?=base_url();?>assets/ADMIN/img/favicon.png" rel="shortcut icon" />
-
-
   <script src="<?=base_url();?>assets/ADMIN/plugins/nprogress/nprogress.js"></script>
 </head>
 <style>
@@ -159,7 +157,7 @@
               </ul>
             </li>        
             <li class="has-sub">
-              <a class="sidenav-item-link" href="<?= base_url(); ?>manager/users">
+              <a class="sidenav-item-link" href="<?= base_url(); ?>manager_users/users">
                 <i class="mdi mdi-account-group"></i>
                 <span class="nav-text">Usuarios</span>
               </a>            
@@ -297,7 +295,7 @@
                   </li>
 
                   <li class="dropdown-footer">
-                    <a href="signin.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                    <a href="signout"> <i class="mdi mdi-logout"></i> Log Out </a>
                   </li>
                 </ul>
               </li>
