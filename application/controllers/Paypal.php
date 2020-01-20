@@ -32,17 +32,23 @@ class Paypal extends CI_Controller {
      *      este proceso toma unos segundos, puede tomar más arriba del server.
     */
     public function requestSaleInformation($errorID) {
+        // echo "ASD";
         $var = $this->mpaypal->getErrorInfo($errorID);
+        // print_r($var);
 
         if ($var != NULL) {
             $order = $var['order_id'];
             $product = $var['ID_PRODUCTO'];
             $user = $var['ID_USUARIO'];
+            $shipment = $var['ID_TIPO_ENVIO'];
+            // echo $order . "<br>";
+            // echo $product . "<br>";
+            // echo $user . "<br>";
+            // echo $shipment . "<br>";
 
-            
-            $this->handleInformation($order, $product, $user);
+            $this->handleInformation($order, $product, $shipment,$user);
         }
-        else echo false;
+        else echo "EMPTY";
     }
 
     /**
