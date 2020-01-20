@@ -31,18 +31,18 @@
                                 <label for="RG_ID_TIPO_ENVIO" class="control-label text-left" style="color: white;">Tipo de envío</label>
                                 <select name="RG_ID_TIPO_ENVIO" id="RG_ID_TIPO_ENVIO" class="form-control">
                                     <?php
-                                    if (count($ROW_SHIPS) > NULO) :
+                                    if ($ROW_SHIPS) {
                                         echo '<option value="">Seleccionar</option>';
-                                        foreach ($ROW_SHIPS as $ROW) :
+                                        foreach ($ROW_SHIPS as $ROW) {
                                             ?>
                                             <option value="<?= $ROW['ID_TIPO_ENVIO'] ?>"><?= mb_strtoupper($ROW['NOMBRE_TIPO_ENVIO']) . " $" . $ROW['PRECIO_TIPO_ENVIO'] ?></option>
                                             <?php
-                                        endforeach;
-                                    else :
+                                        }
+                                    } else {
                                         ?>
                                         <option value="-1">No existen registros</option>
                                         <?php
-                                    endif;
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -91,10 +91,14 @@
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
 
+                                            var ship = document.getElementById("RG_ID_TIPO_ENVIO");
+                                            alert(ship);
+
                                             return fetch('<?= base_url() ?>paypal/handleInformation/' +
                                                 data.orderID + '/' +
                                                 <?= $product[0]['ID_PRODUCTO'] ?> + '/' +
-                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>, {
+                                                <?= $this->session->userdata("YOY_ID_USUARIO") ?>  + '/' +
+                                                ship, {
                                                     method: 'post',
                                                     headers: {
                                                         'content-type': 'application/json'
@@ -107,6 +111,7 @@
                                     }
                                 }).render('#paypal-button-container');
                             </script>
+
                         </div>
                     </div>
                 </div>

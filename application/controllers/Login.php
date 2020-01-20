@@ -14,7 +14,9 @@ class Login extends CI_Controller {
     // }
 
     public function index() {
-        echo getAuthCode();
+        $this->load->view('esqueleton/header');
+        $this->load->view('Login/v_index');
+        $this->load->view('esqueleton/footer');
     }
 
     public function registro(){

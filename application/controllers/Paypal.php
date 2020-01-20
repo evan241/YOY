@@ -50,35 +50,38 @@ class Paypal extends CI_Controller {
      *
      *      Si todo sale bien entonces removera el registro temporal que guardamos en paypal_error
      */
-    public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO) {
-        $this->ID_PRODUCTO = $ID_PRODUCTO;
-        $this->ID_USUARIO = $ID_USUARIO;
+    public function handleInformation($orderID, $ID_PRODUCTO, $ID_USUARIO, $ship) {
 
-        $info = $this->getInformation($orderID);
+        echo $ship;
 
-        if ($info != NULL) {
-            $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
-            $this->mpaypal->addOrder($info["paypal_order"]);
-            $this->mpaypal->deleteError($orderID);
+        // $this->ID_PRODUCTO = $ID_PRODUCTO;
+        // $this->ID_USUARIO = $ID_USUARIO;
 
-            $data = array(
-                'ID_USUARIO' => $ID_USUARIO,
-                'ID_PRODUCTO' => $ID_PRODUCTO,
-                'CANTIDAD_VENTA' => SI,
-                'FECHA_VENTA' => $info['paypal_order']['create_date'],
-                'PAGADA_VENTA' => SI,
-                'ENVIADA_VENTA' => SI,
-                'ID_MEDIO_PAGO' => PAGO_PAYPAL,
-                'paypal_order_id' => $orderID,
-            );
+        // $info = $this->getInformation($orderID);
 
-            $this->mmanager_sales->save_sale($data);
+        // if ($info != NULL) {
+        //     $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
+        //     $this->mpaypal->addOrder($info["paypal_order"]);
+        //     $this->mpaypal->deleteError($orderID);
 
-            echo true;
-            return true;
-        }
-        else echo false;
-        return false;
+        //     $data = array(
+        //         'ID_USUARIO' => $ID_USUARIO,
+        //         'ID_PRODUCTO' => $ID_PRODUCTO,
+        //         'CANTIDAD_VENTA' => SI,
+        //         'FECHA_VENTA' => $info['paypal_order']['create_date'],
+        //         'PAGADA_VENTA' => SI,
+        //         'ENVIADA_VENTA' => SI,
+        //         'ID_MEDIO_PAGO' => PAGO_PAYPAL,
+        //         'paypal_order_id' => $orderID,
+        //     );
+
+        //     $this->mmanager_sales->save_sale($data);
+
+        //     echo true;
+        //     return true;
+        // }
+        // else echo false;
+        // return false;
     }
 
     /**
