@@ -100,14 +100,14 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modCustomer" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
+<div class="modal fade" id="modProduct" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modalTitleAdvice">Borrado de producto</h4>
             </div>
-            <div class="modal-body text-center" id="modBodyCustomer">
+            <div class="modal-body text-center" id="modBodyProduct">
             </div>
             <div class="clear"></div>
             <div class="modal-footer">
@@ -117,7 +117,7 @@
                         <i class="fa fa-times" aria-hidden="true"></i> Cancelar
                     </button>
 
-                    <button class="btn btn-primary" type="button"  id="btnDelRowClient">
+                    <button class="btn btn-primary" type="button"  id="btnDelProduct">
                         <i class="fa fa-check-circle" aria-hidden="true"></i>  Si, borrar
                     </button>
                 </div>       

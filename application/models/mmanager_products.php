@@ -45,4 +45,16 @@ class Mmanager_products extends CI_Model {
             return 0;
         }
     }
+
+    function disableProduct($id) {
+        try {
+            $this->db->set('VIGENCIA_PRODUCTO', 0);
+            $this->db->where('ID_PRODUCTO', $id);
+            $this->db->update('producto');
+            return $this->db->affected_rows();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
 }

@@ -12,16 +12,16 @@ $(document).ready(function () {
         "bProcessing": true,
         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information dt-filter"ip><"clear">',
         buttons: [
-            {
-                extend: 'csv',
-                text: 'Excel',
-                title: 'Productos',
-                exportOptions: {
-                    modifier: {
-                        page: 'current'
-                    }
+        {
+            extend: 'csv',
+            text: 'Excel',
+            title: 'Productos',
+            exportOptions: {
+                modifier: {
+                    page: 'current'
                 }
             }
+        }
         ],
         "aaSorting": [],
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
@@ -44,6 +44,7 @@ $(document).ready(function () {
         }
     });
     
+
     $('#formRecordProduct').on('submit', function (e) {
         e.preventDefault();
         $('#modProduct').modal('toggle');
@@ -67,6 +68,31 @@ $(document).ready(function () {
     });
 
 
+    $('body').on("click", ".btn-delete-product", function (e) {
+        var ID_PRODUCT = $(this).attr('data-id-product');
+        if (ID_PRODUCT > 0) {
+            
+            $('#modProduct').modal('toggle');
+            $('#modBodyProduct').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
+            $('#btnDelProduct').on('click', function (e) {
+
+                $.ajax({
+                    url: raiz_url + "manager_products/ajax_disable_products",
+                    type: 'POST',
+                    data: 'ID_PRODUCT=' + ID_PRODUCT,
+                    success: function (data) {
+
+                        if (data) {
+                            window.location.reload();
+                        } else {
+                            $('#modBodyProduct').html('<b>Hubo un error al realizar la operación</b>');
+                            $('#btnDelProduct').attr("disabled", "disabled");
+                        }
+                    }
+                });
+            });
+        }
+    });
 
     
 });

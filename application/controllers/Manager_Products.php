@@ -108,16 +108,11 @@ class Manager_Products extends CI_Controller {
     }
 
     function ajax_disable_products() {
-        if ($this->input->is_ajax_request()) {
-            if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-                $ID_PRODUCTO = $this->input->post('ID_PRODUCTO');
-                $AFFECTED_ROWS = $this->mproductos->disable_product_on_db($ID_PRODUCTO);
-                echo $AFFECTED_ROWS;
-            } else {
-                redirect('login/salir');
-            }
-        } else {
-            show_404();
-        }
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
+            redirect('login/salir');
+
+        if ($this->mmanager_products->disableProduct($this->input->post('ID_PRODUCT'))) echo 1;
+        else echo 0;
     }
 }
