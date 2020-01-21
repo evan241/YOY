@@ -113,14 +113,14 @@
 
 
 
-<div class="modal fade" id="modCustomer" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
+<div class="modal fade" id="modProduct" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modalTitleAdvice">Alta de productos</h4>
             </div>
-            <div class="modal-body" id="modBodyCustomer">
+            <div class="modal-body" id="modBodyProduct">
             </div>
             <div class="clear"></div>
             <div class="modal-footer">

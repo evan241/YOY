@@ -64,7 +64,6 @@ class Manager_Users extends CI_Controller {
             'VIGENCIA_USUARIO' => VIGENTE
         );
 
-        echo print_r($data);
         if ($this->mmanager_users->add_new_user_on_db($data)) echo 1;
         else echo 0;
     }

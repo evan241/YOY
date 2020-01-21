@@ -56,20 +56,25 @@ class Manager_Products extends CI_Controller {
             ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
             redirect('login/salir');
 
-        $data['ID_CATEGORIA'] = $this->input->post("RG_ID_CATEGORIA");
-        $data['ID_ALMACEN'] = $this->input->post("RG_ID_ALMACEN");
-        $data['CODIGO_PRODUCTO'] = trim($this->input->post("RG_CODIGO_PRODUCTO"));
-        $data['CODIGO_PRODUCTO_SECUNDARIO'] = trim($this->input->post("RG_CODIGO_PRODUCTO_SECUNDARIO"));
-        $data['NOMBRE_PRODUCTO'] = trim($this->input->post("RG_NOMBRE_PRODUCTO"));
-        $data['DESCRIPCION_PRODUCTO'] = trim($this->input->post("RG_DESCRIPCION_PRODUCTO"));
-        $data['COSTO_PRODUCTO'] = $this->input->post("RG_COSTO_PRODUCTO");
-        $data['STOCK_PRODUCTO'] = $this->input->post("RG_STOCK_PRODUCTO");
-        $data['STOCK_MINIMO_PRODUCTO'] = $this->input->post("RG_STOCK_MINIMO_PRODUCTO");
-        $data['PRESTAMO_PRODUCTO'] = $this->input->post("RG_PRESTAMO_PRODUCTO");
-        $data['CONSUMO_PRODUCTO'] = $this->input->post("RG_CONSUMO_PRODUCTO");
+        $data = array(
+            'ID_CATEGORIA' => $this->input->post("RG_ID_CATEGORIA"),
+            'CODIGO_PRODUCTO' => $this->input->post("RG_CODIGO_PRODUCTO"),
+            'NOMBRE_PRODUCTO' => trim($this->input->post("RG_NOMBRE_PRODUCTO")),
+            'DESCRIPCION_PRODUCTO' => trim($this->input->post("RG_DESCRIPCION_PRODUCTO")),
+            'COSTO_PRODUCTO' => $this->input->post("RG_COSTO_PRODUCTO"),
+            'PRECIO_PRODUCTO' => $this->input->post("RG_PRECIO_PRODUCTO"),
+            'STOCK_PRODUCTO' => $this->input->post("RG_STOCK_PRODUCTO"),
+            'ACTIVO_PRODUCTO' => VIGENTE,
+            'VIGENCIA_PRODUCTO' => VIGENTE,
+            'STOCK_MINIMO_PRODUCTO' => $this->input->post("RG_STOCK_MINIMO_PRODUCTO"),
+            'IMAGEN_PRODUCTO' => 'EMPTY'
+        );
+
+        if ($this->mmanager_products->saveProduct($data)) echo 1;
+        else echo 0;
     }
 
-    
+
     public function ajax_edit_products() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {

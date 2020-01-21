@@ -35,4 +35,14 @@ class Mmanager_products extends CI_Model {
             return $e->getMessage();
         }
     }
+
+    function saveProduct($product) {
+        try {
+            $this->db->insert('producto', $product);
+            return $this->db->insert_id();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
 }
