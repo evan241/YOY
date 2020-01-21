@@ -95,7 +95,7 @@
                     <div class="panel-footer">
 
                         <div class="btn-group pull-right"><br>
-                            <a href="<?= base_url() ?>productos/index" class="btn btn pull-left" id="btnCloseAddProduct">
+                            <a href="<?= base_url() ?>manager_products/products" class="btn btn pull-left" id="btnCloseAddProduct">
                                 <i class="fa fa-remove" aria-hidden="true"></i>
                             Cancelar</a>
                             <button type="submit" class="btn btn-default pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>

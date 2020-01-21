@@ -168,4 +168,9 @@ class Login extends CI_Controller {
         . 'email=' . $email . "&"
         . 'code=' . $code;
     }
+
+    public function salir() {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
 }

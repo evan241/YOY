@@ -64,6 +64,7 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="RG_COSTO_PRODUCTO" class="control-label text-left"  >Costo</label>
@@ -71,6 +72,15 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="RG_PRECIO_PRODUCTO" class="control-label text-left"  >Costo</label>
+                                        <input type="text" name="RG_PRECIO_PRODUCTO" id="RG_PRECIO_PRODUCTO" class="form-control" placeholder="Precio del producto" value="<?= $product['PRECIO_PRODUCTO'] ?>">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="RG_STOCK_PRODUCTO" class="control-label text-left"  >Stock</label>
@@ -78,6 +88,7 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="RG_STOCK_MINIMO_PRODUCTO" class="control-label text-left"  >Stock Mínimo</label>
@@ -90,10 +101,10 @@
 
                             <div class="panel-footer">
                                 <div class="btn-group pull-right"><br>
-                                    <a href="<?= base_url() ?>manager_products/products" class="btn btn pull-left" id="btnCloseAddAgent">
+                                    <a href="<?= base_url() ?>manager_products/products" class="btn btn-danger pull-left" id="btnCloseAddAgent">
                                         <i class="fa fa-remove" aria-hidden="true"></i>Cancelar</a>
 
-                                        <button type="submit" class="btn btn-default pull-right"><i class="fa fa-floppy-o" aria-hidden="true"> 
+                                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-floppy-o" aria-hidden="true"> 
                                         </i>Guardar Producto</button>
                                         
                                     </div>
@@ -109,14 +120,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modCustomer" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
+    <div class="modal fade" id="modProduct" tabindex="-1" role="dialog" aria-labelledby="modCustomer" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="modalTitleAdvice">Editando Prductos</h4>
                 </div>
-                <div class="modal-body" id="modBodyCustomer">
+                <div class="modal-body" id="modBodyProduct">
                 </div>
                 <div class="clear"></div>
                 <div class="modal-footer">

@@ -57,4 +57,15 @@ class Mmanager_products extends CI_Model {
             return 0;
         }
     }
+
+    function updateProduct($product, $id) {
+        try {
+            $this->db->where('ID_PRODUCTO', $id);
+            $this->db->update('producto',$product);
+            return $this->db->affected_rows();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
 }
