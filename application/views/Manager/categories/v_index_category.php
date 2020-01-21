@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2 text-center">
-            <?php $this->view('Productos/v_navbar'); ?>
+            <?php $this->view('Manager/products/v_navbar_producto'); ?>
         </div>
         <div class="col-sm-10 text-center">
             <br>

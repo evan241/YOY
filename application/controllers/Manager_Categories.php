@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Manager extends CI_Controller {
+class Manager_Categories extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -11,40 +11,36 @@ class Manager extends CI_Controller {
         $this->load->helper('general');
     }
     
-    public function categorias() {
-        if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-            $data['classIni'] = '';
-            $data['classPro'] = 'class="dropdown active"';
-            $data['classEnt'] = '';
-            $data['classSal'] = '';
-            $data['classRep'] = '';
-            $data['classCnf'] = '';
-            $this->load->view('esqueleton/header', $data);
-            $data['ROW_CATEGORIES'] = $this->mproductos->get_all_valid_categories();
-            //$data['cart'] = array();
-            $this->load->view('Productos/v_categorias', $data);
-            $this->load->view('esqueleton/footer');
-        } else {
-            redirect('login/salir');
-        }
+    public function categories() {
+        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+
+        $data['ROW_CATEGORIES'] = $this->mmanager_categories->get_all_valid_categories();
+
+        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('Manager/categories/v_index_category', $data);
+        $this->load->view('esqueleton/footer');
     }
     
-    public function form_add_category() {
-        if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-            $data['classIni'] = '';
-            $data['classPro'] = 'class="dropdown active"';
-            $data['classEnt'] = '';
-            $data['classSal'] = '';
-            $data['classRep'] = '';
-            $data['classCnf'] = '';
-            $this->load->view('esqueleton/header', $data);
-            $this->load->view('Productos/v_add_categoria');
-            $this->load->view('esqueleton/footer');
-        } else {
-            redirect('login/salir');
-        }
+    public function form_add_categories() {
+        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+
+        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('Manager/categories/v_add_category');
+        $this->load->view('esqueleton/footer');
     }
-    
+
+    public function form_edit_categories($id) {
+        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+        if ($id <= 0) redirect('manager_categories/categories');
+
+        $ROW_CATEGORIA = $this->mproductos->get_category_by_id($ID_CATEGORIA);
+
+        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('Manager/categories/v_edit_category', $data);
+        $this->load->view('esqueleton/footer');
+
+    }
+
     public function ajax_add_category() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
@@ -65,36 +61,9 @@ class Manager extends CI_Controller {
             redirect('login/salir');
         }
     }
-    
-    public function form_edit_category($PARAM) {
 
-        if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-            $ID_CATEGORIA = intval($PARAM);
-            if ($ID_CATEGORIA > NULO) {
-                $ROW_CATEGORIA = $this->mproductos->get_category_by_id($ID_CATEGORIA);
-                if (count($ROW_CATEGORIA) > NULO) {
-                    //CARGAR LA VISTA..
-                    $data['classIni'] = '';
-                    $data['classPro'] = 'class="dropdown active"';
-                    $data['classEnt'] = '';
-                    $data['classSal'] = '';
-                    $data['classRep'] = '';
-                    $data['classCnf'] = '';
-                    $this->load->view('esqueleton/header', $data);
-                    $data['ROW_DATA_CATEGORY'] = $ROW_CATEGORIA;
-                    $this->load->view('Productos/v_edit_categoria', $data);
-                    $this->load->view('esqueleton/footer');
-                } else {
-                    redirect('productos/categorias');
-                }
-            } else {
-                redirect('productos/categorias');
-            }
-        } else {
-            redirect('login/salir');
-        }
-    }
-    
+
+
     public function ajax_edit_category() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
@@ -115,7 +84,7 @@ class Manager extends CI_Controller {
             show_404();
         }
     }
-    
+
     function ajax_disable_category() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {

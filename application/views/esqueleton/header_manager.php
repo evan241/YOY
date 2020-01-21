@@ -149,7 +149,7 @@
                     </a>                   
                   </li>
                   <li class="has-sub">
-                    <a class="sidenav-item-link" href="<?=base_url()?>productos/categorias">                     
+                    <a class="sidenav-item-link" href="<?=base_url()?>manager_categories/categories">                     
                       <span class="nav-text">Categorías</span> <b class="caret"></b>
                     </a>
                   </li>
