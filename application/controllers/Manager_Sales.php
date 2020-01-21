@@ -21,7 +21,9 @@ class Manager_Sales extends CI_Controller {
     }
 
     public function ajax_disable_sale() {
-        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
+            redirect('login/salir');
 
         if ($this->mmanager_sales->disable_sale_on_db($this->input->post("ID_VENTA"))) echo 1;
         else echo 0;
