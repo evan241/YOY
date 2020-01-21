@@ -21,7 +21,7 @@
                 <div class="about-text">
                     <p><?php
                         foreach ($ROWS as $ROW) {
-                            if($ROW['ID'] == $ID) echo $ROW['CONTENIDO'];
+                            if($ROW['ID'] == $ID) echo str_replace('contenteditable="true"', '', $ROW['CONTENIDO']);
                         }
                     ?></p>
                 </div>

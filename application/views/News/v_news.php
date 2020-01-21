@@ -20,7 +20,8 @@
                         foreach ($ROWS as $ROW) {?>
                             <div>
                                 <h2><a href="news/<?= $ROW['ID'] ?>"><?= $ROW['TITULO']; ?></a></h2>
-                                <div><?= substr($ROW['CONTENIDO'], 0, 300) .'...'; ?></div>
+                                <?php $contenido = str_replace('contenteditable="true"', '', $ROW['CONTENIDO']); ?>
+                                <div><?= substr($contenido, 0, 300) .'...</div>'; ?>
                             </div>
                         <?php }
                     ?>

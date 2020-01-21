@@ -47,7 +47,7 @@
                         $infoText = '';
                         foreach ($ROWS as $ROW) { ?>
                             <tr>
-                                <td><input type="checkbox" class="new-tbody-title" data-row-id="<?= $ROW['ID']; ?>"><strong><a href="#"> <?= $ROW['TITULO'];?></a></strong></td>
+                                <td><input type="checkbox" class="new-tbody-title" data-row-id="<?= $ROW['ID']; ?>"><strong><a href="<?= base_url(); ?>manager_news/edit_news/<?= $ROW['ID']; ?>"> <?= $ROW['TITULO'];?></a></strong></td>
                                 <td><?= ucfirst($ROW['NOMBRE_USUARIO']) ?></td>
                                 <?php
                                     switch ($ROW['PUBLICADO']) {
@@ -71,7 +71,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <button class="btn btn-danger">Eliminar seleccionados</button>
+            <button class="btn btn-danger" id="delete-news">Eliminar seleccionados</button>
         </div>
     </div>
 </div>

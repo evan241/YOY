@@ -168,6 +168,12 @@
                 <span class="nav-text">Clientes</span>
               </a> 
             </li>
+            <li class="has-sub">
+              <a class="sidenav-item-link" href="<?= base_url();?>manager_news/news">
+                <i class="fa fa-file-alt"></i>
+                <span class="nav-text">Noticias</span>
+              </a> 
+            </li>
           </ul>
         </div>
 
