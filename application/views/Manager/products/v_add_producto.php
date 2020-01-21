@@ -13,20 +13,27 @@
                             <div class="form-group">
                                 <label for="RG_ID_CATEGORIA" class="control-label text-left"  >Categoría</label>
                                 <select name="RG_ID_CATEGORIA" id="RG_ID_CATEGORIA" class="form-control">
+
                                     <?php
-                                    if (count($ROW_CATEGORIES) > NULO):
+
+                                    if ($categories) {
+
                                         echo '<option value="">Seleccionar</option>';
-                                        foreach ($ROW_CATEGORIES as $ROW):
-                                            ?>
-                                            <option value="<?= $ROW['ID_CATEGORIA'] ?>"><?= mb_strtoupper($ROW['NOMBRE_CATEGORIA']) ?></option>
+
+                                        foreach ($categories as $category) { ?>
+
+                                            <option value="<?= $category['ID_CATEGORIA'] ?>"><?= mb_strtoupper($category['NOMBRE_CATEGORIA']) ?></option>
+                                            
                                             <?php
-                                        endforeach;
-                                    else:
+                                        }
+                                    }
+                                    else {
                                         ?>
                                         <option value="-1">No existen registros</option>
-                                    <?php
-                                    endif;
+                                        <?php
+                                    }
                                     ?>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -90,9 +97,9 @@
                         <div class="btn-group pull-right"><br>
                             <a href="<?= base_url() ?>productos/index" class="btn btn pull-left" id="btnCloseAddProduct">
                                 <i class="fa fa-remove" aria-hidden="true"></i>
-                                Cancelar</a>
+                            Cancelar</a>
                             <button type="submit" class="btn btn-default pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                Guardar producto</button>
+                            Guardar producto</button>
                         </div>
                         <div style="clear:both"><br></div>
                     </div>

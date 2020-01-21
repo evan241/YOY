@@ -1,6 +1,6 @@
 <?php
 
-class Mmanager extends CI_Model {
+class Mmanager_products extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -30,7 +30,7 @@ class Mmanager extends CI_Model {
             $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
             $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');
             $query = $this->db->get();
-            return $query->result_array();
+            return $query->result_array()[0];
         } catch (Exception $ex) {
             return $e->getMessage();
         }

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2 text-center">
-            <?php $this->view('Manager/v_navbar_producto'); ?>
+            <?php $this->view('Manager/products/v_navbar_producto'); ?>
         </div>
         <div class="col-sm-10 text-center">
             <br>
@@ -10,18 +10,20 @@
                     <div class="panel-title text-left"><h2 class="heading-primary">Productos</h2></div>
                 </div>
                 <div class="panel-body">
+
                     <?php
-                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO):
-                        $disabled = '';
-                    else:
-                        $disabled = 'disabled';
-                    endif;
-                    if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR || $this->session->userdata('YOY_ID_ROL') == ADMINISTRATIVO):
-                        ?>
-                        <a href="<?= base_url() ?>manager/form_add_product" class="btn btn-default pull-right" id="btnAddProduct">
+
+                    if ($this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR)) $disabled = '';
+                    else $disabled = 'disabled';
+                    
+                    if ($this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR)) { ?>
+
+                        <a href="<?= base_url() ?>manager_products/form_add_products" class="btn btn-default pull-right" id="btnAddProduct">
                             <i class="fas fa-plus" prescription-bottle aria-hidden="true"></i> Nuevo Poducto
                         </a>
-                    <?php endif; ?>
+
+                    <?php } ?>
+
                     <div style="clear:both"><br></div>
                     <div class="control-group text-left">
                         <div class="table-responsive">  
@@ -42,39 +44,50 @@
                                     </tr>
                                 </thead>
                                 <tbody style="font-size:12px;">
+
                                     <?php
-                                    if (count($ROW_PRODUCTOS)):
-                                        foreach ($ROW_PRODUCTOS as $ROW):
-                                            $ACTIVO = $ROW['ACTIVO_PRODUCTO']==1?'<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>':'<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
-                                            $STOCK_ACTUAL = $ROW['STOCK_PRODUCTO'];
-                                            $STOCK_VENCIDO = $ROW['STOCK_MINIMO_PRODUCTO'];
+
+                                    if ($products) {
+
+                                        foreach ($products as $product) {
+
+                                            $activo = ($product['ACTIVO_PRODUCTO']==1) ? 
+                                            '<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>' : 
+                                            '<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
+
+                                            $stock_actual = $product['STOCK_PRODUCTO'];
+                                            $stock_minimo = $product['STOCK_MINIMO_PRODUCTO'];
                                             $color="";
-                                            if ($STOCK_ACTUAL <= $STOCK_VENCIDO)
-                                                $color = "color:red";
+
+                                            if ($stock_actual <= $stock_minimo) $color = "color:red";
+
                                             ?>
+
                                             <tr style="<?= $color ?>">
-                                                <td><b><?= $ROW['CODIGO_PRODUCTO'] ?></b></td>
-                                                <td><?= mb_strtoupper($ROW['NOMBRE_PRODUCTO']) ?></td>
-                                                <td><?= mb_strtoupper($ROW['NOMBRE_CATEGORIA']) ?></td>
-                                                <td><?= mb_strtoupper($ROW['DESCRIPCION_PRODUCTO']) ?></td> 
-                                                <td><?= $ROW['COSTO_PRODUCTO'] ?></td>
-                                                <td><?= $ROW['PRECIO_PRODUCTO'] ?></td>
-                                                <td><?= $ROW['STOCK_PRODUCTO'] ?></td>
-                                                <td><?= $ROW['STOCK_MINIMO_PRODUCTO'] ?></td>
-                                                <td><?= $ACTIVO ?></td>
+                                                <td><b><?= $product['CODIGO_PRODUCTO'] ?></b></td>
+                                                <td><?= mb_strtoupper($product['NOMBRE_PRODUCTO']) ?></td>
+                                                <td><?= mb_strtoupper($product['NOMBRE_CATEGORIA']) ?></td>
+                                                <td><?= mb_strtoupper($product['DESCRIPCION_PRODUCTO']) ?></td> 
+                                                <td><?= $product['COSTO_PRODUCTO'] ?></td>
+                                                <td><?= $product['PRECIO_PRODUCTO'] ?></td>
+                                                <td><?= $product['STOCK_PRODUCTO'] ?></td>
+                                                <td><?= $product['STOCK_MINIMO_PRODUCTO'] ?></td>
+                                                <td><?= $activo ?></td>
                                                 <td style="width: 15%">
-                                                    <button id="btnEditProduct" class="btn btn-primary btn-edit-product " data-original-title="Editar info producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $ROW['ID_PRODUCTO'] ?>">
+
+                                                    <button id="btnEditProduct" class="btn btn-primary btn-edit-product " data-original-title="Editar info producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>">
                                                         <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
                                                     </button>
-                                                    <button id="btnDeleteProduct" <?= $disabled ?> class="btn btn-primary btn-delete-product" data-original-title="Borrar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $ROW['ID_PRODUCTO'] ?>" >
+
+                                                    <button id="btnDeleteProduct" <?= $disabled ?> class="btn btn-primary btn-delete-product" data-original-title="Borrar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
                                                         <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
                                                     </button>
-                                                </td>
 
+                                                </td>
                                             </tr>
                                             <?php
-                                        endforeach;
-                                    endif;
+                                        }
+                                    }
                                     ?>   
                                 </tbody>
                             </table>

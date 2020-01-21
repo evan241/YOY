@@ -144,7 +144,7 @@
               <ul class="collapse" id="ui-products" data-parent="#sidebar-menu">
                 <div class="sub-menu">
                   <li class="has-sub">
-                    <a class="sidenav-item-link" href="<?=base_url()?>productos/index" >
+                    <a class="sidenav-item-link" href="<?=base_url()?>manager_products/products" >
                       <span class="nav-text">Productos</span>
                     </a>                   
                   </li>
