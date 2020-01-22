@@ -5,131 +5,56 @@
         <div class="col-sm-10 text-center">
             <br>
             <div class="panel panel-primary">
-                <form data-toggle="validator" role="form" id="formEditUser">
-                    <input type="hidden" value="<?=$user['ID_USUARIO']?>" name="RG_ID_USUARIO" id="RG_ID_USUARIO" > 
+                <form data-toggle="validator" role="form" id="formEditCategory">
+                    <input type="hidden" value="<?=$category['ID_CATEGORIA']?>" name="RG_ID_CATEGORIA" id="RG_ID_CATEGORIA" > 
                     <div class="panel-heading header-primary">
-                        <div class="panel-title text-left"><h2 class="heading-primary">Editar usuario</h2></div>
+                        <div class="panel-title text-left"><h2 class="heading-primary">Editar categoria</h2></div>
                     </div>
                     <div class="panel-body">
                         <div class="control-group text-left">
                             <div class="col-md-6">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading text-left"><label class="label-heading-default">Perfíl</label></div>
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="RG_NOMBRE_USUARIO" class="control-label text-left" >Nombre(s)</label>
-                                                <input type="text" style="text-transform:uppercase;" name="RG_NOMBRE_USUARIO" required id="RG_NOMBRE_USUARIO" class="form-control" placeholder="Nombre del usuario" value="<?=$user['NOMBRE_USUARIO']?>"
-                                                pattern="[a-zA-Z ñÑáéíóúÁÉÍÓÚàÀèÈìÌòÒùÙäÄëËïÏöÖüÜ]{2,}" 
-                                                title="No debe incluir números ni símbolos">
+                                                <input type="text" style="text-transform:uppercase;" name="RG_NOMBRE_CATEGORIA" required id="RG_NOMBRE_CATEGORIA" class="form-control" placeholder="Nombre de la categoria" value="<?=$category['NOMBRE_CATEGORIA']?>">
                                                 <div class="help-block with-errors"></div>
                                             </div>
-                                        </div>      
-                                        <div class="col-md-12">
-                                            <div class="form-group"> 
-                                                <label for="RG_APELLIDO_USUARIO" class="control-label text-left">Apellido</label>
-                                                <input type="text" style="text-transform:uppercase;" name="RG_APELLIDO_USUARIO" required id="RG_APELLIDO_USUARIO" class="form-control" placeholder="Apellidos" value="<?=$user['APELLIDO_USUARIO']?>" 
-                                                pattern="[a-zA-Z ñÑáéíóúÁÉÍÓÚàÀèÈìÌòÒùÙäÄëËïÏöÖüÜ]{2,}" 
-                                                title="No debe incluir números ni símbolos">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-12">
-                                            <div class="form-group"> 
-                                                <label for="RG_TELEFONO_USUARIO" class="control-label text-left">Telefono</label>
-                                                <input type="text" style="text-transform:uppercase;" name="RG_TELEFONO_USUARIO" id="RG_TELEFONO_USUARIO" class="form-control" placeholder="Telefono" value="<?=$user['TELEFONO_USUARIO']?>" >
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="RG_ID_ROL" class="control-label text-left"  >Rol</label>
-                                                <select name="RG_ID_ROL" id="RG_ID_ROL" class="form-control">
-                                                    <?PHP
-                                                    if ($roles) {
-                                                        foreach ($roles as $rol) {
-
-                                                            $sel='';
-
-                                                            if($rol['ID_ROL'] == $user['ID_ROL']) $sel='selected';
-                                                            ?>
-                                                            <option value="<?= $rol['ID_ROL'] ?>" <?= $sel ?>>
-                                                                <?= $rol['NOMBRE_ROL'] ?>
-                                                            </option>
-                                                            <?PHP
-                                                        }
-                                                    }
-                                                    else {
-                                                        ?>
-                                                        <option value="">No existen registros</option>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            &nbsp;
-                                        </div>
-                                        <div style="clear:both"></div>
-
-                                        <div style="clear:both"></div>
+                                        </div>  
                                     </div>
-                                    <!--FIN DE COL-MD 6 -->
-                                </div>   
+                                </div>                         
                             </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading text-left"><label class="label-heading-default">Datos de acceso</label></div>
-                                    <div class="panel-body">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="RG_EMAIL_USUARIO" class="control-label text-left"  >Email</label>
-                                                <input type="email" style="text-transform:uppercase;" name="RG_EMAIL_USUARIO" required id="RG_EMAIL_USUARIO" class="form-control" placeholder="Email" value="<?=$user['EMAIL_USUARIO']?>">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="RG_PASSWORD_USUARIO" class="control-label text-left"  >Contraseña</label>
-                                            <input type="password" name="RG_PASSWORD_USUARIO" id="RG_PASSWORD_USUARIO" required class="form-control" placeholder="password" value="<?=$user['PASSWD_USUARIO']?>">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                         
                         </div>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="btn-group pull-right">
+                    <div class="panel-footer">
+                        <div class="btn-group pull-right">
 
-                        <button type="button" class="btn pull-left" id="btnCancelEditUser">
-                            <i class="fa fa-remove" aria-hidden="true"></i> Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                            Actualizar datos
-                        </button>
+                            <button type="button" class="btn pull-left" id="btnCancelEditCategory" onclick="window.location.href='<?= base_url() ?>manager_categories/categories'">
+                                <i class="fa fa-remove" aria-hidden="true"></i> Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Aceptar
+                            </button>
+                        </div>
+                        <div style="clear:both"></div>
                     </div>
-                    <div style="clear:both"></div>
-                </div>
-            </form>
+                </form>
 
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <br>
         </div>
     </div>
-    <div class="col-sm-1">
-        <br>
-    </div>
 </div>
-</div>
-<div class="modal fade" id="modEditUser" tabindex="-1" role="dialog" aria-labelledby="modEditUser" aria-hidden="true">
+<div class="modal fade" id="modEditCategory" tabindex="-1" role="dialog" aria-labelledby="modEditCategory" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalTitleAdvice">Usuario actualizado</h4>
+                <h4 class="modal-title" id="modalTitleAdvice">Categoria actualizada</h4>
             </div>
-            <div class="modal-body text-center" id="modBodyEditUser">
+            <div class="modal-body text-center" id="modBodyEditCategory">
 
             </div>
             <div class="clear"></div>

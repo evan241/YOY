@@ -29,9 +29,9 @@ class Mmanager_products extends CI_Model {
             $this->db->where('P.ID_PRODUCTO',$product_id);
             $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
             $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');
-            $query = $this->db->get();
-            return $query->result_array()[0];
-        } catch (Exception $ex) {
+            return $this->db->get()->result_array()[0];
+        } 
+        catch (Exception $ex) {
             return $e->getMessage();
         }
     }

@@ -12,8 +12,7 @@ class Mmanager_categories extends CI_Model {
             $this->db->from('CATEGORIA');
             $this->db->where('VIGENCIA_CATEGORIA',VIGENTE);
             $this->db->order_by('ID_CATEGORIA', 'ASC');
-            $query = $this->db->get();
-            return $query->result_array();
+            return $this->db->get()->result_array();
         } catch (Exception $ex) {
             return array();
         }
@@ -22,12 +21,9 @@ class Mmanager_categories extends CI_Model {
     function getCategory($id) {
         try {
             $this->db->select("*");
-            $this->db->from('USUARIO');
-            $this->db->where('ID_USUARIO', $id);
-            $this->db->where_in('ID_ROL', array(ADMINISTRADOR, VENDEDOR));
-            $array = $this->db->get()->result_array()[0];
-            $array["PASSWD_USUARIO"] = $this->encryption->decrypt($array["PASSWD_USUARIO"]);
-            return $array;
+            $this->db->from('categoria');
+            $this->db->where('ID_CATEGORIA', $id);
+            return $this->db->get()->result_array()[0];
         } 
         catch (Exception $exception) {
             return array();
@@ -44,11 +40,11 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function disableProduct($id) {
+    function disableCategory($id) {
         try {
             $this->db->set('VIGENCIA_PRODUCTO', 0);
-            $this->db->where('ID_PRODUCTO', $id);
-            $this->db->update('producto');
+            $this->db->where('ID_CATEGORIA', $id);
+            $this->db->update('categoria');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -56,10 +52,10 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function updateProduct($product, $id) {
+    function updateCategory($category, $id) {
         try {
-            $this->db->where('ID_PRODUCTO', $id);
-            $this->db->update('producto',$product);
+            $this->db->where('ID_CATEGORIA', $id);
+            $this->db->update('categoria',$category);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {

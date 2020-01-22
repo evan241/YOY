@@ -33,7 +33,7 @@ class Manager_Categories extends CI_Controller {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
         if ($id <= 0) redirect('manager_categories/categories');
 
-        $ROW_CATEGORIA = $this->mproductos->get_category_by_id($ID_CATEGORIA);
+        $data['category'] = $this->mmanager_categories->getCategory($id);
 
         $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_edit_category', $data);
@@ -41,41 +41,32 @@ class Manager_Categories extends CI_Controller {
 
     }
 
-    public function ajax_add_category() {
+    public function ajax_add_categories() {
         if ((!$this->input->is_ajax_request()) ||
             ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
             redirect('login/salir');
 
         $category = array('NOMBRE_CATEGORIA' => trim($this->input->post("RG_NOMBRE_CATEGORIA")));
-        if ($this->mmanager_categories->addCategory($category))
-            echo 1;
+
+        if ($this->mmanager_categories->addCategory($category))echo 1;
         else echo 0;
     }
 
 
 
-    public function ajax_edit_category() {
-        if ($this->input->is_ajax_request()) {
-            if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
+    public function ajax_edit_categories() {
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
+            redirect('login/salir');
 
-                $id_categoria = $this->input->post("RG_ID_CATEGORIA");
-                $data['NOMBRE_CATEGORIA'] = trim($this->input->post("RG_NOMBRE_CATEGORIA"));
+        $category = array('NOMBRE_CATEGORIA' => trim($this->input->post("RG_NOMBRE_CATEGORIA")));
+        $id = trim($this->input->post("RG_ID_CATEGORIA"));
 
-                $AFFECTED_ROWS = $this->mproductos->edit_category_on_db($data, $id_categoria);
-                if ($AFFECTED_ROWS > NULO) {
-                    echo $AFFECTED_ROWS;
-                } else {
-                    echo -1;
-                }
-            } else {
-                redirect('login/salir');
-            }
-        } else {
-            show_404();
-        }
+        if ($this->mmanager_categories->updateCategory($category, $id))echo 1;
+        else echo 0;
     }
 
-    function ajax_disable_category() {
+    function ajax_disable_categories() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
                 $ID_CATEGORIA = $this->input->post('ID_CATEGORIA');

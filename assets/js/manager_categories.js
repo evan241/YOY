@@ -52,7 +52,7 @@ $(document).ready(function () {
         $('#modBodyAddCategory').html('');
 
         $.ajax({
-            url: raiz_url + "manager_categories/ajax_add_category",
+            url: raiz_url + "manager_categories/ajax_edit_categories",
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
@@ -69,36 +69,34 @@ $(document).ready(function () {
     });
 
 
-    // $('#formEditProduct').on('submit', function (e) {
+    $('#formEditCategory').on('submit', function (e) {
         
-    //         e.preventDefault();
-    //         $.ajax({
-    //             url: raiz_url + "manager_products/ajax_edit_products",
-    //             type: 'POST',
-    //             data: $(this).serialize(),
-    //             success: function (data) {
-    //                 if (data) {
-    //                     $('#modProduct').modal('toggle');
-    //                     $('#modBodyProduct').html('');
-    //                     $('#modBodyProduct').html('<b>! La información se actualizó correctamente ¡</b> ');
-    //                 } 
-    //                 else {
-    //                     $('#modProduct').modal('toggle');
-    //                     $('#modBodyProduct').html('');
-    //                     $('#modBodyProduct').html('<b>Hubo un error al realizar la operación...</b>');
-    //                 }
-    //             }
-    //         });
+            e.preventDefault();
+            $.ajax({
+                url: raiz_url + "manager_categories/ajax_edit_categories",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
 
-    //         $('#modProduct').on('hidden.bs.modal', function () {
-    //             window.location.href = raiz_url + "manager_products/products";
-    //         });
-    // });
+                    if (data) {
+                        $('#modEditCategory').modal('toggle');
+                        $('#modBodyEditCategory').html('');
+                        $('#modBodyEditCategory').html('<b>! La información se actualizó correctamente ¡</b> ');
+                        window.location.href = raiz_url + "manager_categories/categories";
+                    } 
+                    else {
+                        $('#modEditCategory').modal('toggle');
+                        $('#modBodyEditCategory').html('');
+                        $('#modBodyEditCategory').html('<b>Hubo un error al realizar la operación...</b>');
+                    }
+                }
+            });
+    });
 
-    // $('body').on("click", ".btn-edit-product", function (e) {
-    //     var ID_PRODUCT = $(this).attr('data-id-product');
-    //     window.location.href = raiz_url + "manager_products/form_edit_products/" + ID_PRODUCT;
-    // });
+    $('body').on("click", ".btn-edit-category", function (e) {
+        var ID_CATEGORY = $(this).attr('data-id-category');
+        window.location.href = raiz_url + "manager_categories/form_edit_categories/" + ID_CATEGORY;
+    });
 
 
     // $('body').on("click", ".btn-delete-product", function (e) {
