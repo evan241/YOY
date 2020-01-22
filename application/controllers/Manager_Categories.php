@@ -14,19 +14,19 @@ class Manager_Categories extends CI_Controller {
     public function categories() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
-        $data['ROW_CATEGORIES'] = $this->mmanager_categories->get_all_valid_categories();
+        $data['categories'] = $this->mmanager_categories->get_all_valid_categories();
 
-        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_index_category', $data);
-        $this->load->view('esqueleton/footer');
+        $this->load->view('esqueleton/footer_manager');
     }
     
     public function form_add_categories() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
-        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_add_category');
-        $this->load->view('esqueleton/footer');
+        $this->load->view('esqueleton/footer_manager');
     }
 
     public function form_edit_categories($id) {
@@ -35,31 +35,21 @@ class Manager_Categories extends CI_Controller {
 
         $ROW_CATEGORIA = $this->mproductos->get_category_by_id($ID_CATEGORIA);
 
-        $this->load->view('esqueleton/header', getActive("classPro"));
+        $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_edit_category', $data);
-        $this->load->view('esqueleton/footer');
+        $this->load->view('esqueleton/footer_manager');
 
     }
 
     public function ajax_add_category() {
-        if ($this->input->is_ajax_request()) {
-            if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-
-                $data['NOMBRE_CATEGORIA'] = trim($this->input->post("RG_NOMBRE_CATEGORIA"));
-
-                $ID_CATEGORIA = $this->mproductos->add_new_category_on_db($data);
-                if ($ID_CATEGORIA > NULO) {
-                    echo $ID_CATEGORIA;
-                } else {
-                    echo -1;
-                }
-            } else {
-                //operacion no permitida..
-                redirect('login/salir');
-            }
-        } else {
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
             redirect('login/salir');
-        }
+
+        $category = array('NOMBRE_CATEGORIA' => trim($this->input->post("RG_NOMBRE_CATEGORIA")));
+        if ($this->mmanager_categories->addCategory($category))
+            echo 1;
+        else echo 0;
     }
 
 

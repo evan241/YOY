@@ -56,14 +56,12 @@ $(document).ready(function () {
             success: function (data) {
                 if (data) {
                     $('#modBodyProduct').html('<b>! El usuario se agregó correctamente ¡</b> ');
+                    window.location.href = raiz_url + "manager_products/products";
                 } 
                 else {
                     $('#modBodyProduct').html('<b>Hubo un error al realizar la operación...</b>');
                 }
             }
-        });
-        $('#modProduct').on('hidden.bs.modal', function () {
-            window.location.href = raiz_url + "manager_products/products";
         });
     });
 

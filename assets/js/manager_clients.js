@@ -67,16 +67,14 @@ $(document).ready(function () {
                         $('#modEditUser').modal('toggle');
                         $('#modBodyEditUser').html('');
                         $('#modBodyEditUser').html('<b>! La información se actualizó correctamente ¡</b> ');
-                    } else {
+                        window.location.href = raiz_url + "manager_clients/clients";
+                    } 
+                    else {
                         $('#modEditUser').modal('toggle');
                         $('#modBodyEditUser').html('');
                         $('#modBodyEditUser').html('<b>Hubo un error al realizar la operación...</b>');
                     }
                 }
-            });
-
-            $('#modEditUser').on('hidden.bs.modal', function () {
-                window.location.href = raiz_url + "manager_clients/clients";
             });
     });
     

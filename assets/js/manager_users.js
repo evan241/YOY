@@ -55,13 +55,12 @@ $(document).ready(function () {
             success: function (data) {
                 if (data) {
                     $('#modBodyAddUser').html('<b>! El usuario se agregó correctamente ¡</b> ');
-                } else {
+                    window.location.href = raiz_url + "manager_users/users";
+                } 
+                else {
                     $('#modBodyAddUser').html('<b>Hubo un error al realizar la operación...</b>');
                 }
             }
-        });
-        $('#modAddUser').on('hidden.bs.modal', function () {
-            window.location.href = raiz_url + "manager_users/users";
         });
     });
     
