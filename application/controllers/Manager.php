@@ -19,6 +19,7 @@ class Manager extends CI_Controller {
             $data['classIni'] = 'class="dropdown active"';
             $data['classPro'] = '';
             $data['classSal'] = '';
+            $data['classNews'] = '';
             $data['classUser'] = '';
             $data['classCustom'] = '';
             $data['classCnf'] = '';
@@ -30,7 +31,6 @@ class Manager extends CI_Controller {
             redirect('login/salir');
         }
     }
-
 
     public function events() {
         if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
@@ -185,107 +185,4 @@ class Manager extends CI_Controller {
             redirect('login/salir');
         }
     }
-
-    public function news() {
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $this->load->view('esqueleton/header');
-            $DATA['ROW_NEWS'] = $this->mmanager->get_all_valid_news();
-            $this->load->view('Manager/v_manager_news', $DATA);
-            $this->load->view('esqueleton/footer');
-        } else {
-            redirect('login/salir');
-        }
-    }
-
-    public function ajax_get_news() {
-        
-    }
-
-    public function form_add_new() {
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $this->load->view('esqueleton/header');
-            //$DATA['ROW_EVENTS'] = $this->mmanager->get_all_valid_events();
-            $this->load->view('Manager/v_add_new');
-            $this->load->view('esqueleton/footer');
-        } else {
-            redirect('login/salir');
-        }
-    }
-
-    public function ajax_add_new() {
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-
-            $data_aux['TITULO_NOTICIA'] = $this->input->post('TITULO_NOTICIA');
-            $data_aux['TAGS'] = $this->input->post('TAGS');
-            $data_aux['TEXTO_NOTICIA'] = $this->input->post('TEXTO_NOTICIA');
-            $INSERT_EVENT = $this->mmanager->add_new_on_db($data_aux);
-            echo $INSERT_EVENT;
-
-            // uploading successfull, now do your further actions
-        } else {
-            redirect('login/salir');
-        }
-    }
-
-    public function ajax_disable_new() {
-        if ($this->input->is_ajax_request() && !empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $datos = $this->mmanager->disable_new_on_db($this->input->post('ID_NOTICIA'));
-            if ($datos > NULO) {
-                echo $datos;
-            } else {
-                echo -1;
-            }
-        } else {
-            redirect('login/salir');
-        }
-    }
-
-    public function form_edit_new($PARAM) {
-
-        if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO')) && $this->session->userdata('ROLLINGO_ID_ROL') == ADMINISTRADOR) {
-            $ID_NOTICIA = intval($PARAM);
-            if ($ID_NOTICIA > NULO) {
-                $ROW_USER = $this->mmanager->get_new_by_id($ID_NOTICIA);
-
-                if (count($ROW_USER) > NULO) {
-                    $this->load->view('esqueleton/header');
-                    $data['ROW_DATA_NEW'] = $ROW_USER;
-                    //$data['ROW_NEWS'] = $this->mmanager->get_all_valid_autoridades();
-                    $this->load->view('Manager/v_edit_new', $data);
-                    $this->load->view('esqueleton/footer');
-                } else {
-                    redirect('manager/index');
-                }
-            } else {
-                redirect('manager/index');
-            }
-        } else {
-            redirect('login/salir');
-        }
-    }
-
-    public function ajax_edit_new() {
-        if ($this->input->is_ajax_request()) {
-            if (!empty($this->session->userdata('ROLLINGO_ID_USUARIO'))) {
-
-                $data['ID_NOTICIA'] = $this->input->post("ID_NOTICIA");
-                //$data['DIRECCION_IMAGEN_NOTICIA'] = $this->input->post("DIRECCION_IMAGEN_NOTICIA");
-                $data['TITULO_NOTICIA'] = $this->input->post("TITULO_NOTICIA");
-                $data['TAGS'] = $this->input->post("TAGS");
-                $data['TEXTO_NOTICIA'] = $this->input->post("TEXTO_NOTICIA");
-                $AFFECTED_ROWS = $this->mmanager->edit_new_on_db($data);
-                if ($AFFECTED_ROWS > NULO) {
-                    echo $AFFECTED_ROWS;
-                } else {
-                    echo -1;
-                }
-            } else {
-                //operacion no permitida..
-                redirect('login/salir');
-            }
-        } else {
-            show_404();
-        }
-    }
-
 }

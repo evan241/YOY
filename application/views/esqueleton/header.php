@@ -76,7 +76,7 @@
                     <li><a href="<?= base_url() ?>site/about">About</a></li>
                     <!--<li><a href="<?= base_url() ?>site/provenance">Provenance</a></li>-->
                     <!--<li><a href="<?= base_url() ?>site/press">Press</a></li>-->
-                    <!--<li><a href="<?= base_url() ?>site/news">News</a></li>-->
+                    <li><a href="<?= base_url() ?>site/news">News</a></li>
                     <li><a href="<?= base_url() ?>store">Store</a></li>
                     <li><a href="<?= base_url() ?>site/contact">Contact</a></li>
                     <?php if($this->session->userdata('YOY_ID_USUARIO') > 0){ ?>

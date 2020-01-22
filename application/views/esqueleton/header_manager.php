@@ -27,14 +27,14 @@
   <!-- <link rel="stylesheet" href="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.css" /> -->
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="<?=base_url();?>assets/ADMIN/css/sleek.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link href="<?php echo base_url(); ?>assets/css/<?= explode('_', $this->router->fetch_class())[0]; ?>.css" rel="stylesheet" type="text/css"/>
+
 
 
 
   <!-- FAVICON -->
   <link href="<?=base_url();?>assets/ADMIN/img/favicon.png" rel="shortcut icon" />
-
-
   <script src="<?=base_url();?>assets/ADMIN/plugins/nprogress/nprogress.js"></script>
 </head>
 <style>
@@ -166,6 +166,12 @@
               <a class="sidenav-item-link" href="<?= base_url();?>manager_clients/clients">
                 <i class="mdi mdi-account-multiple-check"></i>
                 <span class="nav-text">Clientes</span>
+              </a> 
+            </li>
+            <li class="has-sub">
+              <a class="sidenav-item-link" href="<?= base_url();?>manager_news/news">
+                <i class="fa fa-file-alt"></i>
+                <span class="nav-text">Noticias</span>
               </a> 
             </li>
           </ul>

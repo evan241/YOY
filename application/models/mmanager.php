@@ -41,4 +41,5 @@ class Mmanager extends CI_Model {
             return $e->getMessage();
         }
     }
+
 }
