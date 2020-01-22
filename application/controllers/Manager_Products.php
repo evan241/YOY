@@ -36,7 +36,7 @@ class Manager_Products extends CI_Controller {
 
     public function form_edit_products($id) {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
-        if ($id <= 0) redirect('manager_products/products');
+        if (($id <= 0) || ($id == NUlL)) redirect('manager_products/products');
 
         $data = array(
             'product' => $this->mmanager_products->get_product_by_id($id),

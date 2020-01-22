@@ -35,7 +35,7 @@ class Manager_Users extends CI_Controller {
 
     public function form_config_edit_user($id) {
         if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('manager/index');
-        if ($id <= 0) redirect('manager_users/users');
+        if (($id <= 0) || ($id == NUlL)) redirect('manager_users/users');
 
         $data = array(
             'user' => $this->mmanager_users->get_user_by_id($id),

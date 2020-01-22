@@ -36,7 +36,7 @@ class Manager_Clients extends CI_Controller {
 
     public function form_config_edit_client($id) {
         if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('manager/index');
-        if ($id <= 0) redirect('manager_clients/clients');
+        if (($id <= 0) || ($id == NUlL)) redirect('manager_clients/clients');
 
         $data = array(
             'user' => $this->mmanager_clients->get_client_by_id($id),

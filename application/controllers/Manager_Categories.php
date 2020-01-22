@@ -31,7 +31,7 @@ class Manager_Categories extends CI_Controller {
 
     public function form_edit_categories($id) {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
-        if ($id <= 0) redirect('manager_categories/categories');
+        if (($id <= 0) || ($id == NUlL)) redirect('manager_categories/categories');
 
         $data['category'] = $this->mmanager_categories->getCategory($id);
 
