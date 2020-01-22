@@ -52,8 +52,6 @@ class Manager_Categories extends CI_Controller {
         else echo 0;
     }
 
-
-
     public function ajax_edit_categories() {
         if ((!$this->input->is_ajax_request()) ||
             ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
@@ -67,17 +65,12 @@ class Manager_Categories extends CI_Controller {
     }
 
     function ajax_disable_categories() {
-        if ($this->input->is_ajax_request()) {
-            if (!empty($this->session->userdata('ALMACEN_ID_USUARIO'))) {
-                $ID_CATEGORIA = $this->input->post('ID_CATEGORIA');
-                $AFFECTED_ROWS = $this->mproductos->disable_category_on_db($ID_CATEGORIA);
-                echo $AFFECTED_ROWS;
-            } else {
-                redirect('login/salir');
-            }
-        } else {
-            show_404();
-        }
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
+            redirect('login/salir');
+
+        if ($this->mmanager_categories->disableCategory($this->input->post('ID_CATEGORY'))) echo 1;
+        else echo 0;
     }
 
 }

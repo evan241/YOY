@@ -42,7 +42,7 @@ class Mmanager_categories extends CI_Model {
 
     function disableCategory($id) {
         try {
-            $this->db->set('VIGENCIA_PRODUCTO', 0);
+            $this->db->set('VIGENCIA_CATEGORIA', 0);
             $this->db->where('ID_CATEGORIA', $id);
             $this->db->update('categoria');
             return $this->db->affected_rows();

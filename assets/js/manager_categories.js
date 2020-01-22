@@ -99,31 +99,32 @@ $(document).ready(function () {
     });
 
 
-    // $('body').on("click", ".btn-delete-product", function (e) {
-    //     var ID_PRODUCT = $(this).attr('data-id-product');
-    //     if (ID_PRODUCT > 0) {
+    $('body').on("click", ".btn-delete-category", function (e) {
+        
+        var ID_CATEGORY = $(this).attr('data-id-category');
+        if (ID_CATEGORY > 0) {
 
-    //         $('#modProduct').modal('toggle');
-    //         $('#modBodyProduct').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
-    //         $('#btnDelProduct').on('click', function (e) {
+            $('#modDelCategory').modal('toggle');
+            $('#modBodyDelCategory').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
+            $('#btnDelCategory').on('click', function (e) {
 
-    //             $.ajax({
-    //                 url: raiz_url + "manager_products/ajax_disable_products",
-    //                 type: 'POST',
-    //                 data: 'ID_PRODUCT=' + ID_PRODUCT,
-    //                 success: function (data) {
+                $.ajax({
+                    url: raiz_url + "manager_categories/ajax_disable_categories",
+                    type: 'POST',
+                    data: 'ID_CATEGORY=' + ID_CATEGORY,
+                    success: function (data) {
 
-    //                     if (data) {
-    //                         window.location.reload();
-    //                     } else {
-    //                         $('#modBodyProduct').html('<b>Hubo un error al realizar la operación</b>');
-    //                         $('#btnDelProduct').attr("disabled", "disabled");
-    //                     }
-    //                 }
-    //             });
-    //         });
-    //     }
-    // });
+                        if (data) {
+                            window.location.reload();
+                        } else {
+                            $('#modBodyDelCategory').html('<b>Hubo un error al realizar la operación</b>');
+                            $('#btnDelCategory').attr("disabled", "disabled");
+                        }
+                    }
+                });
+            });
+        }
+    });
 
     
 });
