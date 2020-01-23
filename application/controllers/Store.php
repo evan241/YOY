@@ -10,6 +10,7 @@ class Store extends CI_Controller {
         $this->load->model("mstore");
         $this->load->model('msite');
         $this->load->model('mmanager');
+        $this->load->model('mmanager_products');
     }
 
     public function index() {
@@ -21,7 +22,7 @@ class Store extends CI_Controller {
 
     public function sales($item) {
         $this->load->view('esqueleton/header');
-        $data['product'] = $this->mmanager->get_product_by_id($item);
+        $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
         $this->load->view('store/sales', $data);
         $this->load->view('esqueleton/footer');
