@@ -42,6 +42,12 @@ define('PAGO_PAYPAL', 4);
 define('ERROR_PAYPAL', 1);
 define('SI', 1);
 define('NO', 0);
+
+define('SIN_VERIFICAR', 2);
+define('PAGO_VERIFICADO', 3);
+define('ENVIADO', 4);
+define('RECIBIDO', 5);
+
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes
@@ -100,7 +106,7 @@ define("CODE", "AES-128-CBC");
 
 define("SANDBOX_ID", "AUkS_CZjrIbTs8VBGI6DMlGYlCKPx6kD3mmai8b26yBfC6odKwPAgXm3BbMoDh8tPSWEa3lncUiZoxNC");
 define("SANDBOX_SECRET", "EHGPk70uoc_GUcT8g9UdHY4hRI4HgrYictcIEEAG5vJvP2Au48BL0GL0rBQ3TrRlJsJgljypkrdUTfqI");
-// define("SANDBOX_SECRET", "TEST PARA INVALIDAR AL VENDEDOR");
+// define("SANDBOX_SECRET", "TEST PARA PROBAR ERRORES DE VENTA");
 
 define("LIVE_ID", "AZxD_NRo_2G2F4WI3_sNF7W_dY-bx6wG_0PtLlXyroDEhQ_1OapZtRzZrHy5ojkMPiZJIOrdljr2qwgL");
 define("LIVE_SECRET", "EMd0La4XDWpSITErPfYnBnBqETDa1_0-5vy4Qo09qkMQEaitUI6YjcosCGNNteiU9WhIhYkTtud30XzK");

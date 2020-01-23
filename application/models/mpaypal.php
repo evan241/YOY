@@ -123,9 +123,9 @@ class Mpaypal extends CI_Model
         }
     }
 
-    function deleteSaleError($errorID) {
+    function deleteSaleError($ventaID) {
         try {
-            $this->db->where('paypal_error_id', $errorID);
+            $this->db->where('ID_VENTA', $ventaID);
             $this->db->delete('venta');
             return ($this->db->affected_rows() > 0);
         }

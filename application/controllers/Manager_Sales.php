@@ -8,8 +8,6 @@ class Manager_Sales extends CI_Controller {
         parent::__construct();
         $this->load->model('mmanager_sales');
         $this->load->helper('general');
-
-        $this->load->model('mpaypal');
     }
 
     public function sales() {
@@ -17,11 +15,9 @@ class Manager_Sales extends CI_Controller {
 
         $data['sales'] = $this->mmanager_sales->get_all_sales();
 
-        print_r($this->mpaypal->deleteSaleError(1));
-
-        // $this->load->view('esqueleton/header_manager', getActive("classSal"));
-        // $this->load->view('Manager/sales/v_index_venta', $data);
-        // $this->load->view('esqueleton/footer_manager');
+        $this->load->view('esqueleton/header_manager', getActive("classSal"));
+        $this->load->view('Manager/sales/v_index_venta', $data);
+        $this->load->view('esqueleton/footer_manager');
     }
 
     public function ajax_disable_sale() {
