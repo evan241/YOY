@@ -85,6 +85,18 @@ class Mpaypal extends CI_Model
         }
     }
 
+    function paypalSaleExists($order_id) {
+        try {
+            $this->db->select("*");
+            $this->db->from('venta');
+            $this->db->where("paypal_order_id", $order_id);
+            return ($this->db->get()->result_array() > 0);
+        }
+        catch (Exception $exception) {
+            return FALSE;
+        }
+    }
+
     function getSaleError($errorID) {
         try {
             $this->db->select("*");

@@ -65,39 +65,40 @@ class Paypal extends CI_Controller {
         /*  Si obtuvo la informacion, entonces guarda la orden en la base de datos,
             en la tabla de ordenes de Paypal
         */
-        if ($info != NULL) {
-            $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
-            $id = $this->mpaypal->addOrder($info["paypal_order"]);
+            if ($info != NULL) {
+                $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
+                $id = $this->mpaypal->addOrder($info["paypal_order"]);
 
             /*  Si logro guardar correctamente el registro de la orden de Paypal,
                 entonces borramos el registro de la tabla errores de Paypal
             */
-            if ($id > 0) {
-                $this->mpaypal->deleteError($orderID);
+                if ($id > 0) {
+                    $this->mpaypal->deleteError($orderID);
 
-                $data = array(
-                    'ID_USUARIO' => $ID_USUARIO,
-                    'ID_PRODUCTO' => $ID_PRODUCTO,
-                    'FECHA_VENTA' => $info['paypal_order']['create_date'],
-                    'STATUS_VENTA' => PAGO_VERIFICADO,
-                    'ID_MEDIO_PAGO' => PAGO_PAYPAL,
-                    'ID_TIPO_ENVIO' => $this->ID_TIPO_ENVIO,
-                    'paypal_order_id' => $id
-                );
+                    $data = array(
+                        'ID_USUARIO' => $ID_USUARIO,
+                        'ID_PRODUCTO' => $ID_PRODUCTO,
+                        'FECHA_VENTA' => $info['paypal_order']['create_date'],
+                        'STATUS_VENTA' => PAGO_VERIFICADO,
+                        'ID_MEDIO_PAGO' => PAGO_PAYPAL,
+                        'ID_TIPO_ENVIO' => $this->ID_TIPO_ENVIO,
+                        'paypal_order_id' => $id
+                    );
 
                 /*  Por ultimo, agregamos la venta de Paypal a la tabla de ventas, 
                     si todo sale bien, borramos el registro de la venta con error
                 */
-                if ($this->mmanager_sales->save_sale($data)) {
+                    if (!$this->mpaypal->paypalSaleExists($data['paypal_order_id'])) {
+                        $this->mmanager_sales->save_sale($data);
+                    }
                     $this->mpaypal->deleteSaleError($this->ID_SALE);
                 }
+                echo true;
+                return true;
             }
-            echo true;
-            return true;
+            else echo false;
+            return false;
         }
-        else echo false;
-        return false;
-    }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
