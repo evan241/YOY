@@ -85,6 +85,20 @@ class Mpaypal extends CI_Model
         }
     }
 
+    function getSaleError($errorID) {
+        try {
+            $this->db->select("*");
+            $this->db->from('venta');
+            $this->db->where("paypal_error_id", $errorID);
+
+            $result = $this->db->get()->row('ID_VENTA');
+            return ($result > 0) ? $result : NULL;
+        }
+        catch (Exception $exception) {
+            return NULL;
+        }
+    }
+
     function addSaleError($ID_USUARIO, $ID_PRODUCTO, $ID_TIPO_ENVIO, $errorID) {
         try {
             $sale_id = $this->getSaleError($errorID);
@@ -109,23 +123,11 @@ class Mpaypal extends CI_Model
         }
     }
 
-    function getSaleError($errorID) {
-        try {
-            $this->db->select("*");
-            $this->db->from('venta');
-            $this->db->where("paypal_error_id", $errorID);
-
-            $result = $this->db->get()->row('ID_VENTA');
-            return ($result > 0) ? $result : NULL;
-        }
-        catch (Exception $exception) {
-            return NULL;
-        }
-    }
-
     function deleteSaleError($errorID) {
         try {
-
+            $this->db->where('paypal_error_id', $errorID);
+            $this->db->delete('venta');
+            return ($this->db->affected_rows() > 0);
         }
         catch (Exception $exception) {
             return NULL;

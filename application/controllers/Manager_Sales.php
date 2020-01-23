@@ -17,7 +17,7 @@ class Manager_Sales extends CI_Controller {
 
         $data['sales'] = $this->mmanager_sales->get_all_sales();
 
-        print_r($this->mpaypal->addSaleError(1, 1, 1, 2));
+        print_r($this->mpaypal->deleteSaleError(1));
 
         // $this->load->view('esqueleton/header_manager', getActive("classSal"));
         // $this->load->view('Manager/sales/v_index_venta', $data);
