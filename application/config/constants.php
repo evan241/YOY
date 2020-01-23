@@ -39,6 +39,7 @@ define('CLIENTE', 3);
 define('NULO', 0);
 
 define('PAGO_PAYPAL', 4);
+define('ERROR_PAYPAL', 1);
 define('SI', 1);
 define('NO', 0);
 /*

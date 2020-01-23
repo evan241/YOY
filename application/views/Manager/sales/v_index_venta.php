@@ -60,7 +60,6 @@ table.dataTable tfoot th {
                      <th width="10%">Estatus</th>
                      <th  data-orderable="false" width="15%">Medio de pago</th>
                      <th width="15%">Tipo de envío</th>
-                     <th width="5%">Activa</th>
                      <th  data-orderable="false" width="10%">Actions</th>
                   </tr>
                </thead>
@@ -82,7 +81,6 @@ table.dataTable tfoot th {
                            <td><?=$ESTATUS?></td>
                            <td><?=$sale['NOMBRE_MEDIO_PAGO']?></td>
                            <td><?=$sale['NOMBRE_TIPO_ENVIO']?></td>
-                           <td><?=$ACTIVA?></td>
                            <td style="width: 15%">
                               <button id="btnViewUser" class="btn btn-primary btn-view-user "
                               data-original-title="Ver info de usuario" data-toggle="tooltip"
