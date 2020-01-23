@@ -90,7 +90,7 @@ class Mpaypal extends CI_Model
             $this->db->select("*");
             $this->db->from('venta');
             $this->db->where("paypal_order_id", $order_id);
-            return ($this->db->get()->result_array() > 0);
+            return ($this->db->count_all_results() > 0);
         }
         catch (Exception $exception) {
             return FALSE;

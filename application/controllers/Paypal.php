@@ -88,7 +88,7 @@ class Paypal extends CI_Controller {
                 /*  Por ultimo, agregamos la venta de Paypal a la tabla de ventas, 
                     si todo sale bien, borramos el registro de la venta con error
                 */
-                    if (!$this->mpaypal->paypalSaleExists($data['paypal_order_id'])) {
+                    if (!$this->mpaypal->paypalSaleExists($id)) {
                         $this->mmanager_sales->save_sale($data);
                     }
                     $this->mpaypal->deleteSaleError($this->ID_SALE);
