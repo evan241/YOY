@@ -41,5 +41,17 @@ class Mmanager extends CI_Model {
             return $e->getMessage();
         }
     }
+    
+    function get_product_by_id($id_producto) {
+        try {
+            $this->db->select("*");
+            $this->db->from('producto');
+            $this->db->where('ID_PRODUCTO', $id_producto);
+            $query = $this->db->get();
+            return $query->result_array();
+        } catch (Exception $ex) {
+            return $e->getMessage();
+        }
+    }
 
 }
