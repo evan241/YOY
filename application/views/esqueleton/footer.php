@@ -28,6 +28,7 @@
 <script src="<?= base_url() ?>assets/js/circle-progress.min.js"></script>
 <script src="<?= base_url() ?>assets/js/main.js"></script>
 <script src="<?= base_url('assets/js/login.js')?>"></script>
+<script src="<?= base_url('assets/js/index.js')?>"></script>
 <script src="<?= base_url('assets/js/registro.js')?>"></script>
 
 <script src="<?= base_url() ?>assets/js/site.js"></script>
@@ -47,6 +48,7 @@
             header.classList.remove("header-nav");
         }
     }
+
 </script>
 
 </body>
