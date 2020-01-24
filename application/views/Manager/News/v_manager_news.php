@@ -12,8 +12,10 @@
                 <div class="float-left">
                     <a href="#">Todo (<?= count($ROWS);?>)</a> | <a href="#"> Publicado (<?php
                                 $totalNewsPublic = 0;
+                                if(count($ROWS) > NULO){
                                 foreach ($ROWS as $ROW) {
                                     if ($ROW['PUBLICADO'] == 1) $totalNewsPublic += 1;
+                                }
                                 }
                                 echo $totalNewsPublic;
                             ?>)</a>
@@ -45,6 +47,7 @@
                     <?php
                         $infoClass = '';
                         $infoText = '';
+                        if(count($ROWS) > NULO){
                         foreach ($ROWS as $ROW) { ?>
                             <tr>
                                 <td><input type="checkbox" class="new-tbody-title" data-row-id="<?= $ROW['ID']; ?>"><strong><a href="<?= base_url(); ?>manager_news/edit_news/<?= $ROW['ID']; ?>"> <?= $ROW['TITULO'];?></a></strong></td>
@@ -66,6 +69,7 @@
                                 <td><?= date('d-m-Y', strtotime($ROW['CREATED_AT'])); ?></td>
                             </tr>
                         <?php }
+                        }
                     ?>
                 </tbody>
             </table>
