@@ -57,11 +57,142 @@
     </div>
 </section>
 <!-- Hero section end -->
+   
+<style>
+ 
+@media screen and (min-width: 768px)
+{ 
+    .modal{
+        text-align:center;
+    }
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+    .pRight-img{
+        padding-left: 5px;
+        padding-right: 25px;
+    }
+    .pd-right0{padding-right:0px}
+    .pick-img{ border-radius:10px;} 
+               
+   
+    .img-responsive{
+        display: block;
+        width: 75%;
+        height: auto;
+        border-radius: 10px;
+    }
 
-
+}   
+@media screen and (max-width: 768px){
+    #intro-video{top:20%;}
+    #pick-main{ height:280px !important}
+    #logo-main{display:none;}
+}
+.btn-circle{
+        border-radius:50%;
+        font-size:12px;
+        outline:0
+    } 
+    .modal-content{
+        background: transparent;
+        border: 0px;
+    }
+    .modal-footer{
+        /* background:#b3d7ff; */
+        background: #dee2e6;
+        border-radius: 10px;
+    }
+    .pick-img{
+        border-radius:10px;
+    }
+    .btn-black{
+        background: #333;
+        color:white;
+    }
+    .btn-black:hover{
+        background: #333;
+        color:#07ff5f;
+    }
+    #videox{
+        border-radius: 10px;
+        outline: 0;
+    }
+   
+   .modal-dialog {
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+   }
+   .bg-black{
+        background: #000000bd;
+   }
+</style>
 <!-- Portfilio section -->
-<div class="portfolio-section">
-    <div class="portfolio-gallery">
+<div class="container-fluid">
+    <div class="row">
+        <div  class="col-lg-6 pd-right0 thumbnail"data-image-id="1" 
+             data-toggle="modal" 
+             data-title="Mesa perritos 1" 
+             data-caption="Mesa perritos 1" 
+             data-target="#image-gallery"
+             data-image="<?= base_url() ?>assets/img/works/1.jpeg"> <br>
+            <img src="<?= base_url() ?>assets/img/works/1.jpeg" width="100%"height="545px" id="pick-main" class="pick-img"> 
+        </div>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
+        <div class="col-lg-6"><br>
+            <div class="row">            
+            <div id="img-1" class="col-lg-6 text-center thumbnail form-group" data-image-id="2" 
+             data-toggle="modal" 
+             data-title="Mesa perritos 2" 
+             data-caption="Mesa perritos 2" 
+             data-target="#image-gallery"
+             data-image="<?= base_url() ?>assets/img/works/6.jpeg">
+
+                <img src="<?= base_url() ?>assets/img/works/6.jpeg" width="90%" height="340px" class="pick-img">
+
+            </div>
+            <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
+            <div id="img-2" class="col-lg-6 text-center thumbnail form-group pRight-img"  data-image-id="3" 
+             data-toggle="modal" 
+             data-title="Mesa perritos 3" 
+             data-caption="Mesa perritos 3" 
+             data-target="#image-gallery"
+             data-image="<?= base_url() ?>assets/img/works/3.jpeg">
+
+                <img src="<?= base_url() ?>assets/img/works/3.jpeg" width="90%" height="340px" class="pick-img">
+
+            </div>    
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
+            <div id="img-3" class="col-lg-6 text-center thumbnail form-group" data-image-id="4" 
+            data-toggle="modal" 
+             data-title="Mesa perritos 4" 
+             data-caption="Mesa perritos 4" 
+             data-target="#image-gallery"
+             data-image="<?= base_url() ?>assets/img/works/4.jpeg">
+
+                <img src="<?= base_url() ?>assets/img/works/4.jpeg" width="90%" height="190px" class="pick-img">
+
+            </div>
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
+            <div id="img-4" class="col-lg-6 text-center thumbnail form-group pRight-img" data-image-id="5" 
+            data-toggle="modal" 
+            data-title="Mesa perritos 5" 
+            data-caption="Mesa perritos 5" 
+            data-target="#image-gallery"
+            data-image="<?= base_url() ?>assets/img/works/2.jpeg">
+
+                <img src="<?= base_url() ?>assets/img/works/2.jpeg" width="90%" height="190px" class="pick-img">           
+          
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!--  <div class="portfolio-gallery">
         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/1.jpg">
             <a href="<?= base_url() ?>assets/img/works/1.jpg" class="portfolio-view">Equipal Pavo</a>
         </div>
@@ -71,6 +202,8 @@
         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/2.jpg">
             <a href="<?= base_url() ?>assets/img/works/2.jpg" class="portfolio-view">Equipal Pavo</a>
         </div>
+
+
         <div class="portfolio-item --big set-bg" data-setbg="<?= base_url() ?>assets/img/works/6.jpg">
             <a href="<?= base_url() ?>assets/img/works/6.jpg" class="portfolio-view">Equipal Pavo</a>
         </div>
@@ -101,64 +234,10 @@
          <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/5.jpg">
             <a href="<?= base_url() ?>assets/img/works/5.jpg"></a>
         </div>
-    </div>
-</div>
+    </div> -->
+
 <!-- Portfilio section end -->
-
-
-<!-- About section -->
-<section class="about-secton">
-        <img src="<?= base_url() ?>assets/img/works/6.jpg" class="imgFill-index" alt="">
-    <div class="container xstyle">
-        <img src="<?= base_url() ?>assets/img/about-img.jpg" class="about-img" alt="">
-        <div class="row">
-            <div class="col-lg-7 about-text" style="padding-left:30px;">
-                <h2 class="color-black">SILLÓN ENCICLOPEDIA</h2>
-                <p>Las palabras viajan más allá del estatus y resaltan la solemne esencia<br>del corazón transmutado
-                    en arte. YOY<br><br>Obra de arte conformada por una maleta de viaje con historia
-                    y<br>enciclopedias antiguas.</p>
-                <h2 class="color-black">Material</h2>
-                <P>Estructura de Madera | Pino<br>Resina cristal para proteger asiento</P>
-                <P>Modelos | Sofía Serrano<br>Elaborado por | DK Arquitectura & Carpintería<br>Diseño | Yoyce Aranní
-                    HR</P>
-            </div>
-        </div>
-    </div>
-    <div class="about-img-box-warp">
-        <div class="container-fluid">
-            <div class="row" style="padding-left: 8rem;">
-                <div class="col-lg-7 p-0">
-                    <div class="about-img-box">
-                        <img class="w100" src="<?= base_url() ?>assets/img/image-box.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-5  d-lg-flex p-0">
-                    <div class="about-text-box-warp second-index">
-                        <div class="about-text">
-                            <h2>MESA XÓLOTL</h2>
-                            <p>El conocimiento es un universo y se transforma en poder cuando se transmite.
-                                YOY<br><br>Obra de arte en óleo sobre cristal artesanal.</p>
-                            <h2 class="black-title">Perros colimotes:</h2>
-                            <P>Los perros Tlalchichis fueron animales pequeños, gorditos, sin pelo y con las patas
-                                curvas, como se ven en los museos.<br><br>Los perros colimotes representan la
-                                transmisión del conocimiento,como se hacía en la antigüedad.<br><br>El perro viejo,
-                                representado por arrugas en su piel y una columna sobreexpuesta, le habla al oído al
-                                joven heredándole sabiduría.<br><br>El joven representa a las nuevas
-                                generaciones.<br><br>Modelo | Annie Marie Robin</P>
-                        </div>
-                    </div>
-                </div>
-
-                <video class="video" controls="false" loop="true" autoplay="true">
-                    <source src="<?= base_url() ?>assets/img/Yoy.mp4" type="video/mp4">
-                    <source src="<?= base_url() ?>assets/img/Yoy.webm" type="video/webm">
-                    <source src="<?= base_url() ?>assets/img/Yoy.ogv" type="video/ogg">
-                </video>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- About section end -->
+<br>
 
 
 <!-- Shop section  -->
@@ -220,3 +299,54 @@
     </div>
 </section>
 <!-- Newslatter section end -->
+<div class="modal fade bg-black" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <!--   <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="image-gallery-title"></h4>
+            </div> -->
+            <div class="modal-body">
+			<center>
+                <img id="image-gallery-image" class="img-responsive" src="">
+			</center>
+            </div>
+            <div class="modal-footer">
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-black btn-circle" id="show-previous-image"><i class="fas fa-chevron-left"></i></button>
+                </div>
+
+                <div class="col-md-8 text-justify" id="image-gallery-caption">
+                    This text will be overwritten by jQuery
+                </div>
+
+                <div class="col-md-2 text-right pd-right0">
+                    <button type="button" id="show-next-image" class="btn btn-black btn-circle"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bg-black" id="intro-video" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <!--   <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="image-gallery-title"></h4>
+            </div> -->
+            <div class="modal-body text-cemter">
+              
+               <!--  <video  controls autoplay="autoplay">
+                    <source src="<?= base_url('assets/img/Yoy.mp4');?>"  type="video/mp4">                               
+                </video>  -->
+             
+                <video id="videox" width="100%" autoplay controls>
+                    <source src="<?= base_url('assets/img/Yoy.mp4');?>" type="video/mp4" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </div> 
+          
+        </div>
+    </div>
+</div>
