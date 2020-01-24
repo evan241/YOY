@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
+   
 
 class Site extends CI_Controller {
 
@@ -9,7 +9,8 @@ class Site extends CI_Controller {
         parent::__construct();
         $this->load->model('mmanager_news');
     }
-
+    
+    
     public function index() {
         if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
             redirect('manager/index');
@@ -63,3 +64,17 @@ class Site extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
 }
+
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Controllername extends CI_Controller {
+
+    public function index()
+    {
+        
+    }
+
+}
+
+/* End of file Controllername.php */

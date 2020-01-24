@@ -7,6 +7,7 @@ class Manager_Sales extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('mmanager_sales');
+        $this->load->model('mpaypal');
         $this->load->helper('general');
     }
 
