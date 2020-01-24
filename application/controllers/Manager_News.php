@@ -16,7 +16,7 @@ class Manager_News extends CI_Controller {
         $data['ROWS'] = $this->mmanager_news->get_all_news();
 
         $this->load->view('esqueleton/header_manager', getActive("classNews"));
-        $this->load->view('Manager/News/v_manager_news', $data['ROWS']);
+        $this->load->view('Manager/News/v_manager_news', $data);
         $this->load->view('esqueleton/footer_manager');
     }
 
