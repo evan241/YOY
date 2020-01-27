@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Manager_Users extends CI_Controller {
+class Manager_users extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
