@@ -70,15 +70,14 @@ table.dataTable tfoot th {
                      foreach ($sales as $sale) {
 
                         $ACTIVA = $sale['ACTIVA_VENTA'] == 1 ? '<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>' : '<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
-                        $ESTATUS = "VALIDANDO PAGO";
 
                         ?>
                         <tr>
                            <td><b><?=$sale['ID_VENTA']?></b></td>
-                           <td><?=mb_strtoupper($sale['NOMBRE_USUARIO'] . " " . $sale['APELLIDO_USUARIO'])?></td>
+                           <td><?=mb_strtoupper($sale['EMAIL_USUARIO'])?></td>
                            <td><?=mb_strtoupper($sale['NOMBRE_PRODUCTO'])?></td>
                            <td><?=$sale['FECHA_VENTA'];?></td>
-                           <td><?=$ESTATUS?></td>
+                           <td><?=$sale['status']?></td>
                            <td><?=$sale['NOMBRE_MEDIO_PAGO']?></td>
                            <td><?=$sale['NOMBRE_TIPO_ENVIO']?></td>
                            <td style="width: 15%">

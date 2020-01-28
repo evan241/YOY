@@ -25,9 +25,9 @@ class Mmanager_sales extends CI_Model {
             $this->db->join('PRODUCTO AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
             $this->db->join('MEDIO_PAGO AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
             $this->db->join('TIPO_ENVIO AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
+            $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
 
             $this->db->where('V.ACTIVA_VENTA',VIGENTE);
-            $this->db->order_by('V.ID_VENTA', 'DESC');
 
             return $this->db->get()->result_array();
         } 
