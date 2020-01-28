@@ -1,10 +1,10 @@
 <style>
    table.dataTable.no-footer {
-     border-bottom: 1px solid #dee2e6;
-  }
-  
-  table.dataTable thead th,
-  table.dataTable thead td {
+    border-bottom: 1px solid #dee2e6;
+ }
+
+ table.dataTable thead th,
+ table.dataTable thead td {
 
    border-bottom-color:#dee2e6
 }
@@ -80,29 +80,41 @@ table.dataTable tfoot th {
                            <td><?=$sale['status']?></td>
                            <td><?=$sale['NOMBRE_MEDIO_PAGO']?></td>
                            <td><?=$sale['NOMBRE_TIPO_ENVIO']?></td>
+
                            <td style="width: 15%">
+
                               <button id="btnViewUser" class="btn btn-primary btn-view-user "
                               data-original-title="Ver info de usuario" data-toggle="tooltip"
                               style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
-                              <i class="fa fa-eye fa-1x" aria-hidden="true"></i>
-                           </button>
-                           <button id="btnCancelSale" class="btn btn-danger btn-cancel-sale"
-                           data-original-title="Cancelar venta" data-toggle="tooltip"
-                           style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
-                            <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i> 
-                        </button>
-                     </td>
+                              <i class="fa fa-eye fa-1x" aria-hidden="true"></i></button>
 
-                  </tr>
-                  <?php
-               }
-            }
-            ?>
-         </tbody>
-      </table>
+                              <button id="btnCancelSale" class="btn btn-danger btn-cancel-sale"
+                              data-original-title="Cancelar venta" data-toggle="tooltip"
+                              style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
+                               <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php
+
+                              if ($sale['paypal_error_id'] > 0) { ?>
+
+                                 <button id="btnFixSale" class="btn btn-danger btn-cancel-sale"
+                                 data-original-title="Arreglar venta" data-toggle="tooltip"
+                                 style=" padding: 2px 5px !important;" data-id-error="<?=$sale['paypal_error_id']?>">
+                                  <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php } ?>
+
+                           </td>
+                        </tr>
+                        <?php
+                     }
+                  }
+                  ?>
+               </tbody>
+            </table>
+         </div>
+      </div>
    </div>
-</div>
-</div>
 </div>
 </div>
 
