@@ -85,7 +85,7 @@ table.dataTable tfoot th {
 
                               <button id="btnViewUser" class="btn btn-primary btn-view-user "
                               data-original-title="Ver info de usuario" data-toggle="tooltip"
-                              style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
+                              style=" padding: 2px 5px !important;" data-id-user="<?=$sale['ID_USUARIO']?>">
                               <i class="fa fa-eye fa-1x" aria-hidden="true"></i></button>
 
                               <button id="btnCancelSale" class="btn btn-danger btn-cancel-sale"
