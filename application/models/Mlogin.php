@@ -11,7 +11,7 @@ class Mlogin extends CI_Model {
         try {
             if ($this->getPassword($data['email']) == $data['password']) {
                 $this->db->select("*");
-                $this->db->from("USUARIO");
+                $this->db->from("usuario");
                 $this->db->where("EMAIL_USUARIO", $data['email']);
                 $this->db->where("VIGENCIA_USUARIO",VIGENTE);
                 $this->db->where("CONFIRMADO_USUARIO",VIGENTE);
@@ -27,7 +27,7 @@ class Mlogin extends CI_Model {
     function getPassword($email) {
         try {
             $this->db->select('PASSWD_USUARIO');
-            $this->db->from("USUARIO");
+            $this->db->from("usuario");
             $this->db->where("EMAIL_USUARIO", $email);
             $result = $this->db->get()->row('PASSWD_USUARIO');
             if ($result) return $this->encryption->decrypt($result);
@@ -58,7 +58,7 @@ class Mlogin extends CI_Model {
             $this->db->set("CONFIRMADO_USUARIO", 1);
             $this->db->where("EMAIL_USUARIO", $email);
             $this->db->where("CODIGO_USUARIO", $code);
-            $this->db->update("USUARIO");
+            $this->db->update("usuario");
 
             return ($this->db->affected_rows() > 0) ? 3 : 4;
         }
@@ -71,7 +71,7 @@ class Mlogin extends CI_Model {
     function emailExists($email) { 
         try {
             $this->db->select('*');
-            $this->db->from("USUARIO");
+            $this->db->from("usuario");
             $this->db->where("EMAIL_USUARIO", $email);
 
             return (count($this->db->get()->result_array()) > 0);
@@ -85,7 +85,7 @@ class Mlogin extends CI_Model {
     function isVerified($email) {
         try {
             $this->db->select('*');
-            $this->db->from("USUARIO");
+            $this->db->from("usuario");
             $this->db->where("EMAIL_USUARIO", $email);
             $this->db->where("CONFIRMADO_USUARIO", 1);
 
@@ -101,7 +101,7 @@ class Mlogin extends CI_Model {
         try {
             $data = array('ULTIMO_LOGIN_USUARIO' => date('Y-m-d H:i:s'));
             $this->db->where('ID_USUARIO',$ID_USUARIO);
-            $this->db->update('USUARIO',$data);
+            $this->db->update('usuario',$data);
 
             return $this->db->affected_rows();
         } catch (Exception $ex) {

@@ -8,7 +8,7 @@ class Mmanager_sales extends CI_Model {
 
     function save_sale($data) {
         try {
-            $this->db->insert('VENTA', $data);
+            $this->db->insert('venta', $data);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -19,15 +19,15 @@ class Mmanager_sales extends CI_Model {
     function get_all_sales() {
         try {
             $this->db->select("*");
-            $this->db->from('VENTA AS V');
+            $this->db->from('venta AS V');
 
-            $this->db->join('USUARIO AS U',"U.ID_USUARIO = V.ID_USUARIO");
-            $this->db->join('PRODUCTO AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
-            $this->db->join('MEDIO_PAGO AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
-            $this->db->join('TIPO_ENVIO AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
+            $this->db->join('usuario AS U',"U.ID_USUARIO = V.ID_USUARIO");
+            $this->db->join('producto AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
+            $this->db->join('medio_pago AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
+            $this->db->join('tipo_envio AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
+            $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
 
             $this->db->where('V.ACTIVA_VENTA',VIGENTE);
-            $this->db->order_by('V.ID_VENTA', 'DESC');
 
             return $this->db->get()->result_array();
         } 
@@ -40,7 +40,7 @@ class Mmanager_sales extends CI_Model {
         try {
             $this->db->set('ACTIVA_VENTA', 0);
             $this->db->where('ID_VENTA', $id);
-            $this->db->update('VENTA');
+            $this->db->update('venta');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
