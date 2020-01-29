@@ -21,4 +21,12 @@ class Manager_shipments extends CI_Controller {
         $this->load->view('esqueleton/footer_manager');
     }
 
+
+    function ajax_disable_shipments($id) {
+        if ((!$this->input->is_ajax_request()) ||
+            ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR )) 
+            redirect('login/salir');
+
+        echo $this->mmanager_shipments->disableShipment($id);
+    }
 }

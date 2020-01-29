@@ -37,7 +37,7 @@
                                     if ($shipments) {
 
                                         foreach ($shipments as $shipment) { ?>
-                                            
+
                                             <tr>
                                                 <td><?= $shipment['NOMBRE_TIPO_ENVIO'] ?></td>
                                                 <td><?= $shipment['PRECIO_TIPO_ENVIO'] ?></td>
@@ -70,14 +70,14 @@
 
         <!-- modal eliminar -->
 
-        <div class="modal fade" id="modDelCategory" tabindex="-1" role="dialog" aria-labelledby="modCategory" aria-hidden="true">
+        <div class="modal fade" id="modDelShipment" tabindex="-1" role="dialog" aria-labelledby="modCategory" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                         <button type="button" class="close" data-dismiss="modal" style="color:#FFF;" aria-label="Close"><span style="color:#FFF;" aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="modalTitleAdvice">Borrado de categoria</h4>
+                        <h4 class="modal-title" id="modalTitleAdvice">Borrado de envio</h4>
                     </div>
-                    <div class="modal-body text-center" id="modBodyDelCategory">
+                    <div class="modal-body text-center" id="modBodyDelShipment">
                     </div>
                     <div class="clear"></div>
                     <div class="modal-footer">
@@ -85,7 +85,7 @@
                             <button class="btn btn-default" type="button"  data-dismiss="modal">
                                <i class="fa fa-times" aria-hidden="true"></i> Cancelar
                            </button>
-                           <button class="btn btn-primary" type="button"  id="btnDelCategory">
+                           <button class="btn btn-primary" type="button"  id="btnDelShipment">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>  Si, borrar
                         </button>
                     </div>       

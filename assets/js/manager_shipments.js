@@ -99,26 +99,26 @@ $(document).ready(function () {
     });
 
 
-    $('body').on("click", ".btn-delete-category", function (e) {
+    $('body').on("click", ".btn-delete-shipment", function (e) {
         
-        var ID_CATEGORY = $(this).attr('data-id-category');
-        if (ID_CATEGORY > 0) {
+        var ID_SHIPMENT = $(this).attr('data-id-shipment');
+        if (ID_SHIPMENT > 0) {
 
-            $('#modDelCategory').modal('toggle');
-            $('#modBodyDelCategory').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
-            $('#btnDelCategory').on('click', function (e) {
+            $('#modDelShipment').modal('toggle');
+            $('#modBodyDelShipment').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
+            $('#btnDelShipment').on('click', function (e) {
 
                 $.ajax({
-                    url: raiz_url + "manager_categories/ajax_disable_categories",
+                    url: raiz_url + "manager_shipments/ajax_disable_shipments/" + ID_SHIPMENT,
                     type: 'POST',
-                    data: 'ID_CATEGORY=' + ID_CATEGORY,
+                    data: $(this).serialize(),
                     success: function (data) {
 
                         if (data) {
                             window.location.reload();
                         } else {
-                            $('#modBodyDelCategory').html('<b>Hubo un error al realizar la operación</b>');
-                            $('#btnDelCategory').attr("disabled", "disabled");
+                            $('#modBodyDelShipment').html('<b>Hubo un error al realizar la operación</b>');
+                            $('#btnDelShipment').attr("disabled", "disabled");
                         }
                     }
                 });

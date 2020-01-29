@@ -44,7 +44,7 @@ class Mmanager_shipments extends CI_Model {
             $this->db->set('VIGENTE_TIPO_ENVIO', 0);
             $this->db->where('ID_TIPO_ENVIO', $id);
             $this->db->update('tipo_envio');
-            return $this->db->affected_rows();
+            return ($this->db->affected_rows() > 0) ? 1 : 0;
         }
         catch (Exception $exception) {
             return 0;
