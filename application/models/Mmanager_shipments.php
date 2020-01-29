@@ -1,28 +1,27 @@
 <?php
 
-class Mmanager_categories extends CI_Model {
+class Mmanager_shipments extends CI_Model {
 
     function __construct() {
         parent::__construct();
     }
     
-    function get_all_valid_categories(){
+    function getAll(){
         try {
             $this->db->select("*");
-            $this->db->from('categoria');
-            $this->db->where('VIGENCIA_CATEGORIA',VIGENTE);
-            $this->db->order_by('ID_CATEGORIA', 'ASC');
+            $this->db->from('tipo_envio');
+            $this->db->where('VIGENTE_TIPO_ENVIO',VIGENTE);
             return $this->db->get()->result_array();
         } catch (Exception $ex) {
             return array();
         }
     }
 
-    function getCategory($id) {
+    function getShipment($id) {
         try {
             $this->db->select("*");
-            $this->db->from('categoria');
-            $this->db->where('ID_CATEGORIA', $id);
+            $this->db->from('tipo_envio');
+            $this->db->where('ID_TIPO_ENVIO', $id);
             return $this->db->get()->result_array()[0];
         } 
         catch (Exception $exception) {
@@ -30,9 +29,9 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function addCategory($category) {
+    function addShipment($shipment) {
         try {
-            $this->db->insert('categoria', $category);
+            $this->db->insert('tipo_envio', $shipment);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -40,11 +39,11 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function disableCategory($id) {
+    function disableShipment($id) {
         try {
-            $this->db->set('VIGENCIA_CATEGORIA', 0);
-            $this->db->where('ID_CATEGORIA', $id);
-            $this->db->update('categoria');
+            $this->db->set('VIGENTE_TIPO_ENVIO', 0);
+            $this->db->where('ID_TIPO_ENVIO', $id);
+            $this->db->update('tipo_envio');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -52,10 +51,10 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function updateCategory($category, $id) {
+    function updateShipment($shipment, $id) {
         try {
-            $this->db->where('ID_CATEGORIA', $id);
-            $this->db->update('categoria',$category);
+            $this->db->where('ID_TIPO_ENVIO', $id);
+            $this->db->update('tipo_envio',$shipment);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
