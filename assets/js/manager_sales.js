@@ -51,7 +51,7 @@ $(document).ready(function () {
         if (ID_ORDER > 0) {
 
             $.ajax({
-                url: raiz_url + "manager_sales/ajax_get_user/" + ID_ORDER,
+                url: raiz_url + "manager_sales/ajax_paypal_info/" + ID_ORDER,
                 type: 'POST',
                 data: $(this).serialize(),
 
@@ -60,7 +60,6 @@ $(document).ready(function () {
                         console.log(data);
                     } 
                     else {
-                        alert("Hubo un error")
                     }
                 }
             });
