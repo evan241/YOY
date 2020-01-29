@@ -10,6 +10,31 @@ class Mpaypal extends CI_Model
         define("TABLE_PAYPAL_ERROR", "paypal_error");
     }
 
+    function orderInformation($id) {
+        try {
+            $this->db->select("*");
+            $this->db->from("paypal_order");
+            $this->db->where("paypal_order_id", $id);
+
+            return $this->db->get()->result_array()[0];
+        }
+        catch(Exception $exception) {
+            return NULL;
+        }
+    }
+
+    function clientInformation($id) {
+        try {
+            $this->db->select("*");
+            $this->db->from("paypal_client");
+            $this->db->where("paypal_client_id", $id);
+
+            return $this->db->get()->result_array()[0];
+        }
+        catch(Exception $exception) {
+            return NULL;
+        }
+    }
 
     /**
      *      Agrega errores a la tabla paypal_error, para evitar perder la informacion

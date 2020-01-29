@@ -43,6 +43,51 @@ $(document).ready(function () {
             }
         }
     });
+
+
+    $('body').on("click", ".btn-paypal-sale", function (e) {
+
+        var ID_ORDER = $(this).attr('data-id-paypal');
+        if (ID_ORDER > 0) {
+
+            $.ajax({
+                url: raiz_url + "manager_sales/ajax_paypal_info/" + ID_ORDER,
+                type: 'POST',
+                data: $(this).serialize(),
+
+                success: function (data) {
+                    if (data) {
+                        console.log(data);
+                    } 
+                    else {
+                    }
+                }
+            });
+        }
+    });
+
+
+    $('body').on("click", ".btn-view-user", function (e) {
+
+        var ID_USUARIO = $(this).attr('data-id-user');
+        if (ID_USUARIO > 0) {
+
+            $.ajax({
+                url: raiz_url + "manager_sales/ajax_get_user/" + ID_USUARIO,
+                type: 'POST',
+                data: $(this).serialize(),
+
+                success: function (data) {
+                    if (data) {
+                        console.log(data);
+                    } 
+                    else {
+                        alert("Hubo un error")
+                    }
+                }
+            });
+        }
+    });
     
 
     $('body').on("click", ".btn-cancel-sale", function (e) {
