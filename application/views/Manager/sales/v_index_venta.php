@@ -97,7 +97,7 @@ table.dataTable tfoot th {
 
                               if ($sale['paypal_error_id'] > 0) { ?>
 
-                                 <button id="btnFixSale" class="btn btn-danger btn-cancel-sale"
+                                 <button id="btnFixSale" class="btn btn-danger btn-fix-sale"
                                  data-original-title="Arreglar venta" data-toggle="tooltip"
                                  style=" padding: 2px 5px !important;" data-id-error="<?=$sale['paypal_error_id']?>">
                                   <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>

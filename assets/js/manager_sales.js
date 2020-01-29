@@ -12,16 +12,16 @@ $(document).ready(function () {
         "bProcessing": true,
         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information dt-filter"ip><"clear">',
         buttons: [
-            {
-                extend: 'csv',
-                text: 'Excel',
-                title: 'Productos',
-                exportOptions: {
-                    modifier: {
-                        page: 'current'
-                    }
+        {
+            extend: 'csv',
+            text: 'Excel',
+            title: 'Productos',
+            exportOptions: {
+                modifier: {
+                    page: 'current'
                 }
             }
+        }
         ],
         "aaSorting": [],
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
@@ -49,17 +49,17 @@ $(document).ready(function () {
 
         var ID_VENTA = $(this).attr('data-id-sale');
         if (ID_VENTA > 0) {
-            
+
             $('#modDelSale').modal('toggle');
             $('#modBodyDelSale').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
             $('#btnDelRowSale').on('click', function (e) {
-               
+
                 $.ajax({
                     url: raiz_url + "manager_sales/ajax_disable_sale",
                     type: 'POST',
                     data: 'ID_VENTA=' + ID_VENTA,
                     success: function (data) {
-                        
+
                         if (data > 0) {
                             window.location.reload();
                         } else {
@@ -68,6 +68,28 @@ $(document).ready(function () {
                         }
                     }
                 });
+            });
+        }
+    });
+
+
+    $('body').on("click", ".btn-fix-sale", function (e) {
+
+        var ID_ERROR = $(this).attr('data-id-error');
+        if (ID_ERROR > 0) {
+
+            $.ajax({
+                url: raiz_url + "paypal/requestSaleInformation/" + ID_ERROR,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
+
+                    if (data) {
+                        window.location.reload();
+                    } else {
+                        alert("Error al momento de arreglar");
+                    }
+                }
             });
         }
     });
