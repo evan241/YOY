@@ -17,10 +17,11 @@ class Manager_sales extends CI_Controller {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
         $data['sales'] = $this->mmanager_sales->get_all_sales();
+        print_r($this->mpaypal->clientInformation(1));
 
-        $this->load->view('esqueleton/header_manager', getActive("classSal"));
-        $this->load->view('Manager/sales/v_index_venta', $data);
-        $this->load->view('esqueleton/footer_manager');
+        // $this->load->view('esqueleton/header_manager', getActive("classSal"));
+        // $this->load->view('Manager/sales/v_index_venta', $data);
+        // $this->load->view('esqueleton/footer_manager');
     }
 
     public function ajax_disable_sale() {

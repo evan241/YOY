@@ -104,6 +104,17 @@ table.dataTable tfoot th {
 
                               <?php } ?>
 
+                              <?php
+
+                              if ($sale['paypal_order_id']) { ?>
+
+                                 <button id="btnPaypalSale" class="btn btn-danger btn-paypal-sale"
+                                 data-original-title="Informacion Paypal" data-toggle="tooltip"
+                                 style=" padding: 2px 5px !important;" data-id-paypal="<?=$sale['paypal_order_id']?>">
+                                  <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php } ?>
+
                            </td>
                         </tr>
                         <?php
