@@ -45,23 +45,23 @@ $(document).ready(function () {
     });
     
 
-    $('#formRecordCategory').on('submit', function (e) {
+    $('#formRecordShipment').on('submit', function (e) {
         e.preventDefault();
 
-        $('#modAddCategory').modal('toggle');
-        $('#modBodyAddCategory').html('');
+        $('#modAddShipment').modal('toggle');
+        $('#modBodyAddShipment').html('');
 
         $.ajax({
-            url: raiz_url + "manager_categories/ajax_edit_categories",
+            url: raiz_url + "manager_shipments/ajax_add_shipments",
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
                 if (data) {
-                    $('#modBodyAddCategory').html('<b>La categoria se agregó correctamente</b> ');
-                    window.location.href = raiz_url + "manager_categories/categories";
+                    $('#modBodyAddShipment').html('<b>La categoria se agregó correctamente</b> ');
+                    // window.location.href = raiz_url + "manager_shipments/shipments";
                 } 
                 else {
-                    $('#modBodyAddCategory').html('<b>Hubo un error al realizar la operación</b>');
+                    $('#modBodyAddShipment').html('<b>Hubo un error al realizar la operación</b>');
                 }
             }
         });
@@ -100,7 +100,7 @@ $(document).ready(function () {
 
 
     $('body').on("click", ".btn-delete-shipment", function (e) {
-        
+
         var ID_SHIPMENT = $(this).attr('data-id-shipment');
         if (ID_SHIPMENT > 0) {
 

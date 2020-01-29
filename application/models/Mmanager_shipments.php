@@ -32,7 +32,7 @@ class Mmanager_shipments extends CI_Model {
     function addShipment($shipment) {
         try {
             $this->db->insert('tipo_envio', $shipment);
-            return $this->db->insert_id();
+            return 1;
         }
         catch (Exception $exception) {
             return 0;

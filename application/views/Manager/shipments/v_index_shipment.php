@@ -7,7 +7,7 @@
                     <div class="panel-title text-left"><h2 class="heading-primary">Tipos de Envio</h2></div>
                 </div>
                 <div class="panel-body">
-                    <a href="<?= base_url() ?>manager_categories/form_add_categories" class="btn btn-default pull-right" id="btnAddUser">
+                    <a href="<?= base_url() ?>manager_shipments/form_add_shipments" class="btn btn-default pull-right" id="btnAddUser">
                         <i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo tipo
                     </a>
                     <div style="clear:both"><br></div>
