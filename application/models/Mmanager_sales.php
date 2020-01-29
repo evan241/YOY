@@ -36,6 +36,18 @@ class Mmanager_sales extends CI_Model {
         }
     }
 
+    function changeStatus($saleID, $statusID) {
+        try {
+            $this->db->set('STATUS_VENTA', $statusID);
+            $this->db->where('ID_VENTA', $saleID);
+            $this->db->update('venta');
+            return ($this->db->affected_rows() > 0);
+        }
+        catch (Exception $exception) {
+            return false;
+        }
+    }
+
     function disable_sale_on_db($id) {
         try {
             $this->db->set('ACTIVA_VENTA', 0);
