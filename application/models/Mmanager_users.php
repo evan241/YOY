@@ -9,8 +9,8 @@ class Mmanager_users extends CI_Model {
     function get_all_valid_users() {
         try {
             $this->db->select("*");
-            $this->db->from('USUARIO AS U');
-            $this->db->join('ROL AS R', 'U.ID_ROL=R.ID_ROL');
+            $this->db->from('usuario AS U');
+            $this->db->join('rol AS R', 'U.ID_ROL=R.ID_ROL');
             $this->db->where('VIGENCIA_USUARIO', VIGENTE);
             $this->db->where_in('U.ID_ROL', array(ADMINISTRADOR, VENDEDOR));
             return $this->db->get()->result_array();
@@ -22,7 +22,7 @@ class Mmanager_users extends CI_Model {
 
     function add_new_user_on_db($user) {
         try {
-            $this->db->insert('USUARIO', $user);
+            $this->db->insert('usuario', $user);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -33,7 +33,7 @@ class Mmanager_users extends CI_Model {
     function get_user_by_id($id) {
         try {
             $this->db->select("*");
-            $this->db->from('USUARIO');
+            $this->db->from('usuario');
             $this->db->where('ID_USUARIO', $id);
             $this->db->where_in('ID_ROL', array(ADMINISTRADOR, VENDEDOR));
             $array = $this->db->get()->result_array()[0];
@@ -48,7 +48,7 @@ class Mmanager_users extends CI_Model {
     function edit_user_on_db($user,$id) {
         try {
             $this->db->where('ID_USUARIO', $id);
-            $this->db->update('USUARIO',$user);
+            $this->db->update('usuario',$user);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -60,7 +60,7 @@ class Mmanager_users extends CI_Model {
         try {
             $this->db->set('VIGENCIA_USUARIO', 0);
             $this->db->where('ID_USUARIO', $id);
-            $this->db->update('USUARIO');
+            $this->db->update('usuario');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {

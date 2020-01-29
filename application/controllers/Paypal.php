@@ -1,10 +1,10 @@
-kb<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 //  FAVOR DE NO TOCAR ESTO O SE CAE TODO
 
-require '/vendor/autoload.php';
+require './vendor/autoload.php';
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
 use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use PayPalCheckoutSdk\Orders\OrdersGetRequest;

@@ -9,8 +9,8 @@ class Mmanager_clients extends CI_Model {
     function get_all_valid_clients() {
         try {
             $this->db->select("*");
-            $this->db->from('USUARIO AS U');
-            $this->db->join('ROL AS R', 'U.ID_ROL=R.ID_ROL');
+            $this->db->from('usuario AS U');
+            $this->db->join('rol AS R', 'U.ID_ROL=R.ID_ROL');
             $this->db->where('VIGENCIA_USUARIO', VIGENTE);
             $this->db->where_in('U.ID_ROL', CLIENTE);
             return $this->db->get()->result_array();
@@ -22,7 +22,7 @@ class Mmanager_clients extends CI_Model {
 
     function add_new_client_on_db($client) {
         try {
-            $this->db->insert('USUARIO', $client);
+            $this->db->insert('usuario', $client);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -33,9 +33,8 @@ class Mmanager_clients extends CI_Model {
     function get_client_by_id($id) {
         try {
             $this->db->select("*");
-            $this->db->from('USUARIO');
+            $this->db->from('usuario');
             $this->db->where('ID_USUARIO', $id);
-            $this->db->where('ID_ROL', CLIENTE);
             $array = $this->db->get()->result_array()[0];
             $array["PASSWD_USUARIO"] = $this->encryption->decrypt($array["PASSWD_USUARIO"]);
             return $array;
@@ -48,7 +47,7 @@ class Mmanager_clients extends CI_Model {
     function edit_client_on_db($client,$id) {
         try {
             $this->db->where('ID_USUARIO', $id);
-            $this->db->update('USUARIO',$client);
+            $this->db->update('usuario',$client);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -60,7 +59,7 @@ class Mmanager_clients extends CI_Model {
         try {
             $this->db->set('VIGENCIA_USUARIO', 0);
             $this->db->where('ID_USUARIO', $id);
-            $this->db->update('USUARIO');
+            $this->db->update('usuario');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {

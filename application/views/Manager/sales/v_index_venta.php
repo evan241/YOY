@@ -1,10 +1,10 @@
 <style>
    table.dataTable.no-footer {
-     border-bottom: 1px solid #dee2e6;
-  }
-  
-  table.dataTable thead th,
-  table.dataTable thead td {
+    border-bottom: 1px solid #dee2e6;
+ }
+
+ table.dataTable thead th,
+ table.dataTable thead td {
 
    border-bottom-color:#dee2e6
 }
@@ -70,40 +70,62 @@ table.dataTable tfoot th {
                      foreach ($sales as $sale) {
 
                         $ACTIVA = $sale['ACTIVA_VENTA'] == 1 ? '<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>' : '<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
-                        $ESTATUS = "VALIDANDO PAGO";
 
                         ?>
                         <tr>
                            <td><b><?=$sale['ID_VENTA']?></b></td>
-                           <td><?=mb_strtoupper($sale['NOMBRE_USUARIO'] . " " . $sale['APELLIDO_USUARIO'])?></td>
+                           <td><?=mb_strtoupper($sale['EMAIL_USUARIO'])?></td>
                            <td><?=mb_strtoupper($sale['NOMBRE_PRODUCTO'])?></td>
                            <td><?=$sale['FECHA_VENTA'];?></td>
-                           <td><?=$ESTATUS?></td>
+                           <td><?=$sale['status']?></td>
                            <td><?=$sale['NOMBRE_MEDIO_PAGO']?></td>
                            <td><?=$sale['NOMBRE_TIPO_ENVIO']?></td>
+
                            <td style="width: 15%">
+
                               <button id="btnViewUser" class="btn btn-primary btn-view-user "
                               data-original-title="Ver info de usuario" data-toggle="tooltip"
-                              style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
-                              <i class="fa fa-eye fa-1x" aria-hidden="true"></i>
-                           </button>
-                           <button id="btnCancelSale" class="btn btn-danger btn-cancel-sale"
-                           data-original-title="Cancelar venta" data-toggle="tooltip"
-                           style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
-                            <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i> 
-                        </button>
-                     </td>
+                              style=" padding: 2px 5px !important;" data-id-user="<?=$sale['ID_USUARIO']?>">
+                              <i class="fa fa-eye fa-1x" aria-hidden="true"></i></button>
 
-                  </tr>
-                  <?php
-               }
-            }
-            ?>
-         </tbody>
-      </table>
+                              <button id="btnCancelSale" class="btn btn-danger btn-cancel-sale"
+                              data-original-title="Cancelar venta" data-toggle="tooltip"
+                              style=" padding: 2px 5px !important;" data-id-sale="<?=$sale['ID_VENTA']?>">
+                               <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php
+
+                              if ($sale['paypal_error_id'] > 0) { ?>
+
+                                 <button id="btnFixSale" class="btn btn-danger btn-fix-sale"
+                                 data-original-title="Arreglar venta" data-toggle="tooltip"
+                                 style=" padding: 2px 5px !important;" data-id-error="<?=$sale['paypal_error_id']?>">
+                                  <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php } ?>
+
+                              <?php
+
+                              if ($sale['paypal_order_id']) { ?>
+
+                                 <button id="btnPaypalSale" class="btn btn-danger btn-paypal-sale"
+                                 data-original-title="Informacion Paypal" data-toggle="tooltip"
+                                 style=" padding: 2px 5px !important;" data-id-paypal="<?=$sale['paypal_order_id']?>">
+                                  <i class="fa fa-times-circle fa-1x" aria-hidden="true"></i></button>
+
+                              <?php } ?>
+
+                           </td>
+                        </tr>
+                        <?php
+                     }
+                  }
+                  ?>
+               </tbody>
+            </table>
+         </div>
+      </div>
    </div>
-</div>
-</div>
 </div>
 </div>
 
