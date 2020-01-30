@@ -1,28 +1,27 @@
 <?php
 
-class Mmanager_categories extends CI_Model {
+class Mmanager_payments extends CI_Model {
 
     function __construct() {
         parent::__construct();
     }
     
-    function get_all_valid_categories(){
+    function getAll(){
         try {
             $this->db->select("*");
-            $this->db->from('categoria');
-            $this->db->where('VIGENCIA_CATEGORIA',VIGENTE);
-            $this->db->order_by('ID_CATEGORIA', 'ASC');
+            $this->db->from('medio_pago');
+            $this->db->where('VIGENTE_MEDIO_PAGO',VIGENTE);
             return $this->db->get()->result_array();
         } catch (Exception $ex) {
             return array();
         }
     }
 
-    function getCategory($id) {
+    function get($id) {
         try {
             $this->db->select("*");
-            $this->db->from('categoria');
-            $this->db->where('ID_CATEGORIA', $id);
+            $this->db->from('medio_pago');
+            $this->db->where('ID_MEDIO_PAGO', $id);
             return $this->db->get()->result_array()[0];
         } 
         catch (Exception $exception) {
@@ -30,9 +29,9 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function addCategory($category) {
+    function add($payment) {
         try {
-            $this->db->insert('categoria', $category);
+            $this->db->insert('medio_pago', $payment);
             return $this->db->insert_id();
         }
         catch (Exception $exception) {
@@ -40,11 +39,11 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function disableCategory($id) {
+    function disable($id) {
         try {
-            $this->db->set('VIGENCIA_CATEGORIA', 0);
-            $this->db->where('ID_CATEGORIA', $id);
-            $this->db->update('categoria');
+            $this->db->set('VIGENTE_MEDIO_PAGO', 0);
+            $this->db->where('ID_MEDIO_PAGO', $id);
+            $this->db->update('medio_pago');
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
@@ -52,10 +51,10 @@ class Mmanager_categories extends CI_Model {
         }
     }
 
-    function updateCategory($category, $id) {
+    function update($payment, $id) {
         try {
-            $this->db->where('ID_CATEGORIA', $id);
-            $this->db->update('categoria',$category);
+            $this->db->where('ID_MEDIO_PAGO', $id);
+            $this->db->update('medio_pago',$payment);
             return $this->db->affected_rows();
         }
         catch (Exception $exception) {
