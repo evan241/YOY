@@ -22,7 +22,7 @@ class Mmanager extends CI_Model {
     function get_all_valid_autoridades() {
         try {
             $this->db->select("*");
-            $this->db->from('ROL');
+            $this->db->from('rol');
             $query = $this->db->get();
             return $query->result_array();
         } catch (Exception $ex) {
@@ -33,7 +33,7 @@ class Mmanager extends CI_Model {
     function get_autoridad_by_id($id_autoridad) {
         try {
             $this->db->select("*");
-            $this->db->from('ROL');
+            $this->db->from('rol');
             $this->db->where('ID_ROL', $id_autoridad);
             $query = $this->db->get();
             return $query->result_array();

@@ -91,6 +91,9 @@ $(document).ready(function () {
                     }
                 }
             });
+            $('#modEditCategory').on('hidden.bs.modal', function () {
+                window.location.href = raiz_url + "manager_categories/categories";
+            });
     });
 
     $('body').on("click", ".btn-edit-category", function (e) {

@@ -12,7 +12,7 @@ class Manager_sales extends CI_Controller {
         $this->load->model('mpaypal');
         $this->load->helper('general');
     }
-
+    
     public function sales() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
