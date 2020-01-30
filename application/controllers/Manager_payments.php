@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Manager_categories extends CI_Controller {
+class Manager_payments extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -21,11 +21,11 @@ class Manager_categories extends CI_Controller {
         $this->load->view('esqueleton/footer_manager');
     }
 
-    function ajax_disable_categories() {
+    function ajax_toggle_payments() {
         if ((!$this->input->is_ajax_request()) || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR )) 
             redirect('login/salir');
 
-        echo $this->mmanager_payments->disable($this->input->post('ID_CATEGORY'));
+        echo $this->mmanager_payments->toggle($this->input->post('ID_PAYMENT'));
     }
 
 }

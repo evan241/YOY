@@ -7,9 +7,6 @@
                     <div class="panel-title text-left"><h2 class="heading-primary">Medios de Pago</h2></div>
                 </div>
                 <div class="panel-body">
-                    <a href="<?= base_url() ?>manager_payments/form_add_payments" class="btn btn-default pull-right" id="btnAddUser">
-                        <i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo medio de pago
-                    </a>
                     <div style="clear:both"><br></div>
                     <div class="control-group text-left">
                         <div class="table-responsive">
@@ -20,8 +17,8 @@
                                         <th></th>
                                     </tr>
                                     <tr>
-                                        <th style="width: 20%">Categoria</th>
-                                        <th style="text-align: center; width: 10%;">Acciones</th>
+                                        <th style="width: 20%">Tipo</th>
+                                        <th style="text-align: center; width: 10%;">Activar / Desactivar</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -31,18 +28,19 @@
                                 </tfoot>
                                 <tbody style="font-size:12px;">
                                     <?php
-                                    if ($categories) {
-                                        foreach ($categories as $category) {
+                                    if ($payments) {
+                                        foreach ($payments as $payment) {
+
+                                            $tooltip = ($payment['ACTIVO_MEDIO_PAGO'] == 0) ? 'Activar' : 'Desactivar';
                                             ?>
                                             <tr>
-                                                <td><?= $category['NOMBRE_CATEGORIA'] ?></td>
+                                                <td><?= $payment['NOMBRE_MEDIO_PAGO'] ?></td>
                                                 <td>
-                                                    <button id="btnEditCategory" class="btn btn-primary btn-edit-category" data-original-title="Editar info categoria" data-toggle="tooltip" data-id-category="<?= $category['ID_CATEGORIA']?>" style=" padding: 2px 5px !important;">
-                                                        <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button id="btnDeleteCategory" class="btn btn-primary btn-delete-category" data-original-title="Borrar categoria" data-toggle="tooltip" data-id-category="<?= $category['ID_CATEGORIA']?>" style=" padding: 2px 5px !important;">
-                                                        <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
-                                                    </button>
+
+                                                    <button id="btnTogglePayment" class="btn btn-primary btn-toggle-payment" data-original-title="<?= $tooltip ?>" 
+                                                    data-toggle="tooltip" data-id-payment="<?= $payment['ID_MEDIO_PAGO']?>" style=" padding: 2px 5px !important;">
+                                                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i></button>
+
                                                 </td>
                                             </tr>
                                             <?php
@@ -60,7 +58,7 @@
             </div>
         </div>
     </div>
-    
+
 </div><br><br><br><br><br><br><br><br><br>
 
 <!-- modal eliminar -->
@@ -79,12 +77,12 @@
                 <div class="btn-group ">
                     <button class="btn btn-default" type="button"  data-dismiss="modal">
                        <i class="fa fa-times" aria-hidden="true"></i> Cancelar
-                    </button>
-                    <button class="btn btn-primary" type="button"  id="btnDelCategory">
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>  Si, borrar
-                    </button>
-                </div>       
-            </div>
+                   </button>
+                   <button class="btn btn-primary" type="button"  id="btnDelCategory">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>  Si, borrar
+                </button>
+            </div>       
         </div>
     </div>
+</div>
 </div> 
