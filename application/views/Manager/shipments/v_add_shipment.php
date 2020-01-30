@@ -62,7 +62,7 @@
                     <div class="modal-content">
                         <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="modalTitleAdvice">Categoria dada de alta</h4>
+                            <h4 class="modal-title" id="modalTitleAdvice">Tipo de envio dado de alta</h4>
                         </div>
                         <div class="modal-body text-center" id="modBodyAddShipment">
 

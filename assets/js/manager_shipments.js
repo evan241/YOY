@@ -43,60 +43,57 @@ $(document).ready(function () {
             }
         }
     });
-    
 
     $('#formRecordShipment').on('submit', function (e) {
-        e.preventDefault();
-
-        $('#modAddShipment').modal('toggle');
-        $('#modBodyAddShipment').html('');
-
-        $.ajax({
-            url: raiz_url + "manager_shipments/ajax_add_shipments",
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (data) {
-                if (data) {
-                    $('#modBodyAddShipment').html('<b>La categoria se agregó correctamente</b> ');
-                    // window.location.href = raiz_url + "manager_shipments/shipments";
-                } 
-                else {
-                    $('#modBodyAddShipment').html('<b>Hubo un error al realizar la operación</b>');
-                }
-            }
-        });
-
-    });
-
-
-    $('#formEditCategory').on('submit', function (e) {
-        
+        if (!e.isDefaultPrevented()) {
             e.preventDefault();
+
             $.ajax({
-                url: raiz_url + "manager_categories/ajax_edit_categories",
+                url: raiz_url + "manager_shipments/ajax_add_shipments",
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (data) {
 
-                    if (data) {
-                        $('#modEditCategory').modal('toggle');
-                        $('#modBodyEditCategory').html('');
-                        $('#modBodyEditCategory').html('<b>! La información se actualizó correctamente ¡</b> ');
-                        window.location.href = raiz_url + "manager_categories/categories";
+                    if (data) {         
+                        window.location.href = raiz_url + "manager_shipments/shipments";
                     } 
                     else {
-                        $('#modEditCategory').modal('toggle');
-                        $('#modBodyEditCategory').html('');
-                        $('#modBodyEditCategory').html('<b>Hubo un error al realizar la operación...</b>');
+                        
                     }
                 }
             });
+        }
     });
 
-    $('body').on("click", ".btn-edit-category", function (e) {
-        var ID_CATEGORY = $(this).attr('data-id-category');
-        window.location.href = raiz_url + "manager_categories/form_edit_categories/" + ID_CATEGORY;
-    });
+
+    // $('#formEditCategory').on('submit', function (e) {
+
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: raiz_url + "manager_categories/ajax_edit_categories",
+    //         type: 'POST',
+    //         data: $(this).serialize(),
+    //         success: function (data) {
+
+    //             if (data) {
+    //                 $('#modEditCategory').modal('toggle');
+    //                 $('#modBodyEditCategory').html('');
+    //                 $('#modBodyEditCategory').html('<b>! La información se actualizó correctamente ¡</b> ');
+    //                 window.location.href = raiz_url + "manager_categories/categories";
+    //             } 
+    //             else {
+    //                 $('#modEditCategory').modal('toggle');
+    //                 $('#modBodyEditCategory').html('');
+    //                 $('#modBodyEditCategory').html('<b>Hubo un error al realizar la operación...</b>');
+    //             }
+    //         }
+    //     });
+    // });
+
+    // $('body').on("click", ".btn-edit-category", function (e) {
+    //     var ID_CATEGORY = $(this).attr('data-id-category');
+    //     window.location.href = raiz_url + "manager_categories/form_edit_categories/" + ID_CATEGORY;
+    // });
 
 
     $('body').on("click", ".btn-delete-shipment", function (e) {

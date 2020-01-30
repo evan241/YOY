@@ -38,7 +38,8 @@ class Manager_shipments extends CI_Controller {
             'PRECIO_TIPO_ENVIO' => trim($this->input->post("RG_PRECIO_ENVIO"))
         );
 
-        echo $this->mmanager_shipments->addShipment($shipment);
+        $this->mmanager_shipments->addShipment($shipment);
+        echo "saved";
     }
 
     function ajax_disable_shipments($id) {
