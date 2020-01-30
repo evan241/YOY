@@ -4,11 +4,11 @@
             <br>
             <div class="panel panel-primary">
                 <div class="panel-heading header-primary">
-                    <div class="panel-title text-left"><h2 class="heading-primary">Categorias</h2></div>
+                    <div class="panel-title text-left"><h2 class="heading-primary">Medios de Pago</h2></div>
                 </div>
                 <div class="panel-body">
-                    <a href="<?= base_url() ?>manager_categories/form_add_categories" class="btn btn-default pull-right" id="btnAddUser">
-                        <i class="fa fa-user-plus" aria-hidden="true"></i> Nueva categoria
+                    <a href="<?= base_url() ?>manager_payments/form_add_payments" class="btn btn-default pull-right" id="btnAddUser">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo medio de pago
                     </a>
                     <div style="clear:both"><br></div>
                     <div class="control-group text-left">
