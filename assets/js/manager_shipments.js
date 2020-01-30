@@ -58,7 +58,7 @@ $(document).ready(function () {
                         window.location.href = raiz_url + "manager_shipments/shipments";
                     } 
                     else {
-                        
+
                     }
                 }
             });
@@ -66,34 +66,37 @@ $(document).ready(function () {
     });
 
 
-    // $('#formEditCategory').on('submit', function (e) {
+    $('#formEditShipment').on('submit', function (e) {
 
-    //     e.preventDefault();
-    //     $.ajax({
-    //         url: raiz_url + "manager_categories/ajax_edit_categories",
-    //         type: 'POST',
-    //         data: $(this).serialize(),
-    //         success: function (data) {
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: raiz_url + "manager_shipments/ajax_edit_shipments",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
 
-    //             if (data) {
-    //                 $('#modEditCategory').modal('toggle');
-    //                 $('#modBodyEditCategory').html('');
-    //                 $('#modBodyEditCategory').html('<b>! La información se actualizó correctamente ¡</b> ');
-    //                 window.location.href = raiz_url + "manager_categories/categories";
-    //             } 
-    //             else {
-    //                 $('#modEditCategory').modal('toggle');
-    //                 $('#modBodyEditCategory').html('');
-    //                 $('#modBodyEditCategory').html('<b>Hubo un error al realizar la operación...</b>');
-    //             }
-    //         }
-    //     });
-    // });
+                    if (data) {
+                        $('#modEditShipment').modal('toggle');
+                        $('#modBodyEditShipment').html('');
+                        $('#modBodyEditShipment').html('<b>! La información se actualizó correctamente ¡</b> ');
+                        window.location.href = raiz_url + "manager_shipments/shipments";
+                    } 
+                    else {
+                        $('#modEditShipment').modal('toggle');
+                        $('#modBodyEditShipment').html('');
+                        $('#modBodyEditShipment').html('<b>Hubo un error al realizar la operación...</b>');
+                    }
+                }
+            });
+        }
+    });
 
-    // $('body').on("click", ".btn-edit-category", function (e) {
-    //     var ID_CATEGORY = $(this).attr('data-id-category');
-    //     window.location.href = raiz_url + "manager_categories/form_edit_categories/" + ID_CATEGORY;
-    // });
+    $('body').on("click", ".btn-edit-shipment", function (e) {
+        var ID_SHIPMENT = $(this).attr('data-id-shipment');
+        window.location.href = raiz_url + "manager_shipments/form_edit_shipments/" + ID_SHIPMENT;
+    });
 
 
     $('body').on("click", ".btn-delete-shipment", function (e) {

@@ -29,6 +29,17 @@ class Manager_shipments extends CI_Controller {
         $this->load->view('esqueleton/footer_manager');
     }
 
+    public function form_edit_shipments($id) {
+        if ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR) redirect('login/salir');
+        if (($id <= 0) || ($id == NUlL)) redirect('Manager_shipments/shipments');
+
+        $data['shipment'] = $this->mmanager_shipments->getShipment($id);
+
+        $this->load->view('esqueleton/header_manager');
+        $this->load->view('Manager/shipments/v_edit_shipment', $data);
+        $this->load->view('esqueleton/footer_manager');
+    }
+
     public function ajax_add_shipments() {
         if ((!$this->input->is_ajax_request()) || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR )) 
             redirect('login/salir');
@@ -38,8 +49,20 @@ class Manager_shipments extends CI_Controller {
             'PRECIO_TIPO_ENVIO' => trim($this->input->post("RG_PRECIO_ENVIO"))
         );
 
-        $this->mmanager_shipments->addShipment($shipment);
-        echo "saved";
+        echo $this->mmanager_shipments->addShipment($shipment);
+    }
+
+    public function ajax_edit_shipments() {
+        if ((!$this->input->is_ajax_request()) || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR )) 
+            redirect('login/salir');
+
+        $shipment = array(
+            'NOMBRE_TIPO_ENVIO' => trim($this->input->post("RG_NOMBRE_ENVIO")),
+            'PRECIO_TIPO_ENVIO' => trim($this->input->post("RG_PRECIO_ENVIO"))
+        );
+        $id = trim($this->input->post("RG_ID_TIPO_ENVIO"));
+
+        echo $this->mmanager_shipments->updateShipment($shipment, $id);
     }
 
     function ajax_disable_shipments($id) {
