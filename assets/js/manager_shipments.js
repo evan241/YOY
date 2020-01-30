@@ -70,7 +70,7 @@ $(document).ready(function () {
 
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
-            
+
             $.ajax({
                 url: raiz_url + "manager_shipments/ajax_edit_shipments",
                 type: 'POST',
@@ -81,7 +81,6 @@ $(document).ready(function () {
                         $('#modEditShipment').modal('toggle');
                         $('#modBodyEditShipment').html('');
                         $('#modBodyEditShipment').html('<b>! La información se actualizó correctamente ¡</b> ');
-                        window.location.href = raiz_url + "manager_shipments/shipments";
                     } 
                     else {
                         $('#modEditShipment').modal('toggle');
@@ -89,6 +88,9 @@ $(document).ready(function () {
                         $('#modBodyEditShipment').html('<b>Hubo un error al realizar la operación...</b>');
                     }
                 }
+            });
+            $('#modEditShipment').on('hidden.bs.modal', function () {
+                window.location.href = raiz_url + "manager_shipments/shipments";
             });
         }
     });
