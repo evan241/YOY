@@ -44,22 +44,21 @@ $(document).ready(function () {
         }
     });
 
-
-    $('body').on("click", ".btn-paypal-sale", function (e) {
-
-        var ID_ORDER = $(this).attr('data-id-paypal');
-        if (ID_ORDER > 0) {
+    $('#formRecordShipment').on('submit', function (e) {
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
 
             $.ajax({
-                url: raiz_url + "manager_sales/ajax_paypal_info/" + ID_ORDER,
+                url: raiz_url + "manager_shipments/ajax_add_shipments",
                 type: 'POST',
                 data: $(this).serialize(),
-
                 success: function (data) {
-                    if (data) {
-                        console.log(data);
+
+                    if (data) {         
+                        window.location.href = raiz_url + "manager_shipments/shipments";
                     } 
                     else {
+
                     }
                 }
             });
@@ -67,49 +66,61 @@ $(document).ready(function () {
     });
 
 
-    $('body').on("click", ".btn-view-user", function (e) {
+    $('#formEditShipment').on('submit', function (e) {
 
-        var ID_USUARIO = $(this).attr('data-id-user');
-        if (ID_USUARIO > 0) {
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
 
             $.ajax({
-                url: raiz_url + "manager_sales/ajax_get_user/" + ID_USUARIO,
+                url: raiz_url + "manager_shipments/ajax_edit_shipments",
                 type: 'POST',
                 data: $(this).serialize(),
-
                 success: function (data) {
+
                     if (data) {
-                        console.log(data);
+                        $('#modEditShipment').modal('toggle');
+                        $('#modBodyEditShipment').html('');
+                        $('#modBodyEditShipment').html('<b>! La información se actualizó correctamente ¡</b> ');
                     } 
                     else {
-                        alert("Hubo un error")
+                        $('#modEditShipment').modal('toggle');
+                        $('#modBodyEditShipment').html('');
+                        $('#modBodyEditShipment').html('<b>Hubo un error al realizar la operación...</b>');
                     }
                 }
             });
+            $('#modEditShipment').on('hidden.bs.modal', function () {
+                window.location.href = raiz_url + "manager_shipments/shipments";
+            });
         }
     });
-    
 
-    $('body').on("click", ".btn-cancel-sale", function (e) {
+    $('body').on("click", ".btn-edit-shipment", function (e) {
+        var ID_SHIPMENT = $(this).attr('data-id-shipment');
+        window.location.href = raiz_url + "manager_shipments/form_edit_shipments/" + ID_SHIPMENT;
+    });
 
-        var ID_VENTA = $(this).attr('data-id-sale');
-        if (ID_VENTA > 0) {
 
-            $('#modDelSale').modal('toggle');
-            $('#modBodyDelSale').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
-            $('#btnDelRowSale').on('click', function (e) {
+    $('body').on("click", ".btn-delete-shipment", function (e) {
+
+        var ID_SHIPMENT = $(this).attr('data-id-shipment');
+        if (ID_SHIPMENT > 0) {
+
+            $('#modDelShipment').modal('toggle');
+            $('#modBodyDelShipment').html('<b>El registro será borrado.   <br> ¿ Estás seguro ?</b>');
+            $('#btnDelShipment').on('click', function (e) {
 
                 $.ajax({
-                    url: raiz_url + "manager_sales/ajax_disable_sale",
+                    url: raiz_url + "manager_shipments/ajax_disable_shipments/" + ID_SHIPMENT,
                     type: 'POST',
-                    data: 'ID_VENTA=' + ID_VENTA,
+                    data: $(this).serialize(),
                     success: function (data) {
 
-                        if (data > 0) {
+                        if (data) {
                             window.location.reload();
                         } else {
-                            $('#modBodyDelSale').html('<b>Hubo un error al realizar la operación</b>');
-                            $('#btnDelRowSale').attr("disabled", "disabled");
+                            $('#modBodyDelShipment').html('<b>Hubo un error al realizar la operación</b>');
+                            $('#btnDelShipment').attr("disabled", "disabled");
                         }
                     }
                 });
@@ -117,28 +128,6 @@ $(document).ready(function () {
         }
     });
 
-
-    $('body').on("click", ".btn-fix-sale", function (e) {
-
-        var ID_ERROR = $(this).attr('data-id-error');
-        if (ID_ERROR > 0) {
-
-            $.ajax({
-                url: raiz_url + "paypal/requestSaleInformation/" + ID_ERROR,
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (data) {
-
-                    if (data) {
-                        window.location.reload();
-                    } else {
-                        alert("Error al momento de arreglar");
-                    }
-                }
-            });
-        }
-    });
-
-
+    
 });
 ///FUNCIONES JS..

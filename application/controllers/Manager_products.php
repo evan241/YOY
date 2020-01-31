@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Manager_Products extends CI_Controller {
+class Manager_products extends CI_Controller {
 
     public function __construct() {
         parent::__construct();

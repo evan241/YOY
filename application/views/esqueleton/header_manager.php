@@ -144,13 +144,13 @@
           </li>
 
           <li>
-            <a class="sidenav-item-link" href="<?=base_url()?>manager/shipment_types">
+            <a class="sidenav-item-link" href="<?=base_url()?>manager_shipments/shipments">
               <span class="nav-text">Tipos de envío</span>
             </a>
           </li>
 
           <li>
-            <a class="sidenav-item-link" href="<?=base_url()?>manager/payment_types">
+            <a class="sidenav-item-link" href="<?=base_url()?>manager_payments/payments">
               <span class="nav-text">Medios de pago</span>
             </a>
           </li>

@@ -10,8 +10,8 @@ class Mmanager_products extends CI_Model {
     function get_all_valid_products() {
         try {
             $this->db->select("*");
-            $this->db->from('PRODUCTO AS P');
-            $this->db->join('CATEGORIA AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
+            $this->db->from('producto AS P');
+            $this->db->join('categoria AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
             $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
             $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');
             $query = $this->db->get();
@@ -24,8 +24,8 @@ class Mmanager_products extends CI_Model {
     function get_product_by_id($product_id){
         try {
             $this->db->select("*");
-            $this->db->from('PRODUCTO AS P');
-            $this->db->join('CATEGORIA AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
+            $this->db->from('producto AS P');
+            $this->db->join('categoria AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
             $this->db->where('P.ID_PRODUCTO',$product_id);
             $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
             $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');
