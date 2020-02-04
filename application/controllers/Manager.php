@@ -14,8 +14,8 @@ class Manager extends CI_Controller {
     public function index() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
-            $this->load->view('esqueleton/header_manager', getActive('classIni'));
-            $this->load->view('Manager/v_index_manager');
-            $this->load->view('esqueleton/footer_manager');
+        $this->load->view('esqueleton/header_manager', getActive('classIni'));
+        $this->load->view('Manager/v_index_manager');
+        $this->load->view('esqueleton/footer_manager');
     }
 }
