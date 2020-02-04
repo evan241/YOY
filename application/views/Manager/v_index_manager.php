@@ -1,42 +1,33 @@
-<style>
-    <?php
-
-
-    ?>
-
-</style>
 <div class="row">
+
     <div class="col-xs-12 col-md-6 col-lg-3"></div>
     <div class="col-xl-3 col-sm-6">
         <div class="card card-mini mb-4 box-shadow">
             <div class="card-body">
-                <div class="float-left">
+                <div class="float-right">
                     <h2><i class="fas fa-2x fa-hand-holding-usd"></i></h2>
                 </div>
-                <div class="float-right">
-                    <h2 class="mb-1 text-right"><?= $test ?></h2>
-                    <p>Ventas del día</p>
-                </div>
+                <h2 class="mb-1"></h2>
+                <p>Ventas del mes</p>
             </div>
         </div>
     </div>
-
 
     <div class="col-xs-12 col-md-6 col-lg-3">
         <div class="card card-mini mb-4 box-shadow">
             <div class="card-body">
                 <div class="float-right">
-                    <h2><i class="fas fa-2x fa-shipping-fast"></i></h2>
+                    <h2><i class="fas fa-2x fa-hand-holding-usd"></i></h2>
                 </div>
                 <h2 class="mb-1">2</h2>
-                <p>Envíos del día</p>
+                <p>Ventas del año</p>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-3"></div>
 </div>
-<div class="row">
 
+<div class="row">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-lg-12">
@@ -77,7 +68,7 @@
                     responsive: true
                 });
             };
-            </script>
+        </script>
 
 
             <!--<div class="row">
