@@ -31,6 +31,17 @@ class Mmanager extends CI_Model {
         }
         return $result;
     }
+
+    function getYearSaleTotal() {
+        try {
+            $this->db->select("*");
+            $this->db->from("venta");
+            return $this->db->get()->num_rows();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
     
     function get_all_valid_ships(){
         try {

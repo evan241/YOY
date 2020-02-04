@@ -13,8 +13,8 @@ $asd = [1, 2, 3];
                 <div class="float-right">
                     <h2><i class="fas fa-2x fa-hand-holding-usd"></i></h2>
                 </div>
-                <h2 class="mb-1"></h2>
-                <p>Ventas del mes</p>
+                <h2 class="mb-1"><?= $monthSales ?></h2>
+                <p>Venta mensual</p>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@ $asd = [1, 2, 3];
                 <div class="float-right">
                     <h2><i class="fas fa-2x fa-hand-holding-usd"></i></h2>
                 </div>
-                <h2 class="mb-1">2</h2>
-                <p>Ventas del año</p>
+                <h2 class="mb-1"><?= $yearSales ?></h2>
+                <p>Venta anual</p>
             </div>
         </div>
     </div>
@@ -50,10 +50,10 @@ $asd = [1, 2, 3];
 
         <script type="text/javascript">
 
-            var monthArray = <?= json_encode($data) ?>;
-            var months = [];
+            var monthArray = <?= json_encode($months) ?>;
+            var monthSales = [];
             for (var i in monthArray)
-                months.push(monthArray[i]);
+                monthSales.push(monthArray[i]);
 
             var lineChartData = {
                 labels : [
@@ -69,7 +69,7 @@ $asd = [1, 2, 3];
                     pointStrokeColor : "#fff",
                     pointHighlightFill : "#fff",
                     pointHighlightStroke : "rgba(48, 164, 255, 1)",
-                    data : months
+                    data : monthSales
                 }
                 ]
             }

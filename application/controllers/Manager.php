@@ -14,7 +14,9 @@ class Manager extends CI_Controller {
     public function index() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
-        $data['data'] = $this->mmanager->getYearSales();
+        $data['months'] = $this->mmanager->getYearSales();
+        $data['monthSales'] = $this->mmanager->monthSaleCount(date('m'));
+        $data['yearSales'] = $this->mmanager->getYearSaleTotal();
 
         $this->load->view('esqueleton/header_manager', getActive('classIni'));
         $this->load->view('Manager/v_index_manager', $data);
