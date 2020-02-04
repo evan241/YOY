@@ -14,13 +14,10 @@ class Manager extends CI_Controller {
     public function index() {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
-        // print_r(getDateRange(12));
+        $data['data'] = $this->mmanager->getYearSales();
 
-        $var = $this->mmanager->monthSaleCount(1);
-        print_r($var);
-
-        // $this->load->view('esqueleton/header_manager', getActive('classIni'));
-        // $this->load->view('Manager/v_index_manager', $data);
-        // $this->load->view('esqueleton/footer_manager');
+        $this->load->view('esqueleton/header_manager', getActive('classIni'));
+        $this->load->view('Manager/v_index_manager', $data);
+        $this->load->view('esqueleton/footer_manager');
     }
 }

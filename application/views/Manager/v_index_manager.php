@@ -1,3 +1,9 @@
+<?php
+
+$asd = [1, 2, 3];
+
+?>
+
 <div class="row">
 
     <div class="col-xs-12 col-md-6 col-lg-3"></div>
@@ -43,6 +49,12 @@
         </div>
 
         <script type="text/javascript">
+
+            var monthArray = <?= json_encode($data) ?>;
+            var months = [];
+            for (var i in monthArray)
+                months.push(monthArray[i]);
+
             var lineChartData = {
                 labels : [
                 "Enero","Febrero","Marzo","Abril","Mayo","Junio", "Julio",
@@ -57,7 +69,7 @@
                     pointStrokeColor : "#fff",
                     pointHighlightFill : "#fff",
                     pointHighlightStroke : "rgba(48, 164, 255, 1)",
-                    data : [<?= $test ?>]
+                    data : months
                 }
                 ]
             }

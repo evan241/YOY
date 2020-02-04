@@ -21,6 +21,16 @@ class Mmanager extends CI_Model {
             return 0;
         }
     }
+
+    function getYearSales() {
+        $result = getMonthArray();
+        $month = getMonths();
+
+        for ($i = 0; $i < 12; $i++) {
+            $result[$month[$i]] = $this->monthSaleCount($i + 1); 
+        }
+        return $result;
+    }
     
     function get_all_valid_ships(){
         try {
