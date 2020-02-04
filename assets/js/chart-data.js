@@ -2,25 +2,26 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 
 // randomScalingFactor()
 
-var lineChartData = {
-	labels : [
-	"Enero","Febrero","Marzo","Abril","Mayo","Junio", "Julio",
-	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-	],
-	datasets : [
-	{
-		label: "Sales",
-		fillColor : "rgba(48, 164, 255, 0.2)",
-		strokeColor : "rgba(48, 164, 255, 1)",
-		pointColor : "rgba(48, 164, 255, 1)",
-		pointStrokeColor : "#fff",
-		pointHighlightFill : "#fff",
-		pointHighlightStroke : "rgba(48, 164, 255, 1)",
-		data : []
-	}
-	]
+// var test = <?= $test ?>;
 
-}
+// var lineChartData = {
+// 	labels : [
+// 	"Enero","Febrero","Marzo","Abril","Mayo","Junio", "Julio",
+// 	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+// 	],
+// 	datasets : [
+// 	{
+// 		label: "Sales",
+// 		fillColor : "rgba(48, 164, 255, 0.2)",
+// 		strokeColor : "rgba(48, 164, 255, 1)",
+// 		pointColor : "rgba(48, 164, 255, 1)",
+// 		pointStrokeColor : "#fff",
+// 		pointHighlightFill : "#fff",
+// 		pointHighlightStroke : "rgba(48, 164, 255, 1)",
+// 		data : [10]
+// 	}
+// 	]
+// }
 
 var barChartData = {
 	labels : [
@@ -102,11 +103,11 @@ var doughnutData = [
 
 ];
 
-window.onload = function(){
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-		responsive: true
-	});
+// window.onload = function(){
+// 	var chart1 = document.getElementById("line-chart").getContext("2d");
+// 	window.myLine = new Chart(chart1).Line(lineChartData, {
+// 		responsive: true
+// 	});
 	/*var chart2 = document.getElementById("#bar-chart").getContext("2d");
 	window.myBar = new Chart(chart2).Bar(barChartData, {
 		responsive : true
@@ -118,4 +119,4 @@ window.onload = function(){
 	window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
 	});*/
 	
-};
+// };
