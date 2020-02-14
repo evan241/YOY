@@ -5,6 +5,43 @@ class Mmanager extends CI_Model {
     function __construct() {
         parent::__construct();
     }
+
+    function monthSaleCount($monthNumber) {
+        try {
+            $date = getDateRange($monthNumber);
+
+            $this->db->select("*");
+            $this->db->from("venta");
+            $this->db->where("DATE(FECHA_VENTA) >=", $date['start']);
+            $this->db->where("DATE(FECHA_VENTA) <", $date['end']);
+
+            return $this->db->get()->num_rows();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
+
+    function getYearSales() {
+        $result = getMonthArray();
+        $month = getMonths();
+
+        for ($i = 0; $i < 12; $i++) {
+            $result[$month[$i]] = $this->monthSaleCount($i + 1); 
+        }
+        return $result;
+    }
+
+    function getYearSaleTotal() {
+        try {
+            $this->db->select("*");
+            $this->db->from("venta");
+            return $this->db->get()->num_rows();
+        }
+        catch (Exception $exception) {
+            return 0;
+        }
+    }
     
     function get_all_valid_ships(){
         try {
