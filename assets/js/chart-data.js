@@ -44,7 +44,6 @@ var barChartData = {
 		data : [1, 2, 3]
 	}
 	]
-	
 }
 
 var pieData = [
