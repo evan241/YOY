@@ -11,6 +11,7 @@ class Store extends CI_Controller {
         $this->load->model('msite');
         $this->load->model('mmanager');
         $this->load->model('mmanager_products');
+        /* if($this->session->userdata('YOY_ID_USUARIO')==''){redirect('site/index');} */
     }
 
     public function index() {
@@ -32,6 +33,19 @@ class Store extends CI_Controller {
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
         $this->load->view('store/process_payment', $data);
         $this->load->view('esqueleton/footer');
+    }
+    public function ajax_choose_ship(){
+        if($this->input->is_ajax_request())
+        {
+            $choose = $this->mstore->choose_ship();
+            if($choose)
+                echo $choose;
+            else
+                echo"error";
+            
+        }else{
+            redirect('Store/index','refresh');
+        }
     }
     public function sales($item) {
         $this->load->view('esqueleton/header');

@@ -40,8 +40,12 @@
 /* Sergio CSS
 /*----------------------------------------*/
  footer{display:none;}
-   .mt-100{margin-top:100px}
-   .mt-container{margin-top:2%;margin-bottom:2%;}
+	 .pd-container{padding: 0px 42px;}
+	
+	.h2-section{margin-top:6rem}
+	.mt-100{margin-top:100px}
+	.ml-10{margin-left: 10%;}
+   .mt-container{margin-top:2%;margin-bottom:1%;}
    .page-info-sectionII{height:110px !important}
    .details-buy{font-size: 16px;color: #60656b;line-height: 1.8;}        
    .pd-left20{padding-left: 27px;}
@@ -51,9 +55,9 @@
    .hide{display:none;}
    .normal{font-weight:normal}
    .color-green{color:green}
+   .color-yellow{color:#ffc107 !important}
    .border-bottomx{border-bottom: 2px solid #343a40;}
    .pointer{cursor:pointer}
-   #logo-main{width:62%}
    #dir{overflow: hidden;text-overflow:ellipsis;white-space: pre;}
 
    .label-ship{font-size: 17px;
@@ -70,15 +74,37 @@
     height: 35px;
     background: #f8f9fa;
     border: 3px solid #60656b;}.circle-opt:hover{background:#313131; border: 3px solid #47a2ff;}
-   .checked-input{background: #313131 !important; border: 3px solid #47a2ff!important;}
-   
+   .checked-input{background: #007bff !important;	border: 3px solid #004085!important;}
+	
+  
+   .btn-sale{
+		background-color: whitesmoke;
+		border-color: whitesmoke;
+		color: black;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 14px;
+  
+	}
    .circle-dir{
     width: 35px; height: 35px;    
     border: 3px solid #60656b;
     background: #60656b;color:white;    
     padding-top: 5px; padding-left: 8.2px;
     line-height: initial;border-radius: 50%;    
-   }
+	}
+	.radio-ships{padding: 10px;
+		height: 30px;
+		width: 30px;
+		background: #007bff;
+		padding-left: 9px;
+		padding-top: 5px;
+		border-radius: 50%;}
+	.label-ships{font-size: 17px;
+		color: white;
+		text-transform: uppercase;
+		font-weight: bold;}
+	.boxshadow-white{box-shadow: 0px -1px 53px rgba(255, 255, 255, 0.25), 0 2px 10px rgba(255, 255, 255, 0.22) }
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
@@ -163,19 +189,19 @@ ol {
 	-----------------------*/
 
 /* ---- SERGIO ------------*/
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 7px !important;
 	background: #494949;
 }
 .color-black{
 	color:black !important;
 }
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background: #e7e7e7;
 	border-radius: 4px;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
 	background: #e7e7e7;
 	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
@@ -183,7 +209,10 @@ body::-webkit-scrollbar-thumb:hover {
 	background: #00111b;
     border-radius: 0px 10px 20px 0px;
 }
-
+.view-ship-auto{
+	height: 415px;
+	overflow: auto;
+}
 .formx{
 	background: #f8f9fa;
 	border-radius: 10px;
@@ -746,6 +775,7 @@ transform: translateY(3px);
 
 .main-menu-right li a:hover {
 	color: #fff;
+	padding-bottom: 5px;
 	border-bottom: 1px solid #fff;
 }
 
@@ -775,7 +805,9 @@ transform: translateY(3px);
 /*------------------
 	 Hero section
  ---------------------*/
-
+.btn-nextprev{
+	padding-right: 13px;
+	padding-left: 10px;}
 .hero-section {
 	position: relative;
 }
@@ -1241,12 +1273,17 @@ h2.white-title {
 }
 
 .page-info-sectionII h2 {
-	font-size: 90px;
+	font-size: 60px;
 	font-weight: lighter;
 	color: #fff;
 	position: relative;
 	z-index: 1;
+	width: 100%;
+	 margin: 0px 123px;	 
+    border-bottom: 1px solid white;
+    text-align: left;
 }
+
 
 .page-info-section:after {
 	position: absolute;

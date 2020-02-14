@@ -20,4 +20,27 @@ class Mstore extends CI_Model {
             return $e->getMessage();
         }
     }
+    function choose_ship(){
+        try {
+            if(!$this->input->post('id')){
+                return false;
+            }else{
+
+                $id = $this->input->post('id');
+                $type = $this->input->post('type');
+                $product = $this->input->post('product');
+
+                $this->session->set_userdata('TEMP_CHOSSE_ID_ENVIO', $id);
+                $this->session->set_userdata('TEMP_CHOSSE_TYPE_ENVIO', $type);
+
+                return $product;
+            }
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
+        
+    }
 }
