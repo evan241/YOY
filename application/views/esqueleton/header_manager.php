@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/ADMIN/plugins/ladda/ladda.min.css" />
   <link rel="stylesheet" href="<?=base_url();?>assets/ADMIN/plugins/select2/css/select2.min.css" />
   <link rel="stylesheet" href="<?=base_url();?>assets/ADMIN/plugins/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="<?=base_url();?>assets/timepicker/lib/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
   <!-- <link rel="stylesheet" href="<?=base_url();?>assets/ADMIN/plugins/data-tables/datatables.bootstrap4.min.css" /> -->
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="<?=base_url();?>assets/ADMIN/css/sleek.css" />
@@ -91,7 +92,7 @@
           </li>
 
           <li class="has-sub">
-            <a class="sidenav-item-link" href="<?=base_url()?>manager_sales/sales">
+            <a class="sidenav-item-link" href="<?=base_url()?>Manager_sales/sales">
             <i class="mdi mdi-currency-usd"></i>
             <span class="nav-text">Ventas</span>
           </a>
@@ -99,28 +100,28 @@
 
 
         <li class="has-sub">
-          <a class="sidenav-item-link" href="<?=base_url()?>manager_products/products">
+          <a class="sidenav-item-link" href="<?=base_url()?>Manager_products/products">
           <i class="mdi mdi-cube-outline"></i>
           <span class="nav-text">Productos</span>
         </a>
       </li>  
 
       <li class="has-sub">
-        <a class="sidenav-item-link" href="<?= base_url();?>manager_news/news">
+        <a class="sidenav-item-link" href="<?= base_url();?>Manager_news/news">
           <i class="fa fa-file-alt"></i>
           <span class="nav-text">Noticias</span>
         </a> 
       </li> 
 
       <li class="has-sub">
-        <a class="sidenav-item-link" href="<?= base_url(); ?>manager_users/users">
+        <a class="sidenav-item-link" href="<?= base_url(); ?>Manager_users/users">
           <i class="mdi mdi-account-group"></i>
           <span class="nav-text">Usuarios</span>
         </a>            
       </li>
 
       <li class="has-sub">
-        <a class="sidenav-item-link" href="<?= base_url();?>manager_clients/clients">
+        <a class="sidenav-item-link" href="<?= base_url();?>Manager_clients/clients">
           <i class="mdi mdi-account-multiple-check"></i>
           <span class="nav-text">Clientes</span>
         </a> 
