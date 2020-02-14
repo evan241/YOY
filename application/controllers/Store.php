@@ -19,7 +19,20 @@ class Store extends CI_Controller {
         $this->load->view('Store/v_index', $data);
         $this->load->view('esqueleton/footer');
     }
-
+    public function proccess_sale($item) {
+        $this->load->view('esqueleton/header');
+        $data['product'] = $this->mmanager_products->get_product_by_id($item);
+        $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
+        $this->load->view('store/process_sale', $data);
+        $this->load->view('esqueleton/footer');
+    }
+    public function proccess_payment($item) {
+        $this->load->view('esqueleton/header');
+        $data['product'] = $this->mmanager_products->get_product_by_id($item);
+        $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
+        $this->load->view('store/process_payment', $data);
+        $this->load->view('esqueleton/footer');
+    }
     public function sales($item) {
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);

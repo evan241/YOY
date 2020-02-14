@@ -37,6 +37,49 @@
 
 
 /*----------------------------------------*/
+/* Sergio CSS
+/*----------------------------------------*/
+ footer{display:none;}
+   .mt-100{margin-top:100px}
+   .mt-container{margin-top:2%;margin-bottom:2%;}
+   .page-info-sectionII{height:110px !important}
+   .details-buy{font-size: 16px;color: #60656b;line-height: 1.8;}        
+   .pd-left20{padding-left: 27px;}
+   .align-middle{ display: flex;justify-content: center; align-items: center;}     
+   .style-ship{border-radius:10px;background:white;padding:5px 0px}
+   .bold{font-weight:bold}
+   .hide{display:none;}
+   .normal{font-weight:normal}
+   .color-green{color:green}
+   .border-bottomx{border-bottom: 2px solid #343a40;}
+   .pointer{cursor:pointer}
+   #logo-main{width:62%}
+   #dir{overflow: hidden;text-overflow:ellipsis;white-space: pre;}
+
+   .label-ship{font-size: 17px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;margin-top:4%;
+   }
+   .circle-opt{padding-left: 9px;
+    padding-top: 5px;
+    line-height: 22.9px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background: #f8f9fa;
+    border: 3px solid #60656b;}.circle-opt:hover{background:#313131; border: 3px solid #47a2ff;}
+   .checked-input{background: #313131 !important; border: 3px solid #47a2ff!important;}
+   
+   .circle-dir{
+    width: 35px; height: 35px;    
+    border: 3px solid #60656b;
+    background: #60656b;color:white;    
+    padding-top: 5px; padding-left: 8.2px;
+    line-height: initial;border-radius: 50%;    
+   }
+/*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
 
