@@ -109,6 +109,7 @@
     border-left: 3px solid #b8b8b8;
 }
 
+/*Ventas manager*/
 .status-span {
     padding: 3px 5px;
     border-radius: 15px;
@@ -119,4 +120,35 @@
 
 .resp{
     overflow: auto;
+}
+
+/* Datatables */
+table.dataTable.no-footer {
+    border-bottom: 1px solid #dee2e6;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+
+    border-bottom-color:#dee2e6
+}
+
+table.dataTable thead th,
+table.dataTable tfoot th {
+    font-weight: 600;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#333
+}
+
+.dataTables_length select {
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.paginate_button.current {
+    background: #ccc !important;
+    color: white !important;
 }

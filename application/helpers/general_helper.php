@@ -30,7 +30,7 @@ function hasInfo($data) {
 }
 
 function getDateRange($month) {
-    if (($month >= 1) && ($month <= 9)) $month = '0' . $month;  
+    //if (($month >= 1) && ($month <= 9)) $month = '0' . $month;  
 
     $start = date("Y") . '-' . $month . '-01';
     $end = date('Y-m-d', strtotime("+1 months", strtotime($start)));

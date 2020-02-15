@@ -70,7 +70,7 @@ class Manager_news extends CI_Controller {
             || ($_FILES["image"]["type"] == "image/jpg")
             || ($_FILES["image"]["type"] == "image/png")
             || ($_FILES["image"]["type"] == "image/gif")) {
-            if (move_up
+            if (move_up){
                 echo base_url() . 'assets/img/news/'. $_FILES['image']['name'];
             } else {
                 echo '1';
