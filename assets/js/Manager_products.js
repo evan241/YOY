@@ -44,15 +44,18 @@ $(document).ready(function () {
     $('#formRecordProduct').on('submit', function (e) {
         e.preventDefault();
         $('#modProduct').modal('toggle');
-        $('#modBodyProduct').html('');
+        $('#modBodyProduct').html('Guardando');
         $.ajax({
             url: raiz_url + "manager_products/ajax_add_products",
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
                 if (data) {
-                    $('#modBodyProduct').html('<b>! El usuario se agregó correctamente ¡</b> ');
-                    window.location.href = raiz_url + "manager_products/products";
+                    $('#modBodyProduct').html('<b>! El producto se agregó correctamente ¡</b> ');
+                    //Se agrega para que el usuario pueda ver el modal y al cerrarlo reedireccione a productos
+                    $('#modProduct').on('hidden.bs.modal', function () {
+                        window.location.href = raiz_url + "manager_products/products";
+                    });
                 } 
                 else {
                     $('#modBodyProduct').html('<b>Hubo un error al realizar la operación...</b>');

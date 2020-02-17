@@ -5,7 +5,7 @@
 
 <!-- Page info section -->
 <section class="page-info-section set-bg">
-    <h2>Noticias</h2>
+    <h2>News</h2>
 </section>
 <!-- Page info section end -->
 
