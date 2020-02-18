@@ -42,7 +42,18 @@ class Store extends CI_Controller {
                 echo $choose;
             else
                 echo"error";
-            
+        }else{
+            redirect('Store/index','refresh');
+        }
+    }
+    public function ajax_choose_payment(){
+        if($this->input->is_ajax_request())
+        {
+            $choose = $this->mstore->choose_payment();
+            if($choose)
+                echo $choose;
+            else
+                echo"error";
         }else{
             redirect('Store/index','refresh');
         }
@@ -52,6 +63,17 @@ class Store extends CI_Controller {
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
         $this->load->view('store/sales', $data);
+        $this->load->view('esqueleton/footer');
+    }
+     public function resume($id) {
+         $Sale = $this->mstore->get_sale($id);
+         /* $Product = $Sale->ID_PRODUCTO; */
+         
+         $data['infoSale'] =$this->mstore->get_sale($id);
+         $data['product'] = $this->mmanager_products->get_product_by_id(2);
+
+        $this->load->view('esqueleton/header');
+        $this->load->view('store/resume_sale', $data);
         $this->load->view('esqueleton/footer');
     }
 }

@@ -44,6 +44,7 @@
 	
 	.h2-section{margin-top:6rem}
 	.mt-100{margin-top:100px}
+	.mt-20{margin-top:20px}
 	.ml-10{margin-left: 10%;}
    .mt-container{margin-top:2%;margin-bottom:1%;}
    .page-info-sectionII{height:110px !important}
@@ -1280,7 +1281,7 @@ h2.white-title {
 	z-index: 1;
 	width: 100%;
 	 margin: 0px 123px;	 
-    border-bottom: 1px solid white;
+    border-bottom: 3px solid white;
     text-align: left;
 }
 

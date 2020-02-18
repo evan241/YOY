@@ -115,7 +115,7 @@ if(count($Usuario_info))
          <input type="hidden" id="TYPE_SHIP">
       </div>
       <div class="col-lg-4">
-         <div class="row justify-content-center mt-100">
+         <div class="row justify-content-center mt-20">
             <div class="col-lg-10 col-lg-offset-1 text-center form-group">
                <img class="boxshadow-white"src="<?= base_url($product['IMAGEN_PRODUCTO']) ?>" alt="">
             </div>
@@ -140,7 +140,7 @@ if(count($Usuario_info))
             </div>
             <div class="col-lg-10 col-lg-offset-1 mt-container">
               
-               <a class="btn btn-sale" id="FIN_CHOOSE_SHIP" href="#">Continuar</a>
+               <a class="btn btn-sale" id="FIN_CHOOSE_SHIP" href="">Continuar</a>
             </div>
          </div>
       </div>

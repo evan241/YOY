@@ -9,13 +9,63 @@ $(document).ready(function () {
          });
       });   
    })
+   $("#FIN_CHOOSE_SHIP").click(function (e) {
+      e.preventDefault();
+
+      if ($('input[name=type_ship]:checked').val() == 1) { checked("input[name='shipNacional']") }
+      else { checked("input[name='shipInternacional']") }
+
+      let id = $("#ID_SHIP").val();
+      let type_ship = $("#TYPE_SHIP").val();
+      let id_product = $("#ID_PRODUCT").val();
+      let total_final = $("#TOTAL_FINAL").html();
+      let precio_envio = $("#PRECIO_ENVIO").html();
+
+      $.ajax({
+         type: "POST",
+         url: raiz_url + "Store/ajax_choose_ship",
+         data: {
+            id: id,
+            type: type_ship,
+            product: id_product,
+            envio: precio_envio,
+            total: total_final
+         },
+         success: function (res) {
+            if (res === 'error') {
+               alert('No selecciono cómo le enviamos a enviar su pedido')
+            } else {
+               window.location.replace(raiz_url + "Store/proccess_payment/" + res);
+            }
+         }
+      });
+   })
+   $("#FIN_CHOOSE_PAYMENT").click(function (e) {
+
+      checked_payment("input[name='payment']");
+
+      let id_pago = $("#ID_PAGO").val();
+      let nombre_pago = $("#NOMBRE_PAGO").val();
+
+       $.ajax({
+         type: "POST",
+         url: raiz_url + "Store/ajax_choose_payment",
+         data: {
+            id: id_pago,
+            nombre: nombre_pago
+         },
+         success: function (res) {
+            if (res === 'error') {
+               alert('No seleccionó el tipo de pago');
+            } else {
+               window.location.replace(raiz_url + "Store/resume/" + res);
+            }
+         }
+      }); 
+   })
    /* PROCCESS SALE */
-;
-
       let precio_product = $("#PRECIO_PRODUCTO").html();
-
       get_total(precio_product,0);
-   /* get_total(precio_product,0); */
 
    $('input[name=type_ship]').on('change', function() {
       let val = $('input[name=type_ship]:checked').val();
@@ -24,6 +74,8 @@ $(document).ready(function () {
             $(this).removeClass('hide');
             $("#Internacional").addClass('hide');
             $("#labelNacional").addClass('color-yellow');
+            $("input[name=shipInternacional]").prop('checked',false);
+            $(".circle-opt").removeClass('checked-input');
          }else{
             $(this).addClass('hide');
             $("#Internacional").removeClass('hide');
@@ -32,6 +84,9 @@ $(document).ready(function () {
          if ($("#Internacional").hasClass('hide')) {
             $("#Nacional").addClass('hide');
             $("#Internacional").removeClass('hide');
+            $("input[name=shipNacional]").prop('checked',false);
+            $(".circle-opt").removeClass('checked-input');
+
          } else {
             $("#Nacional").removeClass('hide');
             $("#Internacional").addClass('hide');
@@ -39,27 +94,26 @@ $(document).ready(function () {
       }
    })
 
-   $("#FIN_CHOOSE_SHIP").click(function(e){
-      e.preventDefault();
-      if(!$("#Nacional").hasClass('hide'))
-          {checked("input[name='shipNacional")}
-      else{checked("input[name='shipInternacional']") }
+   $("#FIN_CHOOSE_PAYMENT").click(function(e){        
+     
+      checked_payment("input[name='payment']") ;
 
-      let id = $("#ID_SHIP").val();
-      let type_ship = $("#TYPE_SHIP").val();
-      let id_product = $("#ID_PRODUCT").val();
-      $.ajax({
+      let id_pago = $("#ID_PAGO");
+      let nombre_pago = $("#NOMBRE_PAGO");
+
+     $.ajax({
          type: "POST",
-         url: raiz_url+"Store/ajax_choose_ship",
-         data: {id:id,type:type_ship,product:id_product},
+         url: raiz_url+"Store/ajax_choose_payment",
+         data: {id:id_pago,           
+            nombre:nombre_pago},
          success: function (res) {
-            if(res != 0){
-
-               window.location.replace(raiz_url+"Store/proccess_payment/"+res);
+            if (res === 'error'){
+               alert('No seleccionó el tipo de pago');
+            }else{
+               window.location.replace(raiz_url + "Store/resume/" + res);
             }
-         }
+         } 
       });
-
    })
 
    $("body").on('click','.pointer',function()
@@ -68,17 +122,18 @@ $(document).ready(function () {
       var input = divID +" input"; 
       var circle = divID + " .circle-opt";
       var checked = "checked-input";
+      
       var precio_producto = $("#PRECIO_PRODUCTO").html();
       var precio_envio = $(input).data('price');
     
       $(input).prop('checked', true);
-      $(circle).addClass(checked);
+      //$(circle).addClass(checked);
       $("#PRECIO_ENVIO").html("$"+precio_envio);
       
       $.each($(".circle-opt"), function () {        
          $(this).removeClass(checked);
-         $(circle).addClass(checked)       
-      });     
+      });
+      $(circle).addClass(checked);       
       
       get_total(precio_producto,precio_envio);
    });
@@ -87,7 +142,15 @@ $(document).ready(function () {
       $(name).each(function (i) {
          if (this.checked) {
             $("#ID_SHIP").val($(this).attr('id'));
-            $("#TYPE_SHIP").val($(this).attr('name'));
+            $("#TYPE_SHIP").val($(this).attr('name'));            
+         }
+      });
+   }
+   function checked_payment(name) {
+      $(name).each(function (i) {
+         if (this.checked) {
+            $("#NOMBRE_PAGO").val($(this).data('name'));
+            $("#ID_PAGO").val($(this).attr('id'));
          }
       });
    }

@@ -12,41 +12,50 @@
 <div class="container mt-container">
    <div class="row">
       <div class="col-lg-8">
-         <h3>¿Cómo quieres pagar? </h3>
+         <h3>RESUMEN DE COMPRA #135e4b3ad1418c8</h3>
          
-         <label class="label-ship">Opciones de pago</label>
-         <!-- Medios de pago -->
-         <div id="type_payment">
-         <?php 
-            $CI =& get_instance();
-            $shipNacional = $this->db->get_where('medio_pago',array('VIGENTE_MEDIO_PAGO'=> 1 ))->result_array();
-            foreach ($shipNacional as $key => $row) {
-            $id = $row['ID_MEDIO_PAGO'];
-            $name = $row['NOMBRE_MEDIO_PAGO'];
-            $img =  $row['SRC_IMG'];
-            ?>
+
+         <label class="label-ship">Producto</label>
             <div class="form-group">            
-               <div class="row style-ship details-buy pointer" id="divPayment<?=$key?>">
+               <div class="row style-ship details-buy pointer" >
                   <div class="col-lg-2 align-middle">
-                     <div class="circle-opt">
-                     <input type="radio" name="payment" data-name="<?=$name?>" id="<?=$id?>">
+                     <div class="circle-opt checked-input">
+                     <input type="radio" name="product" checked>
                      </div>
                   </div>
                   <div class="col-lg-8">
                      <div>
-                        <b><?=$name?></b>                        
+                        <b>Mesa de centro</b>                        
                      </div>
                   </div>
                   <div class="col-lg-2">
-                     <div><img src="<?=$img?>" width="70%"></div>
+                     <div><img src="" width="70%"></div>
                   </div>
                </div>
             </div>
-         <?php } ?>
+         <label class="label-ship">Tipo de pago</label>
+         <!-- Medios de pago -->
+         <div id="type_payment">
+            <div class="form-group">            
+               <div class="row style-ship details-buy pointer" >
+                  <div class="col-lg-2 align-middle">
+                     <div class="circle-opt checked-input">
+                     <input type="radio" name="payment" checked>
+                     </div>
+                  </div>
+                  <div class="col-lg-8">
+                     <div>
+                        <b>Pago Oxxo</b>                        
+                     </div>
+                  </div>
+                  <div class="col-lg-2">
+                     <div><img src="" width="70%"></div>
+                  </div>
+               </div>
+            </div>            
          </div>
-         <input type="hidden" id="ID_PAGO">
-         <input type="hidden" id="NOMBRE_PAGO">
-         <button type="button" id="FIN_CHOOSE_PAYMENT" class="btn btn-sale">confirmar compra</button>
+          
+         <button type="button" id="FIN_CHOOSE_PAYMENT" class="btn btn-sale">Ver mis compras</button>
       </div>
       <div class="col-lg-4">
          <div class="row justify-content-center">
