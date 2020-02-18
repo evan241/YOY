@@ -5,8 +5,6 @@
         border-radius: 5px;
         padding: 5px;
     }
-    .dt-filter{margin-top:10px;padding-left: 15px;}
-
     #dataProducts_length{
         margin-left: 15px ;
     }
@@ -16,18 +14,16 @@
         <div class="card card-default">
             <div class="card-header card-header-border-bottom d-flex justify-content-between">
                 <h2>PRODUCTOS</h2>
-                <?php
-                if ($this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR)) {
-                    ?>
-                    <a href="<?= base_url() ?>manager_products/form_add_products" class="btn btn-primary pull-right" id="btnAddProduct">
-                        <i class="fas fa-plus" prescription-bottle aria-hidden="true"></i> Nuevo Poducto
-                    </a>
-                <?php } ?>
+                <a href="<?= base_url() ?>manager_products/form_add_products" class="btn btn-primary pull-right" id="btnAddProduct">
+                    <i class="fas fa-plus" prescription-bottle aria-hidden="true"></i> Nuevo Poducto
+                </a>
             </div>
             <div class="card-body">
                 <?php
-                if ($this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR)) $disabled = '';
-                else $disabled = 'disabled';
+                if ($this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR))
+                    $disabled = '';
+                else
+                    $disabled = 'disabled';
                 ?>
                 <div class="basic-data-table">
                     <table id="dataProducts" class="table nowrap dataTable no-footer" style="font-size: 14px;" cellspacing="0" width="100%">
@@ -49,7 +45,7 @@
                             <?php
                             if ($products) {
                                 foreach ($products as $product) {
-                                    $activo = ($product['ACTIVO_PRODUCTO'] == 1)?'<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>':'<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
+                                    $activo = ($product['ACTIVO_PRODUCTO'] == 1) ? '<i style="color:green" class="fa fa-check fa-2x" aria-hidden="true"></i>' : '<i style="color:red" class="fa fa-times fa-2x" aria-hidden="true"></i>';
                                     $stock_actual = $product['STOCK_PRODUCTO'];
                                     $stock_minimo = $product['STOCK_MINIMO_PRODUCTO'];
                                     $color = "";
@@ -61,15 +57,15 @@
                                             <button id="btnEditProduct" <?= $disabled ?> class="btn btn-primary btn-edit-product" data-original-title="Editar info producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>">
                                                 <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                                             </button>
-                                            <?php if($product['ACTIVO_PRODUCTO'] == 1){ ?>
-                                            <button id="btnDesactiveProduct" <?= $disabled ?> class="btn btn-danger btn-Desactive-product" data-original-title="Desactivar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
-                                                <i class="fa fa-times fa-1x" aria-hidden="true"></i>
-                                            </button>
-                                            <?php } else{ ?>
-                                            <button id="btnActiveProduct" <?= $disabled ?> class="btn btn-success btn-active-product" data-original-title="Activar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
-                                                <i class="fa fa-check fa-1x" aria-hidden="true"></i>
-                                            </button>
-                                            <?php } ?>
+        <?php if ($product['ACTIVO_PRODUCTO'] == 1) { ?>
+                                                <button id="btnDesactiveProduct" <?= $disabled ?> class="btn btn-danger btn-Desactive-product" data-original-title="Desactivar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
+                                                    <i class="fa fa-times fa-1x" aria-hidden="true"></i>
+                                                </button>
+        <?php } else { ?>
+                                                <button id="btnActiveProduct" <?= $disabled ?> class="btn btn-success btn-active-product" data-original-title="Activar producto" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
+                                                    <i class="fa fa-check fa-1x" aria-hidden="true"></i>
+                                                </button>
+        <?php } ?>
                                             <button id="btnAddPicProduct" <?= $disabled ?> class="btn btn-primary btn-addpic-product" data-original-title="Agregar imágenes" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-product="<?= $product['ID_PRODUCTO'] ?>" >
                                                 <i class="fa fa-images fa-1x" aria-hidden="true"></i>
                                             </button>

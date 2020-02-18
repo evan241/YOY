@@ -5,8 +5,6 @@
         border-radius: 5px;
         padding: 5px;
     }
-    .dt-filter{margin-top:10px;padding-left: 15px;}
-
     #dataVentas_length{
         margin-left: 15px ;
     }

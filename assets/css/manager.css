@@ -152,3 +152,7 @@ table.dataTable tfoot th {
     background: #ccc !important;
     color: white !important;
 }
+
+.dt-filter{margin-top:10px;padding-left: 15px;}
+
+/*FIN DATATABLES*/
