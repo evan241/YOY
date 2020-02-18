@@ -49,13 +49,14 @@
   <script src="<?=base_url();?>assets/ADMIN/js/date-range.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/map.js"></script>
   <script src="<?=base_url();?>assets/ADMIN/js/custom.js"></script>
+  <script src="<?=base_url();?>assets/timepicker/lib/bootstrap-datepicker.js" type="text/javascript"></script>
 
   <script src="<?php echo base_url(); ?>assets/js/lumino.glyphs.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/chart-data.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/chart.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/easypiechart-data.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/easypiechart.js" type="text/javascript"></script>
-  <script src="<?php echo base_url(); ?>assets/js/manager.js" type="text/javascript"></script>
+  <!--<script src="<?php echo base_url(); ?>assets/js/manager.js" type="text/javascript"></script>-->
 
   <script src="<?= base_url() ?>assets/js/<?php 
   $classExplode = explode('_', $this->router->fetch_class()); 
@@ -63,11 +64,13 @@
   echo $classExplode[0] .'_'. end($methodExplode); 
   ?>.js"></script>
 
-<!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
-  <script src="<?= base_url() ?>assets/js/manager_clients.js"></script>
+  <!--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
+  <!--<script src="<?= base_url() ?>assets/js/manager_clients.js"></script>
   <script src="<?= base_url() ?>assets/js/manager_sales.js"></script>
   <script src="<?= base_url() ?>assets/js/manager_products.js"></script>
   <script src="<?= base_url() ?>assets/js/manager_categories.js"></script>
+  <script src="<?= base_url() ?>assets/js/manager_shipments.js"></script>
+  <script src="<?= base_url() ?>assets/js/manager_payments.js"></script>-->
 
   <!--   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
 

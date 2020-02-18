@@ -56,7 +56,7 @@
     }
     .xstyle{
         background: #f8f9fa;
-    border-radius: 20px;
+        border-radius: 20px;
         margin-right: 8rem;
     }
     </style>
@@ -65,7 +65,7 @@
         <nav class="header-section " id="myHeader">
             <div class="container">
                 <a href="<?= base_url() ?>site/index" class="logo-header">
-                    <img src="<?= base_url() ?>assets/img/logo.png"  class="br100" alt="">
+                    <img src="<?= base_url() ?>assets/img/logo.png"  id="logo-main" class="br100" alt="">
                 </a>
                 <!--<ul class="main-menu-left site-menu-style">
 

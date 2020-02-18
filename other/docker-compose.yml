@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+
+  php:
+    image: jouo/php:7.4.2-apache-buster
+    ports:
+      - 80:80
+    networks:
+      - geem-network
+    volumes:
+      - ./:/var/www/html
+
+  mysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    networks:
+      - geem-network
+    environment:
+      MYSQL_ROOT_PASSWORD: S0mikolo09
+    volumes:
+      - geem-mysql:/var/lib/mysql
+
+volumes:
+    geem-mysql:
+       external: true
+
+networks:
+    geem-network:
+       external: true

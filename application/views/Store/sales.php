@@ -15,17 +15,17 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="about-img-box">
-                        <img src="<?= base_url($product[0]['IMAGEN_PRODUCTO']) ?>" alt="">
+                        <img src="<?= base_url($product['IMAGEN_PRODUCTO']) ?>" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6  d-lg-flex align-items-center p-0">
                     <div class="about-text-box-warp">
                         <div class="about-text">
-                            <h2><?= $product[0]['NOMBRE_PRODUCTO'] ?></h2>
+                            <h2><?= $product['NOMBRE_PRODUCTO'] ?></h2>
                             <p>
-                                <?= $product[0]['DESCRIPCION_PRODUCTO'] ?>
+                                <?= $product['DESCRIPCION_PRODUCTO'] ?>
                                 <br>
-                                $<?= $product[0]['PRECIO_PRODUCTO'] ?>
+                                $<?= $product['PRECIO_PRODUCTO'] ?>
                             </p>
                             <div class="form-group">
                                 <label for="RG_ID_TIPO_ENVIO" class="control-label text-left" style="color: white;">Tipo de envío</label>
@@ -48,7 +48,7 @@
                             </div>
                             <input type="hidden" name="ship_price" id="ship_price">
                             <p>
-                                Total: <div id="total_sale" style="color: white;"><?= $product[0]['PRECIO_PRODUCTO'] ?></div>
+                                Total: <div id="total_sale" style="color: white;"><?= $product['PRECIO_PRODUCTO'] ?></div>
                             </p>
 
 
@@ -79,7 +79,7 @@
                                         var shipment = document.getElementById("RG_ID_TIPO_ENVIO");
                                         var shipmentPrice = shipment.options[shipment.selectedIndex].value;
 
-                                        var itemPrice = <?php echo json_encode($product[0]['PRECIO_PRODUCTO'], JSON_HEX_TAG); ?>;
+                                        var itemPrice = <?php echo json_encode($product['PRECIO_PRODUCTO'], JSON_HEX_TAG); ?>;
 
                                         var total = parseInt(shipmentPrice) + parseInt(itemPrice);
 
@@ -88,11 +88,11 @@
                                                 amount: {
                                                     /*  Cantidad a cobrar
                                                     */
-                                                    value: '<?= $product[0]['PRECIO_PRODUCTO'] ?>'
+                                                    value: '<?= $product['PRECIO_PRODUCTO'] ?>'
                                                 },
                                                 /*  La descripcion que se manda durante la paga
                                                 */
-                                                description: '<?= $product[0]['DESCRIPCION_PRODUCTO'] ?>'
+                                                description: '<?= $product['DESCRIPCION_PRODUCTO'] ?>'
                                             }]
                                         });
                                     },
@@ -106,7 +106,7 @@
 
                                             return fetch('<?= base_url() ?>paypal/handleInformation/' +
                                                 data.orderID + '/' +
-                                                <?= $product[0]['ID_PRODUCTO'] ?> + '/' +
+                                                <?= $product['ID_PRODUCTO'] ?> + '/' +
                                                 '1' + '/' +
                                                 <?= $this->session->userdata("YOY_ID_USUARIO") ?>, {
                                                     method: 'post',
