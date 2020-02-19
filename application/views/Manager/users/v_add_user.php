@@ -8,7 +8,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -104,7 +103,7 @@
         <div class="modal-content">
             <div class="modal-header header-primary" id="modalHeaderAdvice"  >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalTitleAdvice">Usuario dado de alta</h4>
+                <h4 class="modal-title" id="modalTitleAdvice">Nuevo usuario</h4>
             </div>
             <div class="modal-body text-center" id="modBodyAddUser"></div>
             <div class="clear"></div>

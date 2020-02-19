@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -72,5 +71,4 @@ class Manager_categories extends CI_Controller {
         if ($this->mmanager_categories->disableCategory($this->input->post('ID_CATEGORY'))) echo 1;
         else echo 0;
     }
-
 }

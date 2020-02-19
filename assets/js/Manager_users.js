@@ -11,7 +11,7 @@ $(document).ready(function () {
             {
                 extend: 'csv',
                 text: 'Excel',
-                title: 'Productos',
+                title: 'Usuarios',
                 exportOptions: {
                     modifier: {
                         page: 'current'
@@ -66,9 +66,8 @@ $(document).ready(function () {
 
     $('body').on("click", ".btn-edit-user", function (e) {
         var ID_USUARIO = $(this).attr('data-id-user');
-        window.location.href = raiz_url + "Manager_users/form_config_edit_user/" + ID_USUARIO;
+        window.location.href = raiz_url + "Manager_users/form_config_edit_users/" + ID_USUARIO;
     });
-
 
     $('#btnCancelEditUser').on('click', function () {
         window.location.href = raiz_url + "Manager_users/users";
@@ -77,18 +76,16 @@ $(document).ready(function () {
     //EDIT USUARIO...
     $('#formEditUser').on('submit', function (e) {
         e.preventDefault();
+        $('#modEditUser').modal('toggle');
+        $('#modBodyEditUser').html('Guardando');
         $.ajax({
             url: raiz_url + "Manager_users/ajax_edit_user",
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
                 if (data > 0) {
-                    $('#modEditUser').modal('toggle');
-                    $('#modBodyEditUser').html('');
                     $('#modBodyEditUser').html('<b>! La información se actualizó correctamente ¡</b> ');
                 } else {
-                    $('#modEditUser').modal('toggle');
-                    $('#modBodyEditUser').html('');
                     $('#modBodyEditUser').html('<b>Hubo un error al realizar la operación...</b>');
                 }
             }
