@@ -1,4 +1,7 @@
-
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 <section class="page-info-sectionII set-bg">
     <!-- <h2>Your cart</h2> -->
 </section>
@@ -43,10 +46,10 @@
                </div>
             </div>
          <?php } ?>
-         </div>
+         </div><br>
          <input type="hidden" id="ID_PAGO">
          <input type="hidden" id="NOMBRE_PAGO">
-         <button type="button" id="FIN_CHOOSE_PAYMENT" class="btn btn-sale">confirmar compra</button>
+         <button type="button" id="FIN_CHOOSE_PAYMENT" class="btn btn-sale ml--15">confirmar compra</button>
       </div>
       <div class="col-lg-4">
          <div class="row justify-content-center">

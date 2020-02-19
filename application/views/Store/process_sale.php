@@ -13,6 +13,10 @@ if(count($Usuario_info))
    $phone = $Usuario_info->TELEFONO_USUARIO;
 }
 ?>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 <section class="page-info-sectionII set-bg"></section>
 
 <div class="container mt-container">
@@ -40,13 +44,16 @@ if(count($Usuario_info))
             </div>
          </div>
          <!-- Tipo envio -->
-         <div class="form-group row">
-            <label class="label-ship form-control" style=" background: none; border: none;">Tipo de envío</label>
+         <div class="form-group">
+            <div class="row">
+               <label class="label-ships" style=" background: none; border: none;">Tipo de <font class="color-yellow">envío  </font></label>
+               <div class="radio-ships checked"><input type="radio" name="type_ship" value="1" checked></div> 
+               <span class="label-ships" id="labelNacional">Nacional</span>
+               <div class="ml-10 radio-ships" ><input type="radio" name="type_ship" value="2"></div> 
+               <span class="label-ships" id="labelInteracional">Internacional</span>
 
-            <div class="radio-ships"><input type="radio" name="type_ship" value="1" checked></div> 
-            <span class="label-ships" id="labelNacional">Nacional</span>
-            <div class="ml-10 radio-ships" ><input type="radio" name="type_ship" value="2"></div> 
-            <span class="label-ships" id="labelInteracional">Internacional</span>
+            </div>
+
          </div>
          <!-- Opciones envio -->
          <label class="label-ship">Opciones de envío</label>
@@ -140,7 +147,7 @@ if(count($Usuario_info))
             </div>
             <div class="col-lg-10 col-lg-offset-1 mt-container">
               
-               <a class="btn btn-sale" id="FIN_CHOOSE_SHIP" href="">Continuar</a>
+               <a class="btn btn-sale ml--15" id="FIN_CHOOSE_SHIP" href="">Continuar</a>
             </div>
          </div>
       </div>

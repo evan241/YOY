@@ -2,17 +2,19 @@ $(document).ready(function () {
    /* SALE VIEW */
    $(".hover-img").hover(function () {
       let img = $(this).data('img');
+      $("#main_img").attr('src',img);
 
-      $('#main_img').fadeOut(300, function(){
+     /*  $('#main_img').fadeOut(300, function(){
          $(this).attr('src',img).bind('onreadystatechange load', function(){
                if (this.complete) $(this).fadeIn(100);
          });
-      });   
+      });    */
    })
    $("#FIN_CHOOSE_SHIP").click(function (e) {
       e.preventDefault();
 
-      if ($('input[name=type_ship]:checked').val() == 1) { checked("input[name='shipNacional']") }
+      if ($('input[name=type_ship]:checked').val() == 1)
+           { checked("input[name='shipNacional']") }
       else { checked("input[name='shipInternacional']") }
 
       let id = $("#ID_SHIP").val();
@@ -27,9 +29,9 @@ $(document).ready(function () {
          data: {
             id: id,
             type: type_ship,
-            product: id_product,
+            total: total_final,
             envio: precio_envio,
-            total: total_final
+            product: id_product,
          },
          success: function (res) {
             if (res === 'error') {
@@ -58,7 +60,8 @@ $(document).ready(function () {
             if (res === 'error') {
                alert('No seleccionó el tipo de pago');
             } else {
-               window.location.replace(raiz_url + "Store/resume/" + res);
+             window.location.replace(raiz_url + "Store/resume/" + res);
+           
             }
          }
       }); 
@@ -70,31 +73,44 @@ $(document).ready(function () {
    $('input[name=type_ship]').on('change', function() {
       let val = $('input[name=type_ship]:checked').val();
       if (val === 1){
-         if ($("#Nacional").hasClass('hide')) {
+         if ($("#Nacional").hasClass('hide'))
+         {
             $(this).removeClass('hide');
-            $("#Internacional").addClass('hide');
-            $("#labelNacional").addClass('color-yellow');
+            $("#Internacional").addClass('hide');           
             $("input[name=shipInternacional]").prop('checked',false);
             $(".circle-opt").removeClass('checked-input');
+            
+            $("#PRECIO_ENVIO").html('$0.00');
+            get_total(precio_product,0);
          }else{
             $(this).addClass('hide');
             $("#Internacional").removeClass('hide');
+
+            $("#PRECIO_ENVIO").html('$0.00');
+            get_total(precio_product,0);
          }
       }else{
-         if ($("#Internacional").hasClass('hide')) {
+         if ($("#Internacional").hasClass('hide'))
+         {
             $("#Nacional").addClass('hide');
             $("#Internacional").removeClass('hide');
-            $("input[name=shipNacional]").prop('checked',false);
             $(".circle-opt").removeClass('checked-input');
-
+            $("input[name=shipNacional]").prop('checked',false);
+            $("input[name=shipInternacional]").prop('checked',false);
+            
+            $("#PRECIO_ENVIO").html('$0.00');
+            get_total(precio_product,0);
          } else {
             $("#Nacional").removeClass('hide');
             $("#Internacional").addClass('hide');
+
+            $("#PRECIO_ENVIO").html('$0.00');
+            get_total(precio_product,0);
          }
       }
    })
 
-   $("#FIN_CHOOSE_PAYMENT").click(function(e){        
+   /*$("#FIN_CHOOSE_PAYMENT").click(function(e){        
      
       checked_payment("input[name='payment']") ;
 
@@ -114,7 +130,7 @@ $(document).ready(function () {
             }
          } 
       });
-   })
+   }) */
 
    $("body").on('click','.pointer',function()
    {

@@ -66,6 +66,7 @@ class Store extends CI_Controller {
         $this->load->view('esqueleton/footer');
     }
      public function resume($id) {
+         
          $Sale = $this->mstore->get_sale($id);
          /* $Product = $Sale->ID_PRODUCTO; */
          

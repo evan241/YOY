@@ -60,7 +60,7 @@ class Mstore extends CI_Model {
                 $data = array(
                     'ID_USUARIO' => $this->session->userdata('YOY_ID_USUARIO'),
                     'ID_PRODUCTO' => $this->session->userdata('TEMP_CHOSSE_ID_PRODUCTO'),
-                    'FECHA_VENTA' => date("Y-m-d H:i"),
+                    'TOTAL_VENTA' => substr($this->session->userdata('TEMP_CHOSSE_TOTAL'), 1,11),
                     'STATUS_VENTA' => 1,
                     'ID_MEDIO_PAGO' => $this->session->userdata('TEMP_CHOSSE_ID_PAYMENT'),
                     'ID_TIPO_ENVIO' => $this->session->userdata('TEMP_CHOSSE_ID_ENVIO'),
@@ -72,7 +72,9 @@ class Mstore extends CI_Model {
                 $this->db->insert('venta', $data);
                 $id = $this->db->insert_id();
                 $this->db->where('ID_VENTA', $id);
-                $id_uniq = uniqid($id);
+
+                $key = rand(1,99);
+                $id_uniq = substr(uniqid($key), 0,10);
                 $this->db->update('venta', array('ID_SALE'=> $id_uniq));
 
                 return $id_uniq;
@@ -89,7 +91,9 @@ class Mstore extends CI_Model {
 
     function get_sale($id){
         try {
-            return $this->db->get_where('venta', array('ID_SALE' => $id))->row();
+            $row =  $this->db->get_where('venta', array('ID_SALE' => $id))->row();
+
+            return $row;
             
         } catch (\Throwable $th) {
             //throw $th;

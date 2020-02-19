@@ -69,32 +69,10 @@
                        </div>
                     </p>
                     <div>
-                        <?php $sale = $this->uri->segment(3);?>
-                        <a href="<?=base_url('Store/proccess_sale/' . $sale);?>" class="btn btn-sale">Comprar ahora</a>
+                        
+                        <a href="<?=base_url('Store/proccess_sale/' . $product['ID_PRODUCTO']);?>" class="btn btn-sale">Comprar ahora</a>
                     </div>
-                  <!--   <div class="form-group">
-                        <label for="RG_ID_TIPO_ENVIO" class="control-label text-left" style="color: white;">Tipo de envío</label>
-                        <select name="RG_ID_TIPO_ENVIO" id="RG_ID_TIPO_ENVIO" class="form-control">
-                            <?php
-                            if ($ROW_SHIPS) {
-                            echo '<option value="">Seleccionar</option>';
-                            foreach ($ROW_SHIPS as $ROW) {
-                                ?>
-                                    <option value="<?=$ROW['ID_TIPO_ENVIO']?>"><?=mb_strtoupper($ROW['NOMBRE_TIPO_ENVIO']) . " $" . $ROW['PRECIO_TIPO_ENVIO']?></option>
-                                    <?php
-                            }
-                            } else {
-                            ?>
-                                <option value="-1">No existen registros</option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <input type="hidden" name="ship_price" id="ship_price">
-                    <p>
-                        Total: <div id="total_sale" style="color: white;"><?=$product['PRECIO_PRODUCTO']?></div>
-                    </p> -->
+             
 
 
                     <!-- Boton de Paypal -->
