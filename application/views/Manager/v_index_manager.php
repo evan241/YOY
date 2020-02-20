@@ -1,7 +1,6 @@
 <?php
 $asd = [1, 2, 3];
 ?>
-
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-3"></div>
     <div class="col-xl-3 col-sm-6">

@@ -15,8 +15,7 @@ class Manager_news extends CI_Controller {
         if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
 
         $data['ROWS'] = $this->mmanager_news->get_all_news();
-
-        $this->load->view('esqueleton/header_manager', getActive("classNews"));https://github.com/evan241/YOY
+        $this->load->view('esqueleton/header_manager', getActive("classNews"));
         $this->load->view('Manager/News/v_manager_news', $data);
         $this->load->view('esqueleton/footer_manager');
     }
@@ -34,7 +33,6 @@ class Manager_news extends CI_Controller {
         if (($id <= 0) || ($id == NUlL)) redirect('manager_news/news');
 
         $data['ROWS'] = $this->mmanager_news->get_news_by_id($id);
-
         $this->load->view('esqueleton/header_manager');
         $this->load->view('Manager/News/v_manager_edit_new', $data);
         $this->load->view('esqueleton/footer_manager');
@@ -70,7 +68,7 @@ class Manager_news extends CI_Controller {
             || ($_FILES["image"]["type"] == "image/jpg")
             || ($_FILES["image"]["type"] == "image/png")
             || ($_FILES["image"]["type"] == "image/gif")) {
-            if (move_up
+            if (move_up){
                 echo base_url() . 'assets/img/news/'. $_FILES['image']['name'];
             } else {
                 echo '1';

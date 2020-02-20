@@ -50,7 +50,7 @@ class Site extends CI_Controller {
 
     public function news($id = NULL) {
         
-        $data['ROWS'] = $this->mmanager_news->get_all_news();
+        $data['ROWS'] = $this->Mmanager_news->get_all_news();
         $data['ID'] = $id;
 
         $this->load->view('esqueleton/header', $data);
