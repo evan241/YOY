@@ -62,9 +62,11 @@
  
 @media screen and (min-width: 768px)
 { 
-    .modal{
-        text-align:center;
-    }
+    .modal{text-align:center; }
+    .pd-left0{padding-left:5px}
+    .pd-right0{padding-right:0px}
+    .pick-img{ border-radius:10px;} 
+   
     .modal:before {
         display: inline-block;
         vertical-align: middle;
@@ -75,10 +77,6 @@
         padding-left: 5px;
         padding-right: 25px;
     }
-    .pd-right0{padding-right:0px}
-    .pick-img{ border-radius:10px;} 
-               
-   
     .img-responsive{
         display: block;
         width: 75%;
@@ -92,44 +90,32 @@
     #pick-main{ height:280px !important}
     #logo-main{display:none;}
 }
-.btn-circle{
-        border-radius:50%;
-        font-size:12px;
-        outline:0
-    } 
-    .modal-content{
-        background: transparent;
-        border: 0px;
-    }
-    .modal-footer{
-        /* background:#b3d7ff; */
-        background: #dee2e6;
-        border-radius: 10px;
-    }
-    .pick-img{
-        border-radius:10px;
-    }
-    .btn-black{
-        background: #333;
-        color:white;
-    }
-    .btn-black:hover{
-        background: #333;
-        color:#07ff5f;
-    }
-    #videox{
-        border-radius: 10px;
-        outline: 0;
-    }
-   
-   .modal-dialog {
-      display: inline-block;
-      text-align: left;
-      vertical-align: middle;
-   }
-   .bg-black{
-        background: #000000bd;
-   }
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+.modal-content{
+    background: transparent;
+    border: 0px;
+}
+.modal-footer{
+    /* background:#b3d7ff; */
+    background: #dee2e6;
+    border-radius: 10px;
+}
+
+
+#videox{ border-radius: 10px; outline: 0;}
+
+.pick-img{border-radius:10px;}
+.bg-black{ background: #000000bd;}
+.btn-black{background: #333; color:white;}
+.btn-black:hover{background: #333;color:#07ff5f;}
+.btn-circle{border-radius:50%; font-size:12px; outline:0} 
+
+
 </style>
 <!-- Portfilio section -->
 <div class="container-fluid">
@@ -143,9 +129,9 @@
             <img src="<?= base_url() ?>assets/img/works/1.jpeg" width="100%"height="545px" id="pick-main" class="pick-img"> 
         </div>
         <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
-        <div class="col-lg-6"><br>
+        <div class="col-lg-6 pd-left0"><br>
             <div class="row">            
-            <div id="img-1" class="col-lg-6 text-center thumbnail form-group" data-image-id="2" 
+            <div id="img-1" class="col-lg-6 text-right thumbnail form-group" data-image-id="2" 
              data-toggle="modal" 
              data-title="Mesa perritos 2" 
              data-caption="Mesa perritos 2" 
@@ -167,7 +153,7 @@
 
             </div>    
             <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
-            <div id="img-3" class="col-lg-6 text-center thumbnail form-group" data-image-id="4" 
+            <div id="img-3" class="col-lg-6 text-right thumbnail form-group" data-image-id="4" 
             data-toggle="modal" 
              data-title="Mesa perritos 4" 
              data-caption="Mesa perritos 4" 
@@ -192,53 +178,7 @@
     </div>
 </div>
 
-   <!--  <div class="portfolio-gallery">
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/1.jpg">
-            <a href="<?= base_url() ?>assets/img/works/1.jpg" class="portfolio-view">Equipal Pavo</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/2copy.jpg">
-            <a href="<?= base_url() ?>assets/img/works/2copy.jpg" class="portfolio-view">Equipal Arco</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/2.jpg">
-            <a href="<?= base_url() ?>assets/img/works/2.jpg" class="portfolio-view">Equipal Pavo</a>
-        </div>
-
-
-        <div class="portfolio-item --big set-bg" data-setbg="<?= base_url() ?>assets/img/works/6.jpg">
-            <a href="<?= base_url() ?>assets/img/works/6.jpg" class="portfolio-view">Equipal Pavo</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/3.jpg">
-            <a href="<?= base_url() ?>assets/img/works/3.jpg" class="portfolio-view">Equipal Arco</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/5.jpg">
-            <a href="<?= base_url() ?>assets/img/works/5.jpg"></a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/4.jpg">
-            <a href="<?= base_url() ?>assets/img/works/4.jpg" class="portfolio-view">Equipal Arco</a>
-        </div>
-        <div class="portfolio-item --big set-bg" data-setbg="<?= base_url() ?>assets/img/works/7.jpg">
-            <a href="<?= base_url() ?>assets/img/works/7.jpg" class="portfolio-view">Equipal Arco</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/8.jpg">
-            <a href="<?= base_url() ?>assets/img/works/8.jpg" class="portfolio-view">Silla Lienzo</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/9.jpg">
-            <a href="<?= base_url() ?>assets/img/works/9.jpg" class="portfolio-view">Silla Lienzo</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/10.jpg">
-            <a href="<?= base_url() ?>assets/img/works/10.jpg" class="portfolio-view">Silla Lienzo</a>
-        </div>
-        <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/11.jpg">
-            <a href="<?= base_url() ?>assets/img/works/11.jpg" class="portfolio-view">Silla Lienzo</a>
-        </div>
-         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/5.jpg">
-            <a href="<?= base_url() ?>assets/img/works/5.jpg"></a>
-        </div>
-    </div> -->
-
-<!-- Portfilio section end -->
 <br>
-
 
 <!-- Shop section  -->
 <section class="shop-section">
@@ -297,11 +237,11 @@
             <div class="modal-footer">
 
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-black btn-circle" id="show-previous-image"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-black btn-circle btn-nextprev" id="show-previous-image"><i class="fas fa-chevron-left"></i></button>
                 </div>
 
                 <div class="col-md-8 text-justify" id="image-gallery-caption">
-                    This text will be overwritten by jQuery
+                    Descripción
                 </div>
 
                 <div class="col-md-2 text-right pd-right0">
@@ -318,18 +258,12 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="image-gallery-title"></h4>
             </div> -->
-            <div class="modal-body text-cemter">
-              
-               <!--  <video  controls autoplay="autoplay">
-                    <source src="<?= base_url('assets/img/Yoy.mp4');?>"  type="video/mp4">                               
-                </video>  -->
-             
+            <div class="modal-body text-cemter">                          
                 <video id="videox" width="100%" autoplay controls>
                     <source src="<?= base_url('assets/img/Yoy.mp4');?>" type="video/mp4" />
                     Your browser does not support the video tag or the file format of this video.
                 </video>
-            </div> 
-          
+            </div>           
         </div>
     </div>
 </div>

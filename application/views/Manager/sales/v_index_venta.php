@@ -1,45 +1,13 @@
 <style>
-    table.dataTable.no-footer {
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    table.dataTable thead th,
-    table.dataTable thead td {
-
-        border-bottom-color:#dee2e6
-    }
-
-    table.dataTable thead th,
-    table.dataTable tfoot th {
-        font-weight: 600;
-        letter-spacing:0.5px;
-        text-transform:uppercase;
-        font-size:12px;
-        color:#333
-    }
-
     #dataVentas_filter input {
         outline: 0px;
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 5px;
     }
-    .dt-filter{margin-top:10px;padding-left: 15px;}
-
     #dataVentas_length{
         margin-left: 15px ;
     }
-    .dataTables_length select {
-        border-radius: 5px;
-        padding: 5px;
-
-    }
-
-    .paginate_button.current {
-        background: #ccc !important;
-        color: white !important;
-    }
-
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -48,7 +16,7 @@
                 <h2>VENTAS</h2>
             </div>
             <div class="card-body">
-                <form id="formSearchCuentas" action="<?= base_url(); ?>Reportes/cuentas" method="post">
+                <form id="formSearchCuentas" action="<?= base_url(); ?>Manager_sales/sales" method="post">
                     <input type="hidden" name="RG_BUSCAR" id="RG_BUSCAR" value="1">
                     <div class="row">
                         <div class='col-md-4' style="text-align: left">
@@ -110,7 +78,7 @@
                                     <tr>
                                         <td><b><?= $sale['ID_VENTA'] ?></b></td>
                                         <td>
-                                            <button id="btnViewSale" class="btn btn-primary btn-view-user " data-original-title="Ver info de venta" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-sale="<?= $sale['ID_VENTA'] ?>">
+                                            <button id="btnViewSale" class="btn btn-primary btn-view-sale " data-original-title="Ver info de venta" data-toggle="tooltip" style=" padding: 2px 5px !important;" data-id-sale="<?= $sale['ID_VENTA'] ?>">
                                                 <i class="fa fa-eye fa-1x" aria-hidden="true"></i>
                                             </button>
                                             <?php if ($sale['STATUS_VENTA'] != CANCELADA) { ?>

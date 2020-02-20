@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h3 class="float-left">News</h3>
+            <h3 class="float-left">Noticias</h3>
             <div class="float-right">
                 <a href="<?= base_url(); ?>manager_news/add_news" class="btn btn-primary"><span class="fa fa-plus"></span> Añadir nueva</a>
             </div>

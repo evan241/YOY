@@ -21,8 +21,8 @@ class Manager_sales extends CI_Controller {
             redirect('login/salir');
 
         if ($this->input->post("RG_BUSCAR") == 1) {
-            $dates['fechaini'] = convierte_fecha($this->input->post("RG_FECHA_INICIAL")) . " 00:00:00";
-            $dates['fechafin'] = convierte_fecha($this->input->post("RG_FECHA_FINAL")) . " 23:59:59";
+            $dates['fechaini'] = convierte_fecha($this->input->post("RG_FECHA_INICIAL"));
+            $dates['fechafin'] = convierte_fecha($this->input->post("RG_FECHA_FINAL"));
             $data['fechaini'] = $this->input->post("RG_FECHA_INICIAL");
             $data['fechafin'] = $this->input->post("RG_FECHA_FINAL");
         } else {
@@ -30,12 +30,12 @@ class Manager_sales extends CI_Controller {
             $year = date('Y');
             $fechaini = date('d/m/Y', mktime(0, 0, 0, $month, 1, $year));
             $fechafin = date('d/m/Y');
-            $dates['fechaini'] = convierte_fecha($fechaini) . " 00:00:00";
-            $dates['fechafin'] = convierte_fecha($fechafin) . " 23:59:59";
+            $dates['fechaini'] = convierte_fecha($fechaini);
+            $dates['fechafin'] = convierte_fecha($fechafin);
             $data['fechaini'] = $fechaini;
             $data['fechafin'] = $fechafin;
         }
-        $data['sales'] = $this->mmanager_sales->get_all_sales();
+        $data['sales'] = $this->mmanager_sales->get_all_sales_by_dates($dates);
 
         $this->load->view('esqueleton/header_manager', getActive("classSal"));
         $this->load->view('Manager/sales/v_index_venta', $data);
@@ -52,12 +52,11 @@ class Manager_sales extends CI_Controller {
             echo 0;
     }
 
-    public function ajax_get_user($id) {
-        if ((!$this->input->is_ajax_request()) ||
-                ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)))
+    public function ajax_get_sale($id) {
+        if ((!$this->input->is_ajax_request()) || ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)))
             redirect('login/salir');
 
-        print_r($this->mmanager_clients->get_client_by_id($id));
+        print_r($this->mmanager_sales->get_sale_by_id($id));
     }
 
     public function ajax_paypal_info($id) {

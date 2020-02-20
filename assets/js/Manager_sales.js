@@ -1,8 +1,7 @@
-
 var asInitVals = new Array();
 $(document).ready(function () {
     var date = new Date();
-    var currentYear = date.getFullYear();
+    //var currentYear = date.getFullYear();
 
     /*INICIALIZACION DE CALENDARIO EN ESPAÑOL*/
     $.fn.datepicker.dates['es'] = {
@@ -20,8 +19,6 @@ $(document).ready(function () {
     });
 
     $('#dataVentas').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        //"iDisplayLength": 30,
-        //"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
         "iDisplayLength": 25,
         "aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
         "bDestroy": true,
@@ -32,7 +29,7 @@ $(document).ready(function () {
             {
                 extend: 'csv',
                 text: 'Excel',
-                title: 'Productos',
+                title: 'Ventas',
                 exportOptions: {
                     modifier: {
                         page: 'current'
@@ -61,7 +58,6 @@ $(document).ready(function () {
         }
     });
 
-
     $('body').on("click", ".btn-paypal-sale", function (e) {
 
         var ID_ORDER = $(this).attr('data-id-paypal');
@@ -83,13 +79,13 @@ $(document).ready(function () {
     });
 
 
-    $('body').on("click", ".btn-view-user", function (e) {
+    $('body').on("click", ".btn-view-sale", function (e) {
 
-        var ID_USUARIO = $(this).attr('data-id-user');
-        if (ID_USUARIO > 0) {
+        var ID_VENTA = $(this).attr('data-id-sale');
+        if (ID_VENTA > 0) {
 
             $.ajax({
-                url: raiz_url + "manager_sales/ajax_get_user/" + ID_USUARIO,
+                url: raiz_url + "manager_sales/ajax_get_sale/" + ID_VENTA,
                 type: 'POST',
                 data: $(this).serialize(),
 
