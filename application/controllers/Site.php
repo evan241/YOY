@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
-   
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 class Site extends CI_Controller {
 
@@ -9,8 +9,7 @@ class Site extends CI_Controller {
         parent::__construct();
         $this->load->model('Mmanager_news');
     }
-    
-    
+
     public function index() {
         if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
             redirect('manager/index');
@@ -44,13 +43,13 @@ class Site extends CI_Controller {
         $data['logo2'] = base_url() . "assets/images/logo2.png";
 
         $this->load->view('esqueleton/header', $data);
-        $this->load->view('contacto');
+        $this->load->view('contact/v_index_contact');
         $this->load->view('esqueleton/footer');
     }
 
     public function news($id = NULL) {
-        
-        $data['ROWS'] = $this->mmanager_news->get_all_news();
+
+        $data['ROWS'] = $this->Mmanager_news->get_all_news();
         $data['ID'] = $id;
 
         $this->load->view('esqueleton/header', $data);
@@ -63,15 +62,50 @@ class Site extends CI_Controller {
 
         $this->load->view('esqueleton/footer');
     }
-}
 
+    public function send_mail() {
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'tls://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'erick.evangelista87@gmail.com',
+            'smtp_pass' => 'EdyXellE2011',
+            'wordwrap' => true
+        );
+        $data = array(
+            'Nombre' => $this->input->post("nombre"),
+            'Telefono' => $this->input->post("telefono"),
+            'Email' => $this->input->post("e-mail"),
+            'Mensaje' => $this->input->post("mensaje")
+        );
+
+        //load email library
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        //set email information and content
+        $this->email->from('erick.evangelista87@gmail.com', 'Administración');
+        $this->email->to('gilbertomunizs@hotmail.com');
+        $this->email->subject('YOY CONTACT');
+         $this->email->message($this->load->view('contact/emailContact', $data, true));
+           
+
+        $this->email->set_mailtype('html');
+
+        $this->email->send();
+
+        echo true;
+        
+    }
+
+}
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Controllername extends CI_Controller {
 
-    public function index()
-    {
+    public function index() {
         
     }
 
