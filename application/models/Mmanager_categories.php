@@ -9,7 +9,7 @@ class Mmanager_categories extends CI_Model {
     function get_all_valid_categories(){
         try {
             $this->db->select("*");
-            $this->db->from('CATEGORIA');
+            $this->db->from('categoria');
             $this->db->where('VIGENCIA_CATEGORIA',VIGENTE);
             $this->db->order_by('ID_CATEGORIA', 'ASC');
             return $this->db->get()->result_array();

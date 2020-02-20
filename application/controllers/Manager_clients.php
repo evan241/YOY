@@ -2,10 +2,11 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Manager_Clients extends CI_Controller {
+class Manager_clients extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+
         $this->load->model('mmanager');
         $this->load->model('mmanager_clients');
         $this->load->helper('general');
@@ -52,7 +53,7 @@ class Manager_Clients extends CI_Controller {
 
 
     public function ajax_add_client() {
-        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
+        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR))
             redirect('manager/index');
 
         $data = array(
@@ -71,7 +72,7 @@ class Manager_Clients extends CI_Controller {
 
 
     public function ajax_edit_client() {
-        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
+        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR))
             redirect('manager/index');
 
         $user = array(
@@ -82,7 +83,7 @@ class Manager_Clients extends CI_Controller {
             'EMAIL_USUARIO' => strtolower(trim($this->input->post("RG_EMAIL_USUARIO"))),
             'PASSWD_USUARIO' => $this->encryption->encrypt(trim($this->input->post("RG_PASSWORD_USUARIO")))
         );
-        
+
         $id = trim($this->input->post("RG_ID_USUARIO"));
 
         if ($this->mmanager_clients->edit_client_on_db($user, $id)) echo 1;
@@ -91,7 +92,7 @@ class Manager_Clients extends CI_Controller {
 
 
     public function ajax_disable_client() {
-        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR)) 
+        if (!$this->input->is_ajax_request() || ($this->session->userdata('YOY_ID_ROL') != ADMINISTRADOR))
             redirect('manager/index');
 
         if ($this->mmanager_clients->disable_client_on_db($this->input->post("ID_USUARIO"))) echo 1;

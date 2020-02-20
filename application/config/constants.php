@@ -47,6 +47,7 @@ define('SIN_VERIFICAR', 2);
 define('PAGO_VERIFICADO', 3);
 define('ENVIADO', 4);
 define('RECIBIDO', 5);
+define('CANCELADA', 6);
 
 /*
 |--------------------------------------------------------------------------

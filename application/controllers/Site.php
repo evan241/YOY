@@ -7,7 +7,7 @@ class Site extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('mmanager_news');
+        $this->load->model('Mmanager_news');
     }
     
     
