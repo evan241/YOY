@@ -25,6 +25,9 @@ $idProduct = $infoSale->ID_PRODUCTO;
 $Product = $CI->db->select('PRECIO_PRODUCTO')->get_where('producto',array('ID_PRODUCTO'=>$idProduct))->row();
 $PrecioProduct= $Product->PRECIO_PRODUCTO;
 
+$ID_VENTA = $infoSale->ID_VENTA;
+
+
 ?>
 <style>
    .form-group{margin-bottom:10px}
@@ -37,7 +40,8 @@ $PrecioProduct= $Product->PRECIO_PRODUCTO;
     <!-- <h2>Your cart</h2> -->
 </section>
 <div class="container mt-container">
-   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE;?></h4><br>
+   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE." "; echo $ID_VENTA;
+?></h4><br>
    <div class="row">
       <div class="col-lg-8">
             <div class="form-group">            
@@ -106,7 +110,7 @@ $PrecioProduct= $Product->PRECIO_PRODUCTO;
                 
                </div>
             </div><br>
-            <div class="col-lg-12">
+            <div class="">
                <div class="project ml-10 ">
                   <div class="task pending"><img src="https://static.thenounproject.com/png/99630-200.png" width="80%" style="margin-top: .3em;margin-left: .2em;"></div>
                   <div class="progress"><div> </div> </div>

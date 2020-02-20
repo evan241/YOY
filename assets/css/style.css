@@ -65,13 +65,19 @@
    .border-bottomx{border-bottom: 2px solid #343a40;}
    .pointer{cursor:pointer}
    #dir{overflow: hidden;text-overflow:ellipsis;white-space: pre;}
-
+#paypal-button-container{
+	 margin-left: -40px;padding-top: 8px;}
+    
    .label-ship{font-size: 15px;
     text-transform: uppercase;
     font-weight: 600;
     color: white;
     letter-spacing: 1px;margin-top:4%;
 	}
+	/* .PaymentPaypal{
+		height:55px;
+		  transition: width 2s, height 1s;
+	} */
 	.label-ships{font-size: 16px;
 		text-transform: uppercase;
 		font-weight: 600;

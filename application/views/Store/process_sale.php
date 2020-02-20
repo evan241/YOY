@@ -44,12 +44,12 @@ if(count($Usuario_info))
             </div>
          </div>
          <!-- Tipo envio -->
-         <div class="form-group">
+         <div style="margin-top: 35px;margin-bottom: -20px;">
             <div class="row">
                <label class="label-ships" style=" background: none; border: none;">Tipo de <font class="color-yellow">envío  </font></label>
-               <div class="radio-ships checked"><input type="radio" name="type_ship" value="1" checked></div> 
+               <div id="typeShip1"class="radio-ships checked"><input type="radio" name="type_ship" value="1" checked></div> 
                <span class="label-ships" id="labelNacional">Nacional</span>
-               <div class="ml-10 radio-ships" ><input type="radio" name="type_ship" value="2"></div> 
+               <div id="typeShip2"class="ml-10 radio-ships" ><input type="radio" name="type_ship" value="2"></div> 
                <span class="label-ships" id="labelInteracional">Internacional</span>
 
             </div>

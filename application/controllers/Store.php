@@ -68,13 +68,20 @@ class Store extends CI_Controller {
      public function resume($id) {
          
          $Sale = $this->mstore->get_sale($id);
-         /* $Product = $Sale->ID_PRODUCTO; */
-         
-         $data['infoSale'] =$this->mstore->get_sale($id);
-         $data['product'] = $this->mmanager_products->get_product_by_id(2);
+         if (count($Sale)){
+            $Product = $Sale->ID_PRODUCTO;
+            $data['infoSale'] = $this->mstore->get_sale($id);
+            $data['product'] = $this->mmanager_products->get_product_by_id($Product);
 
-        $this->load->view('esqueleton/header');
-        $this->load->view('store/resume_sale', $data);
-        $this->load->view('esqueleton/footer');
+            $this->load->view('esqueleton/header');
+            $this->load->view('store/resume_sale', $data);
+            $this->load->view('esqueleton/footer');
+
+         }else{
+            
+            redirect(base_url('Store/index'),'refresh');
+            
+         }
+         
     }
 }

@@ -73,6 +73,7 @@ $(document).ready(function () {
    $('input[name=type_ship]').on('change', function() {
       let val = $('input[name=type_ship]:checked').val();
       if (val === 1){
+
          if ($("#Nacional").hasClass('hide'))
          {
             $(this).removeClass('hide');
@@ -80,6 +81,9 @@ $(document).ready(function () {
             $("input[name=shipInternacional]").prop('checked',false);
             $(".circle-opt").removeClass('checked-input');
             
+            $("#typeShip1").addClass('checked');
+            $("#typeShip2").removeClass('checked');
+
             $("#PRECIO_ENVIO").html('$0.00');
             get_total(precio_product,0);
          }else{
@@ -90,6 +94,7 @@ $(document).ready(function () {
             get_total(precio_product,0);
          }
       }else{
+         
          if ($("#Internacional").hasClass('hide'))
          {
             $("#Nacional").addClass('hide');
@@ -98,9 +103,15 @@ $(document).ready(function () {
             $("input[name=shipNacional]").prop('checked',false);
             $("input[name=shipInternacional]").prop('checked',false);
             
+            $("#typeShip2").addClass('checked');
+            $("#typeShip1").removeClass('checked');
+
             $("#PRECIO_ENVIO").html('$0.00');
             get_total(precio_product,0);
          } else {
+            $("#typeShip1").addClass('checked');
+            $("#typeShip2").removeClass('checked');
+             
             $("#Nacional").removeClass('hide');
             $("#Internacional").addClass('hide');
 
@@ -134,6 +145,14 @@ $(document).ready(function () {
 
    $("body").on('click','.pointer',function()
    {
+      if($(this).hasClass('PaymentPaypal')){
+         $("#imgPaypal").hide();
+         $("#paypal-button-container").show();
+      }else{
+         $("#imgPaypal").show();
+         $("#paypal-button-container").hide();
+      }
+
       var divID = "#"+$(this).attr('id');
       var input = divID +" input"; 
       var circle = divID + " .circle-opt";
@@ -152,6 +171,8 @@ $(document).ready(function () {
       $(circle).addClass(checked);       
       
       get_total(precio_producto,precio_envio);
+
+      
    });
 
    function checked(name){
