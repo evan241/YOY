@@ -12,6 +12,11 @@
 
 <!-- Portfolio section -->
 <div class="portfolio-page-section">
+    <div class="hero-social-links">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+    </div>
     <div class="portfolio-gallery">
         <div class="portfolio-item set-bg" data-setbg="<?= base_url() ?>assets/img/works/1.jpg">
             <a href="<?= base_url() ?>assets/img/works/1.jpg" class="portfolio-view">Name</a>
@@ -48,24 +53,3 @@
     </div>
 </div>
 <!-- Portfolio section end -->
-
-
-<!-- Newslatter section -->
-<section class="newsletter-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 text-white">
-                <h3>Sign up to our Newsletter</h3>
-            </div>
-            <div class="col-lg-9">
-                <form class="newsletter-form">
-                    <input type="text" placeholder="Your E-mail">
-                    <button class="site-btn sb-white">subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Newslatter section end -->
-
-
