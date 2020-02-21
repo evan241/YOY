@@ -222,23 +222,6 @@
 <!-- Shop section end -->
 
 
-<!-- Newslatter section -->
-<section class="newsletter-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 text-white">
-                <h3>Sign up to our Newsletter</h3>
-            </div>
-            <div class="col-lg-9">
-                <form class="newsletter-form">
-                    <input type="text" placeholder="Your E-mail">
-                    <button class="site-btn sb-white">subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Newslatter section end -->
 <div class="modal fade bg-black" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
