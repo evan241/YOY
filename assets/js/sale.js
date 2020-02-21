@@ -144,14 +144,7 @@ $(document).ready(function () {
    }) */
 
    $("body").on('click','.pointer',function()
-   {
-      if($(this).hasClass('PaymentPaypal')){
-         $("#imgPaypal").hide();
-         $("#paypal-button-container").show();
-      }else{
-         $("#imgPaypal").show();
-         $("#paypal-button-container").hide();
-      }
+   {      
 
       var divID = "#"+$(this).attr('id');
       var input = divID +" input"; 

@@ -18,7 +18,7 @@ $shipPrice = $shipping->PRECIO_TIPO_ENVIO;
 
 $idPayment = $infoSale->ID_MEDIO_PAGO;
 $typePayment= $CI->db->select('NOMBRE_MEDIO_PAGO,SRC_IMG')->get_where('medio_pago',array('ID_MEDIO_PAGO'=>$idPayment))->row();
-$payment = $typePayment->NOMBRE_MEDIO_PAGO;
+$payment = ($idPayment == 4) ? "<div id='paypal-button-container'></div>" : "Cuenta Bancaria a depositar: 95e4ce70b4qtl43o9x";
 $imgPayment = $typePayment->SRC_IMG;
 
 $idProduct = $infoSale->ID_PRODUCTO;
@@ -26,22 +26,19 @@ $Product = $CI->db->select('PRECIO_PRODUCTO')->get_where('producto',array('ID_PR
 $PrecioProduct= $Product->PRECIO_PRODUCTO;
 
 $ID_VENTA = $infoSale->ID_VENTA;
-
-
 ?>
 <style>
    .form-group{margin-bottom:10px}
    .style-ship {padding: 8px 0px;}
 </style>
 
-
-<div id="preloder"><div class="loader"></div></div>
+<div id="preloder">
+   <div class="loader"></div>
+</div>
 <section class="page-info-sectionII set-bg">
-    <!-- <h2>Your cart</h2> -->
 </section>
 <div class="container mt-container">
-   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE." "; echo $ID_VENTA;
-?></h4><br>
+   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE." "; echo $ID_VENTA;?></h4><br>
    <div class="row">
       <div class="col-lg-8">
             <div class="form-group">            
@@ -81,35 +78,25 @@ $ID_VENTA = $infoSale->ID_VENTA;
                   <div class="col-lg-2 form-group">
                      <div>Código Postal <?= $cp ?></div>
                   </div>
-                    <!-- ACCOUNT -->
-                  <div class="col-lg-2 align-middle form-group">                     
-                     <img src="https://cdn3.iconfinder.com/data/icons/kommerze/90/personal-512.png" width="50%">
-                  </div>
-                  <div class="col-lg-8 form-group">
-                     <div>
-                        <p>Cuenta Bancaria a depositar: 95e4ce70b4qtl43o9x</p>                        
-                     </div>
-                  </div>
-                  <div class="col-lg-2 form-group">
-                     <div>TOTAL: $<?=$infoSale->TOTAL_VENTA;?></div>
-                  </div>          
-                
+              
                   <!-- PAYMENT -->
                   <div class="col-lg-2 align-middle form-group">                     
-                     <img src="https://cdn1.iconfinder.com/data/icons/business-finance-1-1/128/buy-with-cash-512.png" width="50%">
+                    <img src="<?=$imgPayment?>" width="50%">
                   </div>
                   <div class="col-lg-8 form-group">
-                     <div>
-                        <p><?=$payment?></p>                        
+                     <div class="col-lg-6">
+                        <?=$payment?>                     
                      </div>
                   </div>
                   <div class="col-lg-2 form-group">
-                     <div><img src="<?=$imgPayment?>" width="50%"></div>
+                     Status <br>
+                     <span class="status-pill status-pending">No pagado</span>
                   </div>
                   <!-- Progress -->
                 
                </div>
-            </div><br>
+            </div>
+            <br>
             <div class="">
                <div class="project ml-10 ">
                   <div class="task pending"><img src="https://static.thenounproject.com/png/99630-200.png" width="80%" style="margin-top: .3em;margin-left: .2em;"></div>
@@ -142,3 +129,68 @@ $ID_VENTA = $infoSale->ID_VENTA;
       </div>
    </div>
 </div>
+
+ <!-- Boton de Paypal -->
+<script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" . SANDBOX_ID ."&currency=MXN" ?>></script> <!-- Currency -->
+
+<script>
+   paypal.Buttons({
+
+   style: {
+   layout: 'horizontal',
+   fundingicons: 'false',
+
+   size: 'responsive',
+   color: 'gold',
+   shape: 'pill',
+   label: 'checkout',
+   tagline: 'true'
+   },
+
+   createOrder: function(data, actions) {
+
+   var shipment = document.getElementById("RG_ID_TIPO_ENVIO");
+   var shipmentPrice = shipment.options[shipment.selectedIndex].value;
+
+   var itemPrice = <?php echo json_encode($product['PRECIO_PRODUCTO'], JSON_HEX_TAG); ?>;
+
+   var total = parseInt(shipmentPrice) + parseInt(itemPrice);
+
+   return actions.order.create({
+   purchase_units: [{
+   amount: {
+   /*  Cantidad a cobrar
+   */
+   value: '<?=$product['PRECIO_PRODUCTO']?>'
+   },
+   /*  La descripcion que se manda durante la paga
+   */
+   description: '<?=$product['DESCRIPCION_PRODUCTO']?>'
+   }]
+   });
+   },
+   onApprove: function(data, actions) {
+   return actions.order.capture().then(function(details) {
+
+   // alert(data.orderID);
+   // var option = d
+   // var value = option.options[option.selectedIndex].value;
+   // alert(value);
+
+   return fetch('<?=base_url()?>paypal/handleInformation/' +
+   data.orderID + '/' +
+   <?=$product['ID_PRODUCTO']?> + '/' +
+   '1' + '/' +
+   <?=$this->session->userdata("YOY_ID_USUARIO")?>, {
+   method: 'post',
+   headers: {
+   'content-type': 'application/json'
+   },
+   body: JSON.stringify({
+   orderID: data.orderID
+   })
+   });
+   });
+   }
+   }).render('#paypal-button-container');
+</script>
