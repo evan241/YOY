@@ -21,7 +21,7 @@ if(count($Usuario_info))
 
 <div class="container mt-container">
    <h3>¿Cómo quieres recibir tu compra? </h3><br>
-   <div class="row view-ship-auto">
+   <div class="row">
       <div class="col-lg-8">
          
          <!-- Domicilio -->

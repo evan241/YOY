@@ -82,7 +82,19 @@
 		text-transform: uppercase;
 		font-weight: 600;
 		color: white;
-	  }
+	}
+	.status-pill{
+		padding: 3px 8px;
+    	border-radius: 15px;
+	}
+	.status-pending{
+		background:#ffc107;
+		color:black;
+	}
+	.status-success{
+		background:#28a745;
+		color:white;
+	}
    .circle-opt{padding-left: 9px;
     padding-top: 5px;
     line-height: 22.9px;
@@ -153,7 +165,7 @@
 	  right: -.4em;
 	  position: absolute;
 	}
- .pending { background: #F8AC59; }
+ .pending { background: #ffc107; }
  .running { background: #1C84C6; }
  .passed { background: #1AB394; }
  .failed { background: #ED5565; }
