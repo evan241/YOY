@@ -89,7 +89,7 @@ class Mmanager_sales extends CI_Model {
             $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
             $this->db->where('V.ID_VENTA',$ID_VENTA);
 
-            return $this->db->get()->result_array();
+            return $this->db->get()->result_array()[0];
         } 
         catch (Exception $exception) {
             return array();

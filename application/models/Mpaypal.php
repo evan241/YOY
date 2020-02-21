@@ -18,7 +18,7 @@ class Mpaypal extends CI_Model
 
             return $this->db->get()->result_array()[0];
         }
-        catch(Exception $exception) {
+        catch (Exception $exception) {
             return NULL;
         }
     }
@@ -40,16 +40,14 @@ class Mpaypal extends CI_Model
      *      Agrega errores a la tabla paypal_error, para evitar perder la informacion
      *      en caso de fallo durante el proceso.
      */
-    function addError($ID_USUARIO, $ID_PRODUCTO, $ID_TIPO_ENVIO, $orderID)
+    function addError($ID_VENTA, $orderID)
     {
         try {
             $errorId = $this->getError($orderID);
 
             if ($errorId == NULL) {
                 $this->db->insert(TABLE_PAYPAL_ERROR, array(
-                    'ID_USUARIO' => $ID_USUARIO,
-                    'ID_PRODUCTO' => $ID_PRODUCTO,
-                    'ID_TIPO_ENVIO' => $ID_TIPO_ENVIO,
+                    'ID_VENTA' => $ID_VENTA,
                     'order_id' => $orderID
                 ));
                 return $this->db->insert_id();
@@ -122,6 +120,30 @@ class Mpaypal extends CI_Model
         }
     }
 
+    function updateSaleOrder($ID_VENTA, $paypalID) {
+        try {
+            $this->db->set('paypal_order_id', $paypalID);
+            $this->db->where('ID_VENTA', $ID_VENTA);
+            $this->db->update('venta');
+            return ($this->db->affected_rows() > 0);
+        }
+        catch(Exception $exception) {
+            return false;
+        }
+    }
+
+    function updateSaleError($ID_VENTA) {
+        try {
+            $this->db->set('paypal_error_id', 0);
+            $this->db->where('ID_VENTA', $ID_VENTA);
+            $this->db->update('venta');
+            return ($this->db->affected_rows() > 0);
+        }
+        catch(Exception $exception) {
+            return false;
+        }
+    }
+
     function getSaleError($errorID) {
         try {
             $this->db->select("*");
@@ -136,27 +158,16 @@ class Mpaypal extends CI_Model
         }
     }
 
-    function addSaleError($ID_USUARIO, $ID_PRODUCTO, $ID_TIPO_ENVIO, $errorID) {
+    function addSaleError($ID_VENTA, $errorID) {
         try {
-            $sale_id = $this->getSaleError($errorID);
-
-            if ($sale_id != NULL) return $sale_id;
-            
-            else {
-                $data = array(
-                    'ID_USUARIO' => $ID_USUARIO,
-                    'ID_PRODUCTO' => $ID_PRODUCTO,
-                    'STATUS_VENTA' => ERROR_PAYPAL,
-                    'ID_MEDIO_PAGO' => PAGO_PAYPAL,
-                    'ID_TIPO_ENVIO' => $ID_TIPO_ENVIO,
-                    'paypal_error_id' => $errorID
-                );
-                $this->db->insert('venta', $data);
-                return $this->db->insert_id();
-            }
+            $this->db->set('paypal_error_id', $errorID);
+            $this->db->where('ID_VENTA', $ID_VENTA);
+            $this->db->update('venta');
+            return ($this->db->affected_rows() > 0);
         }
+
         catch (Exception $exception) {
-            return NULL;
+            return false;
         }
     }
 
