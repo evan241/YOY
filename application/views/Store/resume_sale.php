@@ -154,7 +154,7 @@ $ID_VENTA = $infoSale->ID_VENTA;
                amount: {
    /*  Cantidad a cobrar
    */
-   value: '<?=$product['PRECIO_PRODUCTO']?>'
+   value: '<?=$infoSale->TOTAL_VENTA?>'
 },
    /*  La descripcion que se manda durante la paga
    */

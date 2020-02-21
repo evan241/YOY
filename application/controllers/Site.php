@@ -9,23 +9,26 @@ class Site extends CI_Controller {
         parent::__construct();
         $this->load->model('Mmanager_news');
         $this->load->model('Mmanager_sales');
+        $this->load->model('mpaypal');
     }
 
     public function index() {
-        $var = $this->Mmanager_sales->get_sale_by_id(13);
-        foreach ($var as $key => $val) {
-        print_r($key . " = " . $val);
-        echo "<br>";
+        // $list['order_id'] = "13N127471N965893J";
+        // $test = $this->mpaypal->addOrder($list);
+        // echo $test;
+        // $var = $this->Mmanager_sales->get_sale_by_id(13);
+        // foreach ($var as $key => $val) {
+        // print_r($key . " = " . $val);
+        // echo "<br>";
+        // }
 
-        }
-
-        // if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
-        //     redirect('manager/index');
-        // } else {
-        //     $this->load->view('esqueleton/header');
-        //     $this->load->view('index');
-        //     $this->load->view('esqueleton/footer');
-        // }    
+        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
+            redirect('manager/index');
+        } else {
+            $this->load->view('esqueleton/header');
+            $this->load->view('index');
+            $this->load->view('esqueleton/footer');
+        }    
     }
 
     public function salir() {

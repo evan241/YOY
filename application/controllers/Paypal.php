@@ -16,6 +16,7 @@ ini_set('display_startup_errors', '1');
 class Paypal extends CI_Controller {
 
   private $sale = NULL;
+  private $saleID = NULL;
 
 
   public function __construct() {
@@ -34,12 +35,9 @@ class Paypal extends CI_Controller {
       $var = $this->mpaypal->getErrorInfo($errorID);
 
       if ($var != NULL) {
-        $order = $var['order_id'];
-        $product = $var['ID_PRODUCTO'];
-        $user = $var['ID_USUARIO'];
-        $shipment = $var['ID_TIPO_ENVIO'];
-
-        $this->handleInformation($order, $product, $shipment, $user);
+        $orderID = $var['order_id'];
+        $saleID = $var['ID_VENTA'];
+        $this->handleInformation($orderID, $saleID);
       }
       else echo false;
     }
@@ -53,6 +51,7 @@ class Paypal extends CI_Controller {
     public function handleInformation($orderID, $saleID) {
 
       /* obtenemos la informacion de la venta guardada previamente */
+      $this->saleID = $saleID;
       $this->sale = $this->mmanager_sales->get_sale_by_id($saleID);
 
       /*  Obtiene la informacion de la orden  */
@@ -71,23 +70,14 @@ class Paypal extends CI_Controller {
                 if ($id > 0) {
                   $this->mpaypal->deleteError($orderID);
 
-                  $data = array(
-                    'ID_USUARIO' => $ID_USUARIO,
-                    'ID_PRODUCTO' => $ID_PRODUCTO,
-                    'FECHA_VENTA' => $info['paypal_order']['create_date'],
-                    'STATUS_VENTA' => PAGO_VERIFICADO,
-                    'ID_MEDIO_PAGO' => PAGO_PAYPAL,
-                    'ID_TIPO_ENVIO' => $this->ID_TIPO_ENVIO,
-                    'paypal_order_id' => $id
-                  );
-
                 /*  Por ultimo, agregamos la venta de Paypal a la tabla de ventas, 
                     si todo sale bien, borramos el registro de la venta con error
                 */
                     if (!$this->mpaypal->paypalSaleExists($id)) {
-                      $this->mmanager_sales->save_sale($data);
+                      $this->mpaypal->updateSaleOrder($saleID, $id);
                     }
-                    $this->mpaypal->deleteSaleError($this->ID_SALE);
+                    $this->mpaypal->deleteError($orderID);
+                    $this->mpaypal->updateSaleError($saleID);
                   }
                   echo true;
                   return true;
@@ -107,7 +97,8 @@ class Paypal extends CI_Controller {
     public function getInformation($orderID) {
 
 		// Guardamos la info en caso de un error
-      $error_id = $this->mpaypal->addError($this->sale['ID_VENTA'], $orderID);
+      $errorID = $this->mpaypal->addError($this->saleID, $orderID);
+      $this->mpaypal->addSaleError($this->saleID, $errorID);
 
 
 		// Intentamos pedir la informacion a paypal
@@ -140,9 +131,9 @@ class Paypal extends CI_Controller {
 
 			$paypal_order = array(
 				"paypal_client_id" => NULL,
-				"ID_USUARIO" => $this->ID_USUARIO,
-				"ID_PRODUCTO" => $this->ID_PRODUCTO,
-        "ID_TIPO_ENVIO" => $this->ID_TIPO_ENVIO,
+				"ID_USUARIO" => $this->sale['ID_USUARIO'],
+				"ID_PRODUCTO" => $this->sale['ID_PRODUCTO'],
+        "ID_TIPO_ENVIO" => $this->sale['ID_TIPO_ENVIO'],
         "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
         "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
         "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
