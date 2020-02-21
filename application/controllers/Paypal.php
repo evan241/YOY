@@ -15,18 +15,15 @@ ini_set('display_startup_errors', '1');
 
 class Paypal extends CI_Controller {
 
-    private $ID_PRODUCTO = NULL;
-    private $ID_USUARIO = NULL;
-    private $ID_TIPO_ENVIO = NULL;
-    private $ID_SALE = NULL;
+  private $sale = NULL;
 
 
-    public function __construct() {
-        parent::__construct();
-        $this->load->helper('paypal');
-        $this->load->model('mpaypal');
-        $this->load->model('mmanager_sales');
-    }
+  public function __construct() {
+    parent::__construct();
+    $this->load->helper('paypal');
+    $this->load->model('mpaypal');
+    $this->load->model('mmanager_sales');
+  }
 
     /**
      *      Funcion para arreglar los errores de paypal, solo toma el ID del error encontrado
@@ -34,17 +31,17 @@ class Paypal extends CI_Controller {
      *      este proceso toma unos segundos, puede tomar más arriba del server.
     */
     public function requestSaleInformation($errorID) {
-        $var = $this->mpaypal->getErrorInfo($errorID);
+      $var = $this->mpaypal->getErrorInfo($errorID);
 
-        if ($var != NULL) {
-            $order = $var['order_id'];
-            $product = $var['ID_PRODUCTO'];
-            $user = $var['ID_USUARIO'];
-            $shipment = $var['ID_TIPO_ENVIO'];
+      if ($var != NULL) {
+        $order = $var['order_id'];
+        $product = $var['ID_PRODUCTO'];
+        $user = $var['ID_USUARIO'];
+        $shipment = $var['ID_TIPO_ENVIO'];
 
-            $this->handleInformation($order, $product, $shipment, $user);
-        }
-        else echo false;
+        $this->handleInformation($order, $product, $shipment, $user);
+      }
+      else echo false;
     }
 
     /**
@@ -53,52 +50,51 @@ class Paypal extends CI_Controller {
      *
      *      Si todo sale bien entonces removera el registro temporal que guardamos en paypal_error
      */
-    public function handleInformation($orderID, $ID_PRODUCTO, $ID_TIPO_ENVIO, $ID_USUARIO) {
+    public function handleInformation($orderID, $saleID) {
 
-        $this->ID_PRODUCTO = $ID_PRODUCTO;
-        $this->ID_USUARIO = $ID_USUARIO;
-        $this->ID_TIPO_ENVIO = $ID_TIPO_ENVIO;
+      /* obtenemos la informacion de la venta guardada previamente */
+      $this->sale = $this->mmanager_sales->get_sale_by_id($saleID);
 
-        /*  Obtiene la informacion de la orden  */
-        $info = $this->getInformation($orderID);
+      /*  Obtiene la informacion de la orden  */
+      $info = $this->getInformation($orderID);
 
         /*  Si obtuvo la informacion, entonces guarda la orden en la base de datos,
             en la tabla de ordenes de Paypal
         */
             if ($info != NULL) {
-                $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
-                $id = $this->mpaypal->addOrder($info["paypal_order"]);
+              $info["paypal_order"]["paypal_client_id"] = $this->mpaypal->addClient($info["paypal_client"]);
+              $id = $this->mpaypal->addOrder($info["paypal_order"]);
 
             /*  Si logro guardar correctamente el registro de la orden de Paypal,
                 entonces borramos el registro de la tabla errores de Paypal
             */
                 if ($id > 0) {
-                    $this->mpaypal->deleteError($orderID);
+                  $this->mpaypal->deleteError($orderID);
 
-                    $data = array(
-                        'ID_USUARIO' => $ID_USUARIO,
-                        'ID_PRODUCTO' => $ID_PRODUCTO,
-                        'FECHA_VENTA' => $info['paypal_order']['create_date'],
-                        'STATUS_VENTA' => PAGO_VERIFICADO,
-                        'ID_MEDIO_PAGO' => PAGO_PAYPAL,
-                        'ID_TIPO_ENVIO' => $this->ID_TIPO_ENVIO,
-                        'paypal_order_id' => $id
-                    );
+                  $data = array(
+                    'ID_USUARIO' => $ID_USUARIO,
+                    'ID_PRODUCTO' => $ID_PRODUCTO,
+                    'FECHA_VENTA' => $info['paypal_order']['create_date'],
+                    'STATUS_VENTA' => PAGO_VERIFICADO,
+                    'ID_MEDIO_PAGO' => PAGO_PAYPAL,
+                    'ID_TIPO_ENVIO' => $this->ID_TIPO_ENVIO,
+                    'paypal_order_id' => $id
+                  );
 
                 /*  Por ultimo, agregamos la venta de Paypal a la tabla de ventas, 
                     si todo sale bien, borramos el registro de la venta con error
                 */
                     if (!$this->mpaypal->paypalSaleExists($id)) {
-                        $this->mmanager_sales->save_sale($data);
+                      $this->mmanager_sales->save_sale($data);
                     }
                     $this->mpaypal->deleteSaleError($this->ID_SALE);
+                  }
+                  echo true;
+                  return true;
                 }
-                echo true;
-                return true;
-            }
-            else echo false;
-            return false;
-        }
+                else echo false;
+                return false;
+              }
 
     /**
      *      Aqui basicamente acomodamos toda la informacion que le habiamos pedido a Paypal sobre la compra,
@@ -111,12 +107,7 @@ class Paypal extends CI_Controller {
     public function getInformation($orderID) {
 
 		// Guardamos la info en caso de un error
-      $error_id = $this->mpaypal->addError(
-        $this->ID_USUARIO, $this->ID_PRODUCTO, $this->ID_TIPO_ENVIO, $orderID);
-
-      // Guardamos la venta con el error
-      $this->ID_SALE = $this->mpaypal->addSaleError(
-        $this->ID_USUARIO, $this->ID_PRODUCTO, $this->ID_TIPO_ENVIO, $error_id);
+      $error_id = $this->mpaypal->addError($this->sale['ID_VENTA'], $orderID);
 
 
 		// Intentamos pedir la informacion a paypal
@@ -128,12 +119,12 @@ class Paypal extends CI_Controller {
         $response = $client->execute(new OrdersGetRequest($orderID));
 
         $additionalInfo = $this->getTransactionDetails(
-            $response->result->links[0]->href,
-            $this->getToken());
-    }
-    catch (Exception $e) {
+          $response->result->links[0]->href,
+          $this->getToken());
+      }
+      catch (Exception $e) {
         return NULL;
-    }
+      }
 
 		/**
 		 * 		Si paypal regresa de manera efectiva la informacion, entonces la acomodamos en arrays
@@ -151,28 +142,28 @@ class Paypal extends CI_Controller {
 				"paypal_client_id" => NULL,
 				"ID_USUARIO" => $this->ID_USUARIO,
 				"ID_PRODUCTO" => $this->ID_PRODUCTO,
-                "ID_TIPO_ENVIO" => $this->ID_TIPO_ENVIO,
-                "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
-                "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
-                "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
-                "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
-                "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
-                "status" => $response->result->status,
-                "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
-                "create_time" => "",
-                "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
-                "update_time" => "",
-                "order_id" => $response->result->id
-            );
+        "ID_TIPO_ENVIO" => $this->ID_TIPO_ENVIO,
+        "sale_id" => $additionalInfo->purchase_units[0]->payments->captures[0]->id,
+        "currency" => $additionalInfo->purchase_units[0]->amount->currency_code,
+        "total_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->gross_amount->value,
+        "net_amount" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->net_amount->value,
+        "paypal_fee" => $additionalInfo->purchase_units[0]->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value,
+        "status" => $response->result->status,
+        "create_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->create_time,
+        "create_time" => "",
+        "update_date" => $additionalInfo->purchase_units[0]->payments->captures[0]->update_time,
+        "update_time" => "",
+        "order_id" => $response->result->id
+      );
 
 			$info = fixDateTime(array(
 				"paypal_client" => $paypal_client,
 				"paypal_order" => $paypal_order
 			));
-            return $info;
-        }
-        return NULL;
+      return $info;
     }
+    return NULL;
+  }
 
     /**
      *      Aqui es donde jalamos toda la informacion de la compra de Paypal ya que por default 
@@ -185,22 +176,22 @@ class Paypal extends CI_Controller {
      */
     public function getTransactionDetails($checkout, $token) {
 
-        $curl = curl_init($checkout);
-        curl_setopt($curl, CURLOPT_POST, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer ' . $token,
-            'Accept: application/json',
-            'Content-Type: application/json'
-        ));
+      $curl = curl_init($checkout);
+      curl_setopt($curl, CURLOPT_POST, false);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($curl, CURLOPT_HEADER, false);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer ' . $token,
+        'Accept: application/json',
+        'Content-Type: application/json'
+      ));
 
-        $result = json_decode(curl_exec($curl));
-        $additionalInfo = (!array_key_exists("name", $result)) ? $result : NULL;
-        curl_close($curl);
+      $result = json_decode(curl_exec($curl));
+      $additionalInfo = (!array_key_exists("name", $result)) ? $result : NULL;
+      curl_close($curl);
 
-        return $additionalInfo;
+      return $additionalInfo;
     }
 
     /**
@@ -212,23 +203,23 @@ class Paypal extends CI_Controller {
      */
     public function getToken() {
 
-        $curl = curl_init();
+      $curl = curl_init();
 
-        curl_setopt($curl, CURLOPT_URL, TOKEN_URL);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
-        curl_setopt($curl, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-        
-        $result = json_decode(curl_exec($curl));
-        $token = (array_key_exists("access_token", $result)) ? $result->access_token : NULL;
-        curl_close($curl);
+      curl_setopt($curl, CURLOPT_URL, TOKEN_URL);
+      curl_setopt($curl, CURLOPT_HEADER, false);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($curl, CURLOPT_POST, true);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+      curl_setopt($curl, CURLOPT_USERPWD, SANDBOX_ID.":".SANDBOX_SECRET);
+      curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
 
-        return $token;
+      $result = json_decode(curl_exec($curl));
+      $token = (array_key_exists("access_token", $result)) ? $result->access_token : NULL;
+      curl_close($curl);
+
+      return $token;
     }
-}
+  }
 
 /**
  *      Aqui es donde cambiamos el payment API a Sandbox o Live.
@@ -239,13 +230,13 @@ class Paypal extends CI_Controller {
  */
 class PayPalClient
 {
-    public static function client() {
-        return new PayPalHttpClient(self::environment());
-    }
+  public static function client() {
+    return new PayPalHttpClient(self::environment());
+  }
 
-    public static function environment(){
-        $clientId = getenv("CLIENT_ID") ?: SANDBOX_ID;
-        $clientSecret = getenv("CLIENT_SECRET") ?: SANDBOX_SECRET;
-        return new SandboxEnvironment($clientId, $clientSecret);
-    }
+  public static function environment(){
+    $clientId = getenv("CLIENT_ID") ?: SANDBOX_ID;
+    $clientSecret = getenv("CLIENT_SECRET") ?: SANDBOX_SECRET;
+    return new SandboxEnvironment($clientId, $clientSecret);
+  }
 }

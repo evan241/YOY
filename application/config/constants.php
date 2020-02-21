@@ -24,20 +24,10 @@ define('SIN_VERIFICAR', 2);
 define('PAGO_VERIFICADO', 3);
 define('ENVIADO', 4);
 define('RECIBIDO', 5);
-<<<<<<< HEAD
 
-=======
 define('CANCELADA', 6);
 define('move_up', 1);
-/*
-|--------------------------------------------------------------------------
-| File Stream Modes
-|--------------------------------------------------------------------------
-|
-| These modes are used when working with fopen()/popen()
-|
-*/
->>>>>>> 01b39bde2f39882ecc0bcfed2352afbe0bfcc761
+
 defined('FOPEN_READ')                           OR define('FOPEN_READ', 'rb');
 defined('FOPEN_READ_WRITE')                     OR define('FOPEN_READ_WRITE', 'r+b');
 defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       OR define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates

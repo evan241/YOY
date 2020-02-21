@@ -8,16 +8,24 @@ class Site extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Mmanager_news');
+        $this->load->model('Mmanager_sales');
     }
 
     public function index() {
-        if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
-            redirect('manager/index');
-        } else {
-            $this->load->view('esqueleton/header');
-            $this->load->view('index');
-            $this->load->view('esqueleton/footer');
+        $var = $this->Mmanager_sales->get_sale_by_id(13);
+        foreach ($var as $key => $val) {
+        print_r($key . " = " . $val);
+        echo "<br>";
+
         }
+
+        // if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
+        //     redirect('manager/index');
+        // } else {
+        //     $this->load->view('esqueleton/header');
+        //     $this->load->view('index');
+        //     $this->load->view('esqueleton/footer');
+        // }    
     }
 
     public function salir() {
