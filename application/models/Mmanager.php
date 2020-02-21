@@ -12,8 +12,8 @@ class Mmanager extends CI_Model {
 
             $this->db->select("*");
             $this->db->from("venta");
-            $this->db->where("DATE(FECHA_VENTA) >=", $date['start']);
-            $this->db->where("DATE(FECHA_VENTA) <", $date['end']);
+            $this->db->where("DATE(FECHA_VENTA) >= ", $date['start']);
+            $this->db->where("DATE(FECHA_VENTA) < ", $date['end']);
 
             return $this->db->get()->num_rows();
         }
@@ -27,7 +27,7 @@ class Mmanager extends CI_Model {
         $month = getMonths();
 
         for ($i = 0; $i < 12; $i++) {
-            $result[$month[$i]] = $this->monthSaleCount($i + 1); 
+            $result[$month[$i]] = $this->monthSaleCount($i+1); 
         }
         return $result;
     }
@@ -36,6 +36,8 @@ class Mmanager extends CI_Model {
         try {
             $this->db->select("*");
             $this->db->from("venta");
+            $this->db->where("DATE(FECHA_VENTA) >=", date('Y')."-01-01");
+            $this->db->where("DATE(FECHA_VENTA) <", date('Y')."-12-31");
             return $this->db->get()->num_rows();
         }
         catch (Exception $exception) {

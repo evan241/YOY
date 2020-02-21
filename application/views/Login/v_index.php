@@ -37,12 +37,14 @@ body{
 .link{
 	color:white !important;
 }
+.m-auto{
+    margin:auto
+}
 </style>
 <section class="shop-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-xl-3" ></div>
-            <div class="col-lg-4 col-xl-6">
+            <div class="col-lg-5 m-auto">
                 <h2 class="text-center mb-3">INICIAR SESIÓN</h2>
 
                 <form class="form" id="btnFormYOY" method="POST">
@@ -87,11 +89,9 @@ body{
 
             </div>
         </div>
-        <div class="col-lg-4 col-xl-3"></div>
     </div>
-
 </div>
 </div>
 </section>
-<br><br><br><br><br>
+
 <!-- Newslatter section end -->

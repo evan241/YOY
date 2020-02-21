@@ -1,27 +1,24 @@
 
 var asInitVals = new Array();
 $(document).ready(function () {
-    //Products
-    $('#dataVentas').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        //"iDisplayLength": 30,
-        //"sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+    $('#dataPayment').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         "iDisplayLength": 25,
         "aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "Todos"]],
         "bDestroy": true,
         "bServerSide": false,
         "bProcessing": true,
-        "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information dt-filter"ip><"clear">',
+        "dom": '<"row justify-content-between top-information"lf><"row resp"rt><"row justify-content-between bottom-information dt-filter"ip><"clear">',
         buttons: [
-        {
-            extend: 'csv',
-            text: 'Excel',
-            title: 'Productos',
-            exportOptions: {
-                modifier: {
-                    page: 'current'
+            {
+                extend: 'csv',
+                text: 'Excel',
+                title: 'Categorías',
+                exportOptions: {
+                    modifier: {
+                        page: 'current'
+                    }
                 }
             }
-        }
         ],
         "aaSorting": [],
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
@@ -45,15 +42,12 @@ $(document).ready(function () {
     });
 
     $('body').on("click", ".btn-toggle-payment", function (e) {
-
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
-
             var ID_PAYMENT = $(this).attr('data-id-payment');
-            if (ID_PAYMENT > 0) {
-
+            if (ID_PAYMENT > 0) {+
                 $.ajax({
-                    url: raiz_url + "manager_payments/ajax_toggle_payments",
+                    url: raiz_url + "Manager_payments/ajax_toggle_payments",
                     type: 'POST',
                     data: 'ID_PAYMENT=' + ID_PAYMENT,
                     success: function (data) {
@@ -68,7 +62,6 @@ $(document).ready(function () {
             }
         }
     });
-
     
 });
 ///FUNCIONES JS..

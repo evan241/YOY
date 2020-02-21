@@ -29,6 +29,7 @@
 <script src="<?= base_url() ?>assets/js/main.js"></script>
 <script src="<?= base_url('assets/js/login.js')?>"></script>
 <script src="<?= base_url('assets/js/index.js')?>"></script>
+<script src="<?= base_url('assets/js/sale.js')?>"></script>
 <script src="<?= base_url('assets/js/registro.js')?>"></script>
 
 <script src="<?= base_url() ?>assets/js/site.js"></script>

@@ -20,13 +20,31 @@ class Mmanager_sales extends CI_Model {
         try {
             $this->db->select("*");
             $this->db->from('venta AS V');
-
             $this->db->join('usuario AS U',"U.ID_USUARIO = V.ID_USUARIO");
             $this->db->join('producto AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
             $this->db->join('medio_pago AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
             $this->db->join('tipo_envio AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
             $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
+            $this->db->where('V.ACTIVA_VENTA',VIGENTE);
 
+            return $this->db->get()->result_array();
+        } 
+        catch (Exception $exception) {
+            return array();
+        }
+    }
+    
+    function get_all_sales_by_dates($dates) {
+        try {
+            $this->db->select("*");
+            $this->db->from('venta AS V');
+            $this->db->join('usuario AS U',"U.ID_USUARIO = V.ID_USUARIO");
+            $this->db->join('producto AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
+            $this->db->join('medio_pago AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
+            $this->db->join('tipo_envio AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
+            $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
+            $this->db->where("DATE(FECHA_VENTA) >=", $dates['fechaini']);
+            $this->db->where("DATE(FECHA_VENTA) <", $dates['fechafin']);
             $this->db->where('V.ACTIVA_VENTA',VIGENTE);
 
             return $this->db->get()->result_array();
@@ -57,6 +75,24 @@ class Mmanager_sales extends CI_Model {
         }
         catch (Exception $exception) {
             return 0;
+        }
+    }
+    
+    function get_sale_by_id($ID_VENTA) {
+        try {
+            $this->db->select("*");
+            $this->db->from('venta AS V');
+            $this->db->join('usuario AS U',"U.ID_USUARIO = V.ID_USUARIO");
+            $this->db->join('producto AS P',"P.ID_PRODUCTO = V.ID_PRODUCTO");
+            $this->db->join('medio_pago AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
+            $this->db->join('tipo_envio AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
+            $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
+            $this->db->where('V.ID_VENTA',$ID_VENTA);
+
+            return $this->db->get()->result_array();
+        } 
+        catch (Exception $exception) {
+            return array();
         }
     }
 }
