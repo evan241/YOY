@@ -25,7 +25,7 @@ class Store extends CI_Controller {
             $this->load->view('esqueleton/header');
             $data['product'] = $this->mmanager_products->get_product_by_id($item);
             $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
-            $this->load->view('store/process_sale', $data);
+            $this->load->view('Store/process_sale', $data);
             $this->load->view('esqueleton/footer');
         else:
             redirect('Login/index','refresh');
@@ -36,7 +36,7 @@ class Store extends CI_Controller {
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
-        $this->load->view('store/process_payment', $data);
+        $this->load->view('Store/process_payment', $data);
         $this->load->view('esqueleton/footer');
     }
     public function ajax_choose_ship(){
@@ -67,7 +67,7 @@ class Store extends CI_Controller {
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
-        $this->load->view('store/sales', $data);
+        $this->load->view('Store/sales', $data);
         $this->load->view('esqueleton/footer');
     }
      public function resume($id) {
@@ -79,7 +79,7 @@ class Store extends CI_Controller {
             $data['product'] = $this->mmanager_products->get_product_by_id($Product);
 
             $this->load->view('esqueleton/header');
-            $this->load->view('store/resume_sale', $data);
+            $this->load->view('Store/resume_sale', $data);
             $this->load->view('esqueleton/footer');
 
          }else{
