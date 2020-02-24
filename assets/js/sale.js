@@ -60,8 +60,8 @@ $(document).ready(function () {
             if (res === 'error') {
                alert('No seleccionó el tipo de pago');
             } else {
+             send_mail();
              window.location.replace(raiz_url + "Store/resume/" + res);
-           
             }
          }
       }); 
@@ -121,27 +121,7 @@ $(document).ready(function () {
       }
    })
 
-   /*$("#FIN_CHOOSE_PAYMENT").click(function(e){        
-     
-      checked_payment("input[name='payment']") ;
 
-      let id_pago = $("#ID_PAGO");
-      let nombre_pago = $("#NOMBRE_PAGO");
-
-     $.ajax({
-         type: "POST",
-         url: raiz_url+"Store/ajax_choose_payment",
-         data: {id:id_pago,           
-            nombre:nombre_pago},
-         success: function (res) {
-            if (res === 'error'){
-               alert('No seleccionó el tipo de pago');
-            }else{
-               window.location.replace(raiz_url + "Store/resume/" + res);
-            }
-         } 
-      });
-   }) */
 
    $("body").on('click','.pointer',function()
    {      
@@ -167,7 +147,16 @@ $(document).ready(function () {
 
       
    });
-
+   function send_mail(){
+      $.ajax({
+         type: "POST",
+         url: raiz_url+"Store/send_mail",
+         data: {data:"data"},
+         success: function (response) {
+            
+         }
+      });
+   }
    function checked(name){
       $(name).each(function (i) {
          if (this.checked) {

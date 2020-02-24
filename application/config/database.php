@@ -6,10 +6,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'docker_mysql_1',
+	'hostname' => 'localhost',
 	'port' => '3306',
 	'username' => 'root',
-	'password' => 'geem',
+	'password' => '',
 	'database' => 'yoy',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

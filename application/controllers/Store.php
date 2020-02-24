@@ -89,4 +89,39 @@ class Store extends CI_Controller {
          }
          
     }
+    public function send_mail() {
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'tls://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'erick.evangelista87@gmail.com',
+            'smtp_pass' => 'EdyXellE2011',
+            'wordwrap' => true
+        );
+        $data = array(
+            'Nombre' => "test",
+            'Telefono' => "test",
+            'Email' => "test",
+            'Mensaje' => "test"
+        );
+
+        //load email library
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        //set email information and content
+        $this->email->from('erick.evangelista87@gmail.com', 'Administración');
+        $this->email->to('infexiuz@gmail.com');
+        $this->email->subject('NEW SALE');
+        $this->email->message($this->load->view('Store/emailBuy',$data,true));
+           
+
+        $this->email->set_mailtype('html');
+
+        $this->email->send();
+
+        echo true;
+        
+    }
 }
