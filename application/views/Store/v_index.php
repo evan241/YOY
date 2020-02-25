@@ -10,7 +10,7 @@
 <!-- Page info section end -->
 
 
-<div class="container mt-container pd-container">
+<div class="container mt-container pd-container bg-black">
     <div class="row">
         <?php
 if (count($products) > NULO) {

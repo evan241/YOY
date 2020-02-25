@@ -19,11 +19,11 @@ if(count($Usuario_info))
 </div>
 <section class="page-info-sectionII set-bg"></section>
 
-<div class="container mt-container">
+<div class="container mt-container bg-black">
    <h3>¿Cómo quieres recibir tu compra? </h3><br>
    <div class="row">
       <div class="col-lg-8">
-         
+        
          <!-- Domicilio -->
          <div class="form-group">
             <label class="label-ship">Domicilio</label>
@@ -133,7 +133,7 @@ if(count($Usuario_info))
          <div class="row justify-content-center">
             <div class="col-lg-10 col-lg-offset-1 border-bottomx">
                <label class="label-ship">Producto</label> 
-               <label class="label-ship float-right">$<span id="PRECIO_PRODUCTO"><?=$product['PRECIO_PRODUCTO'];?></span></label>                         
+               <label class="label-ship float-right">$<span id="PRECIO_PRODUCTO"><?=$product['PRECIO_PRODUCTO'];?></span> x <?=$this->session->userdata('TEMP_CANT')?></label>                         
             </div>
             <div class="col-lg-10 col-lg-offset-1 border-bottomx">
                <label class="label-ship">Envío</label> 
@@ -143,10 +143,10 @@ if(count($Usuario_info))
          <div class="row justify-content-center">
             <div class="col-lg-10 col-lg-offset-1">
                <label class="label-ship color-yellow">Pagas</label> 
+               <input type="hidden" id="CANT_TEMP" value="<?=$this->session->userdata('TEMP_CANT')?>">
                <label class="label-ship float-right color-yellow" id="TOTAL_FINAL">$0.00</label>                                        
             </div>
             <div class="col-lg-10 col-lg-offset-1 mt-container">
-              
                <a class="btn btn-sale ml--15" id="FIN_CHOOSE_SHIP" href="">Continuar</a>
             </div>
          </div>

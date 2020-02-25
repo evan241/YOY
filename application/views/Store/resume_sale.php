@@ -37,8 +37,8 @@ $ID_VENTA = $infoSale->ID_VENTA;
 </div>
 <section class="page-info-sectionII set-bg">
 </section>
-<div class="container mt-container">
-   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE." "; echo $ID_VENTA;?></h4><br>
+<div class="container mt-container  bg-black">
+   <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE;?></h4><br>
    <div class="row">
       <div class="col-lg-8">
          <div class="form-group">            

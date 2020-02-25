@@ -63,7 +63,21 @@ class Store extends CI_Controller {
             redirect('Store/index','refresh');
         }
     }
+    public function ajax_BuyNow(){
+
+        if($this->input->is_ajax_request()){
+
+            if($this->session->set_userdata("TEMP_CANT",$this->input->post("cant"))){
+                return true;
+            }else{
+                return false;
+            }
+        }else{            
+            redirect('Store/index','refresh');        
+        }
+    }
     public function sales($item) {
+
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();

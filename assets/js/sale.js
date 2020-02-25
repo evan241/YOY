@@ -10,6 +10,22 @@ $(document).ready(function () {
          });
       });    */
    })
+   $("#BUY_NOW").click(function(e)
+   {
+      e.preventDefault();
+
+      let attr = $(this).attr('href');
+      let cant = $("#cant").val();
+
+      $.ajax({
+         type: "POST",
+         url: raiz_url+"Store/ajax_BuyNow",
+         data: {cant:cant},         
+         success: function (res) {
+            window.location.href = attr;
+         }
+      });
+   })
    $("#FIN_CHOOSE_SHIP").click(function (e) {
       e.preventDefault();
 
@@ -68,7 +84,8 @@ $(document).ready(function () {
    })
    /* PROCCESS SALE */
       let precio_product = $("#PRECIO_PRODUCTO").html();
-      get_total(precio_product,0);
+      var cant_temp = $("#CANT_TEMP").val();
+      get_total(precio_product,0,cant_temp);
 
    $('input[name=type_ship]').on('change', function() {
       let val = $('input[name=type_ship]:checked').val();
@@ -85,13 +102,13 @@ $(document).ready(function () {
             $("#typeShip2").removeClass('checked');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }else{
             $(this).addClass('hide');
             $("#Internacional").removeClass('hide');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }
       }else{
          
@@ -107,7 +124,7 @@ $(document).ready(function () {
             $("#typeShip1").removeClass('checked');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          } else {
             $("#typeShip1").addClass('checked');
             $("#typeShip2").removeClass('checked');
@@ -116,7 +133,7 @@ $(document).ready(function () {
             $("#Internacional").addClass('hide');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }
       }
    })
@@ -143,10 +160,34 @@ $(document).ready(function () {
       });
       $(circle).addClass(checked);       
       
-      get_total(precio_producto,precio_envio);
+      get_total(precio_producto,precio_envio,cant_temp);
 
       
    });
+   $("#minus").click(function(){
+      var oldValue = $("#cant").val();
+      var sum=0;
+
+      if(oldValue <= 1){
+         sum = 1;
+      }else{
+         sum = parseInt(oldValue) - 1;
+      }
+      $("#cant").val(sum)
+   
+   })
+   $("#add").click(function(){
+      var oldValue = $("#cant").val();
+      var sum=0;
+
+      if(oldValue < 1){
+         sum = 1;
+      }else{
+         sum = parseInt(oldValue) + 1;
+      }
+      $("#cant").val(sum);
+   
+   })
    function send_mail(){
       $.ajax({
          type: "POST",
@@ -173,10 +214,15 @@ $(document).ready(function () {
          }
       });
    }
-   function get_total(product,ship){
+   function get_total(product,ship,cant){
       ship = parseInt(ship);
       product = parseInt(product);
-      let total = product + ship;
+      cant = parseInt(cant);
+
+      let total = (product*cant) + ship;
+      
       $("#TOTAL_FINAL").html("$"+total);
+
+
    }
 })

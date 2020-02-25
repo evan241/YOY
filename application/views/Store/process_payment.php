@@ -13,7 +13,7 @@
 }
 </style>
 
-<div class="container mt-container">
+<div class="container mt-container bg-black">
    <div class="row">
       <div class="col-lg-8">
          <h3>¿Cómo quieres pagar? </h3>

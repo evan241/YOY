@@ -57,9 +57,11 @@ class Mstore extends CI_Model {
                 $this->session->set_userdata('TEMP_CHOSSE_ID_PAYMENT', $id_payment);
                 $this->session->set_userdata('TEMP_CHOSSE_NOMBRE_PAYMENT', $nombre);
 
+                
                 $data = array(
                     'ID_USUARIO' => $this->session->userdata('YOY_ID_USUARIO'),
                     'ID_PRODUCTO' => $this->session->userdata('TEMP_CHOSSE_ID_PRODUCTO'),
+                    'CANT_VENTA' => $this->session->userdata('TEMP_CANT'),
                     'TOTAL_VENTA' => substr($this->session->userdata('TEMP_CHOSSE_TOTAL'), 1,11),
                     'STATUS_VENTA' => 1,
                     'ID_MEDIO_PAGO' => $this->session->userdata('TEMP_CHOSSE_ID_PAYMENT'),
