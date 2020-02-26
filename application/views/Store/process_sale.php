@@ -39,7 +39,7 @@ if(count($Usuario_info))
                   </div>
                </div>
                <div class="col-lg-3 align-middle">
-                  <a href="#"> Añadir o elegir otro</a>
+                  <a href="#" data-toggle="modal" data-target="#MODAL_DIRECCION"> Añadir o elegir otro</a>
                </div>
             </div>
          </div>
@@ -152,4 +152,47 @@ if(count($Usuario_info))
          </div>
       </div>
    </div>
+</div>
+<div class="modal fade" id="MODAL_DIRECCION" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+                <h4 class="modal-title">Editar dirección</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+               <form action="">
+                  <div class="row">
+                     <div class="col-lg-8">
+                        <div class="form-group">
+                           <label for="">Calle</label>
+                           <input type="text" class="form-control" id="CALLE" placeholder="Escribe aquí..">
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="form-group">
+                           <label for="">No. Exterior</label>
+                           <input type="text" class="form-control" id="NUM" placeholder="">
+                        </div>
+                     </div>
+                      <div class="col-lg-8">
+                        <div class="form-group">
+                           <label for="">Colonia</label>
+                           <input type="text" class="form-control" id="COLONIA" placeholder="Escribe aquí..">
+                        </div>
+                     </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                           <label for="">Codigo postal</label>
+                           <input type="number" class="form-control" id="CP_DIR" placeholder="">
+                        </div>
+                     </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                  <input type="submit" value="Guardar" class="btn btn-success">
+               </form>
+            </div>
+        </div>
+    </div>
 </div>
