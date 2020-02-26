@@ -138,7 +138,18 @@ $(document).ready(function () {
       }
    })
 
-
+   $("#ADDRESS_FORM").submit(function(e){
+      e.preventDefault();
+      $.ajax({
+         type: "POST",
+         url: "Store/",
+         data: "data",
+         dataType: "dataType",
+         success: function (response) {
+            
+         }
+      });
+   })
 
    $("body").on('click','.pointer',function()
    {      

@@ -7,26 +7,55 @@ $Producto_info = $CI->db->get_where('usuario',array('ID_USUARIO' => $Usuario_id 
 
 if(count($Usuario_info))
 {
+  
    $CP = $Usuario_info->CP_USUARIO;
-   $dir = $Usuario_info->DIRECCION_USUARIO;
-   $name = $Usuario_info->NOMBRE_USUARIO;
+   $street = $Usuario_info->CALLE_DIRECCION;
+   $colonia = $Usuario_info->COLONIA_DIRECCION;
+   $num_dir = $Usuario_info->NUM_DIRECCION;
+   $name_user = $Usuario_info->NOMBRE_USUARIO;
    $phone = $Usuario_info->TELEFONO_USUARIO;
 }
+   $DIRECCION = ($street != NULL) ? $street." #".$num_dir.", ".$colonia : "No registrado" ;
 ?>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 <section class="page-info-sectionII set-bg"></section>
+<style>
+.form-group >label{
+   color:#767c82;
+   font-size:14px;
+   font-weight:600;
+   text-transform:uppercase;
+   font-family: "Roboto",monospace;
+}
+.form-group > input{
+   border-radius: 0px;
+   background: none;
+   border: 0px;
+   border-bottom: 1px solid;
+}
+.form-control:focus {
+    color: white;
+    background-color: #fff0;
+    border-color: #f8f8f9;
+    outline: 0;
+    box-shadow:unset;
+}
+.modal-backdrop {
 
+  background-color: none !important;
+}
+</style>
 <div class="container mt-container bg-black">
-   <h3>¿Cómo quieres recibir tu compra? </h3><br>
-   <div class="row">
+   <h4>¿Cómo quieres recibir tu compra? </h4><br>
+   <div class="row" style="font-family: 'Roboto',monospace;">
       <div class="col-lg-8">
         
          <!-- Domicilio -->
-         <div class="form-group">
-            <label class="label-ship">Domicilio</label>
+         <div class="form-group form-borderbottom">
+            <span class="label-ship">Domicilio</span>
             <div class="row style-ship details-buy">
                <div class="col-lg-2 align-middle">
                   <div class="circle-dir"><i class="fas fa-map-marker-alt"></i></div>
@@ -34,8 +63,8 @@ if(count($Usuario_info))
                <div class="col-lg-7">
                   <div>
                      <div id="cp">C.P. <?=$CP = (isset($CP)) ? $CP : "No registrado" ;?></div>
-                     <div id="dir"><?=$dir = (isset($dir)) ? $dir : "No registrado" ;?></div>
-                     <div id="nombre"><?=$name?> - <?=$phone?></div>
+                     <div id="dir"><?=$DIRECCION;?></div>
+                     <div id="nombre"><?=$name_user?> - <?=$phone?></div>
                   </div>
                </div>
                <div class="col-lg-3 align-middle">
@@ -44,8 +73,8 @@ if(count($Usuario_info))
             </div>
          </div>
          <!-- Tipo envio -->
-         <div style="margin-top: 35px;margin-bottom: -20px;">
-            <div class="row">
+         <div style="margin-top:-6px;margin-bottom: -20px;">
+            <div class="row row-borderbottom">
                <label class="label-ships" style=" background: none; border: none;">Tipo de <font class="color-yellow">envío  </font></label>
                <div id="typeShip1"class="radio-ships checked"><input type="radio" name="type_ship" value="1" checked></div> 
                <span class="label-ships" id="labelNacional">Nacional</span>
@@ -53,10 +82,9 @@ if(count($Usuario_info))
                <span class="label-ships" id="labelInteracional">Internacional</span>
 
             </div>
-
          </div>
          <!-- Opciones envio -->
-         <label class="label-ship">Opciones de envío</label>
+         <label class="label-ship" style="margin-top:4%;">Opciones de envío</label>
          <div id="Nacional">
          <?php 
             $CI =& get_instance();
@@ -153,44 +181,56 @@ if(count($Usuario_info))
       </div>
    </div>
 </div>
-<div class="modal fade" id="MODAL_DIRECCION" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="MODAL_DIRECCION" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%">
     <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-                <h4 class="modal-title">Editar dirección</h4>
+        <div class="modal-content AddressModalContent">
+          <div class="modal-header AddressModalHeader">
+                <h4 class="modal-title">Editar Dirección</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-               <form action="">
+               <form id="ADDRESS_FORM">
                   <div class="row">
                      <div class="col-lg-8">
                         <div class="form-group">
+                           <label for="">Nombre de quien recibirá</label>
+                           <input type="text" class="form-control" value="<?=$name_user?>"name="NOMBRE" placeholder="Escribe aquí..">
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="form-group">
+                           <label for="">Teléfono</label>
+                           <input type="text" class="form-control" value="<?=$phone?>"name="TEL" placeholder="">
+                        </div>
+                     </div>
+                     <div class="col-lg-8">
+                        <div class="form-group">
                            <label for="">Calle</label>
-                           <input type="text" class="form-control" id="CALLE" placeholder="Escribe aquí..">
+                           <input type="text" class="form-control" value="<?=$calle = (isset($street)) ? $street : "" ;?>"name="CALLE" placeholder="Escribe aquí..">
                         </div>
                      </div>
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label for="">No. Exterior</label>
-                           <input type="text" class="form-control" id="NUM" placeholder="">
+                           <input type="text" class="form-control" value="<?=$num_ext = (isset($num_dir)) ? $num_dir : "" ;?>"name="NUM" placeholder="">
                         </div>
                      </div>
                       <div class="col-lg-8">
                         <div class="form-group">
                            <label for="">Colonia</label>
-                           <input type="text" class="form-control" id="COLONIA" placeholder="Escribe aquí..">
+                           <input type="text" class="form-control" value="<?=$coloniax = (isset($colonia)) ? $colonia : "" ;?>"name="COLONIA" placeholder="Escribe aquí..">
                         </div>
                      </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                            <label for="">Codigo postal</label>
-                           <input type="number" class="form-control" id="CP_DIR" placeholder="">
+                           <input type="number" class="form-control" value="<?=$cp = (isset($CP)) ? $CP : "" ;?>" name="CP_DIR" placeholder="">
                         </div>
                      </div>
                   </div>
             </div>
-            <div class="modal-footer">
-                  <input type="submit" value="Guardar" class="btn btn-success">
+            <div class="modal-footer AddressModalFooter">
+                  <input type="submit" value="Guardar" class="btn btn-secondary">
                </form>
             </div>
         </div>

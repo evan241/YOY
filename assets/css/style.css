@@ -57,7 +57,8 @@
    .details-buy{font-size: 16px;color: #60656b;line-height: 1.8;}        
    .pd-left20{padding-left: 27px;}
    .align-middle{ display: flex;justify-content: center; align-items: center;}     
-   .style-ship{border-radius:10px;background:white;padding:5px 0px}
+   .style-ship{border-radius:10px;background:white;padding:5px 0px; margin-left: 0px;margin-right: 0px;}
+	
    .bold{font-weight:bold}
    .hide{display:none;}
    .normal{font-weight:normal}
@@ -73,7 +74,7 @@
     text-transform: uppercase;
     font-weight: 600;
     color: white;
-    letter-spacing: 1px;margin-top:4%;
+    letter-spacing: 1px;margin-top:1%;margin-bottom:1%;;
 	}
 	/* .PaymentPaypal{
 		height:55px;
@@ -83,6 +84,28 @@
 	{
 		background:#00000099
 	}
+	.form-borderbottom{
+		border-bottom: 3px solid white;
+		padding-bottom: 15px;
+	}
+	.row-borderbottom{
+		margin-left: 0px;
+		margin-right: 0px;
+		border-bottom: 3px solid white;
+	}
+	.AddressModalHeader{
+		background: #383d41;
+		border-bottom: 3px solid #767c82;
+	}
+	.AddressModalFooter{
+		border-top: 0!important;
+    	padding: 0px 15px 15px 0px!important;
+	}
+	.AddressModalContent{
+		background: #101010 !important;
+		color: white !important;
+	}
+
 	.pd-cant{
 		padding-left: 0px;
     	padding-right: 20px;

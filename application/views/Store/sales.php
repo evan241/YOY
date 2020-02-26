@@ -87,13 +87,13 @@
                         <div class="input-group mt-3">
                            
                            <div class="input-group-prepend">
-                              <button class="input-group-text" id="minus"> - </button>
+                              <button class="input-group-text" id="minus"><i class="fas fa-minus"></i></button>
                            </div>
 
                            <input type="text" class="form-control text-center input-cant" placeholder="0" value="1" id="cant">
                             
                            <div class="input-group-prepend">
-                              <button class="input-group-text btn-add" id="add">+</button>
+                              <button class="input-group-text btn-add" id="add"><i class="fas fa-plus"></i></button>
                            </div>
                         </div>
                      </div>
