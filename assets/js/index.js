@@ -1,11 +1,14 @@
-$(document).ready(function(){
-  $('#intro-video').modal('show'); 
-   $('#intro-video').on('shown.bs.modal', function () {
-    $('#videox')[0].play();
-  })
-  $('#intro-video').on('hidden.bs.modal', function () {
-    $('#videox')[0].pause();
-  })
+$(document).ready(function()
+{
+    $("[data-toggle='tooltip']").tooltip();
+    $('#intro-video').modal('show'); 
+
+    $('#intro-video').on('shown.bs.modal', function () {
+        $('#videox')[0].play();
+    })
+    $('#intro-video').on('hidden.bs.modal', function () {
+        $('#videox')[0].pause();
+    })
    loadGallery(true, 'div.thumbnail');
    //This function disables buttons when needed
    function disableButtons(counter_max, counter_current){

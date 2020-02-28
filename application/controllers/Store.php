@@ -32,6 +32,29 @@ class Store extends CI_Controller {
         endif;
             
     }
+    public function ajax_SaveInfoSale()
+    {
+        if($this->input->is_ajax_request())
+        {
+            $AddresTemp = array(
+                'NOMBRE_USUARIO'   => $this->input->post('NOMBRE_EDIT'),
+                'APELLIDO_USUARIO' => $this->input->post('APE_EDIT'),               
+                'TELEFONO_USUARIO' => $this->input->post('TEL_EDIT'),
+                'PAIS_USUARIO'     => $this->input->post('PAIS_EDIT'),
+                'ESTADO_USUARIO'   => $this->input->post('ESTADO_EDIT'),
+                'CIUDAD_USUARIO'   => $this->input->post('CIUDAD_EDIT'),
+                'CALLE_DIRECCION'  => $this->input->post('CALLE_EDIT'),
+                'NUM_DIRECCION'    => $this->input->post('NUM_EDIT'),
+                'CP_USUARIO'       => $this->input->post('CP_EDIT'),
+                'COLONIA_DIRECCION'=> $this->input->post('COLONIA_EDIT')
+            );
+            
+            $this->session->set_userdata($AddresTemp);
+            
+        }else{
+            redirect("Store/index");
+        }
+    }
     public function proccess_payment($item) {
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
@@ -84,7 +107,7 @@ class Store extends CI_Controller {
         $this->load->view('Store/sales', $data);
         $this->load->view('esqueleton/footer');
     }
-     public function resume($id) {
+    public function resume($id) {
          
          $Sale = $this->mstore->get_sale($id);
          if (count($Sale)){

@@ -34,6 +34,7 @@
 
 </head>
 <style>
+   #myHeader{position:absolute}
    @media (max-width: 1200px) {
       .search-switch {
          display: none;
@@ -55,15 +56,29 @@
       border-radius: 20px;
       margin-right: 8rem;
    }
-   #myHeader{position:absolute}
+   /* Testing header */
+   .main-menu-right li a:hover {   
+        color:#000;
+        border-bottom: 2px solid #000 ;
+    }
+    .main-menu-right li a {
+        color: rgb(0, 0, 0);
+    }
+    .site-menu-style li a {
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    .header-section{
+        background:#e9ecef
+    }
 </style>
 
 <body>
 
    <nav class="header-section " id="myHeader">
       <div class="container">
-         <a href="<?=base_url()?>site/index" class="logo-header">
-            <img src="<?=base_url()?>assets/img/logo.png" id="logo-main" class="br100" width="80px" height="80px">
+         <a href="<?=base_url()?>site/index" class="logo-header" style="margin-top: -13.5px;">
+            <img src="<?=base_url()?>assets/img/logo-big.png" id="logo-main" class="br100" width="90px" height="90px">
          </a>
      
          <ul class="main-menu-right site-menu-style">
@@ -76,13 +91,12 @@
             <?php if ($this->session->userdata('YOY_ID_USUARIO') > 0) {?>
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  <i class="fa fa-cog" aria-hidden="true"></i> <?=$this->session->userdata('YOY_EMAIL_USUARIO');?> <span
-                     class="caret"></span>
+                  <i class="fa fa-cog"></i> <?=$this->session->userdata('YOY_EMAIL_USUARIO');?> <span class="caret"></span>                     
                </a>
-               <ul class="dropdown-menu" role="menu" style="background-color: black;">
-                  <li><a href="#"><i class="fa fa-user"></i> My account</a></li><br>
-                  <li><a href="#"><i class="fa fa-shopping-bag"></i> My shops</a></li><br>
-                  <li><a href="<?=base_url()?>site/salir"><i class="fa fa-sign-out"></i> Salir</a></li>
+               <ul class="dropdown-menu DropdownStyle" role="menu">
+                  <li><a href="#" class="DropdownLink"><i class="fa fa-user"></i> My account</a></li><br>
+                  <li><a href="#" class="DropdownLink"><i class="fa fa-shopping-bag"></i> My shops</a></li><br>
+                  <li><a href="<?=base_url()?>Site/salir"  class="DropdownLink"><i class="fa fa-sign-out"></i> Salir</a></li>
                </ul>
             </li>
             <?php } else {?>

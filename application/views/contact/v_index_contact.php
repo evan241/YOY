@@ -101,12 +101,12 @@
     }
     .address-row i.fa {
         font-size: 1.2em;
-        border: 1px solid #000000;
         padding: .5em;
         color: #000000;
         transition: .5s all;
         background: white;
         border-radius: 20px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0,0,0,0.23);
     }
     .address-right {
         float: left;
@@ -120,16 +120,19 @@
         letter-spacing:0.5px
     }
     .address-row h5 {
-        font-size: 17px;
+        font-size: 18px;
         color: #000000;
         margin: 0 0 0 15px;
         font-weight: 600;
-        letter-spacing:1px
+        letter-spacing:1px;
+        text-transform: uppercase;
+        cursor:context-menu;
     }
     .address-row p a {
         color: #ffffff;
         margin: 1em 0 0 0;
         text-decoration: none;
+      
     }
     .address-row p a:hover{
         color: #000000;
@@ -148,7 +151,8 @@
             width: 76%;
         }
         .address-right p {
-            font-size: .9em;
+            font-size: 1em;
+            cursor:pointer
         }
     }
     @media(max-width:1280px){
@@ -239,7 +243,7 @@
     
     <div class="wrap">
         <!-- contact -->
-        <div class="contact">
+        <div class="contact fontRoboto">
             <div class="contact-row agileits-w3layouts set-bgx">  
                 <div class="contact-w3lsleft">
                     <div class="contact-grid agileits">

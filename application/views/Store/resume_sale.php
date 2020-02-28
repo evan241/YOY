@@ -3,23 +3,17 @@
 
 $CI =& get_instance();
 
-$SelectUser = "DIRECCION_USUARIO, TELEFONO_USUARIO, CP_USUARIO";
-$user = $CI->db->select($SelectUser)->get_where('usuario',array('ID_USUARIO' => $infoSale->ID_USUARIO))->row();
-$dir = $user->DIRECCION_USUARIO;
-$tel = $user->TELEFONO_USUARIO;
-$cp = $user->CP_USUARIO;
-
-$idShip = $infoSale->ID_TIPO_ENVIO;
 $SelectShip = "NOMBRE_TIPO_ENVIO,TIEMPO_TIPO_ENVIO,PRECIO_TIPO_ENVIO";
-$shipping = $CI->db->select($SelectShip)->get_where('tipo_envio',array('ID_TIPO_ENVIO'=>$idShip))->row();
-$ship = $shipping->NOMBRE_TIPO_ENVIO;
-$time_ship = $shipping->TIEMPO_TIPO_ENVIO;
-$shipPrice = $shipping->PRECIO_TIPO_ENVIO;
+$Shipping = $CI->db->select($SelectShip)->get_where('tipo_envio',array('ID_TIPO_ENVIO'=>$infoSale->ID_TIPO_ENVIO))->row();
+$NameShip = $Shipping->NOMBRE_TIPO_ENVIO;
+$TimeShip = $Shipping->TIEMPO_TIPO_ENVIO;
+$PriceShip= $Shipping->PRECIO_TIPO_ENVIO;
 
-$idPayment = $infoSale->ID_MEDIO_PAGO;
-$typePayment= $CI->db->select('NOMBRE_MEDIO_PAGO,SRC_IMG')->get_where('medio_pago',array('ID_MEDIO_PAGO'=>$idPayment))->row();
-$payment = ($idPayment == 4) ? "<div id='paypal-button-container'></div>" : "Cuenta Bancaria a depositar: 95e4ce70b4qtl43o9x";
-$imgPayment = $typePayment->SRC_IMG;
+$SelectPayment = "NOMBRE_MEDIO_PAGO,SRC_IMG";
+$typePayment= $CI->db->select($SelectPayment)->get_where('medio_pago',array('ID_MEDIO_PAGO'=>$infoSale->ID_MEDIO_PAGO))->row();
+$PaypalButton = "<div id='paypal-button-container'></div>";
+$BankInformation = "<i class='fas fa-file-signature'></i> Cuenta Bancaria a depositar:<br> 95e4ce70b4qtl43o9x";
+$payment = ($infoSale->ID_MEDIO_PAGO == 4) ? $PaypalButton : $BankInformation;
 
 $idProduct = $infoSale->ID_PRODUCTO;
 $Product = $CI->db->select('PRECIO_PRODUCTO')->get_where('producto',array('ID_PRODUCTO'=>$idProduct))->row();
@@ -28,68 +22,76 @@ $PrecioProduct= $Product->PRECIO_PRODUCTO;
 $ID_VENTA = $infoSale->ID_VENTA;
 ?>
 <style>
-   .form-group{margin-bottom:10px}
+   
    .style-ship {padding: 8px 0px;}
 </style>
 
 <div id="preloder">
    <div class="loader"></div>
 </div>
-<section class="page-info-sectionII set-bg">
+<section class="h2-section set-bg"><br>
 </section>
 <div class="container mt-container  bg-black">
    <h4>RESUMEN DE COMPRA #<?=$infoSale->ID_SALE;?></h4><br>
-   <div class="row">
+   <div class="row fontRoboto">
       <div class="col-lg-8">
          <div class="form-group">            
             <div class="row style-ship details-buy pointer pt-10">
               <!-- PRODUCTO -->
               <div class="col-lg-2 align-middle form-group">                     
-               <img src="https://image.flaticon.com/icons/png/512/126/126165.png" width="40%">
+               <img src="<?=base_url('assets/img/resources/LogoUser.png');?>" width="50%">
             </div>
-            <div class="col-lg-8 form-group">
-               <div> <p>Mesa de centro</p> </div>
+            <div class="col-lg-7 form-group">
+               <div class="capitalize">
+                  <?=$infoSale->NOMBRE?></br>
+                  <i class="fa fa-phone"></i> <?=$infoSale->TELEFONO?>
+               </div>
             </div>
-            <div class="col-lg-2 form-group">
-               <div>$<?=$PrecioProduct?></div>
+            <div class="col-lg-3 form-group text-right pdRight40">
+               <div class="ResumeDescription" data-toggle="tooltip" title="Nombre de quien recibirá. Se necesitará una identificación">¿Quién recibe?</div>
             </div>
             <!--ENVIO -->
             <div class="col-lg-2 form-group align-middle">                     
-               <img src="https://www.bedbathntable.com.au/media/wysiwyg/logos/BBNT-Shipping-Logo-Black_Mobile_.png" width="50%">
+               <img src="<?=base_url('assets/img/resources/LogoShip.png');?>" width="50%">
             </div>
-            <div class="col-lg-8 form-group">
+            <div class="col-lg-7 form-group">
                <div>
-                  <p><?=$ship." - ".$time_ship?></p>                        
+                  <?=$NameShip?><br>
+                  <i class="fas fa-clock"></i> 
+                  <?=$TimeShip?>
                </div>
             </div>
-            <div class="col-lg-2 form-group">
-               <div>$<?=$shipPrice?></div>
+            <div class="col-lg-3 form-group text-right pdRight40">
+               <div class="ResumeDescription" data-toggle="tooltip" title="Información precisa del tipo de envío">Tipo de Envío</div>
             </div>
             <!-- DIRECCION -->
             <div class="col-lg-2 align-middle form-group">                     
-               <img src="https://viptanning.com/wp-content/uploads/2016/05/location-icon-map-png-93d693c9-2482-44c1-9073-d95246ce6de3_iconmonstr-location-16-icon.png" width="50%">
+               <img src="<?=base_url('assets/img/resources/LogoMap.png');?>" width="50%">
 
             </div>
-            <div class="col-lg-8 form-group">
+            <div class="col-lg-7 form-group capitalize">
                <div>
-                  <p><?=$dir." - Tel.".$tel?></p>                        
+                  <i class="fas fa-flag"></i> 
+                  <?=$infoSale->PAIS_USUARIO." ".$infoSale->ESTADO_USUARIO.", ".$infoSale->CIUDAD_USUARIO?><br>
+                  <i class="fas fa-home"></i> 
+                  <?=$infoSale->CALLE_DIRECCION." #".$infoSale->NUM_DIRECCION.", ".$infoSale->COLONIA_DIRECCION?>
                </div>
             </div>
-            <div class="col-lg-2 form-group">
-               <div>Código Postal <?= $cp ?></div>
+            <div class="col-lg-3 form-group text-right pdRight40">
+               <div class="ResumeDescription" data-toggle="tooltip" title="Código Postal de la dirección">ZipCode : <?= $infoSale->CP_VENTA ?></div>
             </div>
 
             <!-- PAYMENT -->
             <div class="col-lg-2 align-middle form-group">                     
-              <img src="<?=$imgPayment?>" width="50%">
+              <img src="<?=base_url($typePayment->SRC_IMG);?>" width="50%">
            </div>
-           <div class="col-lg-8 form-group">
-            <div class="col-lg-6">
-               <?=$payment?>                     
-            </div>
+           <div class="col-lg-7 form-group">
+                <?=$payment?>                     
          </div>
-         <div class="col-lg-2 form-group">
-            Status <br>
+         <div class="col-lg-3 form-group text-right pdRight40">
+            <font class="ResumeDescription"style="margin-right: 20px;" data-toggle="tooltip" title="Aquí verá el estado actual de su pedido">
+               Status
+            </font><br>
             <span class="status-pill status-pending">No pagado</span>
          </div>
          <!-- Progress -->

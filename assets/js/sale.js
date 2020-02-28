@@ -28,30 +28,29 @@ $(document).ready(function () {
    })
    $("#FIN_CHOOSE_SHIP").click(function (e) {
       e.preventDefault();
-
+      
       if ($('input[name=type_ship]:checked').val() == 1)
            { checked("input[name='shipNacional']") }
       else { checked("input[name='shipInternacional']") }
+      
+      var DataShip = new FormData($("#ADDRESS_FORM")[0]);
 
-      let id = $("#ID_SHIP").val();
-      let type_ship = $("#TYPE_SHIP").val();
-      let id_product = $("#ID_PRODUCT").val();
-      let total_final = $("#TOTAL_FINAL").html();
-      let precio_envio = $("#PRECIO_ENVIO").html();
+      DataShip.append('id',$("#ID_SHIP").val());
+      DataShip.append('type',$("#TYPE_SHIP").val());
+      DataShip.append('product',$("#ID_PRODUCT").val());
+      DataShip.append('total',$("#TOTAL_FINAL").html());
+      DataShip.append('envio',$("#PRECIO_ENVIO").html());
 
       $.ajax({
          type: "POST",
          url: raiz_url + "Store/ajax_choose_ship",
-         data: {
-            id: id,
-            type: type_ship,
-            total: total_final,
-            envio: precio_envio,
-            product: id_product,
-         },
+         data: DataShip,
+         cache: false,
+         contentType: false,
+         processData: false,
          success: function (res) {
             if (res === 'error') {
-               alert('No selecciono cómo le enviamos a enviar su pedido')
+               alert('No selecciono cómo le vamos a enviar su pedido')
             } else {
                window.location.replace(raiz_url + "Store/proccess_payment/" + res);
             }
@@ -61,7 +60,6 @@ $(document).ready(function () {
    $("#FIN_CHOOSE_PAYMENT").click(function (e) {
 
       checked_payment("input[name='payment']");
-
       let id_pago = $("#ID_PAGO").val();
       let nombre_pago = $("#NOMBRE_PAGO").val();
 
@@ -70,7 +68,7 @@ $(document).ready(function () {
          url: raiz_url + "Store/ajax_choose_payment",
          data: {
             id: id_pago,
-            nombre: nombre_pago
+            nombre: nombre_pago,
          },
          success: function (res) {
             if (res === 'error') {
@@ -140,20 +138,34 @@ $(document).ready(function () {
 
    $("#ADDRESS_FORM").submit(function(e){
       e.preventDefault();
+      var formData = new FormData($(this)[0]);
+
       $.ajax({
          type: "POST",
-         url: "Store/",
-         data: "data",
-         dataType: "dataType",
-         success: function (response) {
+         url: raiz_url+"Store/ajax_SaveInfoSale",
+         data: formData,
+         cache: false,
+         contentType: false,
+         processData: false,
+         success: function (res) {
             
+            $("#MODAL_DIRECCION").modal('hide');
+
+            let direccion = "<i class='fas fa-home'></i> "+$("#CALLE_EDIT").val()+" #"+$("#NUM_EDIT").val()+", "+$("#COLONIA_EDIT").val();
+            $("#DIR_CLIENT").html(direccion);
+            $("#PAIS_CLIENT").html("<i class='fas fa-flag'></i> "+$("#PAIS_EDIT").val());
+            $("#ESTADO_CLIENT").html($("#ESTADO_EDIT").val());
+            $("#CIUDAD_CLIENT").html($("#CIUDAD_EDIT").val());
+            $("#CP_CLIENT").html("C.P. "+$("#CP_EDIT").val());
+            $("#TELEFONO_CLIENT").html($("#TEL_EDIT").val());
+            $("#NOMBRE_CLIENT").html($("#NOMBRE_EDIT").val()+" "+$("#APE_EDIT").val());
+         
          }
       });
    })
 
    $("body").on('click','.pointer',function()
    {      
-
       var divID = "#"+$(this).attr('id');
       var input = divID +" input"; 
       var circle = divID + " .circle-opt";

@@ -126,7 +126,7 @@
              data-caption="Mesa perritos 1" 
              data-target="#image-gallery"
              data-image="<?= base_url() ?>assets/img/works/1.jpeg"> <br>
-            <img src="<?= base_url() ?>assets/img/works/1.jpeg" width="100%"height="545px" id="pick-main" class="pick-img"> 
+            <img src="<?= base_url() ?>assets/img/works/1.jpeg" width="100%"height="545px" id="pick-main" class="BorderSmoke"> 
         </div>
         <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
         <div class="col-lg-6 pd-left0"><br>
@@ -138,7 +138,7 @@
              data-target="#image-gallery"
              data-image="<?= base_url() ?>assets/img/works/6.jpeg">
 
-                <img src="<?= base_url() ?>assets/img/works/6.jpeg" width="90%" height="340px" class="pick-img">
+                <img src="<?= base_url() ?>assets/img/works/6.jpeg" width="90%" height="340px" class="BorderSmoke">
 
             </div>
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
@@ -149,7 +149,7 @@
              data-target="#image-gallery"
              data-image="<?= base_url() ?>assets/img/works/3.jpeg">
 
-                <img src="<?= base_url() ?>assets/img/works/3.jpeg" width="90%" height="340px" class="pick-img">
+                <img src="<?= base_url() ?>assets/img/works/3.jpeg" width="90%" height="340px" class="BorderSmoke">
 
             </div>    
             <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
@@ -160,7 +160,7 @@
              data-target="#image-gallery"
              data-image="<?= base_url() ?>assets/img/works/4.jpeg">
 
-                <img src="<?= base_url() ?>assets/img/works/4.jpeg" width="90%" height="190px" class="pick-img">
+                <img src="<?= base_url() ?>assets/img/works/4.jpeg" width="90%" height="190px" class="BorderSmoke">
 
             </div>
             <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
@@ -171,7 +171,7 @@
             data-target="#image-gallery"
             data-image="<?= base_url() ?>assets/img/works/2.jpeg">
 
-                <img src="<?= base_url() ?>assets/img/works/2.jpeg" width="90%" height="190px" class="pick-img">           
+                <img src="<?= base_url() ?>assets/img/works/2.jpeg" width="90%" height="190px" class="BorderSmoke">           
           
             </div>
         </div>
@@ -186,34 +186,34 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/1.jpg" alt="">
+                    <img src="<?= base_url() ?>assets/img/shop/1.jpg" class="BorderPink">
                     <h3>Black Coat</h3>
                     <h6>$235</h6>
-                    <a href="" class="add-card">Buy</a>
+                    <a href="<?=base_url("Store/sales/1");?>" class="add-card">Buy</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/2.jpg" alt="">
+                    <img src="<?= base_url("assets/img/shop/2.jpg");?>" class="BorderPink">
                     <h3>Black Dress</h3>
                     <h6>$235</h6>
-                    <a href="" class="add-card">Buy</a>
+                    <a href="<?=base_url("Store/sales/2");?>" class="add-card">Buy</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/3.jpg" alt="">
+                    <img src="<?= base_url() ?>assets/img/shop/3.jpg" class="BorderPink">
                     <h3>White Shirt</h3>
                     <h6>$235</h6>
-                    <a href="" class="add-card">Buy</a>
+                    <a href="<?=base_url("Store/sales/3");?>" class="add-card">Buy</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" alt="">
+                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="BorderPink">
                     <h3>Trousers</h3>
                     <h6>$235</h6>
-                    <a href="" class="add-card">Buy</a>
+                    <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
                 </div>
             </div>
         </div>
@@ -231,13 +231,13 @@
             </div> -->
             <div class="modal-body">
 			<center>
-                <img id="image-gallery-image" class="img-responsive" src="">
+                <img id="image-gallery-image" class="img-responsive BoxShadow" src="">
 			</center>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer GalleryModalFooter">
 
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-black btn-circle btn-nextprev" id="show-previous-image"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-black btn-circle btn-nextprev" id="show-previous-image"><i class="fas fa-chevron-left fa-2x"></i></button>
                 </div>
 
                 <div class="col-md-8 text-justify" id="image-gallery-caption">
@@ -245,12 +245,13 @@
                 </div>
 
                 <div class="col-md-2 text-right pd-right0">
-                    <button type="button" id="show-next-image" class="btn btn-black btn-circle"><i class="fas fa-chevron-right"></i></button>
+                    <button type="button" id="show-next-image" class="btn btn-black btn-circle BtnNext"><i class="fas fa-chevron-right fa-2x"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php if($this->session->YOY_ID_USUAIRO):?>
 <div class="modal fade bg-black" id="intro-video" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -267,3 +268,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

@@ -24,10 +24,13 @@
    footer {
       display: none;
    }
-
-   .page-info-sectionII {
-      height: 195px !important
+   .input-cant[readonly] {
+      background: #1b1b1b;
+		border: 0;
+		color: white;
+		outline:0
    }
+  
 
    .details-buy {
       font-size: 18px;
@@ -45,8 +48,8 @@
 </section>
 <!-- Page info section end -->
 <div class="container mt-container bg-black">
-   <div class="row">
-      <div class="col-lg-2 col-lg-offset-1 text-right">
+   <div class="row fontRoboto">
+      <div class="col-sm-12 col-md-12  col-lg-2 col-lg-offset-1 text-right">
          <?php 
             if(count($IMG)){
                 foreach ($IMG as $key => $row) {
@@ -59,15 +62,16 @@
             }
         ?>
       </div>
-      <div class="col-lg-6 text-center">
+      <!-- Main img description -->
+      <div class="col-sm-12 col-md-12  col-lg-6 text-center">
          <img src="<?=base_url($product['IMAGEN_PRODUCTO'])?>" id="main_img" alt="">
       </div>
-      <div class="col-lg-4">
+      <div class="col-sm-12 col-md-12  col-lg-4 ">
          <div class="about-text-box-warp">
             <div class="about-text">
-               <h3><?=$product['NOMBRE_PRODUCTO']?></h3>
+               <h3><?=strtoupper($product['NOMBRE_PRODUCTO'])?></h3>
                <h2> $<?=$product['PRECIO_PRODUCTO']?></h2>
-               <p>
+             
                   <div class="details-buy">
                      <i class="fas fa-credit-card"></i> 12 meses de $70 sin intereses
                   </div>
@@ -77,30 +81,29 @@
                      <i class="fab fa-cc-amex fa-2x"></i>
                   </div>
                   <div class="details-buy form-group">
-                     <i class="fas fa-shipping-fast"></i> Envío a toda la república <br>
+                     <i class="fas fa-shipping-fast"></i>  Envío a toda la república <br>
                   </div>
                   <div class="details-buy">
-                     <i class="fas fa-undo"></i> Garantía de 30 días <br>
+                      <i class="fas fa-undo"></i>  Garantía de 30 días <br>
                   </div>
-                  <div class="details-cant">
+                  <div class="details-cant form-group">
                      <div class="col-lg-5 pd-cant">
                         <div class="input-group mt-3">
                            
                            <div class="input-group-prepend">
-                              <button class="input-group-text" id="minus"><i class="fas fa-minus"></i></button>
+                              <button class="input-group-text" id="minus"><i class="fas fa-minus colorBlack"></i></button>
                            </div>
 
-                           <input type="text" class="form-control text-center input-cant" placeholder="0" value="1" id="cant">
+                           <input type="text" class="form-control text-center input-cant" readonly placeholder="0" value="1" id="cant">
                             
                            <div class="input-group-prepend">
-                              <button class="input-group-text btn-add" id="add"><i class="fas fa-plus"></i></button>
+                              <button class="input-group-text btn-add" id="add"><i class="fas fa-plus colorBlack"></i></button>
                            </div>
                         </div>
                      </div>
                   </div>
-               </p>
                <div>
-
+               <br>
                   <a id="BUY_NOW" href="<?=base_url('Store/proccess_sale/' . $product['ID_PRODUCTO']);?>"
                      class="btn btn-sale">Comprar ahora</a>
                </div>

@@ -1,21 +1,25 @@
+<!-- Styles-->
+<style>
+
+</style>
+
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 
 <!-- Page info section -->
-<section class="page-info-sectionII h2-section">
+<section class="page-info-sectionII">
     <h2>Store</h2>
 </section>
 <!-- Page info section end -->
 
-
 <div class="container mt-container pd-container bg-black">
     <div class="row">
         <?php
-if (count($products) > NULO) {
-   foreach ($products as $product) {
-      ?>
+        if (count($products) > NULO) {
+            foreach ($products as $product) {
+            ?>
                 <div class="col-lg-3 col-sm-6">
                     <div class="shop-item">
                         <img src="<?=base_url($product['IMAGEN_PRODUCTO'])?>" alt="">
@@ -25,13 +29,13 @@ if (count($products) > NULO) {
                     </div>
                 </div>
                 <?php
-}
-} else {
-   ?>
+            }
+        } else {
+            ?>
             <div class="portfolio-item deisablee" style="color: white;">No hay productos disponibles</div>
             <?php
-}
-?>
+        }
+            ?>
     </div>
 </div>
 

@@ -38,6 +38,21 @@ class Mstore extends CI_Model {
                 $this->session->set_userdata('TEMP_CHOSSE_PRICE_ENVIO', $envio);
                 $this->session->set_userdata('TEMP_CHOSSE_TOTAL', $total);
 
+                $AddresTemp = array(
+                    'NOMBRE_USUARIO'   => $this->input->post('NOMBRE_EDIT'),
+                    'APELLIDO_USUARIO' => $this->input->post('APE_EDIT'),               
+                    'TELEFONO_USUARIO' => $this->input->post('TEL_EDIT'),
+                    'PAIS_USUARIO'     => $this->input->post('PAIS_EDIT'),
+                    'ESTADO_USUARIO'   => $this->input->post('ESTADO_EDIT'),
+                    'CIUDAD_USUARIO'   => $this->input->post('CIUDAD_EDIT'),
+                    'CALLE_DIRECCION'  => $this->input->post('CALLE_EDIT'),
+                    'NUM_DIRECCION'    => $this->input->post('NUM_EDIT'),
+                    'CP_USUARIO'       => $this->input->post('CP_EDIT'),
+                    'COLONIA_DIRECCION'=> $this->input->post('COLONIA_EDIT')
+                );
+                
+                $this->session->set_userdata($AddresTemp);
+
                 return $product;
             }
 
@@ -49,26 +64,34 @@ class Mstore extends CI_Model {
         try {
             if(!$this->input->post('id')){
                 return false;
-            }else{
+            }else{             
 
                 $id_payment = $this->input->post('id');
-                $nombre = $this->input->post('nombre');                                                
+                $nombrePayment = $this->input->post('nombre');                                                
 
                 $this->session->set_userdata('TEMP_CHOSSE_ID_PAYMENT', $id_payment);
-                $this->session->set_userdata('TEMP_CHOSSE_NOMBRE_PAYMENT', $nombre);
-
+                $this->session->set_userdata('TEMP_CHOSSE_NOMBRE_PAYMENT', $nombrePayment);
                 
                 $data = array(
-                    'ID_USUARIO' => $this->session->userdata('YOY_ID_USUARIO'),
-                    'ID_PRODUCTO' => $this->session->userdata('TEMP_CHOSSE_ID_PRODUCTO'),
-                    'CANT_VENTA' => $this->session->userdata('TEMP_CANT'),
-                    'TOTAL_VENTA' => substr($this->session->userdata('TEMP_CHOSSE_TOTAL'), 1,11),
-                    'STATUS_VENTA' => 1,
-                    'ID_MEDIO_PAGO' => $this->session->userdata('TEMP_CHOSSE_ID_PAYMENT'),
-                    'ID_TIPO_ENVIO' => $this->session->userdata('TEMP_CHOSSE_ID_ENVIO'),
-                    'ACTIVA_VENTA' => 1,
-                    'paypal_order_id' => 0,
-                    'paypal_error_id' => 0,                    
+                    'ID_USUARIO'       => $this->session->YOY_ID_USUARIO,
+                    'ID_PRODUCTO'      => $this->session->TEMP_CHOSSE_ID_PRODUCTO,
+                    'NOMBRE'           => $this->session->NOMBRE_USUARIO." ".$this->session->APELLIDO_USUARIO,
+                    'TELEFONO'         => $this->session->TELEFONO_USUARIO,
+                    'PAIS_USUARIO'     => $this->session->PAIS_USUARIO,
+                    'ESTADO_USUARIO'   => $this->session->ESTADO_USUARIO,
+                    'CIUDAD_USUARIO'   => $this->session->CIUDAD_USUARIO,
+                    'CALLE_DIRECCION'  => $this->session->CALLE_DIRECCION,
+                    'NUM_DIRECCION'    => $this->session->NUM_DIRECCION,
+                    'COLONIA_DIRECCION'=> $this->session->COLONIA_DIRECCION,
+                    'CP_VENTA'         => $this->session->CP_USUARIO,
+                    'CANT_VENTA'       => $this->session->TEMP_CANT,
+                    'TOTAL_VENTA'      => substr($this->session->TEMP_CHOSSE_TOTAL, 1,11),
+                    'STATUS_VENTA'     => 1,
+                    'ID_MEDIO_PAGO'    => $this->session->TEMP_CHOSSE_ID_PAYMENT,
+                    'ID_TIPO_ENVIO'    => $this->session->TEMP_CHOSSE_ID_ENVIO,
+                    'ACTIVA_VENTA'     => 1,
+                    'paypal_order_id'  => 0,
+                    'paypal_error_id'  => 0,                    
                 );
 
                 $this->db->insert('venta', $data);
