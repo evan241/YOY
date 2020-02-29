@@ -34,14 +34,14 @@
                                     ?>
                                     <tr>
                                         <td style="text-align: center;">
-                                            <button id="btnEditCategory" class="btn btn-primary btn-edit-category" data-original-title="Editar categoria" data-toggle="tooltip" data-id-category="<?= $category['ID_CATEGORIA'] ?>" style=" padding: 2px 5px !important;">
+                                            <button id="btnEditCategory" class="btn btn-primary btn-edit-category" data-original-title="Editar categoria" data-toggle="tooltip" data-id-category="<?= $category['id'] ?>" style=" padding: 2px 5px !important;">
                                                 <i class="fa fa-edit fa-1x" aria-hidden="true"></i>
                                             </button>
-                                            <button id="btnDeleteCategory" class="btn btn-danger btn-delete-category" data-original-title="Borrar categoria" data-toggle="tooltip" data-id-category="<?= $category['ID_CATEGORIA'] ?>" style=" padding: 2px 5px !important;">
+                                            <button id="btnDeleteCategory" class="btn btn-danger btn-delete-category" data-original-title="Borrar categoria" data-toggle="tooltip" data-id-category="<?= $category['id'] ?>" style=" padding: 2px 5px !important;">
                                                 <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
                                             </button>
                                         </td>
-                                        <td><?= $category['NOMBRE_CATEGORIA'] ?></td>
+                                        <td><?= $category['name'] ?></td>
                                     </tr>
                                     <?php
                                 }

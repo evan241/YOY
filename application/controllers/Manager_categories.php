@@ -8,12 +8,17 @@ class Manager_categories extends CI_Controller {
         parent::__construct();
         $this->load->model('mmanager_categories');
         $this->load->helper('general');
+        $this->load->helper('api');
     }
     
     public function categories() {
-        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+        if (!$this->isAuthorized()) redirect('login/salir');
 
-        $data['categories'] = $this->mmanager_categories->get_all_valid_categories();
+        // $test = ["name" => "anotherone"];
+        // $var = api_post(CATEGORY, $test);
+        // print_r($var);
+
+        $data['categories'] = api_get(CATEGORY);
 
         $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_index_category', $data);
@@ -21,7 +26,7 @@ class Manager_categories extends CI_Controller {
     }
     
     public function form_add_categories() {
-        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+        if (!$this->isAuthorized()) redirect('login/salir');
 
         $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_add_category');
@@ -29,10 +34,10 @@ class Manager_categories extends CI_Controller {
     }
 
     public function form_edit_categories($id) {
-        if ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR)) redirect('login/salir');
+        if (!$this->isAuthorized()) redirect('login/salir');
         if (($id <= 0) || ($id == NUlL)) redirect('manager_categories/categories');
 
-        $data['category'] = $this->mmanager_categories->getCategory($id);
+        $data['category'] = api_get_id(CATEGORY, $id);
 
         $this->load->view('esqueleton/header_manager', getActive("classPro"));
         $this->load->view('Manager/categories/v_edit_category', $data);
@@ -41,34 +46,30 @@ class Manager_categories extends CI_Controller {
     }
 
     public function ajax_add_categories() {
-        if ((!$this->input->is_ajax_request()) ||
-            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
-            redirect('login/salir');
+        if (!$this->input->is_ajax_request() || !$this->isAuthorized()) redirect('login/salir');
 
-        $category = array('NOMBRE_CATEGORIA' => trim($this->input->post("RG_NOMBRE_CATEGORIA")));
-
-        if ($this->mmanager_categories->addCategory($category))echo 1;
-        else echo 0;
+        $category = ["name" => trim($this->input->post("name"))];
+        echo api_post(CATEGORY, $category);
     }
 
     public function ajax_edit_categories() {
-        if ((!$this->input->is_ajax_request()) ||
-            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
-            redirect('login/salir');
+        if (!$this->input->is_ajax_request() || !$this->isAuthorized()) redirect('login/salir');
 
-        $category = array('NOMBRE_CATEGORIA' => trim($this->input->post("RG_NOMBRE_CATEGORIA")));
-        $id = trim($this->input->post("RG_ID_CATEGORIA"));
-
-        if ($this->mmanager_categories->updateCategory($category, $id))echo 1;
-        else echo 0;
+        $data = array(
+            'id' => $this->input->post("id"),
+            'name' => trim($this->input->post("name"))
+        );
+        echo api_put(CATEGORY, $data);
     }
 
     function ajax_disable_categories() {
-        if ((!$this->input->is_ajax_request()) ||
-            ($this->session->userdata('YOY_ID_ROL') != (ADMINISTRADOR || VENDEDOR))) 
-            redirect('login/salir');
+        if (!$this->input->is_ajax_request() || !$this->isAuthorized()) redirect('login/salir');
 
-        if ($this->mmanager_categories->disableCategory($this->input->post('ID_CATEGORY'))) echo 1;
-        else echo 0;
+        $id = $this->input->post('ID_CATEGORY');
+        echo api_delete(CATEGORY, $id);
+    }
+
+    private function isAuthorized() {
+        return $this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR);
     }
 }

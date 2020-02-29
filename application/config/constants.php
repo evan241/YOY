@@ -59,3 +59,6 @@ define("LIVE_ID", "AZxD_NRo_2G2F4WI3_sNF7W_dY-bx6wG_0PtLlXyroDEhQ_1OapZtRzZrHy5o
 define("LIVE_SECRET", "EMd0La4XDWpSITErPfYnBnBqETDa1_0-5vy4Qo09qkMQEaitUI6YjcosCGNNteiU9WhIhYkTtud30XzK");
 
 define("TOKEN_URL", "https://api.sandbox.paypal.com/v1/oauth2/token");
+
+define("HOST", "http://201.164.209.10:8080");
+define("CATEGORY", HOST . "/api/category/");

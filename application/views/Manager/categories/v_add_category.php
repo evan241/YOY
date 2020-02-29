@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" style="text-transform:uppercase;" name="RG_NOMBRE_CATEGORIA" required id="RG_NOMBRE_CATEGORIA" class="form-control" placeholder="Nombre de la categoria">
+                                <input type="text" style="text-transform:uppercase;" name="name" required id="RG_NOMBRE_CATEGORIA" class="form-control" placeholder="Nombre de la categoria">
                                 <div class="help-block with-errors"></div>
                             </div>  
                         </div>

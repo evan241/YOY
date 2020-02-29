@@ -2,7 +2,7 @@
     <div class="col-sm-12 text-left">
         <div class="card card-default">
             <form data-toggle="validator" role="form" id="formEditCategory">
-                <input type="hidden" value="<?= $category['ID_CATEGORIA'] ?>" name="RG_ID_CATEGORIA" id="RG_ID_CATEGORIA" > 
+                <input type="hidden" value="<?= $category['id'] ?>" name="id" id="RG_ID_CATEGORIA" > 
                 <div class="card-header card-header-border-bottom d-flex justify-content-between">
                     <h2>EDITAR CATEGORIA</h2>
                 </div>
@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" style="text-transform:uppercase;" name="RG_NOMBRE_CATEGORIA" required id="RG_NOMBRE_CATEGORIA" class="form-control" placeholder="Nombre de la categoria" value="<?= $category['NOMBRE_CATEGORIA'] ?>">
+                                <input type="text" style="text-transform:uppercase;" name="name" required id="RG_NOMBRE_CATEGORIA" class="form-control" placeholder="Nombre de la categoria" value="<?= $category['name'] ?>">
                                 <div class="help-block with-errors"></div>
                             </div>                  
                         </div>
