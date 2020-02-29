@@ -52,7 +52,6 @@ $(document).ready(function () {
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
-                alert(data);
                 if (data) {
                     $('#modBodyAddCategory').html('<b>La categoria se agregó correctamente</b> ');
                     window.location.href = raiz_url + "manager_categories/categories";
