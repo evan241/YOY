@@ -60,5 +60,5 @@ define("LIVE_SECRET", "EMd0La4XDWpSITErPfYnBnBqETDa1_0-5vy4Qo09qkMQEaitUI6YjcosC
 
 define("TOKEN_URL", "https://api.sandbox.paypal.com/v1/oauth2/token");
 
-define("HOST", "http://201.164.209.10:8080");
+define("HOST", "http://target_spring_api");
 define("CATEGORY", HOST . "/api/category/");
