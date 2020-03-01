@@ -1,11 +1,18 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Manager_categories extends CI_Controller {
 
+    private $rol;
+
     public function __construct() {
         parent::__construct();
+        $this->rol = $this->session->userdata('YOY_ID_ROL');
         $this->load->model('mmanager_categories');
         $this->load->helper('general');
         $this->load->helper('api');
@@ -14,9 +21,17 @@ class Manager_categories extends CI_Controller {
     public function categories() {
         if (!$this->isAuthorized()) redirect('login/salir');
 
-        // $test = ["name" => "anotherone"];
-        // $var = api_post(CATEGORY, $test);
-        // print_r($var);
+        // $curl = curl_init(CATEGORY);
+
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        //   'Content-Type: application/json'
+        // ));
+
+        // $response = json_decode(curl_exec($curl), true);
+        // echo curl_error($curl);
+        // curl_close($curl);
+        // print_r($response);
 
         $data['categories'] = api_get(CATEGORY);
 
@@ -70,6 +85,6 @@ class Manager_categories extends CI_Controller {
     }
 
     private function isAuthorized() {
-        return $this->session->userdata('YOY_ID_ROL') == (ADMINISTRADOR || VENDEDOR);
+        return $this->rol == (ADMINISTRADOR || VENDEDOR);
     }
 }

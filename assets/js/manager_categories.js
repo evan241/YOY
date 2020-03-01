@@ -108,11 +108,10 @@ $(document).ready(function () {
             $('#btnDelCategory').on('click', function (e) {
 
                 $.ajax({
-                    url: raiz_url + "manager_categories/ajax_disable_categories",
+                    url: raiz_url + "Manager_categories/ajax_disable_categories",
                     type: 'POST',
                     data: 'ID_CATEGORY=' + ID_CATEGORY,
                     success: function (data) {
-
                         if (data) {
                             window.location.reload();
                         } else {

@@ -6,3 +6,15 @@ RewriteRule ^(.*)$ index.php/$1 [L]
  
 ErrorDocument 404 /index.php
 Options All -Indexes
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+<FilesMatch ".(gif|png|css|js|jpg|eot|ttf|otf|woff)$">
+<IfModule mod_headers.c>
+      Header set Access-Control-Allow-Origin "*"
+      Header set Access-Control-Allow-Methods: "*"
+      Header set Access-Control-Allow-Headers: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      </IfModule>
+</FilesMatch>

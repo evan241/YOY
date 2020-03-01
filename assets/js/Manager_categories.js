@@ -48,7 +48,7 @@ $(document).ready(function () {
         $('#modBodyAddCategory').html('');
 
         $.ajax({
-            url: raiz_url + "Manager_categories/ajax_add_categories",
+            url: raiz_url + "Manager_categories/ajax_edit_categories",
             type: 'POST',
             data: $(this).serialize(),
             success: function (data) {
@@ -108,11 +108,10 @@ $(document).ready(function () {
             $('#btnDelCategory').on('click', function (e) {
 
                 $.ajax({
-                    url: raiz_url + "manager_categories/ajax_disable_categories",
+                    url: raiz_url + "Manager_categories/ajax_disable_categories",
                     type: 'POST',
                     data: 'ID_CATEGORY=' + ID_CATEGORY,
                     success: function (data) {
-
                         if (data) {
                             window.location.reload();
                         } else {
