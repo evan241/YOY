@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
 // $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
-$config['base_url'] = "http://201.164.209.10/YOY/";
+$config['base_url'] = "http://138.68.5.53/YOY/";
 
 $config['index_page'] = '';
 

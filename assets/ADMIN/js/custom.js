@@ -40,7 +40,7 @@ jQuery.event.special.touchmove = {
 
 
 
-raiz_url = "http://201.164.209.10/YOY/";
+raiz_url = "http://138.68.5.53/YOY/";
 $(document).ready(function() {
   "use strict";
 
