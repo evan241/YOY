@@ -96,7 +96,7 @@ class Site extends CI_Controller {
 
         //set email information and content
         $this->email->from('erick.evangelista87@gmail.com', 'Administración');
-        $this->email->to('gilbertomunizs@hotmail.com');
+        $this->email->to('infexiuz@gmail.com');
         $this->email->subject('YOY CONTACT');
          $this->email->message($this->load->view('contact/emailContact', $data, true));
            

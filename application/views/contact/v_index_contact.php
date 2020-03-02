@@ -1,53 +1,306 @@
+<style>
+    a{text-decoration:none;}
+    .txt-rt{text-align:right;}/* text align right */
+    .txt-lt{text-align:left;}/* text align left */
+    .txt-center{text-align:center;}/* text align center */
+    .float-rt{float:right;}/* float right */
+    .float-lt{float:left;}/* float left */
+    .clear{clear:both;}/* clear float */
+    .pos-relative{position:relative;}/* Position Relative */
+    .pos-absolute{position:absolute;}/* Position Absolute */
+    .vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+    .vertical-top{	vertical-align:top;}/* vertical align top */
+    .wrap {
+        width: 80%;
+        margin: 2em auto 0;
+    }
+
+    /*--profile start here--*/
+  
+    /*-- contact --*/ 
+    .contact{
+        background: #03a9f4;
+    }
+    .contact-grid {
+        background: #ffffff;
+        padding: 2em 2em;
+    }
+    .contact-w3lsleft {
+        float: left;
+        width: 55%;
+    }
+    .contact-w3lsright{
+        float:left;
+        width:45%;
+    }
+    .agileits-contact-right{
+        padding: 3.5em 2em 0;
+    }
+    .contact-grid h4 {
+        font-size: 1.2em;
+        color: #000;
+        margin: 0 0 1em 0;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+    .contact input[type="text"], .contact input[type="email"], .contact textarea {
+        width: 90%;
+        color: #999999;
+        background: #fff;
+        outline: none;
+        font-size: .9em;
+        padding: .8em 1em;
+        margin-bottom: 1.5em;
+        border: solid 1px #b2b2b2;
+        -webkit-appearance: none;
+    }
+    .contact textarea {
+        resize: none;
+        min-height: 6em;
+        font-family: 'Roboto', sans-serif;
+    }
+    .contact input[type="submit"] { 
+        outline: none;
+        color: #fff;
+        padding: .8em 3em;
+        font-size: .9em;
+        -webkit-appearance: none;
+        cursor: pointer;
+        background: #000000;
+        border: solid 1px #000000;
+        transition: 0.5s all;
+        -webkit-transition: 0.5s all;
+        -o-transition: 0.5s all;
+        -moz-transition: 0.5s all;
+        -ms-transition: 0.5s all;
+    }
+    .contact input[type="submit"]:hover{
+        background: none; 
+        border-color:#000000;
+        color:#000000;
+    }
+    .contact ::-webkit-input-placeholder{
+        color:#555 !important;
+    }
+    .address-row {
+        margin-top: 2em;
+    }
+    .contact-w3lsright h2 {
+        font-size: 1em;
+        color: #000000;
+        font-weight: 800;
+        line-height: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .address-left {
+        padding: 0;
+        text-align: center;
+        float: left;
+        width: 20%;
+    }
+    .address-row i.fa {
+        font-size: 1.2em;
+        padding: .5em;
+        color: #000000;
+        transition: .5s all;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0,0,0,0.23);
+    }
+    .address-right {
+        float: left;
+    }
+    .set-bgx{background:#ff1493}
+    
+    .address-right p{
+        color: #ffffff;
+        font-size: .9em;
+        margin: 0 0 0 15px;
+        letter-spacing:0.5px
+    }
+    .address-row h5 {
+        font-size: 18px;
+        color: #000000;
+        margin: 0 0 0 15px;
+        font-weight: 600;
+        letter-spacing:1px;
+        text-transform: uppercase;
+        cursor:context-menu;
+    }
+    .address-row p a {
+        color: #ffffff;
+        margin: 1em 0 0 0;
+        text-decoration: none;
+      
+    }
+    .address-row p a:hover{
+        color: #000000;
+    }
+    .address h4 {
+        font-size: 1.8em;
+        color: #bb3756;
+        margin-bottom: 0.6em;
+        text-transform: uppercase;
+    }
+   
+    /*-- //contact --*/
+    /*-- responsive --*/
+    @media(max-width:1366px){
+        .address-right {
+            width: 76%;
+        }
+        .address-right p {
+            font-size: 1em;
+            cursor:pointer
+        }
+    }
+    @media(max-width:1280px){
+        .wrap {
+            width: 60%;
+        }
+    }
+    @media(max-width:1080px){
+        .wrap {
+            width: 70%;
+        }
+    }
+    @media(max-width:900px){
+        .wrap {
+            width: 80%;
+        }
+    }
+    @media(max-width:800px){
+        .wrap {
+            width: 90%;
+        }
+    }
+    @media(max-width:800px){
+        .address-right {
+            width: 70%;
+            margin-left: 1em;
+        }
+    }
+    @media(max-width:600px){
+        .contact-w3lsleft {
+            float: none;
+            width: 100%;
+        }
+        .contact-w3lsright {
+            float: none;
+            width: 100%;
+        }
+        .agileits-contact-right {
+            padding: 4em 2em;
+        }
+        .address-left {
+            text-align:left;
+            width: 10%;
+        }
+       
+    }
+ 
+    @media(max-width:414px){
+     
+        .contact input[type="text"], .contact input[type="email"], .contact textarea {
+            width: 88%;
+        }
+        .contact-grid {
+            padding: 2em;
+        }
+    }
+    @media(max-width:384px){
+        h1 {
+            font-size: 1.5em;
+        }
+        .address-left {
+            width: 15%;
+        }
+    }
+    @media(max-width:320px){
+        .contact textarea {
+            min-height: 7em;
+        }
+        .agileits-contact-right {
+            padding: 3em 2em;
+        }
+        .address-left {
+            width: 17%;
+        }
+        .contact input[type="submit"] {
+            padding: .8em 2em;
+        }
+    }
+    /*-- //responsive --*/
+</style>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 
-<!-- Page info section -->
-<section class="page-info-sectionII set-bg">
-    <h2>Contact</h2>
-</section>
-<!-- Page info section end -->
-
-
-<div class="container">
-    <div class="row">
-        <div class="">
-            <form data-tooggle="validator" role="form" id="formContact" method="post" >
-                <h4 class="">
-                    Envíanos tu mensaje
-                </h4>
-
-                <div class="">
-                    <input class="" id="nombre" type="text" required="" name="nombre" placeholder="Nombre" style="border: 2px solid #7ab751 !important; border-radius: 4px;">
+<div class="container mt-section">
+ 
+    
+    <div class="wrap">
+        <!-- contact -->
+        <div class="contact fontRoboto">
+            <div class="contact-row agileits-w3layouts set-bgx">  
+                <div class="contact-w3lsleft">
+                    <div class="contact-grid agileits">
+                        <h4>DROP US A LINE </h4>
+                        <form data-tooggle="validator" role="form" id="formContact" method="post" > 
+                            <input type="hidden" id="name"  name="name" placeholder="Name">
+                            <input type="text" id="nombre" name="nombre" placeholder="Name" required="">
+                            <input type="email" id="e-mail" name="e-mail" placeholder="Email" required=""> 
+                            <input type="text" id="telefono" name="telefono" placeholder="Phone Number" required="">
+                            <textarea id="mensaje" name="mensaje" placeholder="Message..."  rows="2" required=""></textarea>
+                            <input type="submit" value="Submit" >
+                        </form> 
+                    </div>
                 </div>
-
-                <div class="">
-                    <input class=" " id="telefono" type="text"  name="telefono" placeholder="Teléfono" style="border: 2px solid #7ab751 !important; border-radius: 4px;">
+                <div class="contact-w3lsright">
+                    <div class="agileits-contact-right">
+                        <h2>Our Contacts</h2>
+                        <div class="address-row">
+                            <div class="address-left">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                            </div>
+                            <div class="address-right">
+                                <h5>Visit Us</h5>
+                                <p>Guadalajara , Jalisco</p>
+                            </div>
+                            <div class="clear"> </div>
+                        </div>
+                        <div class="address-row w3-agileits">
+                            <div class="address-left">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="address-right">
+                                <h5>Mail Us</h5>
+                                <p><a href="mailto:yoy@example.com"> yoy@example.com</a></p>
+                            </div>
+                            <div class="clear"> </div>
+                        </div>
+                        <div class="address-row">
+                            <div class="address-left">
+                                <i class="fa fa-volume-control-phone" aria-hidden="true" style="padding: 8px 10px;"></i>
+                            </div>
+                            <div class="address-right">
+                                <h5>Call Us</h5>
+                                <p>+01 222 333 4444</p>
+                            </div>
+                            <div class="clear"> </div>
+                        </div> 
+                    </div>
                 </div>
-
-                <div class="">
-                    <input class="" type="email" name="e-mail"  id="e-mail" required="" placeholder="Email" style="border: 2px solid #7ab751 !important; border-radius: 4px;">
-                </div>
-
-                <textarea class="" required="" id="mensaje" name="mensaje" placeholder="Mensaje" style="border: 2px solid #7ab751 !important; border-radius: 4px;"></textarea>
-
-                <div style="display: none;">
-                    <input id="name" type="text" name="name" placeholder="Name">
-                </div>
-
-                <div class="">
-                    <!-- Button -->
-                    <button type="submit"  class="">
-                        Enviar mensaje
-                    </button>
-                </div>
-            </form>
+                <div class="clear"> </div>
+            </div>	
         </div>
+        <!-- //contact --> 
     </div>
 </div>
 
-<div class="modal fade" id="modAdvice" tabindex="-1" role="dialog" aria-labelledby="modAdvice" aria-hidden="true">
+<div class="modal fade" id="modAdvice" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content" style="text-align: center">
             <div class="modal-header header-primary" id="modalHeaderAdvice"  >
