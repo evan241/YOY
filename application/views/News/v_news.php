@@ -1,36 +1,41 @@
-<!-- Page Preloder -->
+<style>
+   
+</style>
 <div id="preloder">
     <div class="loader"></div>
 </div>
 
-<!-- Page info section -->
-<section class="page-info-section set-bg">
-    <h2>News</h2>
-</section>
-<!-- Page info section end -->
-
-
-<!-- About Intro section -->
-<section class="about-intor-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 order-lg-1 order-2">
-                <div class="about-text">
-                    <?php
-                        foreach ($ROWS as $ROW) {?>
-                            <div>
-                                <h2><a href="news/<?= $ROW['ID'] ?>"><?= $ROW['TITULO']; ?></a></h2>
-                                <?php $contenido = str_replace('contenteditable="true"', '', $ROW['CONTENIDO']); ?>
-                                <div><?= substr($contenido, 0, 300) .'...</div>'; ?>
-                            </div>
-                        <?php }
-                    ?>
+<div class="container">
+    <section class="page-info-sectionII">
+        <h2 style="margin: 0;">News</h2>
+    </section>
+    <div class="row">
+    <?php
+    foreach ($ROWS as $key => $ROW)
+    {
+        $title = $ROW['TITULO'];
+        $contenido =  substr($ROW['CONTENIDO'], 0, 125) .'...'; 
+        $img = "background: url(".base_url($ROW['IMG']).") no-repeat center/cover;";
+                           
+        ?>
+        <div class="col-lg-4 col-xl-4 col-sm-12 col-md-12" style="padding:0px">
+    
+            <li class="cards__item" style="width:100%">
+                <div class="card">
+                    <div class="card__image" style="<?=$img?>"></div>
+                    <div class="card__content">
+                        <div class="card__title"><?=$title?></div>
+                        <p class="card__text"><?=$contenido?></p>
+                        <button class="btn btn--block card__btn">Continuar leyendo..</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-5 order-lg-2 order-1">
-                <img src="<?= base_url() ?>assets/img/logo-big.png" class="about-logo" alt="">
-            </div>
+            </li>
+    
         </div>
-    </div>
-</section>
+    <?php  
+    }?>
+    </div>    
+</div>
+
+
 <!-- About Intro section end -->

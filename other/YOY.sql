@@ -14,14 +14,18 @@
  Date: 20/02/2020 14:13:14
 */
 
+DROP DATABASE IF EXISTS `yoy`;
+CREATE DATABASE `yoy`;
+USE `yoy`;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for CATEGORIA
 -- ----------------------------
-DROP TABLE IF EXISTS `CATEGORIA`;
-CREATE TABLE `CATEGORIA` (
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE `categoria` (
   `ID_CATEGORIA` int(10) NOT NULL AUTO_INCREMENT,
   `NOMBRE_CATEGORIA` varchar(50) DEFAULT NULL,
   `VIGENCIA_CATEGORIA` int(1) DEFAULT '1',
@@ -32,16 +36,16 @@ CREATE TABLE `CATEGORIA` (
 -- Records of CATEGORIA
 -- ----------------------------
 BEGIN;
-INSERT INTO `CATEGORIA` VALUES (1, 'Ropa accesorios', 1);
-INSERT INTO `CATEGORIA` VALUES (2, 'Artesanal', 1);
-INSERT INTO `CATEGORIA` VALUES (3, 'Pintura', 1);
+INSERT INTO `categoria` VALUES (1, 'Ropa accesorios', 1);
+INSERT INTO `categoria` VALUES (2, 'Artesanal', 1);
+INSERT INTO `categoria` VALUES (3, 'Pintura', 1);
 COMMIT;
 
 -- ----------------------------
 -- Table structure for PRODUCTO
 -- ----------------------------
-DROP TABLE IF EXISTS `PRODUCTO`;
-CREATE TABLE `PRODUCTO` (
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE `producto` (
   `ID_PRODUCTO` int(255) NOT NULL AUTO_INCREMENT,
   `ID_CATEGORIA` int(10) DEFAULT NULL,
   `ID_ALMACEN` int(10) DEFAULT NULL,
@@ -62,19 +66,19 @@ CREATE TABLE `PRODUCTO` (
 -- Records of PRODUCTO
 -- ----------------------------
 BEGIN;
-INSERT INTO `PRODUCTO` VALUES (1, 2, NULL, '0001', 'Equipal artesanal', 'Es una equipal hecho por manos Colimenses...', 500.00, 1000.00, 10, 1, 1, 2, 'assets/img/store/1.jpg');
-INSERT INTO `PRODUCTO` VALUES (2, 2, NULL, '0987', 'Mesa de centro', 'Una mesa elaborada de la mejor madera...', 600.00, 1200.00, 89, 1, 1, 2, 'assets/img/store/2.jpg');
-INSERT INTO `PRODUCTO` VALUES (3, 2, NULL, '44', 'Silla artesanal', 'Silla de madera decorada y hecha artesanalmente...', 400.00, 800.00, 20, 1, 1, 8, 'assets/img/store/3.jpg');
-INSERT INTO `PRODUCTO` VALUES (4, 3, 2, '2', 'CUADRO PINTURA', 'PINTURA AL OLEO CON MARCO ARTESANAL HECHO POR...', 1000.00, 2000.00, 3, 1, 1, 3, 'EMPTY');
-INSERT INTO `PRODUCTO` VALUES (5, 1, 1, '6', 'Vestido', 'Vestido de tela artesanal bordado a mano...', 1200.00, 2400.00, 2, 1, 1, 2, 'assets/img/store/5.jpg');
-INSERT INTO `PRODUCTO` VALUES (10, 2, NULL, '3333', 'DDD', '', 0.00, 0.00, 0, 1, 0, 0, 'EMPTY');
+INSERT INTO `producto` VALUES (1, 2, NULL, '0001', 'Equipal artesanal', 'Es una equipal hecho por manos Colimenses...', 500.00, 1000.00, 10, 1, 1, 2, 'assets/img/store/1.jpg');
+INSERT INTO `producto` VALUES (2, 2, NULL, '0987', 'Mesa de centro', 'Una mesa elaborada de la mejor madera...', 600.00, 1200.00, 89, 1, 1, 2, 'assets/img/store/2.jpg');
+INSERT INTO `producto` VALUES (3, 2, NULL, '44', 'Silla artesanal', 'Silla de madera decorada y hecha artesanalmente...', 400.00, 800.00, 20, 1, 1, 8, 'assets/img/store/3.jpg');
+INSERT INTO `producto` VALUES (4, 3, 2, '2', 'CUADRO PINTURA', 'PINTURA AL OLEO CON MARCO ARTESANAL HECHO POR...', 1000.00, 2000.00, 3, 1, 1, 3, 'EMPTY');
+INSERT INTO `producto` VALUES (5, 1, 1, '6', 'Vestido', 'Vestido de tela artesanal bordado a mano...', 1200.00, 2400.00, 2, 1, 1, 2, 'assets/img/store/5.jpg');
+INSERT INTO `producto` VALUES (10, 2, NULL, '3333', 'DDD', '', 0.00, 0.00, 0, 1, 0, 0, 'EMPTY');
 COMMIT;
 
 -- ----------------------------
 -- Table structure for ROL
 -- ----------------------------
-DROP TABLE IF EXISTS `ROL`;
-CREATE TABLE `ROL` (
+DROP TABLE IF EXISTS `rol`;
+CREATE TABLE `rol` (
   `ID_ROL` int(5) NOT NULL AUTO_INCREMENT,
   `NOMBRE_ROL` varchar(45) DEFAULT NULL,
   `DESCRIPCION_ROL` varchar(50) DEFAULT NULL,
@@ -86,9 +90,9 @@ CREATE TABLE `ROL` (
 -- Records of ROL
 -- ----------------------------
 BEGIN;
-INSERT INTO `ROL` VALUES (1, 'ADMINISTRADOR', NULL, 1);
-INSERT INTO `ROL` VALUES (2, 'VENDEDOR', NULL, 1);
-INSERT INTO `ROL` VALUES (3, 'USUARIO', NULL, 1);
+INSERT INTO `rol` VALUES (1, 'ADMINISTRADOR', NULL, 1);
+INSERT INTO `rol` VALUES (2, 'VENDEDOR', NULL, 1);
+INSERT INTO `rol` VALUES (3, 'USUARIO', NULL, 1);
 COMMIT;
 
 -- ----------------------------

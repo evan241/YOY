@@ -1,0 +1,25 @@
+version: '2.4'
+
+services:
+
+    php:
+
+        build:
+            context: .
+            dockerfile: php.Dockerfile
+
+        image: php-apache:7.4.2
+
+        ports:
+            - 80:80
+
+        networks:
+            - geem
+    
+        volumes:
+            - ../:/var/www/html
+
+
+networks:
+    geem:
+        external: true

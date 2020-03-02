@@ -8,16 +8,27 @@ class Site extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Mmanager_news');
+        $this->load->model('Mmanager_sales');
+        $this->load->model('mpaypal');
     }
 
     public function index() {
+        // $list['order_id'] = "13N127471N965893J";
+        // $test = $this->mpaypal->addOrder($list);
+        // echo $test;
+        // $var = $this->Mmanager_sales->get_sale_by_id(13);
+        // foreach ($var as $key => $val) {
+        // print_r($key . " = " . $val);
+        // echo "<br>";
+        // }
+
         if ($this->session->userdata('YOY_ID_ROL') == ADMINISTRADOR) {
             redirect('manager/index');
         } else {
             $this->load->view('esqueleton/header');
             $this->load->view('index');
             $this->load->view('esqueleton/footer');
-        }
+        }    
     }
 
     public function salir() {
@@ -85,7 +96,7 @@ class Site extends CI_Controller {
 
         //set email information and content
         $this->email->from('erick.evangelista87@gmail.com', 'Administración');
-        $this->email->to('gilbertomunizs@hotmail.com');
+        $this->email->to('infexiuz@gmail.com');
         $this->email->subject('YOY CONTACT');
          $this->email->message($this->load->view('contact/emailContact', $data, true));
            

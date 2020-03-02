@@ -32,6 +32,29 @@ class Store extends CI_Controller {
         endif;
             
     }
+    public function ajax_SaveInfoSale()
+    {
+        if($this->input->is_ajax_request())
+        {
+            $AddresTemp = array(
+                'NOMBRE_USUARIO'   => $this->input->post('NOMBRE_EDIT'),
+                'APELLIDO_USUARIO' => $this->input->post('APE_EDIT'),               
+                'TELEFONO_USUARIO' => $this->input->post('TEL_EDIT'),
+                'PAIS_USUARIO'     => $this->input->post('PAIS_EDIT'),
+                'ESTADO_USUARIO'   => $this->input->post('ESTADO_EDIT'),
+                'CIUDAD_USUARIO'   => $this->input->post('CIUDAD_EDIT'),
+                'CALLE_DIRECCION'  => $this->input->post('CALLE_EDIT'),
+                'NUM_DIRECCION'    => $this->input->post('NUM_EDIT'),
+                'CP_USUARIO'       => $this->input->post('CP_EDIT'),
+                'COLONIA_DIRECCION'=> $this->input->post('COLONIA_EDIT')
+            );
+            
+            $this->session->set_userdata($AddresTemp);
+            
+        }else{
+            redirect("Store/index");
+        }
+    }
     public function proccess_payment($item) {
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
@@ -63,14 +86,28 @@ class Store extends CI_Controller {
             redirect('Store/index','refresh');
         }
     }
+    public function ajax_BuyNow(){
+
+        if($this->input->is_ajax_request()){
+
+            if($this->session->set_userdata("TEMP_CANT",$this->input->post("cant"))){
+                return true;
+            }else{
+                return false;
+            }
+        }else{            
+            redirect('Store/index','refresh');        
+        }
+    }
     public function sales($item) {
+
         $this->load->view('esqueleton/header');
         $data['product'] = $this->mmanager_products->get_product_by_id($item);
         $data['ROW_SHIPS'] = $this->mmanager->get_all_valid_ships();
         $this->load->view('Store/sales', $data);
         $this->load->view('esqueleton/footer');
     }
-     public function resume($id) {
+    public function resume($id) {
          
          $Sale = $this->mstore->get_sale($id);
          if (count($Sale)){
@@ -88,5 +125,40 @@ class Store extends CI_Controller {
             
          }
          
+    }
+    public function send_mail() {
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'tls://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'erick.evangelista87@gmail.com',
+            'smtp_pass' => 'EdyXellE2011',
+            'wordwrap' => true
+        );
+        $data = array(
+            'Nombre' => "test",
+            'Telefono' => "test",
+            'Email' => "test",
+            'Mensaje' => "test"
+        );
+
+        //load email library
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        //set email information and content
+        $this->email->from('erick.evangelista87@gmail.com', 'Administración');
+        $this->email->to('infexiuz@gmail.com');
+        $this->email->subject('NEW SALE');
+        $this->email->message($this->load->view('Store/emailBuy',$data,true));
+           
+
+        $this->email->set_mailtype('html');
+
+        $this->email->send();
+
+        echo true;
+        
     }
 }

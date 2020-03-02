@@ -10,32 +10,47 @@ $(document).ready(function () {
          });
       });    */
    })
-   $("#FIN_CHOOSE_SHIP").click(function (e) {
+   $("#BUY_NOW").click(function(e)
+   {
       e.preventDefault();
 
+      let attr = $(this).attr('href');
+      let cant = $("#cant").val();
+
+      $.ajax({
+         type: "POST",
+         url: raiz_url+"Store/ajax_BuyNow",
+         data: {cant:cant},         
+         success: function (res) {
+            window.location.href = attr;
+         }
+      });
+   })
+   $("#FIN_CHOOSE_SHIP").click(function (e) {
+      e.preventDefault();
+      
       if ($('input[name=type_ship]:checked').val() == 1)
            { checked("input[name='shipNacional']") }
       else { checked("input[name='shipInternacional']") }
+      
+      var DataShip = new FormData($("#ADDRESS_FORM")[0]);
 
-      let id = $("#ID_SHIP").val();
-      let type_ship = $("#TYPE_SHIP").val();
-      let id_product = $("#ID_PRODUCT").val();
-      let total_final = $("#TOTAL_FINAL").html();
-      let precio_envio = $("#PRECIO_ENVIO").html();
+      DataShip.append('id',$("#ID_SHIP").val());
+      DataShip.append('type',$("#TYPE_SHIP").val());
+      DataShip.append('product',$("#ID_PRODUCT").val());
+      DataShip.append('total',$("#TOTAL_FINAL").html());
+      DataShip.append('envio',$("#PRECIO_ENVIO").html());
 
       $.ajax({
          type: "POST",
          url: raiz_url + "Store/ajax_choose_ship",
-         data: {
-            id: id,
-            type: type_ship,
-            total: total_final,
-            envio: precio_envio,
-            product: id_product,
-         },
+         data: DataShip,
+         cache: false,
+         contentType: false,
+         processData: false,
          success: function (res) {
             if (res === 'error') {
-               alert('No selecciono cómo le enviamos a enviar su pedido')
+               alert('No selecciono cómo le vamos a enviar su pedido')
             } else {
                window.location.replace(raiz_url + "Store/proccess_payment/" + res);
             }
@@ -45,7 +60,6 @@ $(document).ready(function () {
    $("#FIN_CHOOSE_PAYMENT").click(function (e) {
 
       checked_payment("input[name='payment']");
-
       let id_pago = $("#ID_PAGO").val();
       let nombre_pago = $("#NOMBRE_PAGO").val();
 
@@ -54,21 +68,22 @@ $(document).ready(function () {
          url: raiz_url + "Store/ajax_choose_payment",
          data: {
             id: id_pago,
-            nombre: nombre_pago
+            nombre: nombre_pago,
          },
          success: function (res) {
             if (res === 'error') {
                alert('No seleccionó el tipo de pago');
             } else {
+             send_mail();
              window.location.replace(raiz_url + "Store/resume/" + res);
-           
             }
          }
       }); 
    })
    /* PROCCESS SALE */
       let precio_product = $("#PRECIO_PRODUCTO").html();
-      get_total(precio_product,0);
+      var cant_temp = $("#CANT_TEMP").val();
+      get_total(precio_product,0,cant_temp);
 
    $('input[name=type_ship]').on('change', function() {
       let val = $('input[name=type_ship]:checked').val();
@@ -85,13 +100,13 @@ $(document).ready(function () {
             $("#typeShip2").removeClass('checked');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }else{
             $(this).addClass('hide');
             $("#Internacional").removeClass('hide');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }
       }else{
          
@@ -107,7 +122,7 @@ $(document).ready(function () {
             $("#typeShip1").removeClass('checked');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          } else {
             $("#typeShip1").addClass('checked');
             $("#typeShip2").removeClass('checked');
@@ -116,36 +131,41 @@ $(document).ready(function () {
             $("#Internacional").addClass('hide');
 
             $("#PRECIO_ENVIO").html('$0.00');
-            get_total(precio_product,0);
+            get_total(precio_product,0,cant_temp);
          }
       }
    })
 
-   /*$("#FIN_CHOOSE_PAYMENT").click(function(e){        
-     
-      checked_payment("input[name='payment']") ;
+   $("#ADDRESS_FORM").submit(function(e){
+      e.preventDefault();
+      var formData = new FormData($(this)[0]);
 
-      let id_pago = $("#ID_PAGO");
-      let nombre_pago = $("#NOMBRE_PAGO");
-
-     $.ajax({
+      $.ajax({
          type: "POST",
-         url: raiz_url+"Store/ajax_choose_payment",
-         data: {id:id_pago,           
-            nombre:nombre_pago},
+         url: raiz_url+"Store/ajax_SaveInfoSale",
+         data: formData,
+         cache: false,
+         contentType: false,
+         processData: false,
          success: function (res) {
-            if (res === 'error'){
-               alert('No seleccionó el tipo de pago');
-            }else{
-               window.location.replace(raiz_url + "Store/resume/" + res);
-            }
-         } 
+            
+            $("#MODAL_DIRECCION").modal('hide');
+
+            let direccion = "<i class='fas fa-home'></i> "+$("#CALLE_EDIT").val()+" #"+$("#NUM_EDIT").val()+", "+$("#COLONIA_EDIT").val();
+            $("#DIR_CLIENT").html(direccion);
+            $("#PAIS_CLIENT").html("<i class='fas fa-flag'></i> "+$("#PAIS_EDIT").val());
+            $("#ESTADO_CLIENT").html($("#ESTADO_EDIT").val());
+            $("#CIUDAD_CLIENT").html($("#CIUDAD_EDIT").val());
+            $("#CP_CLIENT").html("C.P. "+$("#CP_EDIT").val());
+            $("#TELEFONO_CLIENT").html($("#TEL_EDIT").val());
+            $("#NOMBRE_CLIENT").html($("#NOMBRE_EDIT").val()+" "+$("#APE_EDIT").val());
+         
+         }
       });
-   }) */
+   })
 
    $("body").on('click','.pointer',function()
    {      
-
       var divID = "#"+$(this).attr('id');
       var input = divID +" input"; 
       var circle = divID + " .circle-opt";
@@ -163,11 +183,44 @@ $(document).ready(function () {
       });
       $(circle).addClass(checked);       
       
-      get_total(precio_producto,precio_envio);
+      get_total(precio_producto,precio_envio,cant_temp);
 
       
    });
+   $("#minus").click(function(){
+      var oldValue = $("#cant").val();
+      var sum=0;
 
+      if(oldValue <= 1){
+         sum = 1;
+      }else{
+         sum = parseInt(oldValue) - 1;
+      }
+      $("#cant").val(sum)
+   
+   })
+   $("#add").click(function(){
+      var oldValue = $("#cant").val();
+      var sum=0;
+
+      if(oldValue < 1){
+         sum = 1;
+      }else{
+         sum = parseInt(oldValue) + 1;
+      }
+      $("#cant").val(sum);
+   
+   })
+   function send_mail(){
+      $.ajax({
+         type: "POST",
+         url: raiz_url+"Store/send_mail",
+         data: {data:"data"},
+         success: function (response) {
+            
+         }
+      });
+   }
    function checked(name){
       $(name).each(function (i) {
          if (this.checked) {
@@ -184,10 +237,15 @@ $(document).ready(function () {
          }
       });
    }
-   function get_total(product,ship){
+   function get_total(product,ship,cant){
       ship = parseInt(ship);
       product = parseInt(product);
-      let total = product + ship;
+      cant = parseInt(cant);
+
+      let total = (product*cant) + ship;
+      
       $("#TOTAL_FINAL").html("$"+total);
+
+
    }
 })
