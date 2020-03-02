@@ -25,19 +25,17 @@ class Mstore extends CI_Model {
             if(!$this->input->post('id')){
                 return false;
             }else{
+                $Product = $this->input->post('product');
 
-                $id = $this->input->post('id');
-                $type = $this->input->post('type');
-                $product = $this->input->post('product');
-                $envio = $this->input->post('envio');
-                $total = $this->input->post('total');
-
-                $this->session->set_userdata('TEMP_CHOSSE_ID_ENVIO', $id);
-                $this->session->set_userdata('TEMP_CHOSSE_ID_PRODUCTO', $product);
-                $this->session->set_userdata('TEMP_CHOSSE_TYPE_ENVIO', $type);
-                $this->session->set_userdata('TEMP_CHOSSE_PRICE_ENVIO', $envio);
-                $this->session->set_userdata('TEMP_CHOSSE_TOTAL', $total);
-
+                $InfoShip = array(
+                    'TEMP_CHOSSE_TOTAL'      => $this->input->post('total'),
+                    'TEMP_CHOSSE_ID_ENVIO'   => $this->input->post('id'),
+                    'TEMP_CHOSSE_TYPE_ENVIO' => $this->input->post('type'),
+                    'TEMP_CHOSSE_ID_PRODUCTO'=> $this->input->post('product'),               
+                    'TEMP_CHOSSE_PRICE_ENVIO'=> $this->input->post('envio'),                   
+                );
+                $this->session->set_userdata($InfoShip);
+                
                 $AddresTemp = array(
                     'NOMBRE_USUARIO'   => $this->input->post('NOMBRE_EDIT'),
                     'APELLIDO_USUARIO' => $this->input->post('APE_EDIT'),               
@@ -53,7 +51,7 @@ class Mstore extends CI_Model {
                 
                 $this->session->set_userdata($AddresTemp);
 
-                return $product;
+                return $Product;
             }
 
         } catch (\Throwable $th) {
