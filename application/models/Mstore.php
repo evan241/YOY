@@ -9,8 +9,8 @@ class Mstore extends CI_Model {
     function get_all_valid_products_to_store() {
         try {
             $this->db->select("*");
-            $this->db->from('PRODUCTO AS P');
-            $this->db->join('CATEGORIA AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
+            $this->db->from('producto AS P');
+            $this->db->join('categoria AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
             $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
             $this->db->where('P.ACTIVO_PRODUCTO',VIGENTE);
             $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');

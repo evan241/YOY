@@ -21,7 +21,7 @@ class Login extends CI_Controller {
 
     public function registro(){
         $this->load->view('esqueleton/header');
-        $this->load->view('login/registro');
+        $this->load->view('Login/registro');
         $this->load->view('esqueleton/footer');
     }
 

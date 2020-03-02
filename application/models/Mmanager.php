@@ -48,7 +48,7 @@ class Mmanager extends CI_Model {
     function get_all_valid_ships(){
         try {
             $this->db->select("*");
-            $this->db->from('TIPO_ENVIO');
+            $this->db->from('tipo_envio');
             $this->db->where('VIGENTE_TIPO_ENVIO',VIGENTE);
             $this->db->order_by('ID_TIPO_ENVIO', 'ASC');
             $query = $this->db->get();
