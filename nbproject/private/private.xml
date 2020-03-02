@@ -3,16 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/Manager_products.js</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/products/v_add_producto.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/products/v_edit_producto.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Site.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Manager_products.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/models/Mmanager_products.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/views/News/v_news.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/views/News/v_id_news.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/config/email.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/config/constants.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/payments/v_index_payment.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/shipments/v_add_shipment.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Manager_shipments.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/Manager_clients.js</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Manager_payments.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/shipments/v_edit_shipment.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/shipments/v_index_shipment.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Store.php</file>
             <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Manager_news.php</file>
-            <file>file:/Users/erickevangelista/Sites/YOY/application/views/Manager/products/v_index_producto.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/registro.js</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/models/Mmanager.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/Manager_shipments.js</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/Manager_payments.js</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/models/Mstore.php</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/assets/js/login.js</file>
+            <file>file:/Users/erickevangelista/Sites/YOY/application/controllers/Login.php</file>
         </group>
     </open-files>
 </project-private>
