@@ -143,11 +143,11 @@
             </div>
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->                   
             <div id="img-2" class="col-lg-6 text-center thumbnail form-group pRight-img"  data-image-id="3" 
-             data-toggle="modal" 
-             data-title="Mesa perritos 3" 
-             data-caption="Mesa perritos 3" 
-             data-target="#image-gallery"
-             data-image="<?= base_url() ?>assets/img/works/3.jpeg">
+            data-toggle="modal" 
+            data-title="Mesa perritos 3" 
+            data-caption="Mesa perritos 3" 
+            data-target="#image-gallery"
+            data-image="<?= base_url() ?>assets/img/works/3.jpeg">
 
                 <img src="<?= base_url() ?>assets/img/works/3.jpeg" width="90%" height="340px" class="BorderSmoke">
 
@@ -181,41 +181,67 @@
 <br>
 
 <!-- Shop section  -->
-<section class="shop-section">
+<section class="">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/1.jpg" class="BorderPink">
+                    <img src="<?= base_url() ?>assets/img/shop/1.jpg" class="">
                     <h3>Black Coat</h3>
                     <h6>$235</h6>
                     <a href="<?=base_url("Store/sales/1");?>" class="add-card">Buy</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="item">
                 <div class="shop-item">
-                    <img src="<?= base_url("assets/img/shop/2.jpg");?>" class="BorderPink">
+                    <img src="<?= base_url("assets/img/shop/2.jpg");?>" class="">
                     <h3>Black Dress</h3>
                     <h6>$235</h6>
                     <a href="<?=base_url("Store/sales/2");?>" class="add-card">Buy</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="item">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/3.jpg" class="BorderPink">
+                    <img src="<?= base_url() ?>assets/img/shop/3.jpg" class="">
                     <h3>White Shirt</h3>
                     <h6>$235</h6>
                     <a href="<?=base_url("Store/sales/3");?>" class="add-card">Buy</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="item">
                 <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="BorderPink">
+                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="">
                     <h3>Trousers</h3>
                     <h6>$235</h6>
                     <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
                 </div>
             </div>
+            <div class="item">
+                <div class="shop-item">
+                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="">
+                    <h3>Trousers</h3>
+                    <h6>$235</h6>
+                    <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="shop-item">
+                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="">
+                    <h3>Trousers</h3>
+                    <h6>$235</h6>
+                    <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="shop-item">
+                    <img src="<?= base_url() ?>assets/img/shop/4.jpg" class="">
+                    <h3>Trousers</h3>
+                    <h6>$235</h6>
+                    <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </section>
@@ -251,6 +277,7 @@
         </div>
     </div>
 </div>
+
 <?php if($this->session->YOY_ID_USUAIRO):?>
 <div class="modal fade bg-black" id="intro-video" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg">

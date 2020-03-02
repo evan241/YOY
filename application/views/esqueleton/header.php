@@ -24,11 +24,14 @@
    <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/font-awesome.min.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/owl.carousel.min.css" />
+   <link rel="stylesheet" href="<?=base_url()?>assets/css/owl.theme.default.min.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/flaticon.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/magnific-popup.css" />
 
    <!-- Main Stylesheets -->
    <link rel="stylesheet" href="<?=base_url()?>assets/css/style.css" />
+   <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css" />
+   
 
    <!-- <script src="<?php echo base_url(); ?>assets/js/registro.js" type="text/javascript"></script> -->
 
