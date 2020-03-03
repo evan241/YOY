@@ -43,8 +43,8 @@ $ID_VENTA = $infoSale->ID_VENTA;
       <div class="col-lg-8">
          <div class="form-group">            
             <div class="row style-ship details-buy pointer pt-10">
-              <!-- PRODUCTO -->
-              <div class="col-lg-2 align-middle form-group">                     
+             <!-- PRODUCTO -->
+             <div class="col-lg-2 align-middle form-group">                     
                <img src="https://image.flaticon.com/icons/png/512/126/126165.png" width="40%">
             </div>
             <div class="col-lg-8 form-group">
@@ -81,9 +81,9 @@ $ID_VENTA = $infoSale->ID_VENTA;
 
             <!-- PAYMENT -->
             <div class="col-lg-2 align-middle form-group">                     
-              <img src="<?=$imgPayment?>" width="50%">
-           </div>
-           <div class="col-lg-8 form-group">
+             <img src="<?=$imgPayment?>" width="50%">
+          </div>
+          <div class="col-lg-8 form-group">
             <div class="col-lg-6">
                <?=$payment?>                     
             </div>
@@ -150,17 +150,23 @@ $ID_VENTA = $infoSale->ID_VENTA;
       createOrder: function(data, actions) {
 
          return actions.order.create({
+
             purchase_units: [{
                amount: {
-   /*  Cantidad a cobrar
-   */
-   value: '<?=$infoSale->TOTAL_VENTA?>'
-},
-   /*  La descripcion que se manda durante la paga
-   */
-   description: '<?=$product['DESCRIPCION_PRODUCTO']?>'
-}]
-});
+                  /*  Cantidad a cobrar
+                  */
+                  value: '<?=$infoSale->TOTAL_VENTA?>'
+               },
+                  /*  La descripcion que se manda durante la paga
+                  */
+                  description: '<?=$product['DESCRIPCION_PRODUCTO']?>'
+               }],
+               address_details: [{
+                  street_number: "173",
+                  street_name: "LAKE",
+                  street_type: "AV"
+               }]
+         });
       },
       onApprove: function(data, actions) {
          return actions.order.capture().then(function(details) {

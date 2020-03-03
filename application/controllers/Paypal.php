@@ -33,6 +33,8 @@ class Paypal extends CI_Controller {
     */
     public function requestSaleInformation($errorID) {
       $var = $this->mpaypal->getErrorInfo($errorID);
+      // echo "ok";
+      // print_r($var);
 
       if ($var != NULL) {
         $orderID = $var['order_id'];
