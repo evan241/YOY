@@ -5,8 +5,7 @@ class Mlogin extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-    
-    
+    //CAMBIO DE PRUEBA ERICK
     function login($data) {
         try {
             if ($this->getPassword($data['email']) == $data['password']) {
