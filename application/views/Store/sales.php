@@ -62,6 +62,7 @@
             }
         ?>
       </div>
+      <!--ESTA ES UNA PRUEBA DE GIT-->
       <!-- Main img description -->
       <div class="col-sm-12 col-md-12  col-lg-6 text-center">
          <img src="<?=base_url($product['IMAGEN_PRODUCTO'])?>" id="main_img" alt="">
