@@ -62,7 +62,7 @@
       color: #ffffffcf
    }
    .site-menu-style li a {
-      font-weight: 600;
+      font-weight: 10;
       letter-spacing: 1px;
    }
   
