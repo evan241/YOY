@@ -53,7 +53,7 @@ body{
                     <div class="input-group mb-3 mt-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-user"></i>
+                                <i class="fa fa-user"></i>
                             </span>
                         </div>
                         <input class="form-control" type="email" placeholder="Correo" name="email" id="email" required>
@@ -63,7 +63,7 @@ body{
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-lock"></i>
+                                <i class="fa fa-lock"></i>
                             </span>
                         </div>
                         <input class="form-control" type="password" placeholder="Contraseña" name="password" id="password" required>

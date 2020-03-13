@@ -1,8 +1,5 @@
-<!DOCTYPE html><?php
-
-?>
+<!DOCTYPE html>
 <html>
-
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,7 +17,7 @@
 
    <!-- Stylesheets -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
    <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/font-awesome.min.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/owl.carousel.min.css" />
@@ -31,9 +28,6 @@
    <!-- Main Stylesheets -->
    <link rel="stylesheet" href="<?=base_url()?>assets/css/style.css" />
    <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css" />
-   
-
-   <!-- <script src="<?php echo base_url(); ?>assets/js/registro.js" type="text/javascript"></script> -->
 
 </head>
 <style>
@@ -61,19 +55,17 @@
    }
    /* Testing header */
    .main-menu-right li a:hover {   
-        color:#000;
-        border-bottom: 2px solid #000 ;
-    }
-    .main-menu-right li a {
-        color: rgb(0, 0, 0);
-    }
-    .site-menu-style li a {
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
-    .header-section{
-        background:#e9ecef
-    }
+      color:#ffffff;
+      border-bottom: 2px solid #ffffff;
+   }
+   .main-menu-right li a {
+      color: #ffffffcf
+   }
+   .site-menu-style li a {
+      font-weight: 600;
+      letter-spacing: 1px;
+   }
+  
 </style>
 
 <body>
@@ -112,14 +104,14 @@
       </div>
    </nav>
    <!-- Search model -->
-   <!--<div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
-            </div>
-        </div>-->
+   <!-- <div class="search-model">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+         <div class="search-close-switch">+</div>
+         <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Busca lo que necesites.....">
+         </form>
+      </div>
+   </div> -->
    <!-- Search model end -->
 
    <div class="push" id="push">
