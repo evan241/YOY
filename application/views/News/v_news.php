@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card__image" style="<?=$img?>"></div>
                     <div class="card__content">
-                        <div class="card__title"><?=$title?></div>
+                        <div class="card__title" data-toggle="tooltip" title="<?=$title?>"><?=$title?></div>
                         <p class="card__text"><?=$contenido?></p>
                         <button class="btn btn--block card__btn">Continuar leyendo..</button>
                     </div>

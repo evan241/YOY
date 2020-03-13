@@ -73,31 +73,31 @@
                <h2> $<?=$product['PRECIO_PRODUCTO']?></h2>
              
                   <div class="details-buy">
-                     <i class="fas fa-credit-card"></i> 12 meses de $70 sin intereses
+                     <i class="fa fa-credit-card"></i> 12 meses de $70 sin intereses
                   </div>
                   <div class="details-buy pd-left20 form-group">
-                     <i class="fab fa-cc-visa fa-2x"></i>
-                     <i class="fab fa-cc-mastercard fa-2x"></i>
-                     <i class="fab fa-cc-amex fa-2x"></i>
+                     <i class="fa fa-cc-visa fa-2x"></i>
+                     <i class="fa fa-cc-mastercard fa-2x"></i>
+                     <i class="fa fa-cc-amex fa-2x"></i>
                   </div>
                   <div class="details-buy form-group">
-                     <i class="fas fa-shipping-fast"></i>  Envío a toda la república <br>
+                     <i class="fa fa-bus"></i>  Envío a toda la república <br>
                   </div>
                   <div class="details-buy">
-                      <i class="fas fa-undo"></i>  Garantía de 30 días <br>
+                      <i class="fa fa-undo"></i>  Garantía de 30 días <br>
                   </div>
                   <div class="details-cant form-group">
                      <div class="col-lg-5 pd-cant">
                         <div class="input-group mt-3">
                            
                            <div class="input-group-prepend">
-                              <button class="input-group-text" id="minus"><i class="fas fa-minus colorBlack"></i></button>
+                              <button class="input-group-text" id="minus"><i class="fa fa-minus colorBlack"></i></button>
                            </div>
 
                            <input type="text" class="form-control text-center input-cant" readonly placeholder="0" value="1" id="cant">
                             
                            <div class="input-group-prepend">
-                              <button class="input-group-text btn-add" id="add"><i class="fas fa-plus colorBlack"></i></button>
+                              <button class="input-group-text btn-add" id="add"><i class="fa fa-plus colorBlack"></i></button>
                            </div>
                         </div>
                      </div>
