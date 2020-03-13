@@ -33,7 +33,7 @@
                                     <div class="col-md-6 text-left">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend"><span class="input-group-text"
-                                                id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
+                                                id="basic-addon1"><i class="fa fa-user-edit"></i></span></div>
                                                 <input type='text' class="form-control" id="C_NOMBRE_USUARIO" required
                                                 name="C_NOMBRE_USUARIO" placeholder="Nombre(s)" 
                                                 pattern="[a-zA-Z ]{3,25}"/>
@@ -44,7 +44,7 @@
                                         <div class="col-md-6 text-left">
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend"><span class="input-group-text"
-                                                    id="basic-addon1"><i class="fas fa-user-edit"></i></span></div>
+                                                    id="basic-addon1"><i class="fa fa-user-edit"></i></span></div>
                                                     <input type='text' class="form-control" id="C_APELLIDOS_USUARIO" required
                                                     name="C_APELLIDOS_USUARIO" placeholder="Apellido(s)" 
                                                     pattern="[a-zA-Z ]{3,25}"/>
