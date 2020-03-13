@@ -30,12 +30,12 @@
                         <div class="product-tumb divimg" style="<?= $img?>"></div>                                                
                         <div class="product-details">
                             <span class="product-catagory">Women,bag</span>
-                            <h4><a href="Store/sales/2"><?=$product['NOMBRE_PRODUCTO']?></a></h4>
+                            <h4><a href="Store/sales/<?=$product['ID_PRODUCTO']?>"><?=$product['NOMBRE_PRODUCTO']?></a></h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
                             <div class="product-bottom-details">
                                 <div class="product-price"><small>$3,500</small>$<?=$product['PRECIO_PRODUCTO']?></div>
                                 <div class="product-links">
-                                    <a href=""><i class="fa fa-shopping-cart"></i></a>
+                                    <a href="Store/sales/<?=$product['ID_PRODUCTO']?>"><i class="fa fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
