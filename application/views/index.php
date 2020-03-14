@@ -263,7 +263,7 @@
             <div class="modal-footer GalleryModalFooter">
 
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-black btn-circle btn-nextprev" id="show-previous-image"><i class="fas fa-chevron-left fa-2x"></i></button>
+                    <button type="button" class="btn btn-black btn-circle btn-nextprev" id="show-previous-image"><i class="fa fa-chevron-left fa-2x"></i></button>
                 </div>
 
                 <div class="col-md-8 text-justify" id="image-gallery-caption">
@@ -271,7 +271,7 @@
                 </div>
 
                 <div class="col-md-2 text-right pd-right0">
-                    <button type="button" id="show-next-image" class="btn btn-black btn-circle BtnNext"><i class="fas fa-chevron-right fa-2x"></i></button>
+                    <button type="button" id="show-next-image" class="btn btn-black btn-circle BtnNext"><i class="fa fa-chevron-right fa-2x"></i></button>
                 </div>
             </div>
         </div>
