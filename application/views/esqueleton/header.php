@@ -81,7 +81,7 @@
             <li><a href="<?=base_url()?>site/work">Work</a></li>
             <li><a href="<?=base_url()?>site/about">About</a></li>
             <li><a href="<?=base_url()?>site/news">News</a></li>
-            <li><a href="<?=base_url()?>store">Store</a></li>
+            <li><a href="<?=base_url()?>store">Galery</a></li>
             <li><a href="<?=base_url()?>site/contact">Contact</a></li>
             <?php if ($this->session->userdata('YOY_ID_USUARIO') > 0) {?>
             <li class="dropdown">
@@ -99,9 +99,9 @@
             <?php }?>
          </ul>
       </div>
-      <div class="search-switch">
+      <!--<div class="search-switch">
          <img src="<?=base_url()?>assets/img/search-icon.png" alt="">
-      </div>
+      </div>-->
    </nav>
    <!-- Search model -->
    <!-- <div class="search-model">
