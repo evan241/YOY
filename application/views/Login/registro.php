@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <br>
             <div class="panel panel-primary"><br><br><br><br><br><br><br>
-                <h2 class="text-center mb-3">REGÍSTRATE</h2>
+                <h2 class="text-center mb-3">REGÍSTRATE POFAVOR</h2>
                 <center>
                     <form class="formx " data-toggle="validator" role="form" id="formRegistration">
 
