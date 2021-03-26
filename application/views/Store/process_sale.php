@@ -3,7 +3,7 @@ $CI =& get_instance();
 $id_product = $this->uri->segment(3);
 $UserInfo = $CI->db->get_where('usuario',array('ID_USUARIO' => $CI->session->YOY_ID_USUARIO ))->row();
 
-if(count($UserInfo))
+if(is_object($UserInfo))
 {
    if(isset($CI->session->NOMBRE_USUARIO) AND isset($CI->session->APELLIDO_USUARIO))
    {

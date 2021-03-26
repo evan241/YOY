@@ -37,7 +37,6 @@ class Mmanager_users extends CI_Model {
             $this->db->where('ID_USUARIO', $id);
             $this->db->where_in('ID_ROL', array(ADMINISTRADOR, VENDEDOR));
             $array = $this->db->get()->result_array()[0];
-            $array["PASSWD_USUARIO"] = $this->encryption->decrypt($array["PASSWD_USUARIO"]);
             return $array;
         } 
         catch (Exception $exception) {

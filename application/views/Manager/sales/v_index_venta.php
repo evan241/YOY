@@ -51,8 +51,8 @@
                         <div class="col-md-2"></div>
                     </div>
                 </form>
-                <div class="basic-data-table">
-                    <table id="dataVentas" class="table nowrap dataTable no-footer" style="font-size: 14px;" cellspacing="0" width="100%">
+                <div class="table-responsive">
+                    <table id="dataVentas" class="display text-center" style="font-size: 14px;" cellspacing="0" width="100%">
                         <thead class="text-center">
                             <tr>
                                 <th data-orderable="false" width="5%">#</th>
@@ -99,7 +99,7 @@
                                         </td>
                                         <td><?= mb_strtoupper($sale['EMAIL_USUARIO']) ?></td>
                                         <td><?= mb_strtoupper($sale['NOMBRE_PRODUCTO']) ?></td>
-                                        <td><?= mb_strtoupper($sale['CANTIDAD_VENTA']) ?></td>
+                                        <td><?= mb_strtoupper($sale['CANT_VENTA']) ?></td>
                                         <!--<td><?= to_currency($sale['PRECIO_PRODUCTO_VENTA']) ?></td>
                                         <td><?= to_currency($sale['COSTO_ENVIO_VENTA']) ?></td>-->
                                         <td><?= to_currency($sale['TOTAL_VENTA']) ?></td>

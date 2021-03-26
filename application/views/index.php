@@ -185,15 +185,23 @@
     <div class="container">
         <div class="row">
         <div class="owl-carousel owl-theme">
-            <div class="item">
-                <div class="shop-item">
-                    <img src="<?= base_url() ?>assets/img/shop/1.jpg" class="">
-                    <h3>Black Coat</h3>
-                    <h6>$235</h6>
-                    <a href="<?=base_url("Store/sales/1");?>" class="add-card">Buy</a>
-                </div>
-            </div>
-            <div class="item">
+            <?php
+            if(count($products)){
+                foreach ($products as $product){
+                    ?>
+                    <div class="item">
+                        <div class="shop-item">
+                            <img src="<?= base_url($product['IMAGEN_PRODUCTO']) ?>" class="">
+                            <h3><?=$product['NOMBRE_PRODUCTO']?></h3>
+                            <h6>$<?=$product['PRECIO_PRODUCTO']?></h6>
+                            <a href="<?=base_url("Store/sales/".$product['ID_PRODUCTO']);?>" class="add-card">Buy</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+            <!--<div class="item">
                 <div class="shop-item">
                     <img src="<?= base_url("assets/img/shop/2.jpg");?>" class="">
                     <h3>Black Dress</h3>
@@ -240,7 +248,7 @@
                     <h6>$235</h6>
                     <a href="<?=base_url("Store/sales/4");?>" class="add-card">Buy</a>
                 </div>
-            </div>
+            </div>-->
         </div>
         </div>
     </div>

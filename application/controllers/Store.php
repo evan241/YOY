@@ -78,10 +78,10 @@ class Store extends CI_Controller {
         if($this->input->is_ajax_request())
         {
             $choose = $this->mstore->choose_payment();
-            if($choose)
+            if($choose){
                 echo $choose;
-            else
-                echo"error";
+            } else
+                echo "error";
         }else{
             redirect('Store/index','refresh');
         }
@@ -110,7 +110,7 @@ class Store extends CI_Controller {
     public function resume($id) {
          
          $Sale = $this->mstore->get_sale($id);
-         if (count($Sale)){
+         if (is_object($Sale)){
             $Product = $Sale->ID_PRODUCTO;
             $data['infoSale'] = $this->mstore->get_sale($id);
             $data['product'] = $this->mmanager_products->get_product_by_id($Product);
@@ -126,39 +126,55 @@ class Store extends CI_Controller {
          }
          
     }
-    public function send_mail() {
-
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'tls://smtp.gmail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'erick.evangelista87@gmail.com',
-            'smtp_pass' => 'EdyXellE2011',
-            'wordwrap' => true
-        );
+    public function send_mail($id) {
+        $Sale = $this->mstore->get_sale($id);
+        $Usuario = $this->mstore->get_user_by_id($Sale->ID_USUARIO);
+        $producto = $this->mstore->get_producto_by_id($Sale->ID_PRODUCTO);
+        $envio = $this->mstore->get_envio_by_id($Sale->ID_TIPO_ENVIO);
+        
         $data = array(
-            'Nombre' => "test",
-            'Telefono' => "test",
-            'Email' => "test",
-            'Mensaje' => "test"
+            "venta" => $Sale,
+            "usuario" => $Usuario,
+            "producto" => $producto,
+            "envio" => $envio
         );
 
         //load email library
-        $this->load->library('email', $config);
+        $this->load->library('email');
         $this->email->set_newline("\r\n");
 
         //set email information and content
         $this->email->from('erick.evangelista87@gmail.com', 'Administración');
-        $this->email->to('infexiuz@gmail.com');
-        $this->email->subject('NEW SALE');
+        $this->email->to($Usuario["EMAIL_USUARIO"]);
+        $this->email->subject('NEW BUY - YOY');
         $this->email->message($this->load->view('Store/emailBuy',$data,true));
            
 
         $this->email->set_mailtype('html');
 
         $this->email->send();
+        
+        $data2 = array(
+            'Nombre' => $Usuario["NOMBRE_USUARIO"]." ".$Usuario["APELLIDO_USUARIO"],
+            'Telefono' => $Usuario["TELEFONO_USUARIO"],
+            'Email' => $Usuario["EMAIL_USUARIO"],
+            'Mensaje' => $Sale->CANT_VENTA . " " . $producto["NOMBRE_PRODUCTO"]
+        );
 
-        echo true;
+        $this->email->set_newline("\r\n");
+
+        //set email information and content
+        $this->email->from('contacto@geemsolutions.com', 'Administración YOY');
+        $this->email->to('yoyideas@gmail.com');
+        $this->email->subject('YOY - NEW SALE');
+         $this->email->message($this->load->view('Store/newBuy', $data2, true));
+           
+
+        $this->email->set_mailtype('html');
+
+        $this->email->send();
+
+        return true;
         
     }
 }

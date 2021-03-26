@@ -8,14 +8,13 @@ class Mlogin extends CI_Model {
     
     function login($data) {
         try {
-            if ($this->getPassword($data['email']) == $data['password']) {
-                $this->db->select("*");
-                $this->db->from("usuario");
-                $this->db->where("EMAIL_USUARIO", $data['email']);
-                $this->db->where("VIGENCIA_USUARIO",VIGENTE);
-                $this->db->where("CONFIRMADO_USUARIO",VIGENTE);
-                return $this->db->get()->result_array();
-            }
+            $this->db->select("*");
+            $this->db->from("usuario");
+            $this->db->where("EMAIL_USUARIO", $data['email']);
+            $this->db->where("PASSWD_USUARIO", $data['password']);
+            $this->db->where("VIGENCIA_USUARIO",VIGENTE);
+            $this->db->where("CONFIRMADO_USUARIO",VIGENTE);
+            return $this->db->get()->result_array();
         } 
         catch (Exception $e) {
             return $e->getMessage();

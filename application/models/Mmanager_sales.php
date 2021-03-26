@@ -43,8 +43,8 @@ class Mmanager_sales extends CI_Model {
             $this->db->join('medio_pago AS MP',"MP.ID_MEDIO_PAGO = V.ID_MEDIO_PAGO");
             $this->db->join('tipo_envio AS TE',"TE.ID_TIPO_ENVIO = V.ID_TIPO_ENVIO");
             $this->db->join('status AS S', "S.status_id = V.STATUS_VENTA");
-            $this->db->where("DATE(FECHA_VENTA) >=", $dates['fechaini']);
-            $this->db->where("DATE(FECHA_VENTA) <", $dates['fechafin']);
+            $this->db->where('FECHA_VENTA >= ', $dates['fechaini']." 00:00:00");
+            $this->db->where('FECHA_VENTA <= ', $dates['fechafin']." 23:59:59");
             $this->db->where('V.ACTIVA_VENTA',VIGENTE);
 
             return $this->db->get()->result_array();

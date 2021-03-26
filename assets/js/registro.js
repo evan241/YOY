@@ -15,13 +15,40 @@ $(document).ready(function () {
             processData: false,
             success: function (data) {
                 if (data == '1') {
-                    alert("Usuario registrado");
+                    Swal.fire({
+                        title: '¡Usuario registrado!',
+                        text: 'Se ha enviado un correo a su bandeja de entrada',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        onClose: function () {
+                            window.location.href = raiz_url + "login/";
+                        }
+                    });
                 }
                 else if (data == '2') {
-                    alert("Email ya esta registrado");
+                    Swal.fire({
+                        title: '¡Usuario existente!',
+                        text: 'Puedes recuperar tu contraseña',
+                        icon: 'warning',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        onClose: function () {
+                            window.location.href = raiz_url + "login/ForgotPassword";
+                        }
+                    });
                 }
                 else {
-                    alert("Error en los campos");      
+                    Swal.fire({
+                        title: '¡Error al registrar!',
+                        text: 'Verifique los datos',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        onClose: function () {
+                            //window.location.href = raiz_url + "login/registro";
+                        }
+                    });
                 }
             }
         });

@@ -20,6 +20,21 @@ class Mstore extends CI_Model {
             return $e->getMessage();
         }
     }
+    function get_all_valid_products_to_store_portada() {
+        try {
+            $this->db->select("*");
+            $this->db->from('producto AS P');
+            $this->db->join('categoria AS C',"P.ID_CATEGORIA=C.ID_CATEGORIA");
+            $this->db->where('P.VIGENCIA_PRODUCTO',VIGENTE);
+            $this->db->where('P.ACTIVO_PRODUCTO',VIGENTE);
+            $this->db->where('P.PORTADA_PRODUCTO',VIGENTE);
+            $this->db->order_by('P.NOMBRE_PRODUCTO', 'ASC');
+            $query = $this->db->get();
+            return $query->result_array();
+        } catch (Exception $ex) {
+            return $e->getMessage();
+        }
+    }
     function choose_ship(){
         try {
             if(!$this->input->post('id')){
@@ -91,6 +106,10 @@ class Mstore extends CI_Model {
                     'paypal_order_id'  => 0,
                     'paypal_error_id'  => 0,                    
                 );
+                
+                if($this->session->TEMP_CHOSSE_ID_PAYMENT != 4){
+                    $data['STATUS_VENTA'] = 2;
+                }
 
                 $this->db->insert('venta', $data);
                 $id = $this->db->insert_id();
@@ -120,6 +139,45 @@ class Mstore extends CI_Model {
             
         } catch (\Throwable $th) {
             //throw $th;
+        }
+    }
+    
+    function get_user_by_id($id) {
+        try {
+            $this->db->select("*");
+            $this->db->from('usuario');
+            $this->db->where('ID_USUARIO', $id);
+            $array = $this->db->get()->result_array()[0];
+            return $array;
+        } 
+        catch (Exception $exception) {
+            return array();
+        }
+    }
+    
+    function get_producto_by_id($id) {
+        try {
+            $this->db->select("*");
+            $this->db->from('producto');
+            $this->db->where('ID_PRODUCTO', $id);
+            $array = $this->db->get()->result_array()[0];
+            return $array;
+        } 
+        catch (Exception $exception) {
+            return array();
+        }
+    }
+    
+    function get_envio_by_id($id) {
+        try {
+            $this->db->select("*");
+            $this->db->from('tipo_envio');
+            $this->db->where('ID_TIPO_ENVIO', $id);
+            $array = $this->db->get()->result_array()[0];
+            return $array;
+        } 
+        catch (Exception $exception) {
+            return array();
         }
     }
 }

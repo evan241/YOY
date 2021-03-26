@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 
     public function ForgotPassword() {
         $this->load->view('esqueleton/header');
-        $this->load->view('Login/v_forgot_password',$data);
+        $this->load->view('Login/v_forgot_password');
         $this->load->view('esqueleton/footer');
     }
 
@@ -68,30 +68,26 @@ class Login extends CI_Controller {
 
     public function ajax_registrar_usuario() {
 
-        if ($this->form_validation->run('registro')) {
+        $authCode = getAuthCode();
 
-            $authCode = getAuthCode();
+        $info = array(
+            "NOMBRE_USUARIO" => trim($this->input->post('C_NOMBRE_USUARIO')),
+            "APELLIDO_USUARIO" => trim($this->input->post('C_APELLIDOS_USUARIO')),
+            "PASSWD_USUARIO" => trim($this->input->post('C_PASSWORD_USUARIO')),
+            "TELEFONO_USUARIO" => trim($this->input->post('C_TELEFONO_USUARIO')),
+            "EMAIL_USUARIO" => strtolower(trim($this->input->post('C_EMAIL_USUARIO'))),
+            "VIGENCIA_USUARIO" => 1,
+            "CODIGO_USUARIO" => $authCode
+        );
+        
+        if ($this->mlogin->registroUsuario($info)) {
+            $this->sendEmail($info['EMAIL_USUARIO'], $authCode);
 
-            $info = array(
-                "NOMBRE_USUARIO" => trim($this->input->post('C_NOMBRE_USUARIO')),
-                "APELLIDO_USUARIO" => trim($this->input->post('C_APELLIDOS_USUARIO')),
-                "PASSWD_USUARIO" => $this->encryption->encrypt(trim($this->input->post('C_PASSWORD_USUARIO'))),
-                "TELEFONO_USUARIO" => trim($this->input->post('C_TELEFONO_USUARIO')),
-                "EMAIL_USUARIO" => strtolower(trim($this->input->post('C_EMAIL_USUARIO'))),
-                "VIGENCIA_USUARIO" => 1,
-                "CODIGO_USUARIO" => $authCode
-            );
-            if ($this->mlogin->registroUsuario($info)) {
-                $this->sendEmail($info['EMAIL_USUARIO'], $authCode);
-
-                // Registrado de manera correcta
-                echo 1; 
-            }
-            // Email ya existe en la base de datos
-            else echo 2; 
+            // Registrado de manera correcta
+            echo 1; 
         }
-        // Algun campo ingresado (input) no paso la validacion
-        else echo 3; 
+        // Email ya existe en la base de datos
+        else echo 2;
     }
 
     /*  Este metodo es el cual será ejecutado una vez que abran el enlace enviado

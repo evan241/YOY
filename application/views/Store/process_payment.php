@@ -41,7 +41,7 @@
                      </div>
                      <div class="col-lg-2">
                         <div>
-                           <img src="<?=base_url($img);?>" width="50%">
+                           <img src="<?=$img?>" width="50%">
                         </div>
                      </div>
                   </div>

@@ -14,7 +14,7 @@
 
 <!-- Page info section -->
 <section class="page-info-sectionII">
-    <h2>Store</h2>
+    <h2>Galery</h2>
 </section>
 <!-- Page info section end -->
 <div class="container mt-container pd-container bg-black">
@@ -29,13 +29,13 @@
                         <div class="badge">Nuevo</div>
                         <div class="product-tumb divimg" style="<?= $img?>"></div>                                                
                         <div class="product-details">
-                            <span class="product-catagory">Women,bag</span>
+                            <!--<span class="product-catagory">Women,bag</span>-->
                             <h4><a href="Store/sales/<?=$product['ID_PRODUCTO']?>"><?=$product['NOMBRE_PRODUCTO']?></a></h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
+                            <p><?=$product['DESCRIPCION_PRODUCTO']?></p>
                             <div class="product-bottom-details">
-                                <div class="product-price"><small>$3,500</small>$<?=$product['PRECIO_PRODUCTO']?></div>
+                                <div class="product-price"><!--<small>$3,500</small>-->$<?=$product['PRECIO_PRODUCTO']?></div>
                                 <div class="product-links">
-                                    <a href="Store/sales/<?=$product['ID_PRODUCTO']?>"><i class="fa fa-shopping-cart"></i></a>
+                                    <a href="<?= base_url("Store/sales/".$product['ID_PRODUCTO']) ?>"><i class="fa fa-shopping-cart"></i> BUY</a>
                                 </div>
                             </div>
                         </div>

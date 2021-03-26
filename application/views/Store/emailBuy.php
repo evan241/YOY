@@ -330,7 +330,7 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#FFFFFF;">
                                                                         <a target="_blank"
                                                                            style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;text-decoration:none;color:#FFFFFF;line-height:22px;"
-                                                                           href="http://localhost/YOY/Store/">Store</a>
+                                                                           href="https://yoy.geemsolutions.com/igniter/Store/">Store</a>
                                                                      </p>
                                                                   </td>
                                                                </tr>
@@ -425,7 +425,7 @@
                                                          <td style="padding:0px 5px;Margin:0px;background:#e5e5e5;height:1px;width:100%;margin:0px;font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;font-size: 17px;font-weight:700;">
                                                          </td>
                                                          <td style="padding:0px 5px;Margin:0px;background:#e5e5e5;height:1px;width:100%;margin:0px;font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;font-size: 17px;font-weight:700;">
-                                                            48c8sf787ds
+                                                            <?= $venta->ID_SALE ?>
                                                          </td>
                                                       </tr>
                                                       <tr style="border-collapse:collapse;">
@@ -433,13 +433,13 @@
                                                       </tr>
                                                       <tr style="border-collapse:collapse;">
                                                          <td style="font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;padding:5px;Margin:0px;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;height:1px;width:100%;margin:0px;">
-                                                            Productos comprados(1)
+                                                            Productos comprados(<?= $venta->CANT_VENTA ?>) <?= $producto["NOMBRE_PRODUCTO"] ?>
                                                          </td>
                                                          <td style="font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;padding:0;Margin:0px;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;height:1px;width:100%;margin:0px;">
 
                                                          </td>
                                                          <td style="padding:10px;font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;padding:0;Margin:0px;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;height:1px;width:100%;margin:0px;">
-                                                            $1200.00
+                                                            $<?= $producto["PRECIO_PRODUCTO"] * $venta->CANT_VENTA ?>
                                                          </td>
                                                       </tr>
                                                       <tr style="border-collapse:collapse;">
@@ -450,7 +450,7 @@
 
                                                          </td>
                                                          <td style="font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;padding:0;Margin:0px;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;height:1px;width:100%;margin:0px;padding:10px:">
-                                                            $500.00
+                                                            <?= $envio["PRECIO_TIPO_ENVIO"] ?>
                                                          </td>
                                                       </tr>
                                                       <tr style="border-collapse:collapse;">                                                        
@@ -469,7 +469,7 @@
 
                                                          </td>
                                                          <td style="padding:10px;font-family: 'open sans','helvetica neue',helvetica,arial,sans-serif;padding:0;Margin:0px;border-bottom:3px solid #EEEEEE;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;height:1px;width:100%;margin:0px;">
-                                                            $1700.00
+                                                            $<?= $venta->TOTAL_VENTA ?>
                                                          </td>
                                                       </tr>
                                                    </table>

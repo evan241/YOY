@@ -267,7 +267,7 @@
                             </div>
                             <div class="address-right">
                                 <h5>Visit Us</h5>
-                                <p>Guadalajara , Jalisco</p>
+                                <p>Comala, Colima</p>
                             </div>
                             <div class="clear"> </div>
                         </div>
@@ -277,7 +277,7 @@
                             </div>
                             <div class="address-right">
                                 <h5>Mail Us</h5>
-                                <p><a href="mailto:yoy@example.com"> yoy@example.com</a></p>
+                                <p><a href="mailto:yoyideas@gmail.com"> yoyideas@gmail.com</a></p>
                             </div>
                             <div class="clear"> </div>
                         </div>

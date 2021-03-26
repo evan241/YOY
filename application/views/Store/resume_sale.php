@@ -83,7 +83,7 @@ $ID_VENTA = $infoSale->ID_VENTA;
 
             <!-- PAYMENT -->
             <div class="col-lg-2 align-middle form-group">                     
-              <img src="<?=base_url($typePayment->SRC_IMG);?>" width="50%">
+              <img src="<?=$typePayment->SRC_IMG?>" width="50%">
            </div>
            <div class="col-lg-7 form-group">
                 <?=$payment?>                     
@@ -136,6 +136,7 @@ $ID_VENTA = $infoSale->ID_VENTA;
 <script src=<?php echo "https://www.paypal.com/sdk/js?client-id=" . SANDBOX_ID ."&currency=MXN" ?>></script> <!-- Currency -->
 
 <script>
+    <?php if($infoSale->ID_MEDIO_PAGO == 4){ ?>
    paypal.Buttons({
 
       style: {
@@ -185,4 +186,5 @@ $ID_VENTA = $infoSale->ID_VENTA;
 });
       }
    }).render('#paypal-button-container');
+    <?php } ?>
 </script>

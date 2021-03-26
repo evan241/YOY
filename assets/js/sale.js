@@ -58,11 +58,12 @@ $(document).ready(function () {
       });
    })
    $("#FIN_CHOOSE_PAYMENT").click(function (e) {
-
+       $("#FIN_CHOOSE_PAYMENT").html("Wait a moment...");
+       $("#FIN_CHOOSE_PAYMENT").prop( "disabled", true );
       checked_payment("input[name='payment']");
       let id_pago = $("#ID_PAGO").val();
       let nombre_pago = $("#NOMBRE_PAGO").val();
-
+      
        $.ajax({
          type: "POST",
          url: raiz_url + "Store/ajax_choose_payment",
@@ -72,11 +73,14 @@ $(document).ready(function () {
          },
          success: function (res) {
             if (res === 'error') {
-               alert('No seleccionó el tipo de pago');
+                alert('No seleccionó el tipo de pago');
             } else {
-             send_mail();
-             window.location.replace(raiz_url + "Store/resume/" + res);
+                send_mail(res);
+                setTimeout(() => {  window.location.replace(raiz_url + "Store/resume/" + res); }, 10000);
             }
+         },
+         error: function(e){
+             alert('Error!');
          }
       }); 
    })
@@ -211,10 +215,10 @@ $(document).ready(function () {
       $("#cant").val(sum);
    
    })
-   function send_mail(){
+   function send_mail(id){
       $.ajax({
          type: "POST",
-         url: raiz_url+"Store/send_mail",
+         url: raiz_url + "Store/send_mail/" + id,
          data: {data:"data"},
          success: function (response) {
             

@@ -22,7 +22,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#formContact').on('submit', function (e) { console.log('hola')
+    $('#formContact').on('submit', function (e) { console.log('hola');
         if (e.isDefaultPrevented()) {
 // handle the invalid form...
 

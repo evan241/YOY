@@ -98,12 +98,12 @@
                                 </a>
                             </li>  
 
-                            <li class="has-sub">
+                            <!--<li class="has-sub">
                                 <a class="sidenav-item-link" href="<?= base_url(); ?>Manager_news/news">
                                     <i class="fa fa-file-alt"></i>
                                     <span class="nav-text">Noticias</span>
                                 </a> 
-                            </li> 
+                            </li> -->
 
                             <li class="has-sub">
                                 <a class="sidenav-item-link" href="<?= base_url(); ?>Manager_users/users">
@@ -263,7 +263,7 @@
                                             </div>
                                         </li>
 
-                                        <li>
+                                        <!--<li>
                                             <a href="profile.html">
                                                 <i class="mdi mdi-account"></i> My Profile
                                             </a>
@@ -278,7 +278,7 @@
                                         </li>
                                         <li>
                                             <a href="#"> <i class="mdi mdi-settings"></i> Account Setting </a>
-                                        </li>
+                                        </li>-->
 
                                         <li class="dropdown-footer">
                                             <a href="<?= base_url() ?>site/salir"> <i class="mdi mdi-logout"></i> Log Out </a>
